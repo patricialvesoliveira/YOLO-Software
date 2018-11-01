@@ -14,7 +14,6 @@ class Body:
     """docstring for Body"""
 
     def __init__(self):
-
         self.applicationMode = ApplicationMode.AUTONOMOUS
 
         # setting the GPIO mode that the board should
@@ -33,7 +32,6 @@ class Body:
         self._colorBrightness = ColorBrightnessValues[ColorBrightness.MEDIUM.name]
 
         print "Component set up finished!"
-
         return
 
     def __del__(self):

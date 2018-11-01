@@ -107,37 +107,36 @@ class OpticalSensor:
                     #else:
                     #    self.touchState = Touch.NOT_TOUCHING
             
-
-
             if self.opticalState is Optical.RECEIVING:
                 
                 newPosition = (self.opticalSensorPosition[0], self.opticalSensorPosition[1])
-                self.insertNewPathPosition(self.opticalShape,newPosition)
+                self.insertNewPathPosition(self.opticalShape, newPosition)
                 # self.changeState(Optical.NOT_RECEIVING)
-                
+                print "shape: "+ str(self.opticalShape)
             elif self.opticalState is Optical.NOT_RECEIVING:
 
                 #Note: to avoids really small touches on the robot to be read as shapes
                 if len(self.opticalShape) > 30:
                     self.opticalState = Optical.FINISHED
-                    print self.opticalShape
+                    # print self.opticalShape
                 else:
                     self.opticalSensorPosition = [0, 0]
 
             elif self.opticalState is Optical.FINISHED:
-                # self.opticalShape.clear()
+                self.opticalShape.clear()
                 self.opticalSensorPosition = [0, 0]
                 self.opticalState = Optical.NOT_RECEIVING
 
         return (self.sensorType, (self.opticalState, self.opticalShape))
 
     def insertNewPathPosition(self,path,newPosition):
-        if newPosition is None:
+        if newPosition == None:
             return
         #Note: to eliminate possible reads that return the same position
         if len(path) == 0:
             path.append(newPosition)
-        elif path[0] != newPosition:
+        elif path[-1] != newPosition:
+            print "here"
             path.append(newPosition)
 
     def changeState(self,state):
