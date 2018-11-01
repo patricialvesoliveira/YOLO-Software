@@ -7,6 +7,9 @@ PIN_TOUCH = 16
 class TouchSensor:
 
     def __init__(self):
+        self.sensorType = Sensor.TOUCH
+        self.touchState = Touch.NOT_TOUCHING
+
         # set up pins
         if GPIO.getmode() is not GPIO.BCM:
             raise Exception("Error: The GPIO mode is different that the one the touch sensor uses (BCM numbering)")
@@ -16,9 +19,11 @@ class TouchSensor:
         print "OK! -- Touch sensor set up!"
         return
 
-    def getTouchInput(self):
+    def recordTouchInput(self):
 
         if GPIO.input(PIN_TOUCH) == 0:
-            return Touch.TOUCHING
+            self.touchState =  Touch.TOUCHING
         else:
-            return Touch.NOT_TOUCHING
+            self.touchState =  Touch.NOT_TOUCHING
+
+        return (self.sensorType, self.touchState)

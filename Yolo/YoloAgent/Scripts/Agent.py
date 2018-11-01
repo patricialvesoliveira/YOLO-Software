@@ -14,5 +14,4 @@ class Agent:
         self.mind = None
 
     def update(self):
-
         self.mind.update()

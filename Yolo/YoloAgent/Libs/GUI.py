@@ -214,11 +214,9 @@ class GUI:
 
     def switchApplicationMode(self,console, applicationModeState):
 
-        self.agent.body.toggleApplicationMode()
         applicationModeState.configure(text="Current application mode: " + self.agent.body.applicationMode.name)
-
+        Utilities.toggleApplicationMode(self.agent.body)
         console.insert('1.0', "Switched application mode to: " + self.agent.body.applicationMode.name + "\n")
-
         return
 
     # NOTE: for testing purposes only - wrapper function

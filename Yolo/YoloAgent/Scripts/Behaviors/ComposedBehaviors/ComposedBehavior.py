@@ -10,7 +10,7 @@ class ComposedBehavior:
         # standard behaviors
         self.behaviorList = []
         self.behaviorList.append(BlinkBehavior())
-        self.behaviorList.append(FeelerBehavior())
+        #self.behaviorList.append(FeelerBehavior())
         self.behaviorList.append(MoveBehavior())
 
         # generic variables

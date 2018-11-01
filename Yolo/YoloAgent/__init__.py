@@ -16,6 +16,7 @@ applicationGUI = None
 agent = None
 
 
+
 def main(personality, version):
 
     if platform.system() == "Windows":

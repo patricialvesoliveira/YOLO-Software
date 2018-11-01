@@ -52,14 +52,12 @@ class WheelActuator:
         self.C2 = 1
 
         print "OK! -- Wheels set up!"
-
         return
 
     def __del__(self):
 
         self.resetPinInput()
         self.cleanupGPIOPins()
-
         print "Cleaning up wheel actuator"
 
     @staticmethod
@@ -70,7 +68,6 @@ class WheelActuator:
         return forces
 
     def Eastmove2point(self, x, y, max_speed):
-
         controls = self.transform(x, y, 0)
         MAX = max(abs(controls))[0]
         A1new = abs(controls[0])
