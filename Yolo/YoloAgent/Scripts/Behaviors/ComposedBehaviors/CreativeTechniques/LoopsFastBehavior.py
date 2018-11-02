@@ -13,21 +13,4 @@ class LoopsFastBehavior(ComposedBehavior):
 
         # generic variables
         self.behaviorType = ComposedBehaviors.LOOPS_FAST
-
-        return
-
-    def prepareBehavior(self, body):
-
-        for behavior in self.behaviorList:
-
-                if behavior.behaviorType == Behaviors.BLINK:
-                    pass
-                elif behavior.behaviorType == Behaviors.FEELER:
-                    pass
-                elif behavior.behaviorType == Behaviors.MOVE:
-                    behavior.prepareBehavior(body, Shapes.LOOPS, 60, MovementDirection.STANDARD, Transitions.LINEAR, 2, 7, True)
-                    pass
-                else:
-                    raise IndexError("Prepare behavior: This standard behavior type doesn't exist")
-
-        return
+        self.behaviorList.append(MoveBehavior(body, Shapes.LOOPS, 60, MovementDirection.STANDARD, Transitions.LINEAR, 2, 7, True))

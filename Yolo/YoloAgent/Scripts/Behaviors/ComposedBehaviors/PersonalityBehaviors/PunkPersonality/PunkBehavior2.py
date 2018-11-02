@@ -13,24 +13,4 @@ class PunkBehavior2(ComposedBehavior):
 
         # generic variables
         self.behaviorType = ComposedBehaviors.PUNK_EXPRESSION_2
-
-        return
-
-    def prepareBehavior(self, body):
-
-        for behavior in self.behaviorList:
-
-            if behavior.behaviorType == Behaviors.BLINK:
-                behavior.prepareBehavior(body, [Color(rgb=(1.0, 0.5, 0.0)), Color(rgb=(1.0, 0.0, 0.0))], ColorBrightness.HIGH, Transitions.EASEINOUT, 3, 12, Color(rgb=(0.0, 0.0, 0.0)), True)
-                pass
-            elif behavior.behaviorType == Behaviors.FEELER:
-                #behavior.PrepareBehavior(body, 0.86)
-                pass
-            elif behavior.behaviorType == Behaviors.MOVE:
-                #behavior.prepareBehavior(body, Shapes.SPIKES, Transitions.LINEAR, 1, 5, True)
-                pass
-
-            else:
-                raise IndexError("Prepare behavior: This standard behavior type doesn't exist")
-
-        return
+        self.behaviorList.append(BlinkBehaviorEaseInOut(body, [Color(rgb=(1.0, 0.5, 0.0)), Color(rgb=(1.0, 0.0, 0.0))], ColorBrightness.HIGH, 1, 10, body.getColor(), True))

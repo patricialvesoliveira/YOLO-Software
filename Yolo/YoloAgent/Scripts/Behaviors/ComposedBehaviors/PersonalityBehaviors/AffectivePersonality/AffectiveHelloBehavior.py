@@ -13,23 +13,4 @@ class AffectiveHelloBehavior(ComposedBehavior):
 
         # generic variables
         self.behaviorType = ComposedBehaviors.AFFECTIVE_HELLO
-
-        return
-
-    def prepareBehavior(self, body):
-
-        for behavior in self.behaviorList:
-
-                if behavior.behaviorType == Behaviors.BLINK:
-                    behavior.prepareBehavior(body, [Color(rgb=(1.0, 1.0, 0.0))], ColorBrightness.HIGH, Transitions.EASEINOUT, 3, 6, Color(rgb=(0.0, 0.0, 0.0)), False)
-                    pass
-                elif behavior.behaviorType == Behaviors.FEELER:
-                    behavior.prepareBehavior(body, 50, Transitions.LINEAR, 1, 5, True)
-                    pass
-                elif behavior.behaviorType == Behaviors.MOVE:
-                    #behavior.prepareBehavior(body, Shapes.CURVED, 70, MovementDirection.ALTERNATING, Transitions.LINEAR, 4, 8, True)
-                    pass
-                else:
-                    raise IndexError("Prepare behavior: This standard behavior type doesn't exist")
-
-        return
+        self.behaviorList.append(BlinkBehaviorEaseInOut(body, [Color(rgb=(1.0, 1.0, 0.0))], ColorBrightness.HIGH, 3, 12, Color(rgb=(0.0, 0.0, 0.0)), False))

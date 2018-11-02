@@ -9,9 +9,6 @@ class ComposedBehavior:
     def __init__(self):
         # standard behaviors
         self.behaviorList = []
-        self.behaviorList.append(BlinkBehavior())
-        #self.behaviorList.append(FeelerBehavior())
-        self.behaviorList.append(MoveBehavior())
 
         # generic variables
         self._behaviorDuration = 0.0
@@ -20,19 +17,14 @@ class ComposedBehavior:
         self.behaviorHalted = False
         self.behaviorType = ComposedBehaviors.BASE
 
-        return
-
     def startBehavior(self):
         self._startTime = time.time()
         self.isOver = False
-
 
         for behavior in self.behaviorList:
             behavior.startBehavior()
 
         print("Starting " + self.behaviorType.name)
-
-        return
 
     def applyBehavior(self, agentBody):
         self.isOver = True
@@ -50,21 +42,13 @@ class ComposedBehavior:
 
         #if self.isOver : print("Composed behavior is over")
 
-        return
-
     def prepareBehavior(self, body):
         raise NotImplementedError("Please Implement and Use Inheriting Class' Method")
 
     def updateStartTimeAfterHalt(self, totalTimeDelay):
-
         for behavior in self.behaviorList:
             behavior.updateStartTimeAfterHalt(totalTimeDelay)
 
-        return
-
     def haltAndFinishBehavior(self, body):
-
         for behavior in self.behaviorList:
             behavior.finalizeEffects(body)
-
-        return

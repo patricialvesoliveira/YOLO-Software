@@ -13,23 +13,4 @@ class PunkIdleBehavior(ComposedBehavior):
 
         # generic variables
         self.behaviorType = ComposedBehaviors.PUNK_IDLE
-        return
-
-    def prepareBehavior(self, body):
-
-        for behavior in self.behaviorList:
-
-                if behavior.behaviorType == Behaviors.BLINK:
-                    # Blink blue
-                    behavior.prepareBehavior(body, [Color(rgb=(1.0, 0.0, 0.0))], ColorBrightness.LOW,
-                                             Transitions.EASEINOUT, 1, 5, Color(rgb=(0, 0, 0)), False)
-                    pass
-                elif behavior.behaviorType == Behaviors.FEELER:
-                    pass
-                elif behavior.behaviorType == Behaviors.MOVE:
-                    pass
-
-                else:
-                    raise IndexError("Prepare behavior: This standard behavior type doesn't exist")
-
-        return
+        self.behaviorList.append(BlinkBehaviorEaseInOut(body, [Color(rgb=(1.0, 0.0, 0.0))], ColorBrightness.LOW, 1, 10, Color(rgb=(0.0, 0.0, 0.0)), True))

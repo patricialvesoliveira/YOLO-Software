@@ -108,116 +108,11 @@ class WheelActuator:
                 GPIO.output(21, 0)
             self.C2 = C2new
 
-    def linear(self, speed,leg_time):
-        self.Eastmove2point(1, 0, speed)
-        time.sleep(leg_time)
-
-        # should be run every time a behavior is finished
-        self.resetPinInput()
-
-    def serious(self, speed, leg_time):
-        # set of points for one serious motion
-        points = np.array([[1, 0], [0, 1], [1, 0], [0, -1]])
-        for j in range(2):  # repeat 2 times
-            for i in range(points.shape[0]):
-                self.Eastmove2point(points[i, 0], points[i, 1], speed)
-                time.sleep(leg_time)
-
-        # should be run every time a behavior is finished
-        self.resetPinInput()
-
-    def spikes(self, speed, leg_time):
-        # set of points for one spike motion
-        points = np.array([[1, 1], [1, -1]])
-        for j in range(4):  # repeat 4 times
-            for i in range(points.shape[0]):
-                self.Eastmove2point(points[i, 0], points[i, 1], speed)
-                time.sleep(leg_time)
-
-        # should be run every time a behavior is finished
-        self.resetPinInput()
-
-    def curly(self, speed):
-        # create array of sin wave values
-        N = 48  # number of samples; 24 for quicker behavior
-        # period = (N/2)*0.1 seconds
-        ix = np.arange(N)
-        amp = 20  # amplitude, arbitrary
-        signal = np.sin(2 * np.pi * ix / float(N / 2)) * amp  # y values for 2 sine waves
-        x_dist = amp / (N / 8)  # constant x value
-        # alternatively: create signal array with 1024 elements and sample from it according to inputs period and speed
-
-        past_signal = 0
-        for i in range(N):
-            self.Eastmove2point(x_dist, signal[i] - past_signal, speed)
-            time.sleep(0.1)
-            past_signal = signal[i]
-
-        # should be run every time a behavior is finished
-        self.resetPinInput()
-
-    def loops(self, speed):
-        # create array of circle values
-        N = 24  # number of samples; 16 for quicker behavior
-        # period = N*0.1 seconds
-        ix = np.arange(N)
-        rad = 20  # radius, arbitrary
-        xSignal = np.cos(2 * np.pi / N * ix) * rad  # x values for circle
-        ySignal = np.sin(2 * np.pi / N * ix) * rad  # y values for circle
-        x_dist = 4  # constant x value for forward motion
-        # alternatively: create signal array with 1024 elements and sample from it according to inputs period and speed
-
-        past_signal_x = 20
-        past_signal_y = 0
-        for j in range(3):  # repeat 3 times
-            for i in range(N):
-                self.Eastmove2point(xSignal[i] - past_signal_x + x_dist, ySignal[i] - past_signal_y, speed)
-                time.sleep(0.1)
-                past_signal_x = xSignal[i]
-                past_signal_y = ySignal[i]
-
-        # should be run every time a behavior is finished
-        self.resetPinInput()
-
-    def circle(self, speed):
-        # create array of circle values
-        N = 24  # number of samples; 16 for quicker behavior
-        # period = N*0.1 seconds
-        ix = np.arange(N)
-        rad = 20  # radius, arbitrary
-        xSignal = np.cos(2 * np.pi / N * ix) * rad  # x values for circle
-        ySignal = np.sin(2 * np.pi / N * ix) * rad  # y values for circle
-        # alternatively: create signal array with 1024 elements and sample from it according to inputs period and speed
-
-        past_signal_x = 0
-        past_signal_y = 0
-        for j in range(2):  # repeat 2 times
-            for i in range(N):
-                self.Eastmove2point(xSignal[i] - past_signal_x, ySignal[i] - past_signal_y, speed)
-                time.sleep(0.1)
-                past_signal_x = xSignal[i]
-                past_signal_y = ySignal[i]
-
-        # should be run every time a behavior is finished
-        self.resetPinInput()
-
-    def performMovement(self, movementType):
-
-        if movementType == Shapes.SPIKES:
-            self.spikes(90, 0.5)
-        elif movementType == Shapes.RECT:
-            self.serious(90, 0.5)
-        elif movementType == Shapes.LOOPS:
-            self.loops(90)
-        elif movementType == Shapes.CURVED:
-            self.curly(90)
 
     def moveTo(self, waypoint, speed):
-
         self.Eastmove2point(waypoint[0], waypoint[1], speed)
 
     def resetPinInput(self):
-
         self.A1 = 0
         self.B1 = 0
         self.C1 = 0

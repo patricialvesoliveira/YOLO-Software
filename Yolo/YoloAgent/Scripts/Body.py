@@ -78,9 +78,8 @@ class Body:
         self._colorBrightness = newBrightness
         self.LEDActuator.setBrightness(newBrightness)
 
-    def setWheelMovement(self, movementType, waypoint, speed):
+    def setWheelMovement(self, waypoint, speed):
         self.wheelActuator.moveTo(waypoint, speed)
-        #print ("Setting movement to: " + str(movementType))
 
     def resetWheelSetup(self):
         self.wheelActuator.resetPinInput()

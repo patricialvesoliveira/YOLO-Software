@@ -13,21 +13,3 @@ class AloofAttentionCallBehavior(ComposedBehavior):
 
         # generic variables
         self.behaviorType = ComposedBehaviors.ALOOF_ATTENTION_CALL
-
-        return
-
-    def prepareBehavior(self, body):
-
-        for behavior in self.behaviorList:
-
-                if behavior.behaviorType == Behaviors.BLINK:
-                    pass
-                elif behavior.behaviorType == Behaviors.FEELER:
-                    pass
-                elif behavior.behaviorType == Behaviors.MOVE:
-                    pass
-
-                else:
-                    raise IndexError("Prepare behavior: This standard behavior type doesn't exist")
-
-        return

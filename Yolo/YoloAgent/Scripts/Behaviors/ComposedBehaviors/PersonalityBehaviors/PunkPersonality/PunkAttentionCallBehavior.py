@@ -14,24 +14,5 @@ class PunkAttentionCallBehavior(ComposedBehavior):
         # generic variables
         self.behaviorType = ComposedBehaviors.PUNK_ATTENTION_CALL
 
-        return
-
-    def prepareBehavior(self, body):
-
-        for behavior in self.behaviorList:
-
-            if behavior.behaviorType == Behaviors.BLINK:
-                behavior.prepareBehavior(body, [Color(rgb=(1.0, 0.0, 0.0))], ColorBrightness.HIGH,
-                                         Transitions.EASEIN, 1, 10, body.getColor(), True)
-                pass
-            elif behavior.behaviorType == Behaviors.FEELER:
-                pass
-            elif behavior.behaviorType == Behaviors.MOVE:
-                behavior.prepareBehavior(body, Shapes.STRAIGHT, 70, MovementDirection.ALTERNATING, Transitions.LINEAR, 3, 10,
-                                         True)
-                pass
-
-            else:
-                raise IndexError("Prepare behavior: This standard behavior type doesn't exist")
-
-        return
+        self.behaviorList.append(BlinkBehaviorEaseIn(body, [Color(rgb=(1.0, 0.0, 0.0))], ColorBrightness.HIGH, 1, 10, body.getColor(), True))
+        self.behaviorList.append(MoveBehavior(body, Shapes.STRAIGHT, 70, MovementDirection.ALTERNATING, Transitions.LINEAR, 3, 10, True))
