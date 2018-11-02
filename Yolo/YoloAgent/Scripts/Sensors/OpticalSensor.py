@@ -48,14 +48,8 @@ class OpticalSensor:
             for event in events:
                 if event.code == 0:
                     resultList.append(("xCoordinate", event.value))
-                    #print "read x " + str(inputDictionary["xCoordinate"])
                 elif event.code == 1:
-                    #inputDictionary["yCoordinate"] = event.value
-                    #print "read y " + str(inputDictionary["yCoordinate"])
                     resultList.append(("yCoordinate", event.value))
-
-            print resultList
-
                 #Note: to be able to test the pattern recognition using only mouse events as triggers - just uncomment
                 #elif event.code == 272:
                 #    if event.value == 1:
@@ -90,6 +84,7 @@ class OpticalSensor:
             else:
                 print ("Error: This option shouldn't be selected!")
         else:
+            
             resultList = []
             for eventList in self.getEvents():
                 if eventList is not None:
@@ -100,29 +95,25 @@ class OpticalSensor:
                     self.opticalSensorPosition[0] = self.opticalSensorPosition[0] + int(event[1])
                 elif event[0] == "yCoordinate":
                     self.opticalSensorPosition[1] = self.opticalSensorPosition[1] + int(event[1])
-                # Note: to be able to test the pattern recognition using only mouse events as triggers - just uncomment
-                #elif event[0] == "leftButton":
-                    #if event[1] == 1:
-                    #    self.touchState = Touch.TOUCHING
-                    #else:
-                    #    self.touchState = Touch.NOT_TOUCHING
-            
+ 
+
             if self.opticalState is Optical.RECEIVING:
-                
                 newPosition = (self.opticalSensorPosition[0], self.opticalSensorPosition[1])
                 self.insertNewPathPosition(self.opticalShape, newPosition)
-                # self.changeState(Optical.NOT_RECEIVING)
-                print "shape: "+ str(self.opticalShape)
-            elif self.opticalState is Optical.NOT_RECEIVING:
 
-                #Note: to avoids really small touches on the robot to be read as shapes
+                 #Note: to avoids really small touches on the robot to be read as shapes
                 if len(self.opticalShape) > 30:
                     self.opticalState = Optical.FINISHED
                     # print self.opticalShape
-                else:
-                    self.opticalSensorPosition = [0, 0]
+
+
+            elif self.opticalState is Optical.NOT_RECEIVING:
+
+                self.opticalSensorPosition = [0, 0]
+
 
             elif self.opticalState is Optical.FINISHED:
+
                 self.opticalShape.clear()
                 self.opticalSensorPosition = [0, 0]
                 self.opticalState = Optical.NOT_RECEIVING
@@ -136,7 +127,6 @@ class OpticalSensor:
         if len(path) == 0:
             path.append(newPosition)
         elif path[-1] != newPosition:
-            print "here"
             path.append(newPosition)
 
     def changeState(self,state):
