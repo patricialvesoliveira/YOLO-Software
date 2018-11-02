@@ -6,17 +6,17 @@ from colour import Color
 import pytweening as tween
 
 from Libs.Constants import *
-from Scripts.Behaviors.SimpleBehaviors.BlinkBehavior import BlinkBehavior
+from Scripts.Behaviors.SimpleBehaviors.BlinkBehavior.BlinkBehavior import BlinkBehavior
 
 
 class BlinkBehaviorEaseInOut(BlinkBehavior):
-   # Body body, int repetitions, float duration
-   def __init__(self, body, blinkColorList, brightness, repetitions, duration, defaultColor, keepBehaviorSetting=False, startDelay = 0.0, animationPause = 0.0):
-        BlinkBehavior.__init__(self, body, blinkColorList, brightness, repetitions, duration, defaultColor, False, startDelay, animationPause)
-    
+    # Body body, int repetitions, float duration
+    def __init__(self, bodyRef, blinkColorList, brightness, repetitions, duration, defaultColor, keepBehaviorSetting=False, startDelay = 0.0, animationPause = 0.0):
+        BlinkBehavior.__init__(self, bodyRef, blinkColorList, brightness, repetitions, duration, defaultColor, False, startDelay, animationPause)
+
     # Body body
-    def applyBehavior(self, body):
-        BlinkBehavior.applyBehavior(body)
+    def applyBehavior(self):
+        BlinkBehavior.applyBehavior(self)
         
         timeElapsed = time.time() - self._startTime
         totalTime = self._animationIntervalTime / 2

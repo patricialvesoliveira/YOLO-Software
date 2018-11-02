@@ -10,13 +10,16 @@ from Scripts.Behaviors.SimpleBehaviors.Behavior import Behavior
 
 
 class BlinkBehavior(Behavior):
-    def __init__(self, body, blinkColorList, brightness, repetitions, duration, defaultColor, keepBehaviorSetting=False, startDelay = 0.0, animationPause = 0.0):
-        Behavior.__init__(self, body, repetitions, duration, keepBehaviorSetting, startDelay)
+    def __init__(self, bodyRef, blinkColorList, brightness, repetitions, duration, defaultColor, keepBehaviorSetting=False, startDelay = 0.0, animationPause = 0.0):
+        Behavior.__init__(self, bodyRef, repetitions, duration, keepBehaviorSetting, startDelay)
+
+        self.bodyRef = bodyRef
 
         self.behaviorType = Behaviors.BLINK  # Configuration.Behaviors
 
-        self.color = body.getColor()
-        self.colorBrightness = body.getBrightness()
+        self.color = bodyRef.getColor()
+        self.colorBrightness = bodyRef.getBrightness()
+
         self.blinkColorList = blinkColorList
         self.activeBlinkColor = self.blinkColorList[0]
         self.blinkBrightness = ColorBrightnessValues[brightness.name]
@@ -24,7 +27,7 @@ class BlinkBehavior(Behavior):
         self.defaultColor = defaultColor
 
     # Body body
-    def applyBehavior(self, body):
+    def applyBehavior(self):
         # Note: allows for a delayed start
         if self.shouldStartBeDelayed():
             return
@@ -32,7 +35,7 @@ class BlinkBehavior(Behavior):
         # when the animation is over we pause before changing color
         if time.time() - self._startTime > self._animationIntervalTime + self._animationEndPause:
             if self._currentBehaviorRepetition == self._maxBehaviorRepetitions:
-                self.finalizeEffects(body)
+                self.finalizeEffects()
                 print("Behavior ended")
                 return
 
@@ -41,12 +44,12 @@ class BlinkBehavior(Behavior):
             self._startTime = time.time()
 
 
-    def finalizeEffects(self, body):
+    def finalizeEffects(self):
         if self.keepBehaviorSetting == True:
-            body.setColor(self.activeBlinkColor)
+            self.bodyRef.setColor(self.activeBlinkColor)
             print("setting the animation end color")
         else:
-            body.setColor(self.color)
+            self.bodyRef.setColor(self.color)
 
         self.isOver = True
         return
@@ -69,7 +72,9 @@ class BlinkBehavior(Behavior):
 
         return lerpColor
 
-    def animateLerp(percentage):
-        body.setColor(self.lerpColor(percentage, self.color, self.activeBlinkColor))
-        body.setBrightness(self.blinkBrightness * lerp + self.colorBrightness * (1 - lerp))
+    def animateLerp(self, percentage):
+        print self.bodyRef.getColor()
+        breakpoint()
+        self.bodyRef.setColor(self.lerpColor(percentage, self.color, self.activeBlinkColor))
+        self.bodyRef.setBrightness(self.blinkBrightness * percentage + self.colorBrightness * (1 - percentage))
         print("Applying blink: passed " + str((time.time() - self._startTime)) + " of " + str(self._animationIntervalTime) + ". Lerp: " + str(lerp))

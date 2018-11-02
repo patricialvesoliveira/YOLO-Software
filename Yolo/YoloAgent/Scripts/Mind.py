@@ -51,8 +51,10 @@ class Mind:
 
         # agent's variables
         self.personality = personality
-        self.activeBehavior = AffectiveHelloBehavior()
         self.body = body
+
+        self.activeBehavior = AffectiveHelloBehavior(self.body)
+
 
         # this will allow to cycle through the different story arcs
         self.currentStoryArcIndex = 1
@@ -77,7 +79,7 @@ class Mind:
         self.idleBehavior = None
 
         # puppeteer behavior for when children grab the agent
-        self.puppeteerBehavior = PuppeteerBehavior()
+        self.puppeteerBehavior = PuppeteerBehavior(self.body)
 
         # to check if the agent already introduced himself (happens only after first being touched)
         self.performedIntroduction = False
@@ -101,7 +103,7 @@ class Mind:
 
         # Note : checks if there is a behavior being carried out and applies it, otherwise selects a new behavior on touch
         if self.activeBehavior is not None and not self.activeBehavior.isOver and self.touchStatus == Touch.NOT_TOUCHING:
-            self.activeBehavior.applyBehavior(self.body)
+            self.activeBehavior.applyBehavior()
             return
         elif self.touchStatus == Touch.TOUCHING and not self.wasTouched:
             #Note : if it's touched all behaviors should stop, so stopping them
@@ -111,10 +113,10 @@ class Mind:
             #NOTE: this check only exists because during testing the decideBehavior() function could sometimes have missing behaviors
             # and return None, in the final version the behavior should always be defined at this point
             if self.activeBehavior is not None:
-                self.activeBehavior.haltAndFinishBehavior(self.body)
+                self.activeBehavior.haltAndFinishBehavior()
 
             #Note: starts the puppeteer behavior that should change the robot's lights to white to indicate a puppeteer mode
-            self.puppeteerBehavior.prepareBehavior(self.body)
+            # self.puppeteerBehavior.prepareBehavior()
             self.puppeteerBehavior.startBehavior()
 
             self.wasTouched = True
@@ -131,7 +133,7 @@ class Mind:
 
             return
         elif self.touchStatus == Touch.TOUCHING and not self.puppeteerBehavior.isOver:
-            self.puppeteerBehavior.applyBehavior(self.body)
+            self.puppeteerBehavior.applyBehavior()
             return
         elif self.touchStatus == Touch.TOUCHING:
             #Note: this clause avoids having to test in all following ifs if the robot is still being touched
@@ -148,7 +150,7 @@ class Mind:
             self.startAttentionCall()
             return
         elif self.startedIdle and self.idleBehavior is not None and not self.idleBehavior.isOver:
-            self.idleBehavior.applyBehavior(self.body)
+            self.idleBehavior.applyBehavior()
         elif self.startedIdle:
             self.startIdleBehavior()
 
@@ -203,34 +205,34 @@ class Mind:
 
         if self.personality is Personality.AFFECTIVE:
             if randomValue == 1:
-                selectedBehavior = AffectiveBehavior1()
+                selectedBehavior = AffectiveBehavior1(self.body)
             elif randomValue == 2:
-                selectedBehavior = AffectiveBehavior2()
+                selectedBehavior = AffectiveBehavior2(self.body)
             elif randomValue == 3:
-                selectedBehavior = AffectiveBehavior3()
+                selectedBehavior = AffectiveBehavior3(self.body)
 
         elif self.personality is Personality.ALOOF:
             if randomValue == 1:
-                selectedBehavior = AloofBehavior1()
+                selectedBehavior = AloofBehavior1(self.body)
             elif randomValue == 2:
-                selectedBehavior = AloofBehavior2()
+                selectedBehavior = AloofBehavior2(self.body)
             elif randomValue == 3:
-                selectedBehavior = AloofBehavior3()
+                selectedBehavior = AloofBehavior3(self.body)
 
         elif self.personality is Personality.PUNK:
             if randomValue == 1:
-                selectedBehavior = PunkBehavior1()
+                selectedBehavior = PunkBehavior1(self.body)
             elif randomValue == 2:
-                selectedBehavior = PunkBehavior2()
+                selectedBehavior = PunkBehavior2(self.body)
             elif randomValue == 3:
-                selectedBehavior = PunkBehavior3()
+                selectedBehavior = PunkBehavior3(self.body)
 
         else:
             print "This shouldn't happen, the mind didn't find this personality to match with a personality behavior"
             logging.info("Error: The mind didn't find this personality to match with a personality behavior")
             raise Exception("Error: The mind didn't find this personality to match with a personality behavior")
 
-        selectedBehavior.prepareBehavior(self.body)
+        # selectedBehavior.prepareBehavior()
         selectedBehavior.startBehavior()
 
         logging.info(StoryArc(self.currentStoryArcIndex).name + ' arc --- Performing personality behavior: ' + selectedBehavior.behaviorType.name + ". ")
@@ -264,170 +266,170 @@ class Mind:
         elif currentStoryArc == StoryArc.CONFLICT_INTRODUCED:
 
             if self.recognizedShape == Shapes.LOOPS.name and self.accelerationStatus == Acceleration.FAST:
-                selectedBehavior = LoopsFastBehavior()
+                selectedBehavior = LoopsFastBehavior(self.body)
             elif self.recognizedShape == Shapes.LOOPS.name and self.accelerationStatus == Acceleration.SLOW:
-                selectedBehavior = LoopsSlowBehavior()
+                selectedBehavior = LoopsSlowBehavior(self.body)
             elif self.recognizedShape == Shapes.CURVED.name and self.accelerationStatus == Acceleration.FAST:
-                selectedBehavior = CurvedFastBehavior()
+                selectedBehavior = CurvedFastBehavior(self.body)
             elif self.recognizedShape == Shapes.CURVED.name and self.accelerationStatus == Acceleration.SLOW:
-                selectedBehavior = CurvedSlowBehavior()
+                selectedBehavior = CurvedSlowBehavior(self.body)
             elif self.recognizedShape == Shapes.SPIKES.name and self.accelerationStatus == Acceleration.FAST:
-                selectedBehavior = SpikesFastBehavior()
+                selectedBehavior = SpikesFastBehavior(self.body)
             elif self.recognizedShape == Shapes.SPIKES.name and self.accelerationStatus == Acceleration.SLOW:
-                selectedBehavior = SpikesSlowBehavior()
+                selectedBehavior = SpikesSlowBehavior(self.body)
             elif self.recognizedShape == Shapes.RECT.name and self.accelerationStatus == Acceleration.FAST:
-                selectedBehavior = RectFastBehavior()
+                selectedBehavior = RectFastBehavior(self.body)
             elif self.recognizedShape == Shapes.RECT.name and self.accelerationStatus == Acceleration.SLOW:
-                selectedBehavior = RectSlowBehavior()
+                selectedBehavior = RectSlowBehavior(self.body)
 
         elif currentStoryArc == StoryArc.RISING_ACTION_PT1:
 
             if self.recognizedShape == Shapes.LOOPS.name and self.accelerationStatus == Acceleration.FAST:
-                selectedBehavior = LoopsSlowBehavior()
+                selectedBehavior = LoopsSlowBehavior(self.body)
             elif self.recognizedShape == Shapes.LOOPS.name and self.accelerationStatus == Acceleration.SLOW:
-                selectedBehavior = LoopsFastBehavior()
+                selectedBehavior = LoopsFastBehavior(self.body)
             elif self.recognizedShape == Shapes.CURVED.name and self.accelerationStatus == Acceleration.FAST:
-                selectedBehavior = CurvedSlowBehavior()
+                selectedBehavior = CurvedSlowBehavior(self.body)
             elif self.recognizedShape == Shapes.CURVED.name and self.accelerationStatus == Acceleration.SLOW:
-                selectedBehavior = CurvedFastBehavior()
+                selectedBehavior = CurvedFastBehavior(self.body)
             elif self.recognizedShape == Shapes.SPIKES.name and self.accelerationStatus == Acceleration.FAST:
-                selectedBehavior = SpikesSlowBehavior()
+                selectedBehavior = SpikesSlowBehavior(self.body)
             elif self.recognizedShape == Shapes.SPIKES.name and self.accelerationStatus == Acceleration.SLOW:
-                selectedBehavior = SpikesFastBehavior()
+                selectedBehavior = SpikesFastBehavior(self.body)
             elif self.recognizedShape == Shapes.RECT.name and self.accelerationStatus == Acceleration.FAST:
-                selectedBehavior = RectSlowBehavior()
+                selectedBehavior = RectSlowBehavior(self.body)
             elif self.recognizedShape == Shapes.RECT.name and self.accelerationStatus == Acceleration.SLOW:
-                selectedBehavior = RectFastBehavior()
+                selectedBehavior = RectFastBehavior(self.body)
 
         elif currentStoryArc == StoryArc.RISING_ACTION_PT2:
 
             if self.recognizedShape == Shapes.LOOPS.name and self.accelerationStatus == Acceleration.FAST:
                 if randomValue == 1:
-                    selectedBehavior = SpikesFastBehavior()
+                    selectedBehavior = SpikesFastBehavior(self.body)
                 else:
-                    selectedBehavior = RectFastBehavior()
+                    selectedBehavior = RectFastBehavior(self.body)
             elif self.recognizedShape == Shapes.LOOPS.name and self.accelerationStatus == Acceleration.SLOW:
                 if randomValue == 1:
-                    selectedBehavior = SpikesSlowBehavior()
+                    selectedBehavior = SpikesSlowBehavior(self.body)
                 else:
-                    selectedBehavior = RectSlowBehavior()
+                    selectedBehavior = RectSlowBehavior(self.body)
             elif self.recognizedShape == Shapes.CURVED.name and self.accelerationStatus == Acceleration.FAST:
                 if randomValue == 1:
-                    selectedBehavior = SpikesFastBehavior()
+                    selectedBehavior = SpikesFastBehavior(self.body)
                 else:
-                    selectedBehavior = RectFastBehavior()
+                    selectedBehavior = RectFastBehavior(self.body)
             elif self.recognizedShape == Shapes.CURVED.name and self.accelerationStatus == Acceleration.SLOW:
                 if randomValue == 1:
-                    selectedBehavior = SpikesSlowBehavior()
+                    selectedBehavior = SpikesSlowBehavior(self.body)
                 else:
-                    selectedBehavior = RectSlowBehavior()
+                    selectedBehavior = RectSlowBehavior(self.body)
             elif self.recognizedShape == Shapes.SPIKES.name and self.accelerationStatus == Acceleration.FAST:
                 if randomValue == 1:
-                    selectedBehavior = LoopsFastBehavior()
+                    selectedBehavior = LoopsFastBehavior(self.body)
                 else:
-                    selectedBehavior = CurvedFastBehavior()
+                    selectedBehavior = CurvedFastBehavior(self.body)
             elif self.recognizedShape == Shapes.SPIKES.name and self.accelerationStatus == Acceleration.SLOW:
                 if randomValue == 1:
-                    selectedBehavior = LoopsSlowBehavior()
+                    selectedBehavior = LoopsSlowBehavior(self.body)
                 else:
-                    selectedBehavior = CurvedSlowBehavior()
+                    selectedBehavior = CurvedSlowBehavior(self.body)
             elif self.recognizedShape == Shapes.RECT.name and self.accelerationStatus == Acceleration.FAST:
                 if randomValue == 1:
-                    selectedBehavior = LoopsFastBehavior()
+                    selectedBehavior = LoopsFastBehavior(self.body)
                 else:
-                    selectedBehavior = CurvedFastBehavior()
+                    selectedBehavior = CurvedFastBehavior(self.body)
             elif self.recognizedShape == Shapes.RECT.name and self.accelerationStatus == Acceleration.SLOW:
                 if randomValue == 1:
-                    selectedBehavior = LoopsSlowBehavior()
+                    selectedBehavior = LoopsSlowBehavior(self.body)
                 else:
-                    selectedBehavior = CurvedSlowBehavior()
+                    selectedBehavior = CurvedSlowBehavior(self.body)
 
         elif currentStoryArc == StoryArc.FALLING_ACTION_PT1:
 
             if self.recognizedShape == Shapes.LOOPS.name and self.accelerationStatus == Acceleration.FAST:
                 if randomValue == 1:
-                    selectedBehavior = SpikesSlowBehavior()
+                    selectedBehavior = SpikesSlowBehavior(self.body)
                 else:
-                    selectedBehavior = RectSlowBehavior()
+                    selectedBehavior = RectSlowBehavior(self.body)
             elif self.recognizedShape == Shapes.LOOPS.name and self.accelerationStatus == Acceleration.SLOW:
                 if randomValue == 1:
-                    selectedBehavior = SpikesFastBehavior()
+                    selectedBehavior = SpikesFastBehavior(self.body)
                 else:
-                    selectedBehavior = RectFastBehavior()
+                    selectedBehavior = RectFastBehavior(self.body)
             elif self.recognizedShape == Shapes.CURVED.name and self.accelerationStatus == Acceleration.FAST:
                 if randomValue == 1:
-                    selectedBehavior = SpikesSlowBehavior()
+                    selectedBehavior = SpikesSlowBehavior(self.body)
                 else:
-                    selectedBehavior = RectSlowBehavior()
+                    selectedBehavior = RectSlowBehavior(self.body)
             elif self.recognizedShape == Shapes.CURVED.name and self.accelerationStatus == Acceleration.SLOW:
                 if randomValue == 1:
-                    selectedBehavior = SpikesFastBehavior()
+                    selectedBehavior = SpikesFastBehavior(self.body)
                 else:
-                    selectedBehavior = RectFastBehavior()
+                    selectedBehavior = RectFastBehavior(self.body)
             elif self.recognizedShape == Shapes.SPIKES.name and self.accelerationStatus == Acceleration.FAST:
                 if randomValue == 1:
-                    selectedBehavior = LoopsSlowBehavior()
+                    selectedBehavior = LoopsSlowBehavior(self.body)
                 else:
-                    selectedBehavior = CurvedSlowBehavior()
+                    selectedBehavior = CurvedSlowBehavior(self.body)
             elif self.recognizedShape == Shapes.SPIKES.name and self.accelerationStatus == Acceleration.SLOW:
                 if randomValue == 1:
-                    selectedBehavior = LoopsFastBehavior()
+                    selectedBehavior = LoopsFastBehavior(self.body)
                 else:
-                    selectedBehavior = CurvedFastBehavior()
+                    selectedBehavior = CurvedFastBehavior(self.body)
             elif self.recognizedShape == Shapes.RECT.name and self.accelerationStatus == Acceleration.FAST:
                 if randomValue == 1:
-                    selectedBehavior = LoopsSlowBehavior()
+                    selectedBehavior = LoopsSlowBehavior(self.body)
                 else:
-                    selectedBehavior = CurvedSlowBehavior()
+                    selectedBehavior = CurvedSlowBehavior(self.body)
             elif self.recognizedShape == Shapes.RECT.name and self.accelerationStatus == Acceleration.SLOW:
                 if randomValue == 1:
-                    selectedBehavior = LoopsFastBehavior()
+                    selectedBehavior = LoopsFastBehavior(self.body)
                 else:
-                    selectedBehavior = CurvedFastBehavior()
+                    selectedBehavior = CurvedFastBehavior(self.body)
 
         elif currentStoryArc == StoryArc.FALLING_ACTION_PT2:
 
             if self.recognizedShape == Shapes.LOOPS.name and self.accelerationStatus == Acceleration.FAST:
-                selectedBehavior = CurvedFastBehavior()
+                selectedBehavior = CurvedFastBehavior(self.body)
             elif self.recognizedShape == Shapes.LOOPS.name and self.accelerationStatus == Acceleration.SLOW:
-                selectedBehavior = CurvedSlowBehavior()
+                selectedBehavior = CurvedSlowBehavior(self.body)
             elif self.recognizedShape == Shapes.CURVED.name and self.accelerationStatus == Acceleration.FAST:
-                selectedBehavior = LoopsFastBehavior()
+                selectedBehavior = LoopsFastBehavior(self.body)
             elif self.recognizedShape == Shapes.CURVED.name and self.accelerationStatus == Acceleration.SLOW:
-                selectedBehavior = LoopsSlowBehavior()
+                selectedBehavior = LoopsSlowBehavior(self.body)
             elif self.recognizedShape == Shapes.SPIKES.name and self.accelerationStatus == Acceleration.FAST:
-                selectedBehavior = RectFastBehavior()
+                selectedBehavior = RectFastBehavior(self.body)
             elif self.recognizedShape == Shapes.SPIKES.name and self.accelerationStatus == Acceleration.SLOW:
-                selectedBehavior = RectSlowBehavior()
+                selectedBehavior = RectSlowBehavior(self.body)
             elif self.recognizedShape == Shapes.RECT.name and self.accelerationStatus == Acceleration.FAST:
-                selectedBehavior = SpikesFastBehavior()
+                selectedBehavior = SpikesFastBehavior(self.body)
             elif self.recognizedShape == Shapes.RECT.name and self.accelerationStatus == Acceleration.SLOW:
-                selectedBehavior = SpikesSlowBehavior()
+                selectedBehavior = SpikesSlowBehavior(self.body)
 
         elif currentStoryArc == StoryArc.RESOLUTION:
 
             if self.recognizedShape == Shapes.LOOPS.name and self.accelerationStatus == Acceleration.FAST:
-                selectedBehavior = LoopsFastBehavior()
+                selectedBehavior = LoopsFastBehavior(self.body)
             elif self.recognizedShape == Shapes.LOOPS.name and self.accelerationStatus == Acceleration.SLOW:
-                selectedBehavior = LoopsSlowBehavior()
+                selectedBehavior = LoopsSlowBehavior(self.body)
             elif self.recognizedShape == Shapes.CURVED.name and self.accelerationStatus == Acceleration.FAST:
-                selectedBehavior = CurvedFastBehavior()
+                selectedBehavior = CurvedFastBehavior(self.body)
             elif self.recognizedShape == Shapes.CURVED.name and self.accelerationStatus == Acceleration.SLOW:
-                selectedBehavior = CurvedSlowBehavior()
+                selectedBehavior = CurvedSlowBehavior(self.body)
             elif self.recognizedShape == Shapes.SPIKES.name and self.accelerationStatus == Acceleration.FAST:
-                selectedBehavior = SpikesFastBehavior()
+                selectedBehavior = SpikesFastBehavior(self.body)
             elif self.recognizedShape == Shapes.SPIKES.name and self.accelerationStatus == Acceleration.SLOW:
-                selectedBehavior = SpikesSlowBehavior()
+                selectedBehavior = SpikesSlowBehavior(self.body)
             elif self.recognizedShape == Shapes.RECT.name and self.accelerationStatus == Acceleration.FAST:
-                selectedBehavior = RectFastBehavior()
+                selectedBehavior = RectFastBehavior(self.body)
             elif self.recognizedShape == Shapes.RECT.name and self.accelerationStatus == Acceleration.SLOW:
-                selectedBehavior = RectSlowBehavior()
+                selectedBehavior = RectSlowBehavior(self.body)
 
 
         print("Selected a creative technique")
 
         if selectedBehavior is not None:
-            selectedBehavior.prepareBehavior(self.body)
+            # selectedBehavior.prepareBehavior()
             selectedBehavior.startBehavior()
             logging.info(' ' + StoryArc(self.currentStoryArcIndex).name + ' arc --- Performing creative technique: ' + selectedBehavior.behaviorType.name)
         else:
@@ -464,20 +466,20 @@ class Mind:
 
         if self.personality == Personality.AFFECTIVE:
             if self.idleBehavior is None:
-                self.idleBehavior = AffectiveIdleBehavior()
+                self.idleBehavior = AffectiveIdleBehavior(self.body)
 
         elif self.personality == Personality.ALOOF:
             if self.idleBehavior is None:
-                self.idleBehavior = AloofIdleBehavior()
+                self.idleBehavior = AloofIdleBehavior(self.body)
 
         elif self.personality == Personality.PUNK:
             if self.idleBehavior is None:
-                self.idleBehavior = PunkIdleBehavior()
+                self.idleBehavior = PunkIdleBehavior(self.body)
         else:
             print 'Error: Personality not found for idle behavior'
             raise Exception("Error: Personality not found for idle behavior")
 
-        self.idleBehavior.prepareBehavior(self.body)
+        # self.idleBehavior.prepareBehavior(self.body)
         self.idleBehavior.startBehavior()
 
         print StoryArc(self.currentStoryArcIndex).name + ' arc --- Performing idle behavior: ' + self.idleBehavior.behaviorType.name
@@ -486,18 +488,18 @@ class Mind:
     def startAttentionCall(self):
 
         if self.personality == Personality.AFFECTIVE:
-            self.activeBehavior = AffectiveAttentionCallBehavior()
+            self.activeBehavior = AffectiveAttentionCallBehavior(self.body)
 
         elif self.personality == Personality.ALOOF:
-            self.activeBehavior = AloofAttentionCallBehavior()
+            self.activeBehavior = AloofAttentionCallBehavior(self.body)
 
         elif self.personality == Personality.PUNK:
-            self.activeBehavior = PunkAttentionCallBehavior()
+            self.activeBehavior = PunkAttentionCallBehavior(self.body)
         else:
             print 'Error: Personality not found for attention call behavior'
             raise Exception("Error: Personality not found for attention call behavior")
 
-        self.activeBehavior.prepareBehavior(self.body)
+        # self.activeBehavior.prepareBehavior(self.body)
         self.activeBehavior.startBehavior()
 
         print StoryArc(self.currentStoryArcIndex).name + ' arc --- Performing attention call behavior: ' + self.activeBehavior.behaviorType.name
@@ -507,18 +509,18 @@ class Mind:
     def startIntroduction(self):
 
         if self.personality == Personality.AFFECTIVE:
-            self.activeBehavior = AffectiveHelloBehavior()
+            self.activeBehavior = AffectiveHelloBehavior(self.body)
 
         elif self.personality == Personality.ALOOF:
-            self.activeBehavior = AloofHelloBehavior()
+            self.activeBehavior = AloofHelloBehavior(self.body)
 
         elif self.personality == Personality.PUNK:
-            self.activeBehavior = PunkHelloBehavior()
+            self.activeBehavior = PunkHelloBehavior(self.body)
         else:
             print 'Error: Personality not found for introduction behavior'
             raise Exception("Error: Personality not found for introduction behavior")
 
-        self.activeBehavior.prepareBehavior(self.body)
+        # self.activeBehavior.prepareBehavior()
         self.activeBehavior.startBehavior()
 
         print StoryArc(self.currentStoryArcIndex).name + ' arc --- Performing introduction behavior: ' + self.activeBehavior.behaviorType.name

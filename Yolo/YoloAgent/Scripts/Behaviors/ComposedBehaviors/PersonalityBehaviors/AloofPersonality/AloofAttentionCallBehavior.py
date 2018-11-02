@@ -1,15 +1,15 @@
 from Scripts.Behaviors.ComposedBehaviors.ComposedBehavior import ComposedBehavior
-from Scripts.Behaviors.SimpleBehaviors.BlinkBehavior import *
-from Scripts.Behaviors.SimpleBehaviors.FeelerBehavior import *
-from Scripts.Behaviors.SimpleBehaviors.MoveBehavior import *
 from Libs.Constants import *
 import time
 
 
 class AloofAttentionCallBehavior(ComposedBehavior):
-    def __init__(self):
+    def __init__(self, bodyRef):
         # standard behaviors
-        ComposedBehavior.__init__(self)
+        ComposedBehavior.__init__(self, bodyRef)
 
         # generic variables
         self.behaviorType = ComposedBehaviors.ALOOF_ATTENTION_CALL
+
+    def applyBehavior(self):
+        ComposedBehavior.applyBehavior(self)

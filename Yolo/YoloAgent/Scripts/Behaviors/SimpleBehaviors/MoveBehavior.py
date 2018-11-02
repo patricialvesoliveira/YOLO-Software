@@ -23,7 +23,7 @@ class MoveBehavior(Behavior):
 
     # Body body, int repetitions, float duration
     def prepareBehavior(self, body, movementType, movementSpeed, movementDirection, transition, repetitions, duration, keepBehaviorSetting=False, startDelay = 0.0):
-        Behavior.prepareBehavior(self, body, transition, repetitions, duration, keepBehaviorSetting, startDelay)
+        # Behavior.prepareBehavior(self, body, transition, repetitions, duration, keepBehaviorSetting, startDelay)
 
         self.movementTransition = transition
         self.movementType = movementType
@@ -39,7 +39,7 @@ class MoveBehavior(Behavior):
 
 
     # Body agentbody
-    def applyBehavior(self, body):
+    def applyBehavior(self):
 
         # Note: allows for a delayed start
         if self.shouldStartBeDelayed():
@@ -75,7 +75,7 @@ class MoveBehavior(Behavior):
 
                 if not self.alreadyStartedSegment:
                     self.alreadyStartedSegment = True
-                    body.setWheelMovement(self.movementType, waypoints[self.currentMovementWaypoint], self.movementSpeed)
+                    self.bodyRef.setWheelMovement(self.movementType, waypoints[self.currentMovementWaypoint], self.movementSpeed)
                     print "Movement " + str(self.movementType) + " going to " + str(
                         self.currentMovementWaypoint + 1) + " of " + str(len(waypoints)) + " waypoints"
 
@@ -107,7 +107,7 @@ class MoveBehavior(Behavior):
 
                 if not self.alreadyStartedSegment:
                     self.alreadyStartedSegment = True
-                    body.setWheelMovement(self.movementType, [x_dist, signal[self.currentMovementWaypoint] - past_signal],
+                    self.bodyRef.setWheelMovement(self.movementType, [x_dist, signal[self.currentMovementWaypoint] - past_signal],
                                           self.movementSpeed)
                     print "Movement " + str(self.movementType) + " going to " + str(self.currentMovementWaypoint + 1) + " of " + str(N) + " waypoints"
 
@@ -143,7 +143,7 @@ class MoveBehavior(Behavior):
 
                 if not self.alreadyStartedSegment:
                     self.alreadyStartedSegment = True
-                    body.setWheelMovement(self.movementType,
+                    self.bodyRef.setWheelMovement(self.movementType,
                                           [xSignal[self.currentMovementWaypoint] - past_signal_x + x_dist, ySignal[self.currentMovementWaypoint] - past_signal_y], self.movementSpeed)
                     print "Movement " + str(self.movementType) + " going to " + str(
                         self.currentMovementWaypoint + 1) + " of " + str(N) + " waypoints"
@@ -179,7 +179,7 @@ class MoveBehavior(Behavior):
 
                 if not self.alreadyStartedSegment:
                     self.alreadyStartedSegment = True
-                    body.setWheelMovement(self.movementType,
+                    self.bodyRef.setWheelMovement(self.movementType,
                                           [xSignal[self.currentMovementWaypoint] - past_signal_x,
                                            ySignal[self.currentMovementWaypoint] - past_signal_y],
                                           self.movementSpeed)
@@ -195,7 +195,7 @@ class MoveBehavior(Behavior):
         if time.time() - self._startTime > self._animationIntervalTime:
             if self._currentBehaviorRepetition == self._maxBehaviorRepetitions:
                 self.isOver = True
-                self.finalizeEffects(body)
+                self.finalizeEffects()
                 print("Behavior ended")
                 return
 
@@ -216,8 +216,8 @@ class MoveBehavior(Behavior):
 
 
     # Body body
-    def finalizeEffects(self, body):
-        body.resetWheelSetup()
+    def finalizeEffects(self):
+        self.bodyRef.resetWheelSetup()
         self.isOver = True
 
         pass

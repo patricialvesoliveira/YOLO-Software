@@ -5,7 +5,7 @@ from Libs.Constants import *
 
 
 class Behavior:
-    def __init__(self, body, repetitions, duration, keepBehaviorSetting, startDelay = 0.0):
+    def __init__(self, bodyRef, repetitions, duration, keepBehaviorSetting, startDelay = 0.0):
         self.behaviorType = Behaviors.BASE  # Configuration.Behaviors
         
         self.isOver = True
@@ -20,6 +20,8 @@ class Behavior:
         self._animationIntervalTime = self._behaviorDuration / self._maxBehaviorRepetitions
         self._currentBehaviorRepetition = 1
 
+        self.bodyRef = bodyRef
+
 
     def startBehavior(self):
         if self._maxBehaviorRepetitions > 0 and self._behaviorDuration > 0.0:
@@ -28,11 +30,11 @@ class Behavior:
         return
 
     # Body agentbody
-    def applyBehavior(self, body):
+    def applyBehavior(self):
         raise NotImplementedError("Please Implement this method")
 
     # Body body
-    def finalizeEffects(self, body):
+    def finalizeEffects(self):
         raise NotImplementedError("Please Implement this method")
 
     def shouldStartBeDelayed(self):

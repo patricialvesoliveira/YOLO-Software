@@ -24,8 +24,8 @@ class Body:
         self.opticalSensor = OpticalSensor()
 
         # Actuator devices and corresponding demo or auxiliary values
-        self.LEDActuator = LEDActuator()
-        self.wheelActuator = WheelActuator()
+        # self.LEDActuator = LEDActuator()
+        # self.wheelActuator = WheelActuator()
         
         # Body stuff
         self._color = Color(rgb=(0.0, 0.0, 0.0))
@@ -72,17 +72,19 @@ class Body:
     # SETTERS
     def setColor(self, newColor):
         self._color = newColor
-        self.LEDActuator.setColor(newColor.red, newColor.green, newColor.blue)  #Note: the LEDs will clip any value to integer
+        # self.LEDActuator.setColor(newColor.red, newColor.green, newColor.blue)  #Note: the LEDs will clip any value to integer
 
     def setBrightness(self, newBrightness):
         self._colorBrightness = newBrightness
-        self.LEDActuator.setBrightness(newBrightness)
+        # self.LEDActuator.setBrightness(newBrightness)
 
     def setWheelMovement(self, waypoint, speed):
-        self.wheelActuator.moveTo(waypoint, speed)
+        # self.wheelActuator.moveTo(waypoint, speed)
+        print "setWheelMovement"
 
     def resetWheelSetup(self):
-        self.wheelActuator.resetPinInput()
+        # self.wheelActuator.resetPinInput()
+        print "resetWheelMovement"
 
 
     def cleanupGPIOPins(self):
