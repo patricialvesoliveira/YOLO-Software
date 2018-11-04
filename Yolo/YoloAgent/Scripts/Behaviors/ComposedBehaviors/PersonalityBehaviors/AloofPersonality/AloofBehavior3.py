@@ -14,6 +14,3 @@ class AloofBehavior3(ComposedBehavior):
         # generic variables
         self.behaviorType = ComposedBehaviors.ALOOF_EXPRESSION_3
         self.behaviorList.append(BlinkBehaviorEaseIn(bodyRef, [Color(rgb=(0.0, 0.0, 0.0))], ColorBrightness.MEDIUM, 1, 7, Color(rgb=(0.0, 0.0, 0.0)), True))
-
-    def applyBehavior(self):
-        ComposedBehavior.applyBehavior(self)

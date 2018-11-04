@@ -11,14 +11,14 @@ class ComposedBehavior:
         self.behaviorList = []
 
         # generic variables
-        self._behaviorDuration = 0.0
-        self._startTime = 0.0
+        self.behaviorDuration = 0.0
+        self.startTime = 0.0
         self.isOver = True
         self.behaviorHalted = False
         self.behaviorType = ComposedBehaviors.BASE
 
     def startBehavior(self):
-        self._startTime = time.time()
+        self.startTime = time.time()
         self.isOver = False
 
         for behavior in self.behaviorList:

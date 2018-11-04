@@ -28,8 +28,8 @@ class Body:
         # self.wheelActuator = WheelActuator()
         
         # Body stuff
-        self._color = Color(rgb=(0.0, 0.0, 0.0))
-        self._colorBrightness = ColorBrightnessValues[ColorBrightness.MEDIUM.name]
+        self.color = Color(rgb=(0.0, 0.0, 0.0))
+        self.colorBrightness = ColorBrightnessValues[ColorBrightness.MEDIUM.name]
 
         print "Component set up finished!"
         return
@@ -64,18 +64,18 @@ class Body:
         return self.touchSensor.recordTouchInput()
 
     def getColor(self):
-        return self._color
+        return self.color
 
     def getBrightness(self):
-        return self._colorBrightness
+        return self.colorBrightness
    
     # SETTERS
     def setColor(self, newColor):
-        self._color = newColor
+        self.color = newColor
         # self.LEDActuator.setColor(newColor.red, newColor.green, newColor.blue)  #Note: the LEDs will clip any value to integer
 
     def setBrightness(self, newBrightness):
-        self._colorBrightness = newBrightness
+        self.colorBrightness = newBrightness
         # self.LEDActuator.setBrightness(newBrightness)
 
     def setWheelMovement(self, waypoint, speed):

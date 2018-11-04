@@ -14,6 +14,3 @@ class PuppeteerBehavior(ComposedBehavior):
         # generic variables
         self.behaviorType = ComposedBehaviors.PUPPETEER
         self.behaviorList.append(BlinkBehaviorEaseIn(bodyRef, [Color(rgb=(1.0, 1.0, 0.0))], ColorBrightness.HIGH, 1, 1, bodyRef.getColor(), True))
-
-    def applyBehavior(self):
-        ComposedBehavior.applyBehavior(self)

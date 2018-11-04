@@ -14,6 +14,3 @@ class AloofIdleBehavior(ComposedBehavior):
         # generic variables
         self.behaviorType = ComposedBehaviors.ALOOF_IDLE
         self.behaviorList.append(BlinkBehaviorEaseInOut(bodyRef, [Color(rgb=(0.0, 0.0, 1.0))], ColorBrightness.LOW, 1, 12, Color(rgb=(0.0, 0.0, 0.0)), False))
-
-    def applyBehavior(self):
-        ComposedBehavior.applyBehavior(self)

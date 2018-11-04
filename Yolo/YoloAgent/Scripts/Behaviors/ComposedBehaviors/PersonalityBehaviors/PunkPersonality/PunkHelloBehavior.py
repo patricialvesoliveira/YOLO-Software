@@ -14,6 +14,3 @@ class PunkHelloBehavior(ComposedBehavior):
         # generic variables
         self.behaviorType = ComposedBehaviors.PUNK_HELLO
         self.behaviorList.append(BlinkBehaviorEaseInOut(bodyRef, [Color(rgb=(1.0, 0.0, 0.0))], ColorBrightness.HIGH, 1, 10, Color(rgb=(0.0, 0.0, 0.0)), True))
-
-    def applyBehavior(self):
-        ComposedBehavior.applyBehavior(self)

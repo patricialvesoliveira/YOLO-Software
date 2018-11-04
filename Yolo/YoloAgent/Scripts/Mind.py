@@ -55,7 +55,6 @@ class Mind:
 
         self.activeBehavior = AffectiveHelloBehavior(self.body)
 
-
         # this will allow to cycle through the different story arcs
         self.currentStoryArcIndex = 1
         self.storyArcDuration = StoryArcTime[StoryArc(self.currentStoryArcIndex).name] * 60  # in seconds
@@ -100,6 +99,7 @@ class Mind:
         #print("Status: " + StoryArc(self.storyArcCurrent).name + " - elapsed: " + str(
         #    (time.time() - self.storyStartTime) / 60) + " - max: " + str(
         #    StoryArcTime[StoryArc(self.storyArcCurrent).name]))
+
 
         # Note : checks if there is a behavior being carried out and applies it, otherwise selects a new behavior on touch
         if self.activeBehavior is not None and not self.activeBehavior.isOver and self.touchStatus == Touch.NOT_TOUCHING:

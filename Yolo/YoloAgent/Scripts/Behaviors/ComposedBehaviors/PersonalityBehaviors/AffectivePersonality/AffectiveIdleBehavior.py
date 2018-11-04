@@ -14,6 +14,3 @@ class AffectiveIdleBehavior(ComposedBehavior):
         # generic variables
         self.behaviorType = ComposedBehaviors.AFFECTIVE_IDLE
         self.behaviorList.append(BlinkBehaviorEaseInOut(bodyRef, [Color(rgb=(1.0, 1.0, 0.0))], ColorBrightness.HIGH, 1, 9, Color(rgb=(0.0, 0.0, 0.0)), False))
-
-    def applyBehavior(self):
-        ComposedBehavior.applyBehavior(self)

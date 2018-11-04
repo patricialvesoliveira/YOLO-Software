@@ -14,6 +14,3 @@ class PunkIdleBehavior(ComposedBehavior):
         # generic variables
         self.behaviorType = ComposedBehaviors.PUNK_IDLE
         self.behaviorList.append(BlinkBehaviorEaseInOut(bodyRef, [Color(rgb=(1.0, 0.0, 0.0))], ColorBrightness.LOW, 1, 10, Color(rgb=(0.0, 0.0, 0.0)), True))
-
-    def applyBehavior(self):
-        ComposedBehavior.applyBehavior(self)

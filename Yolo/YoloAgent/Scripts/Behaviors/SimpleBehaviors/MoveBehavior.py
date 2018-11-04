@@ -67,7 +67,7 @@ class MoveBehavior(Behavior):
                     negatedWaypoints = [ -x for x in waypoints]
                     waypoints = list(reversed(negatedWaypoints))
 
-                totalTime = float(self._animationIntervalTime) / len(waypoints)
+                totalTime = float(self.animationIntervalTime) / len(waypoints)
 
                 if time.time() - self._startTime >= totalTime * (self.currentMovementWaypoint + 1) and self.currentMovementWaypoint + 1 < len(waypoints):
                     self.currentMovementWaypoint += 1
@@ -90,8 +90,8 @@ class MoveBehavior(Behavior):
                 # alternatively: create signal array with 1024 elements and sample from it according to inputs period and speed
 
                 past_signal = 0
-                totalTime = float(self._animationIntervalTime) / N
-                #print "total time " + str(totalTime) + " of a repetition time of " + str(self._animationIntervalTime) + " divided by " + str(len(signal))
+                totalTime = float(self.animationIntervalTime) / N
+                #print "total time " + str(totalTime) + " of a repetition time of " + str(self.animationIntervalTime) + " divided by " + str(len(signal))
 
                 # Note: to do a path backwards we invert the points and their order
                 if self.currentMovementDirection == MovementDirection.REVERSE:
@@ -124,8 +124,8 @@ class MoveBehavior(Behavior):
 
                 past_signal_x = 20
                 past_signal_y = 0
-                totalTime = float(self._animationIntervalTime) / N
-                # print "total time " + str(totalTime) + " of a repetition time of " + str(self._animationIntervalTime) + " divided by " + str(len(signal))
+                totalTime = float(self.animationIntervalTime) / N
+                # print "total time " + str(totalTime) + " of a repetition time of " + str(self.animationIntervalTime) + " divided by " + str(len(signal))
 
                 # Note: to do a path backwards we invert the points and their order
                 if self.currentMovementDirection == MovementDirection.REVERSE:
@@ -160,8 +160,8 @@ class MoveBehavior(Behavior):
 
                 past_signal_x = 0
                 past_signal_y = 0
-                totalTime = float(self._animationIntervalTime) / N
-                # print "total time " + str(totalTime) + " of a repetition time of " + str(self._animationIntervalTime) + " divided by " + str(len(signal))
+                totalTime = float(self.animationIntervalTime) / N
+                # print "total time " + str(totalTime) + " of a repetition time of " + str(self.animationIntervalTime) + " divided by " + str(len(signal))
 
                 # Note: to do a path backwards we invert the points and their order
                 if self.currentMovementDirection == MovementDirection.REVERSE:
@@ -192,7 +192,7 @@ class MoveBehavior(Behavior):
             raise Exception("Error: Move behavior doesn't support this transition type. Please add it!")
 
         # when the animation is over we pause before changing color
-        if time.time() - self._startTime > self._animationIntervalTime:
+        if time.time() - self._startTime > self.animationIntervalTime:
             if self._currentBehaviorRepetition == self._maxBehaviorRepetitions:
                 self.isOver = True
                 self.finalizeEffects()

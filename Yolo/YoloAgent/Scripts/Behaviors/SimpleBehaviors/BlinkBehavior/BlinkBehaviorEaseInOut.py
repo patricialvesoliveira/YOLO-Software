@@ -18,14 +18,14 @@ class BlinkBehaviorEaseInOut(BlinkBehavior):
     def applyBehavior(self):
         BlinkBehavior.applyBehavior(self)
         
-        timeElapsed = time.time() - self._startTime
-        totalTime = self._animationIntervalTime / 2
+        timeElapsed = time.time() - self.startTime
+        totalTime = self.animationIntervalTime / 2
 
-        if time.time() - self._startTime <= totalTime:
+        if time.time() - self.startTime <= totalTime:
             percentage = tween.easeInSine(numpy.clip(timeElapsed / totalTime, 0, 1))
 
         # when the  animation is over  we can pause before changing color
-        elif time.time() - self._startTime >= totalTime + self._animationEndPause:
+        elif time.time() - self.startTime >= totalTime + self.animationEndPause:
             if self.defaultColor is not None:
                 self.color = self.defaultColor
             percentage = 1 - tween.easeOutSine(numpy.clip(timeElapsed / totalTime, 0, 1))

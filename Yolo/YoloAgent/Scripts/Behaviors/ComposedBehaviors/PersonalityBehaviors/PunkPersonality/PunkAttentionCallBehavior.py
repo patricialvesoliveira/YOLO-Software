@@ -16,6 +16,3 @@ class PunkAttentionCallBehavior(ComposedBehavior):
 
         self.behaviorList.append(BlinkBehaviorEaseIn(bodyRef, [Color(rgb=(1.0, 0.0, 0.0))], ColorBrightness.HIGH, 1, 10, bodyRef.getColor(), True))
         self.behaviorList.append(MoveBehavior(bodyRef, Shapes.STRAIGHT, 70, MovementDirection.ALTERNATING, Transitions.LINEAR, 3, 10, True))
-
-    def applyBehavior(self):
-        ComposedBehavior.applyBehavior(self)

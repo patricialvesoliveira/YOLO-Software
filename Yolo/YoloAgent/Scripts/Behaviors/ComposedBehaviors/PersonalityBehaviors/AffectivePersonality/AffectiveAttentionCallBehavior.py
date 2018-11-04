@@ -15,6 +15,3 @@ class AffectiveAttentionCallBehavior(ComposedBehavior):
         self.behaviorType = ComposedBehaviors.AFFECTIVE_ATTENTION_CALL
         self.behaviorList.append(BlinkBehaviorEaseIn(bodyRef, [Color(rgb=(1.0, 1.0, 0.0))], ColorBrightness.HIGH, 1, 1, bodyRef.getColor(), True))
         self.behaviorList.append(MoveBehavior(bodyRef, Shapes.CIRCLE, 70, MovementDirection.STANDARD, Transitions.LINEAR, 3, 10, True))
-
-    def applyBehavior(self):
-        ComposedBehavior.applyBehavior(self)

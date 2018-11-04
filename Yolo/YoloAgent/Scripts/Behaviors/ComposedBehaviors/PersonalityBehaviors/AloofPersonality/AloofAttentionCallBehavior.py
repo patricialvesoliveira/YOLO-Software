@@ -10,6 +10,3 @@ class AloofAttentionCallBehavior(ComposedBehavior):
 
         # generic variables
         self.behaviorType = ComposedBehaviors.ALOOF_ATTENTION_CALL
-
-    def applyBehavior(self):
-        ComposedBehavior.applyBehavior(self)

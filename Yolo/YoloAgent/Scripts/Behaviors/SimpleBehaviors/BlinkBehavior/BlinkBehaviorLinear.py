@@ -16,6 +16,6 @@ class BlinkBehaviorLinear(BlinkBehavior):
 	    
 	# Body body
 	def applyBehavior(self):
-	    BlinkBehavior.applyBehavior()
-	    percentage = (time.time() - self._startTime) / self._animationIntervalTime
+	    BlinkBehavior.applyBehavior(self)
+	    percentage = (time.time() - self._startTime) / self.animationIntervalTime
 	    self.animateLerp(percentage)

@@ -16,5 +16,5 @@ class BlinkBehaviorInstant(BlinkBehavior):
 	    
 	# Body body
 	def applyBehavior(self):
-	    BlinkBehavior.applyBehavior()
+	    BlinkBehavior.applyBehavior(self)
 	    self.bodyRef.setColor(self.activeBlinkColor)
