@@ -251,9 +251,9 @@ class GUI:
                 return
 
             if value == "Touching":
-                newTouchState = Touch.TOUCHING
+                newTouchState = TouchState.TOUCHING
             else:
-                newTouchState = Touch.NOT_TOUCHING
+                newTouchState = TouchState.NOT_TOUCHING
 
             self.agent.body.touchState = newTouchState
             touchInputState.configure(text="Current touch state: " + self.agent.body.getTouchSensorData()[1].name)

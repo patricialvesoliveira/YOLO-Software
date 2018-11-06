@@ -6,49 +6,35 @@ class ApplicationMode(enum.Enum):
 
 # BODY
 
-class Sensor(enum.Enum):
+class SensorType(enum.Enum):
     OPTICAL = 1
-    ACCEL = 2
-    TOUCH = 3
-    TILT = 4
-    BATTERY = 5
+    TOUCH = 2
 
 
-class Optical(enum.Enum):
+class OpticalState(enum.Enum):
     RECEIVING = 1
     NOT_RECEIVING = 2
     FINISHED = 3
 
 
-class Acceleration(enum.Enum):
-    FAST = 1
-    SLOW = 2
 
-
-class Touch(enum.Enum):
+class TouchState(enum.Enum):
     TOUCHING = 1
     NOT_TOUCHING = 2
 
 
-class Tilt(enum.Enum):
-    VERTICAL = 1
-    HORIZONTAL = 2
-
-
-class Battery(enum.Enum):
-    LOW = 1
-    OK = 2
-
 
 # MIND
 
-class Personality(enum.Enum):
+class PersonalityType(enum.Enum):
+    NONE = 0
     PUNK = 1
     AFFECTIVE = 2
     ALOOF = 3
 
 
-class Shapes(enum.Enum):
+class ShapeType(enum.Enum):
+    NONE = 0
     SPIKES = 1
     CURVED = 2
     LOOPS = 3
@@ -59,13 +45,15 @@ class Shapes(enum.Enum):
 
 
 class MovementDirection(enum.Enum):
-    STANDARD = 1
+    NONE = 0
+    FORWARD = 1
     REVERSE = 2
     ALTERNATING = 3
 
 
 # order is relevant here, the story progresses through its arcs sequentially
 class StoryArc(enum.Enum):
+    NONE = 0
     EXPOSITION = 1
     CONFLICT_INTRODUCED = 2
     RISING_ACTION_PT1 = 3
@@ -95,15 +83,14 @@ StoryCreativeBehaviorProbability = {'EXPOSITION': 0, 'CONFLICT_INTRODUCED': 60, 
 # BEHAVIORS
 
 
-class Behaviors(enum.Enum):
+class BehaviorType(enum.Enum):
+    NONE = 0
     BLINK = 1
-    FEELER = 2
-    MOVE = 3
-    ROTATE = 4
-    BASE = 5
+    MOVE = 2
 
 
-class ComposedBehaviors(enum.Enum):
+class ComposedBehaviorType(enum.Enum):
+    NONE = 0
     LOOPS_FAST = 1
     LOOPS_SLOW = 2
     CURVED_FAST = 3
@@ -137,6 +124,7 @@ class ComposedBehaviors(enum.Enum):
 
 
 class BlinkingSpeed(enum.Enum):
+    NONE = 0
     STOPPED = 1
     VERY_SLOW = 2
     SLOW = 3
@@ -145,7 +133,8 @@ class BlinkingSpeed(enum.Enum):
     VERY_FAST = 6
 
 
-class Colors(enum.Enum):
+class ColorType(enum.Enum):
+    NONE = 0
     WHITE = 1
     GRAY = 2
     BLACK = 3
@@ -165,17 +154,10 @@ class Colors(enum.Enum):
 
 
 class ColorBrightness(enum.Enum):
+    NONE = 0
     LOW = 1
     MEDIUM = 2
     HIGH = 3
 
 
 ColorBrightnessValues = {'LOW': 120, 'MEDIUM': 180, 'HIGH': 255}
-
-
-class Transitions(enum.Enum):
-    LINEAR = 1
-    EASEIN = 2
-    EASEOUT = 3
-    INSTANT = 4
-    EASEINOUT = 5

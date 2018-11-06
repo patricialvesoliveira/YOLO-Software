@@ -32,11 +32,11 @@ def main(personality, version):
     logging.info('Agent YOLO startup')
 
     if personality == "Affective":
-        selectedPersonality = Personality.AFFECTIVE
+        selectedPersonality = PersonalityType.AFFECTIVE
     elif personality == "Aloof":
-        selectedPersonality = Personality.ALOOF
+        selectedPersonality = PersonalityType.ALOOF
     elif personality == "Punk":
-        selectedPersonality = Personality.PUNK
+        selectedPersonality = PersonalityType.PUNK
     else:
         raise Exception("Error: Chosen personality not found.")
 

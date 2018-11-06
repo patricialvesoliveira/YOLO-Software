@@ -24,8 +24,8 @@ class Body:
         self.opticalSensor = OpticalSensor()
 
         # Actuator devices and corresponding demo or auxiliary values
-        # self.LEDActuator = LEDActuator()
-        # self.wheelActuator = WheelActuator()
+        self.LEDActuator = LEDActuator()
+        self.wheelActuator = WheelActuator()
         
         # Body stuff
         self.color = Color(rgb=(0.0, 0.0, 0.0))
@@ -52,10 +52,10 @@ class Body:
         return sensorData
 
     def getOpticalSensorData(self):
-        if self.touchSensor.touchState is Touch.TOUCHING and self.opticalSensor.opticalState is Optical.NOT_RECEIVING:
+        if self.touchSensor.touchState is TouchState.TOUCHING and self.opticalSensor.opticalState is OpticalState.NOT_RECEIVING:
             self.opticalSensor.changeState(Optical.RECEIVING);
 
-        if self.touchSensor.touchState is Touch.NOT_TOUCHING and self.opticalSensor.opticalState is Optical.RECEIVING:
+        if self.touchSensor.touchState is TouchState.NOT_TOUCHING and self.opticalSensor.opticalState is OpticalState.RECEIVING:
             self.opticalSensor.changeState(Optical.NOT_RECEIVING);
 
         return self.opticalSensor.recordOpticalInput()
@@ -72,11 +72,11 @@ class Body:
     # SETTERS
     def setColor(self, newColor):
         self.color = newColor
-        # self.LEDActuator.setColor(newColor.red, newColor.green, newColor.blue)  #Note: the LEDs will clip any value to integer
+        self.LEDActuator.setColor(newColor.red, newColor.green, newColor.blue)  #Note: the LEDs will clip any value to integer
 
     def setBrightness(self, newBrightness):
         self.colorBrightness = newBrightness
-        # self.LEDActuator.setBrightness(newBrightness)
+        self.LEDActuator.setBrightness(newBrightness)
 
     def setWheelMovement(self, waypoint, speed):
         # self.wheelActuator.moveTo(waypoint, speed)

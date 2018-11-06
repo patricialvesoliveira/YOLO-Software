@@ -1,1 +1,0 @@
-__all__ = ["ComposedBehavior", "CurvedFastBehavior", "CurvedSlowBehavior", "LoopsFastBehavior", "LoopsSlowBehavior", "StraightFastBehavior", "StraightSlowBehavior", "RectFastBehavior", "RectSlowBehavior", "SpikesFastBehavior", "SpikesSlowBehavior"]
