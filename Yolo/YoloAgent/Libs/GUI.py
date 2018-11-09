@@ -273,7 +273,7 @@ class GUI:
         self.xold = None  # reset the line when you let go of the button
         self.yold = None
 
-        self.agent.body.opticalState = Optical.FINISHED
+        self.agent.body.opticalState = OpticalState.FINISHED
         event.widget.delete("all")
 
     def motion(self, event):
@@ -283,7 +283,7 @@ class GUI:
                 event.widget.create_line(self.xold, self.yold, event.x, event.y, smooth=TRUE)
                 # here's where you draw it. smooth. neat.
                 self.agent.body.newOpticalInfo = (event.x, event.y)
-                self.agent.body.opticalState = Optical.RECEIVING
+                self.agent.body.opticalState = OpticalState.RECEIVING
                 #print("info sent: " + str(self.agent.body.newOpticalInfo))
 
             self.xold = event.x

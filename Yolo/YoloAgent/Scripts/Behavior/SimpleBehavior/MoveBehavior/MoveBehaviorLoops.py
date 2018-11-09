@@ -37,12 +37,12 @@ class MoveBehaviorLoops(MoveBehavior):
 
         # Note: to do a path backwards we invert the points and their order
         if self.currentMovementDirection == MovementDirection.REVERSE:
-            signal = reversePath(self, signal)
+            # signal = self.reversePath(signal)
             x_dist = -x_dist
 
-        self.followPath(N, [xSignal[self.currentMovementWaypoint] - past_signal_x + x_dist, ySignal[self.currentMovementWaypoint] - past_signal_y])
-        if reachedNewWaypoint(N):
-            past_signal_x = xSignal[self.currentMovementWaypoint - 1]
-            past_signal_y = ySignal[self.currentMovementWaypoint - 1]
+        self.followPath(N, [xSignal[self.currentWaypointIndex] - past_signal_x + x_dist, ySignal[self.currentWaypointIndex] - past_signal_y])
+        if self.reachedNewWaypoint(N):
+            past_signal_x = xSignal[self.currentWaypointIndex - 1]
+            past_signal_y = ySignal[self.currentWaypointIndex - 1]
         return
         

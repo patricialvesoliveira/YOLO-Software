@@ -120,6 +120,7 @@ class Mind:
             self.touchStartTime = time.gmtime()
             return
         elif self.touchStatus == TouchState.NOT_TOUCHING and self.wasTouched:
+            self.puppeteerBehavior.haltAndFinishBehavior()
             self.decideBehavior()
             self.wasTouched = False
             self.startedIdle = False

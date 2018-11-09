@@ -116,7 +116,7 @@ class OpticalSensor:
 
                 self.opticalShape.clear()
                 self.opticalSensorPosition = [0, 0]
-                self.opticalState = Optical.NOT_RECEIVING
+                self.opticalState = OpticalState.NOT_RECEIVING
 
         return (self.sensorType, (self.opticalState, self.opticalShape))
 

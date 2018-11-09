@@ -30,16 +30,20 @@ class MoveBehaviorCircle(MoveBehavior):
 
         past_signal_x = 0
         past_signal_y = 0
-        totalTime = float(self.animationIntervalTime) / N
-        # print "total time " + str(totalTime) + " of a repetition time of " + str(self.animationIntervalTime) + " divided by " + str(len(signal))
+        # totalTime = float(self.animationIntervalTime) / N
 
         # Note: to do a path backwards we invert the points and their order
         if self.currentMovementDirection == MovementDirection.REVERSE:
-            xSignal = reversePath(self, xSignal)
+            xSignal = self.reversePath(xSignal)
 
-        self.followPath(N, [xSignal[self.currentMovementWaypoint] - past_signal_x, ySignal[self.currentMovementWaypoint] - past_signal_y])
-        if reachedNewWaypoint(N):
-            past_signal_x = xSignal[self.currentMovementWaypoint - 1]
-            past_signal_y = ySignal[self.currentMovementWaypoint - 1]
+        print "sadsadsa"
+
+        self.followPath(N, [xSignal[self.currentWaypointIndex] - past_signal_x, ySignal[self.currentWaypointIndex] - past_signal_y])
+        print "sadsadsa2"
+        if self.reachedNewWaypoint(N):
+            past_signal_x = xSignal[self.currentWaypointIndex - 1]
+            past_signal_y = ySignal[self.currentWaypointIndex - 1]
+
+
         return
         

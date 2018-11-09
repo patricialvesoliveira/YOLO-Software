@@ -34,11 +34,11 @@ class MoveBehaviorCurved(MoveBehavior):
 
         # Note: to do a path backwards we invert the points and their order
         if self.currentMovementDirection == MovementDirection.REVERSE:
-            signal = reversePath(self, signal)
+            signal = self.reversePath(signal)
             x_dist = - x_dist
 
 
         self.followPath(N, [x_dist, signal[self.currentMovementWaypoint] - past_signal])
-        if reachedNewWaypoint(N):
+        if self.reachedNewWaypoint(N):
             past_signal = signal[self.currentMovementWaypoint - 1]
         return

@@ -14,14 +14,14 @@ class MoveBehaviorForwardAndBack(MoveBehavior):
     def __init__(self, bodyRef, movementSpeed, movementDirection, transition, repetitions, duration, keepBehaviorSetting=False, startDelay = 0.0):
         MoveBehavior.__init__(self, bodyRef, movementSpeed, movementDirection, transition, repetitions, duration, keepBehaviorSetting, startDelay)
         self.movementType = ShapeType.FORWARD_AND_BACK
-        waypoints = numpy.array([[1, 0], [-1, 0]])
+        self.waypoints = numpy.array([[1, 0], [-1, 0]])
         # Note: to do a path backwards we invert the points and their order
         if self.currentMovementDirection == MovementDirection.REVERSE:
-            self.waypoints = reversePath(self, self.waypoints)
+            self.waypoints = self.reversePath(self.waypoints)
         return
     
     # Body body
     def applyBehavior(self):
         MoveBehavior.applyBehavior(self)
-        self.followPath(len(waypoints), self.currentMovementWaypoint)
+        self.followPath(len(self.waypoints), self.waypoints[self.currentWaypointIndex])
         return

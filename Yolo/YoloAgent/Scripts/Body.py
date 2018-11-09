@@ -53,10 +53,10 @@ class Body:
 
     def getOpticalSensorData(self):
         if self.touchSensor.touchState is TouchState.TOUCHING and self.opticalSensor.opticalState is OpticalState.NOT_RECEIVING:
-            self.opticalSensor.changeState(Optical.RECEIVING);
+            self.opticalSensor.changeState(OpticalState.RECEIVING);
 
         if self.touchSensor.touchState is TouchState.NOT_TOUCHING and self.opticalSensor.opticalState is OpticalState.RECEIVING:
-            self.opticalSensor.changeState(Optical.NOT_RECEIVING);
+            self.opticalSensor.changeState(OpticalState.NOT_RECEIVING);
 
         return self.opticalSensor.recordOpticalInput()
 
@@ -79,11 +79,11 @@ class Body:
         self.LEDActuator.setBrightness(newBrightness)
 
     def setWheelMovement(self, waypoint, speed):
-        # self.wheelActuator.moveTo(waypoint, speed)
+        self.wheelActuator.moveTo(waypoint, speed)
         print "setWheelMovement"
 
     def resetWheelSetup(self):
-        # self.wheelActuator.resetPinInput()
+        self.wheelActuator.resetPinInput()
         print "resetWheelMovement"
 
 

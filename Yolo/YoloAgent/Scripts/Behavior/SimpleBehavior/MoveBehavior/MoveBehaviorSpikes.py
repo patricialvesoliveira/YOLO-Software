@@ -17,11 +17,11 @@ class MoveBehaviorSpikes(MoveBehavior):
         self.waypoints = numpy.array([[1, 1], [1, -1]])
         # Note: to do a path backwards we invert the points and their order
         if self.currentMovementDirection == MovementDirection.REVERSE:
-            self.waypoints = reversePath(self, self.waypoints)
+            self.waypoints = self.reversePath(self.waypoints)
         return
 
     # Body body
     def applyBehavior(self):
         MoveBehavior.applyBehavior(self)
-        self.followPath(len(waypoints), self.currentMovementWaypoint)
+        self.followPath(len(self.waypoints), self.waypoints[self.currentWaypointIndex])
         return
