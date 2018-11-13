@@ -10,7 +10,8 @@ from Libs.Constants import *
 from Libs.MachineLearning.lib.constants import SHAPE_ARRAY
 from Libs.MachineLearning.lib.util import extract_features, predict
 
-from Scripts.Behavior.SimpleBehavior.BlinkBehavior.BlinkBehaviorEaseOut import BlinkBehaviorEaseOut
+from Scripts.Behavior.SimpleBehavior.BlinkBehavior.BlinkBehaviorEaseIn import BlinkBehaviorEaseIn
+from Scripts.Behavior.SimpleBehavior.MoveBehavior.MoveBehaviorStraight import MoveBehaviorStraight
 from colour import Color
 
 
@@ -29,22 +30,21 @@ from Scripts.Behavior.ComposedBehavior.PersonalityBehavior.AffectivePersonality.
 from Scripts.Behavior.ComposedBehavior.PersonalityBehavior.AffectivePersonality.AffectiveBehavior1 import AffectiveBehavior1
 from Scripts.Behavior.ComposedBehavior.PersonalityBehavior.AffectivePersonality.AffectiveBehavior2 import AffectiveBehavior2
 from Scripts.Behavior.ComposedBehavior.PersonalityBehavior.AffectivePersonality.AffectiveBehavior3 import AffectiveBehavior3
-from Scripts.Behavior.ComposedBehavior.PersonalityBehavior.AffectivePersonality.AffectiveHelloBehavior import AffectiveHelloBehavior
 from Scripts.Behavior.ComposedBehavior.PersonalityBehavior.AffectivePersonality.AffectiveIdleBehavior import AffectiveIdleBehavior
 
 from Scripts.Behavior.ComposedBehavior.PersonalityBehavior.AloofPersonality.AloofAttentionCallBehavior import AloofAttentionCallBehavior
 from Scripts.Behavior.ComposedBehavior.PersonalityBehavior.AloofPersonality.AloofBehavior1 import AloofBehavior1
 from Scripts.Behavior.ComposedBehavior.PersonalityBehavior.AloofPersonality.AloofBehavior2 import AloofBehavior2
 from Scripts.Behavior.ComposedBehavior.PersonalityBehavior.AloofPersonality.AloofBehavior3 import AloofBehavior3
-from Scripts.Behavior.ComposedBehavior.PersonalityBehavior.AloofPersonality.AloofHelloBehavior import AloofHelloBehavior
 from Scripts.Behavior.ComposedBehavior.PersonalityBehavior.AloofPersonality.AloofIdleBehavior import AloofIdleBehavior
 
 from Scripts.Behavior.ComposedBehavior.PersonalityBehavior.PunkPersonality.PunkAttentionCallBehavior import PunkAttentionCallBehavior
 from Scripts.Behavior.ComposedBehavior.PersonalityBehavior.PunkPersonality.PunkBehavior1 import PunkBehavior1
 from Scripts.Behavior.ComposedBehavior.PersonalityBehavior.PunkPersonality.PunkBehavior2 import PunkBehavior2
 from Scripts.Behavior.ComposedBehavior.PersonalityBehavior.PunkPersonality.PunkBehavior3 import PunkBehavior3
-from Scripts.Behavior.ComposedBehavior.PersonalityBehavior.PunkPersonality.PunkHelloBehavior import PunkHelloBehavior
 from Scripts.Behavior.ComposedBehavior.PersonalityBehavior.PunkPersonality.PunkIdleBehavior import PunkIdleBehavior
+
+from Scripts.Behavior.ComposedBehavior.PersonalityBehavior.HelloBehavior import HelloBehavior
 
 
 class Mind:
@@ -85,8 +85,7 @@ class Mind:
         # to check if the agent already introduced himself (happens only after first being touched)
         self.performedIntroduction = False
 
-        self.testBehavior = BlinkBehaviorEaseOut(self.body, [Color(rgb=(1.0, 0.25, 0.0)),Color(rgb=(1.0, 1.0, 1.0))], ColorBrightness.MEDIUM, 1, 10, self.body.getColor(), True);
-
+        self.testBehavior = HelloBehavior(self.body);
         return
 
     def update(self):

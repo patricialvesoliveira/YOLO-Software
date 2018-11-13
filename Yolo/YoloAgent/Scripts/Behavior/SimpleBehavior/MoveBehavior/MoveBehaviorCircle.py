@@ -36,10 +36,8 @@ class MoveBehaviorCircle(MoveBehavior):
         if self.currentMovementDirection == MovementDirection.REVERSE:
             xSignal = self.reversePath(xSignal)
 
-        print "sadsadsa"
 
         self.followPath(N, [xSignal[self.currentWaypointIndex] - past_signal_x, ySignal[self.currentWaypointIndex] - past_signal_y])
-        print "sadsadsa2"
         if self.reachedNewWaypoint(N):
             past_signal_x = xSignal[self.currentWaypointIndex - 1]
             past_signal_y = ySignal[self.currentWaypointIndex - 1]

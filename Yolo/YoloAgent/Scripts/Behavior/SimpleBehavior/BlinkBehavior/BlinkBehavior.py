@@ -21,10 +21,13 @@ class BlinkBehavior(SimpleBehavior):
         self.colorBrightness = bodyRef.getBrightness()
 
         self.blinkColorList = blinkColorList
-        self.activeBlinkColor = self.blinkColorList[0]
-        self.blinkBrightness = ColorBrightnessValues[brightness.name]
+        self.activeBlinkColor = blinkColorList[0]
+        self.activeBlinkBrightness = ColorBrightnessValues[brightness.name]
         self.animationEndPause = animationPause
+        self.behaviorDuration = duration
+        print "duration: " + str(duration)
         self.defaultColor = defaultColor
+
 
     # Body body
     def applyBehavior(self):
@@ -33,7 +36,9 @@ class BlinkBehavior(SimpleBehavior):
             return
 
         # when the animation is over we pause before changing color
-        if time.time() - self.startTime > self.animationIntervalTime + self.animationEndPause:
+        # print "I got a pen: " + str(time.time() - self.startTime)
+        # print "I got a apple: " + str(self.behaviorDuration + self.animationEndPause)
+        if time.time() - self.startTime > self.behaviorDuration + self.animationEndPause:
             if self.currentBehaviorRepetition == self.maxBehaviorRepetitions:
                 self.finishBehavior()
                 print "Behavior ended"
@@ -48,16 +53,18 @@ class BlinkBehavior(SimpleBehavior):
         SimpleBehavior.finishBehavior(self)
         if self.keepBehaviorSetting == True:
             self.bodyRef.setColor(self.activeBlinkColor)
+            self.bodyRef.setBrightness(self.activeBlinkBrightness)
             print("setting the animation end color")
         else:
             self.bodyRef.setColor(self.color)
+            self.bodyRef.setBrightness(self.colorBrightness)
         return
 
     
 
     def animateLerp(self, percentage):
         self.bodyRef.setColor(self.lerpColor(percentage, self.color, self.activeBlinkColor))
-        self.bodyRef.setBrightness(self.blinkBrightness * percentage + self.colorBrightness * (1 - percentage))
+        self.bodyRef.setBrightness(self.activeBlinkBrightness * percentage + self.colorBrightness * (1 - percentage))
         # print("Applying blink: passed " + str((time.time() - self._startTime)) + " of " + str(self._animationIntervalTime) + ". Percentage: " + str(percentage))
         return
 

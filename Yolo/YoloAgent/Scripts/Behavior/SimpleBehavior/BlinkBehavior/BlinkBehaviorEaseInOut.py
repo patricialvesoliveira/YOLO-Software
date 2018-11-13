@@ -18,8 +18,8 @@ class BlinkBehaviorEaseInOut(BlinkBehavior):
 
         subBehaviorDuration = duration / 2
 
-        self.easeInBehavior = BlinkBehaviorEaseIn(bodyRef, blinkColorList, brightness, repetitions, subBehaviorDuration, defaultColor)
-        self.easeOutBehavior = BlinkBehaviorEaseOut(bodyRef, blinkColorList, brightness, repetitions, subBehaviorDuration, defaultColor)
+        self.easeInBehavior = BlinkBehaviorEaseIn(bodyRef, blinkColorList, brightness, 1, subBehaviorDuration, defaultColor)
+        self.easeOutBehavior = BlinkBehaviorEaseOut(bodyRef, blinkColorList, brightness, 1, subBehaviorDuration, defaultColor)
         
 
     # Body body

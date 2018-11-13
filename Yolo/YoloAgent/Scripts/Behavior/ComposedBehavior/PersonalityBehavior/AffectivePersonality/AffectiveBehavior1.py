@@ -1,5 +1,6 @@
 from Scripts.Behavior.ComposedBehavior.ComposedBehavior import ComposedBehavior
 from Scripts.Behavior.SimpleBehavior.BlinkBehavior.BlinkBehaviorEaseIn import BlinkBehaviorEaseIn
+from Scripts.Behavior.SimpleBehavior.MoveBehavior.MoveBehaviorCurved import MoveBehaviorCurved
 from Libs.Constants import *
 from colour import Color
 import time
@@ -12,4 +13,5 @@ class AffectiveBehavior1(ComposedBehavior):
 
         # generic variables
         self.behaviorType = ComposedBehaviorType.AFFECTIVE_EXPRESSION_1
-        self.behaviorList.append(BlinkBehaviorEaseIn(bodyRef, [Color(rgb=(0.7, 0.0, 0.7))], ColorBrightness.MEDIUM, 1, 10, bodyRef.getColor(), True))
+        self.behaviorList.append(BlinkBehaviorEaseIn(bodyRef, [Color(rgb=(1.0, 0.25, 0.0))], ColorBrightness.MEDIUM, 1.0, 1.0, bodyRef.getColor(), True))
+        self.behaviorList.append(MoveBehaviorCurved(bodyRef, 40.0, MovementDirection.FORWARD, 2.0, 6.0, True))

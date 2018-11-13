@@ -11,8 +11,8 @@ from Scripts.Behavior.SimpleBehavior.MoveBehavior.MoveBehavior import MoveBehavi
 
 class MoveBehaviorSpikes(MoveBehavior):
     # Body body, int repetitions, float duration
-    def __init__(self, bodyRef, movementSpeed, movementDirection, transition, repetitions, duration, keepBehaviorSetting=False, startDelay = 0.0):
-        MoveBehavior.__init__(self, bodyRef, movementSpeed, movementDirection, transition, repetitions, duration, keepBehaviorSetting, startDelay)
+    def __init__(self, bodyRef, movementSpeed, movementDirection, repetitions, duration, keepBehaviorSetting=False, startDelay = 0.0):
+        MoveBehavior.__init__(self, bodyRef, movementSpeed, movementDirection, repetitions, duration, keepBehaviorSetting, startDelay)
         self.movementType = ShapeType.SPIKES
         self.waypoints = numpy.array([[1, 1], [1, -1]])
         # Note: to do a path backwards we invert the points and their order

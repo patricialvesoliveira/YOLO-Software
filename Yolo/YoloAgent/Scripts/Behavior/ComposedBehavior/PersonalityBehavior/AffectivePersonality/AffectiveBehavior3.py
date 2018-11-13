@@ -1,5 +1,5 @@
 from Scripts.Behavior.ComposedBehavior.ComposedBehavior import ComposedBehavior
-from Scripts.Behavior.SimpleBehavior.BlinkBehavior.BlinkBehaviorEaseInOut import BlinkBehaviorEaseInOut
+from Scripts.Behavior.SimpleBehavior.BlinkBehavior.BlinkBehaviorEaseIn import BlinkBehaviorEaseIn
 from Libs.Constants import *
 from colour import Color
 import time
@@ -12,4 +12,4 @@ class AffectiveBehavior3(ComposedBehavior):
 
         # generic variables
         self.behaviorType = ComposedBehaviorType.AFFECTIVE_EXPRESSION_3
-        self.behaviorList.append(BlinkBehaviorEaseInOut(bodyRef, [Color(rgb=(0.7, 0.0, 0.7))], ColorBrightness.HIGH, 3, 12, Color(rgb=(0.0, 0.0, 0.0)), True))
+        self.behaviorList.append(BlinkBehaviorEaseIn(bodyRef, [Color(rgb=(1.0, 0.25, 0.0))], ColorBrightness.MEDIUM, 1.0, 1.0, bodyRef.getColor(), True))

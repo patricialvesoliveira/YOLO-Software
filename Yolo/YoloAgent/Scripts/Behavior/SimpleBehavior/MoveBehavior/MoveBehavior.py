@@ -8,7 +8,7 @@ from Scripts.Behavior.SimpleBehavior.SimpleBehavior import SimpleBehavior
 
 
 class MoveBehavior(SimpleBehavior):
-    def __init__(self, bodyRef, movementSpeed, movementDirection, transition, repetitions, duration, keepBehaviorSetting=False, startDelay = 0.0):
+    def __init__(self, bodyRef, movementSpeed, movementDirection, repetitions, duration, keepBehaviorSetting=False, startDelay = 0.0):
         SimpleBehavior.__init__(self, bodyRef, repetitions, duration, keepBehaviorSetting, startDelay)
         self.behaviorType = BehaviorType.MOVE  # Configuration.Behaviors
 
@@ -22,7 +22,6 @@ class MoveBehavior(SimpleBehavior):
         self.currentWaypointIndex = 0
         self.animationIntervalTime = duration
 
-        self.movementTransition = transition
         self.movementType = ShapeType.NONE
         self.initialMovementDirection = movementDirection
         self.movementSpeed = numpy.clip(movementSpeed, 0, 90)

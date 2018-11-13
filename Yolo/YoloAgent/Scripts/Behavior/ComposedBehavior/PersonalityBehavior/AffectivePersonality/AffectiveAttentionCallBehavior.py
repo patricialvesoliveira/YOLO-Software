@@ -13,5 +13,5 @@ class AffectiveAttentionCallBehavior(ComposedBehavior):
 
         # generic variables
         self.behaviorType = ComposedBehaviorType.AFFECTIVE_ATTENTION_CALL
-        self.behaviorList.append(BlinkBehaviorEaseIn(bodyRef, [Color(rgb=(1.0, 1.0, 0.0))], ColorBrightness.HIGH, 1, 1, bodyRef.getColor(), True))
-        self.behaviorList.append(MoveBehaviorCircles(bodyRef, 70, MovementDirection.STANDARD, 3, 10, 2, True))
+        self.behaviorList.append(BlinkBehaviorEaseIn(bodyRef, [Color(rgb=(1.0, 0.25, 0.0))], ColorBrightness.MEDIUM, 1.0, 1.0, bodyRef.getColor(), True))
+        self.behaviorList.append(MoveBehaviorCircle(bodyRef, 40.0, MovementDirection.FORWARD, 3.0, 5.0, True))

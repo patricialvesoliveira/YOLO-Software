@@ -11,10 +11,12 @@ from Scripts.Behavior.SimpleBehavior.BlinkBehavior.BlinkBehavior import BlinkBeh
 
 class BlinkBehaviorInstant(BlinkBehavior):
 	# Body body, int repetitions, float duration
-	def __init__(self, bodyRef, blinkColorList, brightness, repetitions, defaultColor, keepBehaviorSetting=False, startDelay = 0.0, animationPause = 0.0):
-	    BlinkBehavior.__init__(self, bodyRef, blinkColorList, brightness, repetitions, 0.5, defaultColor, keepBehaviorSetting, startDelay, animationPause)
+	def __init__(self, bodyRef, blinkColorList, brightness, repetitions, duration, defaultColor, keepBehaviorSetting=False, startDelay = 0.0, animationPause = 0.0):
+	    BlinkBehavior.__init__(self, bodyRef, blinkColorList, brightness, repetitions, duration, defaultColor, keepBehaviorSetting, startDelay, animationPause)
 	    
 	# Body body
 	def applyBehavior(self):
 	    BlinkBehavior.applyBehavior(self)
+
 	    self.bodyRef.setColor(self.activeBlinkColor)
+	    self.bodyRef.setBrightness(self.activeBlinkBrightness)
