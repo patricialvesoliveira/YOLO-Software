@@ -8,7 +8,7 @@ class SimpleBehavior:
     def __init__(self, bodyRef, repetitions, duration, keepBehaviorSetting, startDelay = 0.0):
         self.behaviorType = BehaviorType.NONE  # Configuration.Behaviors
         
-        self.isOver = True
+        self.isOver = False
         self.hasStarted = False
 
         self.startDelay = startDelay

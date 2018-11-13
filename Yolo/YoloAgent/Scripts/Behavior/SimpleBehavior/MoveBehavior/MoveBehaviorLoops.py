@@ -18,6 +18,7 @@ class MoveBehaviorLoops(MoveBehavior):
     
     # Body body
     def applyBehavior(self):
+
         MoveBehavior.applyBehavior(self)
         
         # create array of circle values

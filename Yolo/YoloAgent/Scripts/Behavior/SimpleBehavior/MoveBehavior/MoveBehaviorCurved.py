@@ -38,7 +38,7 @@ class MoveBehaviorCurved(MoveBehavior):
             x_dist = - x_dist
 
 
-        self.followPath(N, [x_dist, signal[self.currentMovementWaypoint] - past_signal])
+        self.followPath(N, [x_dist, signal[self.currentWaypointIndex] - past_signal])
         if self.reachedNewWaypoint(N):
-            past_signal = signal[self.currentMovementWaypoint - 1]
+            past_signal = signal[self.currentWaypointIndex - 1]
         return

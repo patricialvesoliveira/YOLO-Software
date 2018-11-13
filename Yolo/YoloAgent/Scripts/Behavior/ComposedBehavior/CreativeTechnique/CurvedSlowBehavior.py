@@ -11,7 +11,7 @@ class CurvedSlowBehavior(ComposedBehavior):
 
         # generic variables
         self.behaviorType = ComposedBehaviorType.CURVED_SLOW
-        self.behaviorList.append(MoveBehaviorCurved(bodyRef, 45, MovementDirection.STANDARD, 1, 10, True))
+        self.behaviorList.append(MoveBehaviorCurved(bodyRef, 45, MovementDirection.STANDARD, 1, 10, 2, True))
 
     def applyBehavior(self):
         ComposedBehavior.applyBehavior(self)

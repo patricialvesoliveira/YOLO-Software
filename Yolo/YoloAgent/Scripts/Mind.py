@@ -10,6 +10,10 @@ from Libs.Constants import *
 from Libs.MachineLearning.lib.constants import SHAPE_ARRAY
 from Libs.MachineLearning.lib.util import extract_features, predict
 
+from Scripts.Behavior.SimpleBehavior.BlinkBehavior.BlinkBehaviorEaseOut import BlinkBehaviorEaseOut
+from colour import Color
+
+
 
 from Scripts.Behavior.ComposedBehavior.CreativeTechnique.CurvedFastBehavior import CurvedFastBehavior
 from Scripts.Behavior.ComposedBehavior.CreativeTechnique.CurvedSlowBehavior import CurvedSlowBehavior
@@ -52,7 +56,7 @@ class Mind:
         self.body = body
 
 
-        self.activeBehavior = AffectiveHelloBehavior(body)
+        self.activeBehavior = PuppeteerBehavior(body)
 
         # this will allow to cycle through the different story arcs
         self.currentStoryArcIndex = 1
@@ -81,459 +85,463 @@ class Mind:
         # to check if the agent already introduced himself (happens only after first being touched)
         self.performedIntroduction = False
 
+        self.testBehavior = BlinkBehaviorEaseOut(self.body, [Color(rgb=(1.0, 0.25, 0.0)),Color(rgb=(1.0, 1.0, 1.0))], ColorBrightness.MEDIUM, 1, 10, self.body.getColor(), True);
+
         return
 
     def update(self):
 
-        self.parseSensorData(self.body.getSensorData())
+        self.testBehavior.applyBehavior()
 
-        if time.time() - self.storyStartTime > self.storyArcDuration and self.currentStoryArcIndex < len(StoryArc) and self.performedIntroduction:
-            # NOTE: if it has to be cumulative it's just adding the duration of the arcs to the previous one
-            self.currentStoryArcIndex += 1
-            self.storyArcDuration = StoryArcTime[StoryArc(self.currentStoryArcIndex).name] * 60  # in seconds
-            self.storyStartTime = time.time()
+        # self.parseSensorData(self.body.getSensorData())
 
-        #print("Status: " + StoryArc(self.storyArcCurrent).name + " - elapsed: " + str(
-        #    (time.time() - self.storyStartTime) / 60) + " - max: " + str(
-        #    StoryArcTime[StoryArc(self.storyArcCurrent).name]))
+        # if time.time() - self.storyStartTime > self.storyArcDuration and self.currentStoryArcIndex < len(StoryArc) and self.performedIntroduction:
+        #     # NOTE: if it has to be cumulative it's just adding the duration of the arcs to the previous one
+        #     self.currentStoryArcIndex += 1
+        #     self.storyArcDuration = StoryArcTime[StoryArc(self.currentStoryArcIndex).name] * 60  # in seconds
+        #     self.storyStartTime = time.time()
 
-
-        # Note : checks if there is a behavior being carried out and applies it, otherwise selects a new behavior on touch
-        if self.activeBehavior is not None and not self.activeBehavior.isOver and self.touchStatus == TouchState.NOT_TOUCHING:
-            self.activeBehavior.applyBehavior()
-            return
-        elif self.touchStatus == TouchState.TOUCHING and not self.wasTouched:
-            #Note : if it's touched all behaviors should stop, so stopping them
-            if self.idleBehavior is not None:
-                self.idleBehavior.isOver = True
-
-            #NOTE: this check only exists because during testing the decideBehavior() function could sometimes have missing behaviors
-            # and return None, in the final version the behavior should always be defined at this point
-            if self.activeBehavior is not None:
-                self.activeBehavior.haltAndFinishBehavior()
-
-            #Note: starts the puppeteer behavior that should change the robot's lights to white to indicate a puppeteer mode
-            # self.puppeteerBehavior.prepareBehavior()
-            self.puppeteerBehavior.startBehavior()
-
-            self.wasTouched = True
-            self.touchStartTime = time.gmtime()
-            return
-        elif self.touchStatus == TouchState.NOT_TOUCHING and self.wasTouched:
-            self.puppeteerBehavior.haltAndFinishBehavior()
-            self.decideBehavior()
-            self.wasTouched = False
-            self.startedIdle = False
-
-            timestamp = calendar.timegm(self.touchStartTime)
-            logging.info(StoryArc(self.currentStoryArcIndex).name + ' arc --- Touch recorded starting at ' + time.strftime("%H:%M:%S", self.touchStartTime) + ', with a duration of ' + "%.2f" % (time.time() - timestamp) + ' seconds. ')
-            print(StoryArc(self.currentStoryArcIndex).name + ' arc --- Touch recorded starting at ' + time.strftime("%H:%M:%S", self.touchStartTime) + ', with a duration of ' + "%.2f" % (time.time() - timestamp) + ' seconds. ')
-
-            return
-        elif self.touchStatus == TouchState.TOUCHING and not self.puppeteerBehavior.isOver:
-            self.puppeteerBehavior.applyBehavior()
-            return
-        elif self.touchStatus == TouchState.TOUCHING:
-            #Note: this clause avoids having to test in all following ifs if the robot is still being touched
-            return
-
-        # There are two types of idle behaviors - a breathe behavior which played over and over and an attention call which happens once in a while
-        if ((self.activeBehavior is not None and self.activeBehavior.isOver) or self.activeBehavior is None) and not self.startedIdle and self.performedIntroduction:
-            self.startedIdle = True
-            self.idleStartTime = time.time()
-            self.startIdleBehavior()
-            return
-        elif self.startedIdle and time.time() - self.idleStartTime > self.idleAttentionCallInterval:
-            self.startedIdle = False
-            self.startAttentionCall()
-            return
-        elif self.startedIdle and self.idleBehavior is not None and not self.idleBehavior.isOver:
-            self.idleBehavior.applyBehavior()
-        elif self.startedIdle:
-            self.startIdleBehavior()
-
-        return
+        # #print("Status: " + StoryArc(self.storyArcCurrent).name + " - elapsed: " + str(
+        # #    (time.time() - self.storyStartTime) / 60) + " - max: " + str(
+        # #    StoryArcTime[StoryArc(self.storyArcCurrent).name]))
 
 
-    def decideBehavior(self):
+        # # Note : checks if there is a behavior being carried out and applies it, otherwise selects a new behavior on touch
+        # if self.activeBehavior is not None and not self.activeBehavior.isOver and self.touchStatus == TouchState.NOT_TOUCHING:
+        #     self.activeBehavior.applyBehavior()
+        #     return
+        # elif self.touchStatus == TouchState.TOUCHING and not self.wasTouched:
+        #     #Note : if it's touched all behaviors should stop, so stopping them
+        #     if self.idleBehavior is not None:
+        #         self.idleBehavior.isOver = True
 
-        # run the agent's personality behavior in first place
-        if not self.performedIntroduction:
-            self.startIntroduction()
+        #     #NOTE: this check only exists because during testing the decideBehavior() function could sometimes have missing behaviors
+        #     # and return None, in the final version the behavior should always be defined at this point
+        #     if self.activeBehavior is not None:
+        #         self.activeBehavior.haltAndFinishBehavior()
 
-            self.performedIntroduction = True
-            # Note: only starts counting the story after children see a behavior
-            self.storyStartTime = time.time()
-            return
+        #     #Note: starts the puppeteer behavior that should change the robot's lights to white to indicate a puppeteer mode
+        #     # self.puppeteerBehavior.prepareBehavior()
+        #     self.puppeteerBehavior.startBehavior()
 
-        randomValue = numpy.random.random() * StoryBehaviorTotalProbability
+        #     self.wasTouched = True
+        #     self.touchStartTime = time.gmtime()
+        #     return
+        # elif self.touchStatus == TouchState.NOT_TOUCHING and self.wasTouched:
+        #     self.puppeteerBehavior.haltAndFinishBehavior()
+        #     self.decideBehavior()
+        #     self.wasTouched = False
+        #     self.startedIdle = False
 
-        # The probabilities change with each story arc
-        personalityBehaviorProbability = StoryPersonalityBehaviorProbability[StoryArc(self.currentStoryArcIndex).name]
-        creativeBehaviorProbability = StoryCreativeBehaviorProbability[StoryArc(self.currentStoryArcIndex).name]
-        creativeBehaviorProbability += personalityBehaviorProbability  # to get the maximum value for the range
-        #print("The value of " + str(randomValue) + " was chosen!")
+        #     timestamp = calendar.timegm(self.touchStartTime)
+        #     logging.info(StoryArc(self.currentStoryArcIndex).name + ' arc --- Touch recorded starting at ' + time.strftime("%H:%M:%S", self.touchStartTime) + ', with a duration of ' + "%.2f" % (time.time() - timestamp) + ' seconds. ')
+        #     print(StoryArc(self.currentStoryArcIndex).name + ' arc --- Touch recorded starting at ' + time.strftime("%H:%M:%S", self.touchStartTime) + ', with a duration of ' + "%.2f" % (time.time() - timestamp) + ' seconds. ')
 
-        # Note: in some story arcs only personality behaviors are performed and creative techniques probability should be 0
-        if randomValue <= personalityBehaviorProbability:
-            print("Carrying out a new personality behavior.")
-            self.activeBehavior = self.selectPersonalityBehavior()
-        elif personalityBehaviorProbability < randomValue <= creativeBehaviorProbability:
-            print("Carrying out a new creative technique.")
-            self.activeBehavior = self.selectCreativeTechnique()
+        #     return
+        # elif self.touchStatus == TouchState.TOUCHING and not self.puppeteerBehavior.isOver:
+        #     self.puppeteerBehavior.applyBehavior()
+        #     return
+        # elif self.touchStatus == TouchState.TOUCHING:
+        #     #Note: this clause avoids having to test in all following ifs if the robot is still being touched
+        #     return
 
-            #Note: if no suitable creative technique is found do a personality behavior
-            if self.activeBehavior is None:
-                print("Carrying out a new personality behavior instead.")
-                self.activeBehavior = self.selectPersonalityBehavior()
-
-        else:
-            print("The value of " + str(randomValue) + " shouldn't be reachable!")
-            logging.info('Error: Random values generated by the mind for decision making are over the threshold!')
-
-        # Note: after executing a response behavior the path drawn should be cleared
-        self.recognizedShape = None
+        # # There are two types of idle behaviors - a breathe behavior which played over and over and an attention call which happens once in a while
+        # if ((self.activeBehavior is not None and self.activeBehavior.isOver) or self.activeBehavior is None) and not self.startedIdle and self.performedIntroduction:
+        #     self.startedIdle = True
+        #     self.idleStartTime = time.time()
+        #     self.startIdleBehavior()
+        #     return
+        # elif self.startedIdle and time.time() - self.idleStartTime > self.idleAttentionCallInterval:
+        #     self.startedIdle = False
+        #     self.startAttentionCall()
+        #     return
+        # elif self.startedIdle and self.idleBehavior is not None and not self.idleBehavior.isOver:
+        #     self.idleBehavior.applyBehavior()
+        # elif self.startedIdle:
+        #     self.startIdleBehavior()
 
         return
 
-    def selectPersonalityBehavior(self):
 
-        # to select between two possible outputs randomly
-        randomValue = numpy.random.random_integers(3)
+    # def decideBehavior(self):
 
-        if self.personality is Personality.AFFECTIVE:
-            if randomValue == 1:
-                selectedBehavior = AffectiveBehavior1(self.body)
-            elif randomValue == 2:
-                selectedBehavior = AffectiveBehavior2(self.body)
-            elif randomValue == 3:
-                selectedBehavior = AffectiveBehavior3(self.body)
+    #     # run the agent's personality behavior in first place
+    #     if not self.performedIntroduction:
+    #         self.startIntroduction()
 
-        elif self.personality is Personality.ALOOF:
-            if randomValue == 1:
-                selectedBehavior = AloofBehavior1(self.body)
-            elif randomValue == 2:
-                selectedBehavior = AloofBehavior2(self.body)
-            elif randomValue == 3:
-                selectedBehavior = AloofBehavior3(self.body)
+    #         self.performedIntroduction = True
+    #         # Note: only starts counting the story after children see a behavior
+    #         self.storyStartTime = time.time()
+    #         return
 
-        elif self.personality is Personality.PUNK:
-            if randomValue == 1:
-                selectedBehavior = PunkBehavior1(self.body)
-            elif randomValue == 2:
-                selectedBehavior = PunkBehavior2(self.body)
-            elif randomValue == 3:
-                selectedBehavior = PunkBehavior3(self.body)
+    #     randomValue = numpy.random.random() * StoryBehaviorTotalProbability
 
-        else:
-            print "This shouldn't happen, the mind didn't find this personality to match with a personality behavior"
-            logging.info("Error: The mind didn't find this personality to match with a personality behavior")
-            raise Exception("Error: The mind didn't find this personality to match with a personality behavior")
+    #     # The probabilities change with each story arc
+    #     personalityBehaviorProbability = StoryPersonalityBehaviorProbability[StoryArc(self.currentStoryArcIndex).name]
+    #     creativeBehaviorProbability = StoryCreativeBehaviorProbability[StoryArc(self.currentStoryArcIndex).name]
+    #     creativeBehaviorProbability += personalityBehaviorProbability  # to get the maximum value for the range
+    #     #print("The value of " + str(randomValue) + " was chosen!")
 
-        # selectedBehavior.prepareBehavior()
-        selectedBehavior.startBehavior()
+    #     # Note: in some story arcs only personality behaviors are performed and creative techniques probability should be 0
+    #     if randomValue <= personalityBehaviorProbability:
+    #         print("Carrying out a new personality behavior.")
+    #         self.activeBehavior = self.selectPersonalityBehavior()
+    #     elif personalityBehaviorProbability < randomValue <= creativeBehaviorProbability:
+    #         print("Carrying out a new creative technique.")
+    #         self.activeBehavior = self.selectCreativeTechnique()
 
-        logging.info(StoryArc(self.currentStoryArcIndex).name + ' arc --- Performing personality behavior: ' + selectedBehavior.behaviorType.name + ". ")
+    #         #Note: if no suitable creative technique is found do a personality behavior
+    #         if self.activeBehavior is None:
+    #             print("Carrying out a new personality behavior instead.")
+    #             self.activeBehavior = self.selectPersonalityBehavior()
 
-        return selectedBehavior
+    #     else:
+    #         print("The value of " + str(randomValue) + " shouldn't be reachable!")
+    #         logging.info('Error: Random values generated by the mind for decision making are over the threshold!')
 
-    def selectCreativeTechnique(self):
+    #     # Note: after executing a response behavior the path drawn should be cleared
+    #     self.recognizedShape = None
 
-        selectedBehavior = None
-        currentStoryArc = StoryArc(self.currentStoryArcIndex)
+    #     return
 
-        # Note: guard is in place to prevent interactions (touch) with no discernable input patterns to trigger creative techniques
-        # Additionally, for now the Straight shape has no response
-        if self.recognizedShape is None or self.recognizedShape is Shapes.STRAIGHT:
-            print "No suitable technique found. Staying idle"
-            print StoryArc(self.currentStoryArcIndex).name + ' arc --- Corresponding input, recognized shape: ' + str(self.recognizedShape) + '.'
+    # def selectPersonalityBehavior(self):
 
-            logging.info('Attempted to perform creative technique but no suitable technique was found')
-            logging.info(StoryArc(self.currentStoryArcIndex).name + ' arc --- Corresponding input, recognized shape: ' + str(self.recognizedShape) + '.')
-            return None
+    #     # to select between two possible outputs randomly
+    #     randomValue = numpy.random.random_integers(3)
 
-        # to select between two possible outputs randomly
-        randomValue = numpy.random.random_integers(2)
+    #     if self.personality is Personality.AFFECTIVE:
+    #         if randomValue == 1:
+    #             selectedBehavior = AffectiveBehavior1(self.body)
+    #         elif randomValue == 2:
+    #             selectedBehavior = AffectiveBehavior2(self.body)
+    #         elif randomValue == 3:
+    #             selectedBehavior = AffectiveBehavior3(self.body)
 
-        # First 3 options should only use the social aspect & no creative techniques
-        if currentStoryArc == StoryArc.EXPOSITION or currentStoryArc == StoryArc.CLIMAX or currentStoryArc == StoryArc.DENOUEMENT:
-            print "Error: This clause should never be reached while selecting a creative technique, probabilities for these phases should not allow it"
-            logging.info("Error: This clause should never be reached while selecting a creative technique, probabilities for these phases should not allow it")
-            return None
+    #     elif self.personality is Personality.ALOOF:
+    #         if randomValue == 1:
+    #             selectedBehavior = AloofBehavior1(self.body)
+    #         elif randomValue == 2:
+    #             selectedBehavior = AloofBehavior2(self.body)
+    #         elif randomValue == 3:
+    #             selectedBehavior = AloofBehavior3(self.body)
 
-        elif currentStoryArc == StoryArc.CONFLICT_INTRODUCED:
+    #     elif self.personality is Personality.PUNK:
+    #         if randomValue == 1:
+    #             selectedBehavior = PunkBehavior1(self.body)
+    #         elif randomValue == 2:
+    #             selectedBehavior = PunkBehavior2(self.body)
+    #         elif randomValue == 3:
+    #             selectedBehavior = PunkBehavior3(self.body)
 
-            if self.recognizedShape == Shapes.LOOPS.name:
-                selectedBehavior = LoopsFastBehavior(self.body)
-            elif self.recognizedShape == Shapes.LOOPS.name:
-                selectedBehavior = LoopsSlowBehavior(self.body)
-            elif self.recognizedShape == Shapes.CURVED.name:
-                selectedBehavior = CurvedFastBehavior(self.body)
-            elif self.recognizedShape == Shapes.CURVED.name:
-                selectedBehavior = CurvedSlowBehavior(self.body)
-            elif self.recognizedShape == Shapes.SPIKES.name:
-                selectedBehavior = SpikesFastBehavior(self.body)
-            elif self.recognizedShape == Shapes.SPIKES.name:
-                selectedBehavior = SpikesSlowBehavior(self.body)
-            elif self.recognizedShape == Shapes.RECT.name:
-                selectedBehavior = RectFastBehavior(self.body)
-            elif self.recognizedShape == Shapes.RECT.name:
-                selectedBehavior = RectSlowBehavior(self.body)
+    #     else:
+    #         print "This shouldn't happen, the mind didn't find this personality to match with a personality behavior"
+    #         logging.info("Error: The mind didn't find this personality to match with a personality behavior")
+    #         raise Exception("Error: The mind didn't find this personality to match with a personality behavior")
 
-        elif currentStoryArc == StoryArc.RISING_ACTION_PT1:
+    #     # selectedBehavior.prepareBehavior()
+    #     selectedBehavior.startBehavior()
 
-            if self.recognizedShape == Shapes.LOOPS.name:
-                selectedBehavior = LoopsSlowBehavior(self.body)
-            elif self.recognizedShape == Shapes.LOOPS.name:
-                selectedBehavior = LoopsFastBehavior(self.body)
-            elif self.recognizedShape == Shapes.CURVED.name:
-                selectedBehavior = CurvedSlowBehavior(self.body)
-            elif self.recognizedShape == Shapes.CURVED.name:
-                selectedBehavior = CurvedFastBehavior(self.body)
-            elif self.recognizedShape == Shapes.SPIKES.name:
-                selectedBehavior = SpikesSlowBehavior(self.body)
-            elif self.recognizedShape == Shapes.SPIKES.name:
-                selectedBehavior = SpikesFastBehavior(self.body)
-            elif self.recognizedShape == Shapes.RECT.name:
-                selectedBehavior = RectSlowBehavior(self.body)
-            elif self.recognizedShape == Shapes.RECT.name:
-                selectedBehavior = RectFastBehavior(self.body)
+    #     logging.info(StoryArc(self.currentStoryArcIndex).name + ' arc --- Performing personality behavior: ' + selectedBehavior.behaviorType.name + ". ")
 
-        elif currentStoryArc == StoryArc.RISING_ACTION_PT2:
+    #     return selectedBehavior
 
-            if self.recognizedShape == Shapes.LOOPS.name:
-                if randomValue == 1:
-                    selectedBehavior = SpikesFastBehavior(self.body)
-                else:
-                    selectedBehavior = RectFastBehavior(self.body)
-            elif self.recognizedShape == Shapes.LOOPS.name:
-                if randomValue == 1:
-                    selectedBehavior = SpikesSlowBehavior(self.body)
-                else:
-                    selectedBehavior = RectSlowBehavior(self.body)
-            elif self.recognizedShape == Shapes.CURVED.name:
-                if randomValue == 1:
-                    selectedBehavior = SpikesFastBehavior(self.body)
-                else:
-                    selectedBehavior = RectFastBehavior(self.body)
-            elif self.recognizedShape == Shapes.CURVED.name:
-                if randomValue == 1:
-                    selectedBehavior = SpikesSlowBehavior(self.body)
-                else:
-                    selectedBehavior = RectSlowBehavior(self.body)
-            elif self.recognizedShape == Shapes.SPIKES.name:
-                if randomValue == 1:
-                    selectedBehavior = LoopsFastBehavior(self.body)
-                else:
-                    selectedBehavior = CurvedFastBehavior(self.body)
-            elif self.recognizedShape == Shapes.SPIKES.name:
-                if randomValue == 1:
-                    selectedBehavior = LoopsSlowBehavior(self.body)
-                else:
-                    selectedBehavior = CurvedSlowBehavior(self.body)
-            elif self.recognizedShape == Shapes.RECT.name:
-                if randomValue == 1:
-                    selectedBehavior = LoopsFastBehavior(self.body)
-                else:
-                    selectedBehavior = CurvedFastBehavior(self.body)
-            elif self.recognizedShape == Shapes.RECT.name:
-                if randomValue == 1:
-                    selectedBehavior = LoopsSlowBehavior(self.body)
-                else:
-                    selectedBehavior = CurvedSlowBehavior(self.body)
+    # def selectCreativeTechnique(self):
 
-        elif currentStoryArc == StoryArc.FALLING_ACTION_PT1:
+    #     selectedBehavior = None
+    #     currentStoryArc = StoryArc(self.currentStoryArcIndex)
 
-            if self.recognizedShape == Shapes.LOOPS.name:
-                if randomValue == 1:
-                    selectedBehavior = SpikesSlowBehavior(self.body)
-                else:
-                    selectedBehavior = RectSlowBehavior(self.body)
-            elif self.recognizedShape == Shapes.LOOPS.name:
-                if randomValue == 1:
-                    selectedBehavior = SpikesFastBehavior(self.body)
-                else:
-                    selectedBehavior = RectFastBehavior(self.body)
-            elif self.recognizedShape == Shapes.CURVED.name:
-                if randomValue == 1:
-                    selectedBehavior = SpikesSlowBehavior(self.body)
-                else:
-                    selectedBehavior = RectSlowBehavior(self.body)
-            elif self.recognizedShape == Shapes.CURVED.name:
-                if randomValue == 1:
-                    selectedBehavior = SpikesFastBehavior(self.body)
-                else:
-                    selectedBehavior = RectFastBehavior(self.body)
-            elif self.recognizedShape == Shapes.SPIKES.name:
-                if randomValue == 1:
-                    selectedBehavior = LoopsSlowBehavior(self.body)
-                else:
-                    selectedBehavior = CurvedSlowBehavior(self.body)
-            elif self.recognizedShape == Shapes.SPIKES.name:
-                if randomValue == 1:
-                    selectedBehavior = LoopsFastBehavior(self.body)
-                else:
-                    selectedBehavior = CurvedFastBehavior(self.body)
-            elif self.recognizedShape == Shapes.RECT.name:
-                if randomValue == 1:
-                    selectedBehavior = LoopsSlowBehavior(self.body)
-                else:
-                    selectedBehavior = CurvedSlowBehavior(self.body)
-            elif self.recognizedShape == Shapes.RECT.name:
-                if randomValue == 1:
-                    selectedBehavior = LoopsFastBehavior(self.body)
-                else:
-                    selectedBehavior = CurvedFastBehavior(self.body)
+    #     # Note: guard is in place to prevent interactions (touch) with no discernable input patterns to trigger creative techniques
+    #     # Additionally, for now the Straight shape has no response
+    #     if self.recognizedShape is None or self.recognizedShape is Shapes.STRAIGHT:
+    #         print "No suitable technique found. Staying idle"
+    #         print StoryArc(self.currentStoryArcIndex).name + ' arc --- Corresponding input, recognized shape: ' + str(self.recognizedShape) + '.'
 
-        elif currentStoryArc == StoryArc.FALLING_ACTION_PT2:
+    #         logging.info('Attempted to perform creative technique but no suitable technique was found')
+    #         logging.info(StoryArc(self.currentStoryArcIndex).name + ' arc --- Corresponding input, recognized shape: ' + str(self.recognizedShape) + '.')
+    #         return None
 
-            if self.recognizedShape == Shapes.LOOPS.name:
-                selectedBehavior = CurvedFastBehavior(self.body)
-            elif self.recognizedShape == Shapes.LOOPS.name:
-                selectedBehavior = CurvedSlowBehavior(self.body)
-            elif self.recognizedShape == Shapes.CURVED.name:
-                selectedBehavior = LoopsFastBehavior(self.body)
-            elif self.recognizedShape == Shapes.CURVED.name:
-                selectedBehavior = LoopsSlowBehavior(self.body)
-            elif self.recognizedShape == Shapes.SPIKES.name:
-                selectedBehavior = RectFastBehavior(self.body)
-            elif self.recognizedShape == Shapes.SPIKES.name:
-                selectedBehavior = RectSlowBehavior(self.body)
-            elif self.recognizedShape == Shapes.RECT.name:
-                selectedBehavior = SpikesFastBehavior(self.body)
-            elif self.recognizedShape == Shapes.RECT.name:
-                selectedBehavior = SpikesSlowBehavior(self.body)
+    #     # to select between two possible outputs randomly
+    #     randomValue = numpy.random.random_integers(2)
 
-        elif currentStoryArc == StoryArc.RESOLUTION:
+    #     # First 3 options should only use the social aspect & no creative techniques
+    #     if currentStoryArc == StoryArc.EXPOSITION or currentStoryArc == StoryArc.CLIMAX or currentStoryArc == StoryArc.DENOUEMENT:
+    #         print "Error: This clause should never be reached while selecting a creative technique, probabilities for these phases should not allow it"
+    #         logging.info("Error: This clause should never be reached while selecting a creative technique, probabilities for these phases should not allow it")
+    #         return None
 
-            if self.recognizedShape == Shapes.LOOPS.name:
-                selectedBehavior = LoopsFastBehavior(self.body)
-            elif self.recognizedShape == Shapes.LOOPS.name:
-                selectedBehavior = LoopsSlowBehavior(self.body)
-            elif self.recognizedShape == Shapes.CURVED.name:
-                selectedBehavior = CurvedFastBehavior(self.body)
-            elif self.recognizedShape == Shapes.CURVED.name:
-                selectedBehavior = CurvedSlowBehavior(self.body)
-            elif self.recognizedShape == Shapes.SPIKES.name:
-                selectedBehavior = SpikesFastBehavior(self.body)
-            elif self.recognizedShape == Shapes.SPIKES.name:
-                selectedBehavior = SpikesSlowBehavior(self.body)
-            elif self.recognizedShape == Shapes.RECT.name:
-                selectedBehavior = RectFastBehavior(self.body)
-            elif self.recognizedShape == Shapes.RECT.name:
-                selectedBehavior = RectSlowBehavior(self.body)
+    #     elif currentStoryArc == StoryArc.CONFLICT_INTRODUCED:
 
+    #         if self.recognizedShape == Shapes.LOOPS.name:
+    #             selectedBehavior = LoopsFastBehavior(self.body)
+    #         elif self.recognizedShape == Shapes.LOOPS.name:
+    #             selectedBehavior = LoopsSlowBehavior(self.body)
+    #         elif self.recognizedShape == Shapes.CURVED.name:
+    #             selectedBehavior = CurvedFastBehavior(self.body)
+    #         elif self.recognizedShape == Shapes.CURVED.name:
+    #             selectedBehavior = CurvedSlowBehavior(self.body)
+    #         elif self.recognizedShape == Shapes.SPIKES.name:
+    #             selectedBehavior = SpikesFastBehavior(self.body)
+    #         elif self.recognizedShape == Shapes.SPIKES.name:
+    #             selectedBehavior = SpikesSlowBehavior(self.body)
+    #         elif self.recognizedShape == Shapes.RECT.name:
+    #             selectedBehavior = RectFastBehavior(self.body)
+    #         elif self.recognizedShape == Shapes.RECT.name:
+    #             selectedBehavior = RectSlowBehavior(self.body)
 
-        print("Selected a creative technique")
+    #     elif currentStoryArc == StoryArc.RISING_ACTION_PT1:
 
-        if selectedBehavior is not None:
-            # selectedBehavior.prepareBehavior()
-            selectedBehavior.startBehavior()
-            logging.info(' ' + StoryArc(self.currentStoryArcIndex).name + ' arc --- Performing creative technique: ' + selectedBehavior.behaviorType.name)
-        else:
-            print("No suitable technique found. Staying idle")
-            print StoryArc(self.currentStoryArcIndex).name + ' arc --- Corresponding input, recognized shape: ' + str(
-                self.recognizedShape) + '.'
-            logging.info('Attempted to perform creative technique but no suitable technique was found')
-            logging.info(StoryArc(self.currentStoryArcIndex).name + ' arc --- Corresponding input, recognized shape: ' + str(self.recognizedShape) + ', and acceleration: ' + '.')
-            return None
+    #         if self.recognizedShape == Shapes.LOOPS.name:
+    #             selectedBehavior = LoopsSlowBehavior(self.body)
+    #         elif self.recognizedShape == Shapes.LOOPS.name:
+    #             selectedBehavior = LoopsFastBehavior(self.body)
+    #         elif self.recognizedShape == Shapes.CURVED.name:
+    #             selectedBehavior = CurvedSlowBehavior(self.body)
+    #         elif self.recognizedShape == Shapes.CURVED.name:
+    #             selectedBehavior = CurvedFastBehavior(self.body)
+    #         elif self.recognizedShape == Shapes.SPIKES.name:
+    #             selectedBehavior = SpikesSlowBehavior(self.body)
+    #         elif self.recognizedShape == Shapes.SPIKES.name:
+    #             selectedBehavior = SpikesFastBehavior(self.body)
+    #         elif self.recognizedShape == Shapes.RECT.name:
+    #             selectedBehavior = RectSlowBehavior(self.body)
+    #         elif self.recognizedShape == Shapes.RECT.name:
+    #             selectedBehavior = RectFastBehavior(self.body)
 
-        return selectedBehavior
+    #     elif currentStoryArc == StoryArc.RISING_ACTION_PT2:
 
-    def parseSensorData(self, sensorData):
+    #         if self.recognizedShape == Shapes.LOOPS.name:
+    #             if randomValue == 1:
+    #                 selectedBehavior = SpikesFastBehavior(self.body)
+    #             else:
+    #                 selectedBehavior = RectFastBehavior(self.body)
+    #         elif self.recognizedShape == Shapes.LOOPS.name:
+    #             if randomValue == 1:
+    #                 selectedBehavior = SpikesSlowBehavior(self.body)
+    #             else:
+    #                 selectedBehavior = RectSlowBehavior(self.body)
+    #         elif self.recognizedShape == Shapes.CURVED.name:
+    #             if randomValue == 1:
+    #                 selectedBehavior = SpikesFastBehavior(self.body)
+    #             else:
+    #                 selectedBehavior = RectFastBehavior(self.body)
+    #         elif self.recognizedShape == Shapes.CURVED.name:
+    #             if randomValue == 1:
+    #                 selectedBehavior = SpikesSlowBehavior(self.body)
+    #             else:
+    #                 selectedBehavior = RectSlowBehavior(self.body)
+    #         elif self.recognizedShape == Shapes.SPIKES.name:
+    #             if randomValue == 1:
+    #                 selectedBehavior = LoopsFastBehavior(self.body)
+    #             else:
+    #                 selectedBehavior = CurvedFastBehavior(self.body)
+    #         elif self.recognizedShape == Shapes.SPIKES.name:
+    #             if randomValue == 1:
+    #                 selectedBehavior = LoopsSlowBehavior(self.body)
+    #             else:
+    #                 selectedBehavior = CurvedSlowBehavior(self.body)
+    #         elif self.recognizedShape == Shapes.RECT.name:
+    #             if randomValue == 1:
+    #                 selectedBehavior = LoopsFastBehavior(self.body)
+    #             else:
+    #                 selectedBehavior = CurvedFastBehavior(self.body)
+    #         elif self.recognizedShape == Shapes.RECT.name:
+    #             if randomValue == 1:
+    #                 selectedBehavior = LoopsSlowBehavior(self.body)
+    #             else:
+    #                 selectedBehavior = CurvedSlowBehavior(self.body)
 
-        for sensor in sensorData:
+    #     elif currentStoryArc == StoryArc.FALLING_ACTION_PT1:
 
-            if sensor[0] == SensorType.TOUCH:
-                self.touchStatus = sensor[1]
+    #         if self.recognizedShape == Shapes.LOOPS.name:
+    #             if randomValue == 1:
+    #                 selectedBehavior = SpikesSlowBehavior(self.body)
+    #             else:
+    #                 selectedBehavior = RectSlowBehavior(self.body)
+    #         elif self.recognizedShape == Shapes.LOOPS.name:
+    #             if randomValue == 1:
+    #                 selectedBehavior = SpikesFastBehavior(self.body)
+    #             else:
+    #                 selectedBehavior = RectFastBehavior(self.body)
+    #         elif self.recognizedShape == Shapes.CURVED.name:
+    #             if randomValue == 1:
+    #                 selectedBehavior = SpikesSlowBehavior(self.body)
+    #             else:
+    #                 selectedBehavior = RectSlowBehavior(self.body)
+    #         elif self.recognizedShape == Shapes.CURVED.name:
+    #             if randomValue == 1:
+    #                 selectedBehavior = SpikesFastBehavior(self.body)
+    #             else:
+    #                 selectedBehavior = RectFastBehavior(self.body)
+    #         elif self.recognizedShape == Shapes.SPIKES.name:
+    #             if randomValue == 1:
+    #                 selectedBehavior = LoopsSlowBehavior(self.body)
+    #             else:
+    #                 selectedBehavior = CurvedSlowBehavior(self.body)
+    #         elif self.recognizedShape == Shapes.SPIKES.name:
+    #             if randomValue == 1:
+    #                 selectedBehavior = LoopsFastBehavior(self.body)
+    #             else:
+    #                 selectedBehavior = CurvedFastBehavior(self.body)
+    #         elif self.recognizedShape == Shapes.RECT.name:
+    #             if randomValue == 1:
+    #                 selectedBehavior = LoopsSlowBehavior(self.body)
+    #             else:
+    #                 selectedBehavior = CurvedSlowBehavior(self.body)
+    #         elif self.recognizedShape == Shapes.RECT.name:
+    #             if randomValue == 1:
+    #                 selectedBehavior = LoopsFastBehavior(self.body)
+    #             else:
+    #                 selectedBehavior = CurvedFastBehavior(self.body)
 
-            # elif sensor[0] == Sensor.ACCEL:
-            #     self.accelerationStatus = sensor[1]
+    #     elif currentStoryArc == StoryArc.FALLING_ACTION_PT2:
 
-            elif sensor[0] == SensorType.OPTICAL:
-                # NOTE: optical sensor also carries the data for the shape in a tuple
-                self.opticalStatus = sensor[1][0]
+    #         if self.recognizedShape == Shapes.LOOPS.name:
+    #             selectedBehavior = CurvedFastBehavior(self.body)
+    #         elif self.recognizedShape == Shapes.LOOPS.name:
+    #             selectedBehavior = CurvedSlowBehavior(self.body)
+    #         elif self.recognizedShape == Shapes.CURVED.name:
+    #             selectedBehavior = LoopsFastBehavior(self.body)
+    #         elif self.recognizedShape == Shapes.CURVED.name:
+    #             selectedBehavior = LoopsSlowBehavior(self.body)
+    #         elif self.recognizedShape == Shapes.SPIKES.name:
+    #             selectedBehavior = RectFastBehavior(self.body)
+    #         elif self.recognizedShape == Shapes.SPIKES.name:
+    #             selectedBehavior = RectSlowBehavior(self.body)
+    #         elif self.recognizedShape == Shapes.RECT.name:
+    #             selectedBehavior = SpikesFastBehavior(self.body)
+    #         elif self.recognizedShape == Shapes.RECT.name:
+    #             selectedBehavior = SpikesSlowBehavior(self.body)
 
-                if self.opticalStatus == OpticalState.FINISHED:
-                    self.recognizedShape = self.predictShape(sensor[1][1])
+    #     elif currentStoryArc == StoryArc.RESOLUTION:
 
-        #print("Sensor input parsed!")
-        return
-
-    def startIdleBehavior(self):
-
-        if self.personality == PersonalityType.AFFECTIVE:
-            if self.idleBehavior is None:
-                self.idleBehavior = AffectiveIdleBehavior(self.body)
-
-        elif self.personality == PersonalityType.ALOOF:
-            if self.idleBehavior is None:
-                self.idleBehavior = AloofIdleBehavior(self.body)
-
-        elif self.personality == PersonalityType.PUNK:
-            if self.idleBehavior is None:
-                self.idleBehavior = PunkIdleBehavior(self.body)
-        else:
-            print 'Error: Personality not found for idle behavior'
-            raise Exception("Error: Personality not found for idle behavior")
-
-        # self.idleBehavior.prepareBehavior(self.body)
-        self.idleBehavior.startBehavior()
-
-        print StoryArc(self.currentStoryArcIndex).name + ' arc --- Performing idle behavior: ' + self.idleBehavior.behaviorType.name
-        logging.info(StoryArc(self.currentStoryArcIndex).name + ' arc --- Performing idle behavior: ' + self.idleBehavior.behaviorType.name)
-
-    def startAttentionCall(self):
-
-        if self.personality == PersonalityType.AFFECTIVE:
-            self.activeBehavior = AffectiveAttentionCallBehavior(self.body)
-
-        elif self.personality == PersonalityType.ALOOF:
-            self.activeBehavior = AloofAttentionCallBehavior(self.body)
-
-        elif self.personality == PersonalityType.PUNK:
-            self.activeBehavior = PunkAttentionCallBehavior(self.body)
-        else:
-            print 'Error: Personality not found for attention call behavior'
-            raise Exception("Error: Personality not found for attention call behavior")
-
-        # self.activeBehavior.prepareBehavior(self.body)
-        self.activeBehavior.startBehavior()
-
-        print StoryArc(self.currentStoryArcIndex).name + ' arc --- Performing attention call behavior: ' + self.activeBehavior.behaviorType.name
-        logging.info(StoryArc(self.currentStoryArcIndex).name + ' arc --- Performing attention call behavior: ' + self.activeBehavior.behaviorType.name)
+    #         if self.recognizedShape == Shapes.LOOPS.name:
+    #             selectedBehavior = LoopsFastBehavior(self.body)
+    #         elif self.recognizedShape == Shapes.LOOPS.name:
+    #             selectedBehavior = LoopsSlowBehavior(self.body)
+    #         elif self.recognizedShape == Shapes.CURVED.name:
+    #             selectedBehavior = CurvedFastBehavior(self.body)
+    #         elif self.recognizedShape == Shapes.CURVED.name:
+    #             selectedBehavior = CurvedSlowBehavior(self.body)
+    #         elif self.recognizedShape == Shapes.SPIKES.name:
+    #             selectedBehavior = SpikesFastBehavior(self.body)
+    #         elif self.recognizedShape == Shapes.SPIKES.name:
+    #             selectedBehavior = SpikesSlowBehavior(self.body)
+    #         elif self.recognizedShape == Shapes.RECT.name:
+    #             selectedBehavior = RectFastBehavior(self.body)
+    #         elif self.recognizedShape == Shapes.RECT.name:
+    #             selectedBehavior = RectSlowBehavior(self.body)
 
 
-    def startIntroduction(self):
+    #     print("Selected a creative technique")
 
-        if self.personality == PersonalityType.AFFECTIVE:
-            self.activeBehavior = AffectiveHelloBehavior(self.body)
+    #     if selectedBehavior is not None:
+    #         # selectedBehavior.prepareBehavior()
+    #         selectedBehavior.startBehavior()
+    #         logging.info(' ' + StoryArc(self.currentStoryArcIndex).name + ' arc --- Performing creative technique: ' + selectedBehavior.behaviorType.name)
+    #     else:
+    #         print("No suitable technique found. Staying idle")
+    #         print StoryArc(self.currentStoryArcIndex).name + ' arc --- Corresponding input, recognized shape: ' + str(
+    #             self.recognizedShape) + '.'
+    #         logging.info('Attempted to perform creative technique but no suitable technique was found')
+    #         logging.info(StoryArc(self.currentStoryArcIndex).name + ' arc --- Corresponding input, recognized shape: ' + str(self.recognizedShape) + ', and acceleration: ' + '.')
+    #         return None
 
-        elif self.personality == PersonalityType.ALOOF:
-            self.activeBehavior = AloofHelloBehavior(self.body)
+    #     return selectedBehavior
 
-        elif self.personality == PersonalityType.PUNK:
-            self.activeBehavior = PunkHelloBehavior(self.body)
-        else:
-            print 'Error: Personality not found for introduction behavior'
-            raise Exception("Error: Personality not found for introduction behavior")
+    # def parseSensorData(self, sensorData):
 
-        # self.activeBehavior.prepareBehavior()
-        self.activeBehavior.startBehavior()
+    #     for sensor in sensorData:
 
-        print StoryArc(self.currentStoryArcIndex).name + ' arc --- Performing introduction behavior: ' + self.activeBehavior.behaviorType.name
-        logging.info(StoryArc(self.currentStoryArcIndex).name + ' arc --- Performing introduction behavior: ' + self.activeBehavior.behaviorType.name)
+    #         if sensor[0] == SensorType.TOUCH:
+    #             self.touchStatus = sensor[1]
 
-    def predictShape(self, pointDataArray):
-        #print "shape recognized (length " + str(len(pointDataArray)) + "): " + str(pointDataArray)
+    #         # elif sensor[0] == Sensor.ACCEL:
+    #         #     self.accelerationStatus = sensor[1]
 
-        #print "Time feature extract start: " + time.strftime("%H:%M:%S", time.gmtime())
-        features = extract_features(pointDataArray)
-        prediction = predict(features)[0]
-        #print "Time predict end: " + time.strftime("%H:%M:%S", time.gmtime())
+    #         elif sensor[0] == SensorType.OPTICAL:
+    #             # NOTE: optical sensor also carries the data for the shape in a tuple
+    #             self.opticalStatus = sensor[1][0]
 
-        print StoryArc(self.currentStoryArcIndex).name + ' arc --- Recognized a shape: ' + SHAPE_ARRAY[int(prediction)]
-        logging.info(StoryArc(self.currentStoryArcIndex).name + ' arc --- Recognized a shape: ' + SHAPE_ARRAY[int(prediction)])
+    #             if self.opticalStatus == OpticalState.FINISHED:
+    #                 self.recognizedShape = self.predictShape(sensor[1][1])
 
-        return SHAPE_ARRAY[int(prediction)]
+    #     #print("Sensor input parsed!")
+    #     return
+
+    # def startIdleBehavior(self):
+
+    #     if self.personality == PersonalityType.AFFECTIVE:
+    #         if self.idleBehavior is None:
+    #             self.idleBehavior = AffectiveIdleBehavior(self.body)
+
+    #     elif self.personality == PersonalityType.ALOOF:
+    #         if self.idleBehavior is None:
+    #             self.idleBehavior = AloofIdleBehavior(self.body)
+
+    #     elif self.personality == PersonalityType.PUNK:
+    #         if self.idleBehavior is None:
+    #             self.idleBehavior = PunkIdleBehavior(self.body)
+    #     else:
+    #         print 'Error: Personality not found for idle behavior'
+    #         raise Exception("Error: Personality not found for idle behavior")
+
+    #     # self.idleBehavior.prepareBehavior(self.body)
+    #     self.idleBehavior.startBehavior()
+
+    #     print StoryArc(self.currentStoryArcIndex).name + ' arc --- Performing idle behavior: ' + self.idleBehavior.behaviorType.name
+    #     logging.info(StoryArc(self.currentStoryArcIndex).name + ' arc --- Performing idle behavior: ' + self.idleBehavior.behaviorType.name)
+
+    # def startAttentionCall(self):
+
+    #     if self.personality == PersonalityType.AFFECTIVE:
+    #         self.activeBehavior = AffectiveAttentionCallBehavior(self.body)
+
+    #     elif self.personality == PersonalityType.ALOOF:
+    #         self.activeBehavior = AloofAttentionCallBehavior(self.body)
+
+    #     elif self.personality == PersonalityType.PUNK:
+    #         self.activeBehavior = PunkAttentionCallBehavior(self.body)
+    #     else:
+    #         print 'Error: Personality not found for attention call behavior'
+    #         raise Exception("Error: Personality not found for attention call behavior")
+
+    #     # self.activeBehavior.prepareBehavior(self.body)
+    #     self.activeBehavior.startBehavior()
+
+    #     print StoryArc(self.currentStoryArcIndex).name + ' arc --- Performing attention call behavior: ' + self.activeBehavior.behaviorType.name
+    #     logging.info(StoryArc(self.currentStoryArcIndex).name + ' arc --- Performing attention call behavior: ' + self.activeBehavior.behaviorType.name)
+
+
+    # def startIntroduction(self):
+
+    #     if self.personality == PersonalityType.AFFECTIVE:
+    #         self.activeBehavior = AffectiveHelloBehavior(self.body)
+
+    #     elif self.personality == PersonalityType.ALOOF:
+    #         self.activeBehavior = AloofHelloBehavior(self.body)
+
+    #     elif self.personality == PersonalityType.PUNK:
+    #         self.activeBehavior = PunkHelloBehavior(self.body)
+    #     else:
+    #         print 'Error: Personality not found for introduction behavior'
+    #         raise Exception("Error: Personality not found for introduction behavior")
+
+    #     # self.activeBehavior.prepareBehavior()
+    #     self.activeBehavior.startBehavior()
+
+    #     print StoryArc(self.currentStoryArcIndex).name + ' arc --- Performing introduction behavior: ' + self.activeBehavior.behaviorType.name
+    #     logging.info(StoryArc(self.currentStoryArcIndex).name + ' arc --- Performing introduction behavior: ' + self.activeBehavior.behaviorType.name)
+
+    # def predictShape(self, pointDataArray):
+    #     #print "shape recognized (length " + str(len(pointDataArray)) + "): " + str(pointDataArray)
+
+    #     #print "Time feature extract start: " + time.strftime("%H:%M:%S", time.gmtime())
+    #     features = extract_features(pointDataArray)
+    #     prediction = predict(features)[0]
+    #     #print "Time predict end: " + time.strftime("%H:%M:%S", time.gmtime())
+
+    #     print StoryArc(self.currentStoryArcIndex).name + ' arc --- Recognized a shape: ' + SHAPE_ARRAY[int(prediction)]
+    #     logging.info(StoryArc(self.currentStoryArcIndex).name + ' arc --- Recognized a shape: ' + SHAPE_ARRAY[int(prediction)])
+
+    #     return SHAPE_ARRAY[int(prediction)]
 

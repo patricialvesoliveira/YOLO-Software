@@ -44,10 +44,10 @@ class LEDActuator:
         self.leds.begin()
 
         # init leds with a white color
-        for i in range(0, self.leds.numPixels(), 1):
-            self.setColor(1,1,1);
+        # for i in range(0, self.leds.numPixels(), 1):
+        #     self.setColor(1,1,1);
 
-        self.leds.show()
+        # self.leds.show()
 
         print "OK! -- Jewel LEDs set up!"
 
@@ -84,16 +84,6 @@ class LEDActuator:
     def setBrightness(self, brightness):
         self.leds.setBrightness(int(brightness))
         self.leds.show()
-
-    def performColorDisplay(self):
-        self.setColor(1,0,0)
-        time.sleep(1)
-
-        self.setColor(0,1,0)
-        time.sleep(1)
-
-        self.setColor(0,0,1)
-        time.sleep(1)
 
     def printColor(self, ledColorData):
         blue = 255 & ledColorData

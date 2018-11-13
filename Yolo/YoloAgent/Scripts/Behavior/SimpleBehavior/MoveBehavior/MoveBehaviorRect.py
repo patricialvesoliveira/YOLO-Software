@@ -25,5 +25,3 @@ class MoveBehaviorRect(MoveBehavior):
         MoveBehavior.applyBehavior(self)
         self.followPath(len(self.waypoints), self.waypoints[self.currentWaypointIndex])
         return
-        
-        

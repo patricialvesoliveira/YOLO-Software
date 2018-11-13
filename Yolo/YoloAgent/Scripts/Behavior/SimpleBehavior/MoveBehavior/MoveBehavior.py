@@ -17,7 +17,6 @@ class MoveBehavior(SimpleBehavior):
         self.movementSpeed = 0
         self.initialMovementDirection = MovementDirection.NONE
         self.currentMovementDirection = MovementDirection.NONE
-        # self.currentMovementWaypointIndex = 0
         self.alreadyStartedSegment = False
 
         self.currentWaypointIndex = 0
@@ -28,48 +27,20 @@ class MoveBehavior(SimpleBehavior):
         self.initialMovementDirection = movementDirection
         self.movementSpeed = numpy.clip(movementSpeed, 0, 90)
 
-        if self.initialMovementDirection == MovementDirection.FORWARD or self.initialMovementDirection == MovementDirection.REVERSE:
-            self.currentMovementDirection = self.initialMovementDirection
-        elif self.initialMovementDirection == MovementDirection.ALTERNATING:
-            self.currentMovementDirection = MovementDirection.FORWARD
-        else:
-            raise Exception("Error: Type of movement is still unsupported by move behavior.")
+        self.startTime = time.time()
 
     # Body agentbody
     def applyBehavior(self):
-
         # Note: allows for a delayed start
         if self.shouldStartBeDelayed():
             return
-
-        print "current time: " + str(time.time() - self.startTime)
-        print "fart: "+ str((time.time() - self.startTime) > self.animationIntervalTime)
-        # when the animation is over we pause before changing color
-        if (time.time() - self.startTime) > self.animationIntervalTime:
-            if self.currentBehaviorRepetition == self.maxBehaviorRepetitions:
-                self.isOver = True
-                self.finishBehavior()
-                print("Behavior ended")
-                return
-
-            # if this movement is alternating then change it after each repetition
-            if self.initialMovementDirection == MovementDirection.ALTERNATING:
-                if self.currentMovementDirection == MovementDirection.FORWARD:
-                    self.currentMovementDirection = MovementDirection.REVERSE
-                else:
-                    self.currentMovementDirection = MovementDirection.FORWARD
-
-            print "Repetition " + str(self.currentBehaviorRepetition + 1) + " out of " + str(self.maxBehaviorRepetitions)
-            # self.currentMovementWaypointIndex = 0
-            self.currentBehaviorRepetition += 1
-            self.alreadyStartedSegment = False
-            self.startTime = time.time()
         return
 
     # Body body
     def finishBehavior(self):
         SimpleBehavior.finishBehavior(self)
         self.bodyRef.resetWheelSetup()
+        self.currentBehaviorRepetition = 0
         return
 
     def reversePath(self, path):
@@ -80,15 +51,36 @@ class MoveBehavior(SimpleBehavior):
 
     def followPath(self, pathLength, nextWaypoint):
         
-        if self.reachedNewWaypoint(pathLength):
-            self.currentWaypointIndex += 1
-            self.alreadyStartedSegment = False
         if not self.alreadyStartedSegment:
             self.alreadyStartedSegment = True
             self.bodyRef.setWheelMovement(nextWaypoint, self.movementSpeed)
             # print "Movement " + str(self.movementType) + " going to " + str(self.currentMovementWaypoint + 1) + " of " + str(pathLength) + " waypoints"
+        
+        if self.reachedNewWaypoint(pathLength):
+            self.currentWaypointIndex += 1
+            self.alreadyStartedSegment = False
+
+        # account for last waypoint
+        if self.currentWaypointIndex >= pathLength: 
+            print self.currentBehaviorRepetition
+            if self.currentBehaviorRepetition == self.maxBehaviorRepetitions:
+                self.finishBehavior()
+                print("Behavior ended")
+
+            # if this movement is alternating then change it after each repetition
+            if self.initialMovementDirection == MovementDirection.ALTERNATING:
+                if self.currentMovementDirection == MovementDirection.FORWARD:
+                    self.currentMovementDirection = MovementDirection.REVERSE
+                else:
+                    self.currentMovementDirection = MovementDirection.FORWARD
+
+            print "Repetition " + str(self.currentBehaviorRepetition + 1) + " out of " + str(self.maxBehaviorRepetitions)
+            self.currentWaypointIndex = 0
+            self.currentBehaviorRepetition += 1
+            self.alreadyStartedSegment = False
+            self.startTime = time.time()
         return
 
     def reachedNewWaypoint(self, pathLength):
-        timePerWaypoint = float(self.animationIntervalTime) / pathLength
-        return time.time() - self.startTime >= timePerWaypoint * (self.currentWaypointIndex + 1) and self.currentWaypointIndex + 1 < pathLength
+        timePerWaypoint = float(self.animationIntervalTime) / (pathLength)
+        return time.time() - self.startTime >= timePerWaypoint * (self.currentWaypointIndex + 1) and self.currentWaypointIndex < pathLength
