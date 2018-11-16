@@ -19,11 +19,12 @@ class TouchSensor:
         print "OK! -- Touch sensor set up!"
         return
 
-    def recordTouchInput(self):
+    def update(self):
 
-        if GPIO.input(PIN_TOUCH) == 0:
-            self.touchState =  TouchState.TOUCHING
+        if not GPIO.input(PIN_TOUCH):
+            self.touchState = TouchState.TOUCHING
         else:
-            self.touchState =  TouchState.NOT_TOUCHING
+            self.touchState = TouchState.NOT_TOUCHING
 
-        return (self.sensorType, self.touchState)
+    def getState(self):
+        return self.touchState

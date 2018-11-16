@@ -1,5 +1,5 @@
 from Scripts.Behavior.ComposedBehavior.ComposedBehavior import ComposedBehavior
-from Scripts.Behavior.SimpleBehavior.BlinkBehavior.BlinkBehaviorEaseInOut import BlinkBehaviorEaseInOut
+from Scripts.Behavior.SimpleBehavior.BlinkBehavior.BlinkBehaviorInstant import BlinkBehaviorInstant
 from colour import Color
 from Libs.Constants import *
 import time
@@ -12,4 +12,4 @@ class PunkBehavior3(ComposedBehavior):
 
         # generic variables
         self.behaviorType = ComposedBehaviorType.PUNK_EXPRESSION_3
-        self.behaviorList.append(BlinkBehaviorEaseInOut(bodyRef, [Color(rgb=(1.0, 0.5, 0.0))], ColorBrightness.MEDIUM, 1, 10, Color(rgb=(0.0, 0.0, 0.0)), True))
+        self.behaviorList.append(BlinkBehaviorInstant(bodyRef, [Color(rgb=(1.0, 0.0, 0.0))], ColorBrightness.HIGH, 1, 2.5, Color(rgb=(0.0, 0.0, 0.0)), False))

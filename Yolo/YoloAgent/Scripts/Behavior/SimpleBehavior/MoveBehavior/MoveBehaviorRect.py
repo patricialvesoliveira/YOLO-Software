@@ -20,8 +20,7 @@ class MoveBehaviorRect(MoveBehavior):
             self.waypoints = self.reversePath(self.waypoints)
         return
 
-    # Body body
-    def applyBehavior(self):
-        MoveBehavior.applyBehavior(self)
+    def behaviorActions(self):
+        MoveBehavior.behaviorActions(self)
         self.followPath(len(self.waypoints), self.waypoints[self.currentWaypointIndex])
         return

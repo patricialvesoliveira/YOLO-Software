@@ -10,61 +10,65 @@ from Scripts.Behavior.SimpleBehavior.SimpleBehavior import SimpleBehavior
 
 
 class BlinkBehavior(SimpleBehavior):
-    def __init__(self, bodyRef, blinkColorList, brightness, repetitions, duration, defaultColor, keepBehaviorSetting=False, startDelay = 0.0, animationPause = 0.0):
+    def __init__(self, bodyRef, blinkColorList, brightness, repetitions, duration, defaultColor, keepBehaviorSetting, startDelay = 0.0, animationPause = 0.0):
         SimpleBehavior.__init__(self, bodyRef, repetitions, duration, keepBehaviorSetting, startDelay)
 
         self.bodyRef = bodyRef
 
         self.behaviorType = BehaviorType.BLINK  # Configuration.Behaviors
 
-        self.color = bodyRef.getColor()
-        self.colorBrightness = bodyRef.getBrightness()
+        self.bodyColorAtStart = bodyRef.getColor()
+        self.bodyBrightnessAtStart = bodyRef.getBrightness()
 
         self.blinkColorList = blinkColorList
+        
         self.activeBlinkColor = blinkColorList[0]
+
+        self.brightness = brightness
         self.activeBlinkBrightness = ColorBrightnessValues[brightness.name]
+        
         self.animationEndPause = animationPause
         self.behaviorDuration = duration
-        print "duration: " + str(duration)
         self.defaultColor = defaultColor
 
 
-    # Body body
-    def applyBehavior(self):
-        # Note: allows for a delayed start
-        if self.shouldStartBeDelayed():
-            return
-
+    def behaviorActions(self):
         # when the animation is over we pause before changing color
-        # print "I got a pen: " + str(time.time() - self.startTime)
-        # print "I got a apple: " + str(self.behaviorDuration + self.animationEndPause)
-        if time.time() - self.startTime > self.behaviorDuration + self.animationEndPause:
-            if self.currentBehaviorRepetition == self.maxBehaviorRepetitions:
-                self.finishBehavior()
-                print "Behavior ended"
-                return
+        if self.checkForBehaviorEnd():
+            if self.maxBehaviorRepetitions > 0:
+                if self.currentBehaviorRepetition == self.maxBehaviorRepetitions:
+                    self.finishBehavior()
+                    print("Behavior ended")
+                    return
 
-            self.currentBehaviorRepetition += 1
-            self.activeBlinkColor = self.blinkColorList[(self.currentBehaviorRepetition-1) % len(self.blinkColorList)]
+                if self.currentBehaviorRepetition > self.maxBehaviorRepetitions:
+                    return
+
+                self.currentBehaviorRepetition += 1
             self.startTime = time.time()
+            self.activeBlinkColor = self.blinkColorList[(self.currentBehaviorRepetition-1) % len(self.blinkColorList)]
         return
 
     def finishBehavior(self):
         SimpleBehavior.finishBehavior(self)
-        if self.keepBehaviorSetting == True:
+        print "keepBehaviorSetting: "+str(self.keepBehaviorSetting)
+        if self.keepBehaviorSetting:
             self.bodyRef.setColor(self.activeBlinkColor)
             self.bodyRef.setBrightness(self.activeBlinkBrightness)
             print("setting the animation end color")
         else:
-            self.bodyRef.setColor(self.color)
-            self.bodyRef.setBrightness(self.colorBrightness)
+            print "color: " + str(self.bodyColorAtStart)
+            self.bodyRef.setColor(self.defaultColor)
+            # self.bodyRef.setBrightness(self.bodyBrightnessAtStart)
         return
 
     
 
     def animateLerp(self, percentage):
-        self.bodyRef.setColor(self.lerpColor(percentage, self.color, self.activeBlinkColor))
-        self.bodyRef.setBrightness(self.activeBlinkBrightness * percentage + self.colorBrightness * (1 - percentage))
+        if(self.isOver):
+            return
+        self.bodyRef.setColor(self.lerpColor(percentage, self.bodyColorAtStart, self.activeBlinkColor))
+        self.bodyRef.setBrightness(self.activeBlinkBrightness * percentage + self.bodyBrightnessAtStart * (1 - percentage))
         # print("Applying blink: passed " + str((time.time() - self._startTime)) + " of " + str(self._animationIntervalTime) + ". Percentage: " + str(percentage))
         return
 
@@ -84,4 +88,6 @@ class BlinkBehavior(SimpleBehavior):
         #print("color: " + str(currentColor) + ", blink: " + str(newColor) + ", finalColor: " + str(lerpColor.rgb))
         return lerpColor
 
- 
+
+    def checkForBehaviorEnd(self): 
+        return time.time() - self.startTime > self.behaviorDuration + self.animationEndPause

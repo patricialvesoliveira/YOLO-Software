@@ -64,7 +64,7 @@ class OpticalSensor:
 
 
 
-    def recordOpticalInput(self):
+    def update(self):
 
         if not self.isOpticalSensorConnected():
 
@@ -118,7 +118,8 @@ class OpticalSensor:
                 self.opticalSensorPosition = [0, 0]
                 self.opticalState = OpticalState.NOT_RECEIVING
 
-        return (self.sensorType, (self.opticalState, self.opticalShape))
+    def getState(self):
+        return self.opticalState
 
     def insertNewPathPosition(self,path,newPosition):
         if newPosition == None:

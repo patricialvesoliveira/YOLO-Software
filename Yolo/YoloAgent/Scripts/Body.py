@@ -10,6 +10,8 @@ from Scripts.Actuators.WheelActuator import WheelActuator
 from asyncore import loop
 import RPi.GPIO as GPIO
 
+import traceback
+
 class Body:
     """docstring for Body"""
 
@@ -44,24 +46,29 @@ class Body:
         self.cleanupGPIOPins()
         print "Component cleanup successful!"
 
-    # GETTERS
-    def getSensorData(self):
-        sensorData = []
-        sensorData.append(self.getTouchSensorData())
-        sensorData.append(self.getOpticalSensorData())
-        return sensorData
+    def update(self):
+        self.updateTouchSensorData()
+        self.updateOpticalSensorData()
 
-    def getOpticalSensorData(self):
+    def updateOpticalSensorData(self):
         if self.touchSensor.touchState is TouchState.TOUCHING and self.opticalSensor.opticalState is OpticalState.NOT_RECEIVING:
             self.opticalSensor.changeState(OpticalState.RECEIVING);
 
         if self.touchSensor.touchState is TouchState.NOT_TOUCHING and self.opticalSensor.opticalState is OpticalState.RECEIVING:
             self.opticalSensor.changeState(OpticalState.NOT_RECEIVING);
+        
+        self.opticalSensor.update()
 
-        return self.opticalSensor.recordOpticalInput()
+    def updateTouchSensorData(self):
+        self.touchSensor.update()
 
-    def getTouchSensorData(self):
-        return self.touchSensor.recordTouchInput()
+
+    def getTouchSensorState(self):
+        return self.touchSensor.getState()
+
+    def getOpticalSensorState(self):
+        return self.opticalSensor.getState()
+
 
     def getColor(self):
         return self.color
@@ -72,6 +79,8 @@ class Body:
     # SETTERS
     def setColor(self, newColor):
         self.color = newColor
+        print "setColor:" + str(newColor)
+        # traceback.print_stack()
         self.LEDActuator.setColor(newColor.red, newColor.green, newColor.blue)  #Note: the LEDs will clip any value to integer
 
     def setBrightness(self, newBrightness):
@@ -80,11 +89,11 @@ class Body:
 
     def setWheelMovement(self, waypoint, speed):
         self.wheelActuator.moveTo(waypoint, speed)
-        print "setWheelMovement"
+        # print "setWheelMovement"
 
     def resetWheelSetup(self):
         self.wheelActuator.resetPinInput()
-        print "resetWheelMovement"
+        # print "resetWheelMovement"
 
 
     def cleanupGPIOPins(self):

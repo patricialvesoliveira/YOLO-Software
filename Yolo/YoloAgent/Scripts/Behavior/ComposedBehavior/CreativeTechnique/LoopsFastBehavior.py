@@ -11,7 +11,4 @@ class LoopsFastBehavior(ComposedBehavior):
 
         # generic variables
         self.behaviorType = ComposedBehaviorType.LOOPS_FAST
-        self.behaviorList.append(MoveBehaviorLoops(bodyRef, 60, MovementDirection.STANDARD, 2, 7, 2, True))
-
-    def applyBehavior(self):
-        ComposedBehavior.applyBehavior(self)
+        self.behaviorList.append(MoveBehaviorLoops(bodyRef, 95, MovementDirection.FORWARD, 2, 1.5, True))

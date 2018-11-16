@@ -12,4 +12,4 @@ class AffectiveBehavior3(ComposedBehavior):
 
         # generic variables
         self.behaviorType = ComposedBehaviorType.AFFECTIVE_EXPRESSION_3
-        self.behaviorList.append(BlinkBehaviorEaseIn(bodyRef, [Color(rgb=(1.0, 0.25, 0.0))], ColorBrightness.MEDIUM, 1.0, 1.0, bodyRef.getColor(), True))
+        self.behaviorList.append(BlinkBehaviorEaseIn(bodyRef, [Color(rgb=(1.0, 0.25, 0.0))], ColorBrightness.MEDIUM, 1.0, 1.0, Color(rgb=(0.0, 0.0, 0.0)), False))

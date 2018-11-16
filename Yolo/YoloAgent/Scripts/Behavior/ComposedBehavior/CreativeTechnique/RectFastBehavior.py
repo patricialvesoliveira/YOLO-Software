@@ -11,7 +11,4 @@ class RectFastBehavior(ComposedBehavior):
 
         # generic variables
         self.behaviorType = ComposedBehaviorType.RECT_FAST
-        self.behaviorList.append(MoveBehaviorRect(bodyRef, 60, MovementDirection.STANDARD, 1, 7, 2, True))
-
-    def applyBehavior(self):
-        ComposedBehavior.applyBehavior(self)
+        self.behaviorList.append(MoveBehaviorRect(bodyRef, 95, MovementDirection.FORWARD, 2, 1.5, True))

@@ -4,10 +4,10 @@ import sys
 
 
 class Agent:
-    def __init__(self, name, personality):
+    def __init__(self, name, personalityType):
         self.name = name
         self.body = Body()
-        self.mind = Mind(personality, self.body)
+        self.mind = Mind(personalityType, self.body)
 
     def __del__(self):
         self.body = None

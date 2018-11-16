@@ -16,10 +16,8 @@ class MoveBehaviorLoops(MoveBehavior):
         self.movementType = ShapeType.LOOPS
     	return
     
-    # Body body
-    def applyBehavior(self):
-
-        MoveBehavior.applyBehavior(self)
+    def behaviorActions(self):
+        MoveBehavior.behaviorActions(self)
         
         # create array of circle values
         N = 24  # number of samples; 16 for quicker behavior

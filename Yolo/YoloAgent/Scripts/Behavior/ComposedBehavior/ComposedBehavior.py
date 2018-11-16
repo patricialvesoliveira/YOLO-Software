@@ -11,21 +11,12 @@ class ComposedBehavior:
         # generic variables
         self.behaviorDuration = 0.0
         self.startTime = 0.0
-        self.isOver = True
+        self.isOver = False
         self.behaviorHalted = False
         self.behaviorType = ComposedBehaviorType.NONE
 
-    def startBehavior(self):
-        self.startTime = time.time()
-        self.isOver = False
-
-        for behavior in self.behaviorList:
-            behavior.startBehavior()
-
-        print("Starting " + self.behaviorType.name)
 
     def applyBehavior(self):
-        self.isOver = True
         behaviorsToApply = []
 
         #print ("Applying " + str(self.behaviorType))
@@ -34,15 +25,11 @@ class ComposedBehavior:
         for behavior in behaviorsToApply:
             if not behavior.isOver:
                 behavior.applyBehavior()
-                if self.isOver:
-                    self.isOver = False
 
         #if self.isOver : print("Composed behavior is over")
 
-    def updateStartTimeAfterHalt(self, totalTimeDelay):
-        for behavior in self.behaviorList:
-            behavior.updateStartTimeAfterHalt(totalTimeDelay)
-
-    def haltAndFinishBehavior(self):
+    def finishBehavior(self):
         for behavior in self.behaviorList:
             behavior.finishBehavior()
+
+        self.isOver = True

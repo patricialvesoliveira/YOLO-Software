@@ -11,7 +11,4 @@ class StraightFastBehavior(ComposedBehavior):
 
         # generic variables
         self.behaviorType = ComposedBehaviorType.STRAIGHT_FAST
-        self.behaviorList.append(MoveBehaviorStraight(bodyRef, 60, MovementDirection.STANDARD, 1, 5, 2, True))
-
-    def applyBehavior(self):
-        ComposedBehavior.applyBehavior(self)
+        self.behaviorList.append(MoveBehaviorStraight(bodyRef, 95, MovementDirection.FORWARD, 2, 1.5, True))

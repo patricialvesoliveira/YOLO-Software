@@ -15,9 +15,8 @@ class MoveBehaviorCurved(MoveBehavior):
         MoveBehavior.__init__(self, bodyRef, movementSpeed, movementDirection, repetitions, duration, keepBehaviorSetting, startDelay)
         self.movementType = ShapeType.CURVED
     
-    # Body body
-    def applyBehavior(self):
-        MoveBehavior.applyBehavior(self)
+    def behaviorActions(self):
+        MoveBehavior.behaviorActions(self)
         
         # create array of sin wave values
         N = 48  # number of samples; 24 for quicker behavior

@@ -17,7 +17,12 @@ class SimpleBehavior:
         self.behaviorDuration = duration;
 
         self.maxBehaviorRepetitions = repetitions
-        self.animationIntervalTime = self.behaviorDuration / self.maxBehaviorRepetitions
+
+        if self.maxBehaviorRepetitions > 0:
+            self.animationIntervalTime = self.behaviorDuration / self.maxBehaviorRepetitions
+        else:
+            self.animationIntervalTime = self.behaviorDuration
+
         self.currentBehaviorRepetition = 1
 
         self.bodyRef = bodyRef
@@ -25,15 +30,17 @@ class SimpleBehavior:
         self.startTime = time.time()
         return
         
-    def startBehavior(self):
-        if self.maxBehaviorRepetitions > 0 and self.behaviorDuration > 0.0:
-            self.startTime = time.time()
-            self.isOver = False
-        return
 
     # Body agentbody
     def applyBehavior(self):
-        raise NotImplementedError("Please Implement this method")
+        if(not self.isOver):
+            self.behaviorActions()
+        else:
+            print "aaaaaaaaaaaaaaaaaaa"
+        return
+
+    def behaviorActions(self):
+        return
 
     # Body body
     def finishBehavior(self):

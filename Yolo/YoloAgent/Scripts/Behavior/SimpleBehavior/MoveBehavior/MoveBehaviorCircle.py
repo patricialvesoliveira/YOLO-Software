@@ -15,10 +15,9 @@ class MoveBehaviorCircle(MoveBehavior):
         MoveBehavior.__init__(self, bodyRef, movementSpeed, movementDirection, repetitions, duration, keepBehaviorSetting, startDelay)
         self.movementType = ShapeType.CIRCLE
     
-    # Body body
-    def applyBehavior(self):
-        MoveBehavior.applyBehavior(self)
-        
+    def behaviorActions(self):
+        MoveBehavior.behaviorActions(self)
+
         # create array of circle values
         N = 24  # number of samples; 16 for quicker behavior
         # period = N*0.1 seconds

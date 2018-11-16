@@ -11,7 +11,4 @@ class SpikesSlowBehavior(ComposedBehavior):
 
         # generic variables
         self.behaviorType = ComposedBehaviorType.SPIKES_SLOW
-        self.behaviorList.append(MoveBehaviorSpikes(bodyRef, 45, MovementDirection.STANDARD, 1, 5, 2, True))
-
-    def applyBehavior(self):
-        ComposedBehavior.applyBehavior(self)
+        self.behaviorList.append(MoveBehaviorSpikes(bodyRef, 30, MovementDirection.FORWARD, 2, 3.5, True))

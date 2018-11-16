@@ -54,33 +54,10 @@ class MovementDirection(enum.Enum):
 # order is relevant here, the story progresses through its arcs sequentially
 class StoryArc(enum.Enum):
     NONE = 0
-    EXPOSITION = 1
-    CONFLICT_INTRODUCED = 2
-    RISING_ACTION_PT1 = 3
-    RISING_ACTION_PT2 = 4
-    CLIMAX = 5
-    FALLING_ACTION_PT1 = 6
-    FALLING_ACTION_PT2 = 7
-    RESOLUTION = 8
-    DENOUEMENT = 9
+    RISING_ACTION = 1
+    CLIMAX = 2
+    FALLING_ACTION = 3
 
-
-# Time in minutes for each stage in the story arc
-StoryArcTime = {'EXPOSITION': 3, 'CONFLICT_INTRODUCED': 2, 'RISING_ACTION_PT1': 5, 'RISING_ACTION_PT2': 5, 'CLIMAX': 1,
-                'FALLING_ACTION_PT1': 5, 'FALLING_ACTION_PT2': 5, 'RESOLUTION': 2, 'DENOUEMENT': 2}
-
-# Total probability for the
-StoryBehaviorTotalProbability = 100
-
-# Probabilities for the occurrence of either a creative technique or personality behavior at different points of the story
-# Their sum should equal to the total probability
-StoryPersonalityBehaviorProbability = {'EXPOSITION': 100, 'CONFLICT_INTRODUCED': 40, 'RISING_ACTION_PT1': 40, 'RISING_ACTION_PT2': 40, 'CLIMAX': 100,
-                'FALLING_ACTION_PT1': 40, 'FALLING_ACTION_PT2': 40, 'RESOLUTION': 40, 'DENOUEMENT': 100}
-
-StoryCreativeBehaviorProbability = {'EXPOSITION': 0, 'CONFLICT_INTRODUCED': 60, 'RISING_ACTION_PT1': 60, 'RISING_ACTION_PT2': 60, 'CLIMAX': 0,
-                'FALLING_ACTION_PT1': 60, 'FALLING_ACTION_PT2': 60, 'RESOLUTION': 60, 'DENOUEMENT': 0}
-
-# BEHAVIORS
 
 
 class BehaviorType(enum.Enum):

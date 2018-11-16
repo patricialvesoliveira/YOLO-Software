@@ -1,5 +1,6 @@
 from Scripts.Behavior.ComposedBehavior.ComposedBehavior import ComposedBehavior
-from Scripts.Behavior.SimpleBehavior.BlinkBehavior.BlinkBehaviorEaseIn import BlinkBehaviorEaseIn
+from Scripts.Behavior.SimpleBehavior.BlinkBehavior.BlinkBehaviorEaseInOut import BlinkBehaviorEaseInOut
+from Scripts.Behavior.SimpleBehavior.MoveBehavior.MoveBehaviorStraight import MoveBehaviorStraight
 from colour import Color
 from Libs.Constants import *
 import time
@@ -12,4 +13,4 @@ class AloofBehavior3(ComposedBehavior):
 
         # generic variables
         self.behaviorType = ComposedBehaviorType.ALOOF_EXPRESSION_3
-        self.behaviorList.append(BlinkBehaviorEaseIn(bodyRef, [Color(rgb=(0.0, 0.0, 0.0))], ColorBrightness.MEDIUM, 1, 7, Color(rgb=(0.0, 0.0, 0.0)), True))
+        self.behaviorList.append(BlinkBehaviorEaseInOut(bodyRef, [Color(rgb=(0.0, 0.0, 0.1))], ColorBrightness.LOW, 1, 10.0, Color(rgb=(0.0, 0.0, 0.0)), False))

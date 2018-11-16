@@ -11,4 +11,4 @@ class HelloBehavior(ComposedBehavior):
 
         # generic variables
         self.behaviorType = ComposedBehaviorType.HELLO
-        self.behaviorList.append(BlinkBehaviorEaseInOut(bodyRef, [Color(rgb=(1.0, 1.0, 1.0))], ColorBrightness.MEDIUM, 3, 8, bodyRef.getColor(), False))
+        self.behaviorList.append(BlinkBehaviorEaseInOut(bodyRef, [Color(rgb=(1.0, 1.0, 1.0))], ColorBrightness.MEDIUM, 3, 1.0, bodyRef.getColor(), False))
