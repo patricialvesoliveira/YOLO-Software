@@ -22,14 +22,18 @@ class ComposedBehavior:
         #print ("Applying " + str(self.behaviorType))
         behaviorsToApply = self.behaviorList
 
+        areAllOver = True
         for behavior in behaviorsToApply:
             if not behavior.isOver:
+                areAllOver = False
                 behavior.applyBehavior()
 
-        #if self.isOver : print("Composed behavior is over")
+        if areAllOver:
+            self.finishBehavior()
+
+        if self.isOver : print("Composed behavior is over")
 
     def finishBehavior(self):
         for behavior in self.behaviorList:
             behavior.finishBehavior()
-
         self.isOver = True

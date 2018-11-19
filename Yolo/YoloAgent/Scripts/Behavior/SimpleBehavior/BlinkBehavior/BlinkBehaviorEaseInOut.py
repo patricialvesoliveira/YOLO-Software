@@ -16,20 +16,24 @@ class BlinkBehaviorEaseInOut(BlinkBehavior):
     def __init__(self, bodyRef, blinkColorList, brightness, repetitions, duration, defaultColor, keepBehaviorSetting=False, startDelay = 0.0, animationPause = 0.0):
         BlinkBehavior.__init__(self, bodyRef, blinkColorList, brightness, repetitions, duration, defaultColor, False, startDelay, animationPause)
 
-        self.subBehaviorDuration = duration / 2
+        self.subBehaviorDuration = duration/ 2.0
 
         self.easeInBehavior = BlinkBehaviorEaseIn(bodyRef, blinkColorList, brightness, 1, self.subBehaviorDuration, defaultColor, True)
-        self.easeOutBehavior = BlinkBehaviorEaseOut(bodyRef, blinkColorList, brightness, 1, self.subBehaviorDuration, defaultColor, False)
+        self.easeOutBehavior = BlinkBehaviorEaseOut(self.bodyRef, blinkColorList, self.brightness, 1, self.subBehaviorDuration, self.defaultColor, False)
         
     def behaviorActions(self):
         BlinkBehavior.behaviorActions(self)
 
+        # print "isOver1: "+ str(self.easeInBehavior.isOver)
+        # print "isOver2: "+ str(self.easeOutBehavior.isOver)
         if not self.easeInBehavior.isOver:
             self.easeInBehavior.behaviorActions()
-        elif not self.easeOutBehavior.isOver:
-            self.easeOutBehavior.behaviorActions()
-        elif self.currentBehaviorRepetition==0 or self.currentBehaviorRepetition <= self.maxBehaviorRepetitions: #reset ease in and ease out
-            self.easeInBehavior = BlinkBehaviorEaseIn(self.bodyRef, self.blinkColorList, self.brightness, 1, self.subBehaviorDuration, self.defaultColor, True)
             self.easeOutBehavior = BlinkBehaviorEaseOut(self.bodyRef, self.blinkColorList, self.brightness, 1, self.subBehaviorDuration, self.defaultColor, False)
+
+        else:
+            self.easeOutBehavior.behaviorActions()
+        # elif self.currentBehaviorRepetition==0 or self.currentBehaviorRepetition <= self.maxBehaviorRepetitions: #reset ease in and ease out
+        #     self.easeInBehavior = BlinkBehaviorEaseIn(self.bodyRef, self.blinkColorList, self.brightness, 1, self.subBehaviorDuration, self.defaultColor, True)
+        #     self.easeOutBehavior = BlinkBehaviorEaseOut(self.bodyRef, self.blinkColorList, self.brightness, 1, self.subBehaviorDuration, self.defaultColor, False)
                
         return

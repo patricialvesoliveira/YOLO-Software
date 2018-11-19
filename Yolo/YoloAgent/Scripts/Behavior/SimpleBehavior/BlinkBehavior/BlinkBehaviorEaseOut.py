@@ -6,16 +6,12 @@ from colour import Color
 import pytweening as tween
 
 from Libs.Constants import *
-from Scripts.Behavior.SimpleBehavior.BlinkBehavior.BlinkBehavior import BlinkBehavior
+from Scripts.Behavior.SimpleBehavior.BlinkBehavior.BlinkBehaviorEaseIn import BlinkBehaviorEaseIn
 
 
-class BlinkBehaviorEaseOut(BlinkBehavior):
-	# Body body, int repetitions, float duration
-	def __init__(self, bodyRef, blinkColorList, brightness, repetitions, duration, defaultColor, keepBehaviorSetting=False, startDelay = 0.0, animationPause = 0.0):
-	    BlinkBehavior.__init__(self, bodyRef, blinkColorList, brightness, repetitions, duration, defaultColor, keepBehaviorSetting, startDelay, animationPause)
-
-	def behaviorActions(self):
-	    BlinkBehavior.behaviorActions(self)
-	    timeElapsed = time.time() - self.startTime
-	    percentage = 1 - tween.easeOutSine(numpy.clip(timeElapsed / self.behaviorDuration, 0, 1))
-	    self.animateLerp(percentage)
+class BlinkBehaviorEaseOut(BlinkBehaviorEaseIn):
+    # Body body, int repetitions, float duration
+    def __init__(self, bodyRef, blinkColorList, brightness, repetitions, duration, defaultColor, keepBehaviorSetting=False, startDelay = 0.0, animationPause = 0.0):
+    	#an ease out is an ease to black 
+        BlinkBehaviorEaseIn.__init__(self, bodyRef, [Color(rgb=(0.0, 0.0, 0.0))], brightness, repetitions, duration, defaultColor, keepBehaviorSetting, startDelay, animationPause) 
+    	return

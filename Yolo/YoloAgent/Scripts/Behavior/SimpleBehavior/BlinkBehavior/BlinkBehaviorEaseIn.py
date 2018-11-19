@@ -17,5 +17,5 @@ class BlinkBehaviorEaseIn(BlinkBehavior):
     def behaviorActions(self):
         BlinkBehavior.behaviorActions(self)
         timeElapsed = time.time() - self.startTime
-        percentage = tween.easeInSine(numpy.clip(timeElapsed / self.behaviorDuration, 0, 1))
+        percentage = tween.easeInSine(numpy.clip(timeElapsed / self.duration, 0, 1))
         self.animateLerp(percentage)

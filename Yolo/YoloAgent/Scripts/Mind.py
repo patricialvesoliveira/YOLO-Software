@@ -10,7 +10,7 @@ from Libs.Constants import *
 from Libs.MachineLearning.lib.constants import SHAPE_ARRAY
 from Libs.MachineLearning.lib.util import extract_features, predict
 
-from Scripts.Behavior.SimpleBehavior.BlinkBehavior.BlinkBehaviorEaseIn import BlinkBehaviorEaseIn
+from Scripts.Behavior.SimpleBehavior.BlinkBehavior.BlinkBehaviorEaseInOut import BlinkBehaviorEaseInOut
 from Scripts.Behavior.SimpleBehavior.MoveBehavior.MoveBehaviorStraight import MoveBehaviorStraight
 from colour import Color
 
@@ -57,7 +57,7 @@ class Mind:
 
         self.isFirstTimeTouch = True
         self.currBehavior = ComposedBehavior(body)
-
+        # self.currBehavior = BlinkBehaviorEaseInOut(body, [Color(rgb=(0.5, 0.0, 0.5))], ColorBrightness.HIGH, 1, 2.0, body.getColor(), False)
 
         tCurr = time.time()
 
@@ -97,7 +97,6 @@ class Mind:
             print "hasTouchStarted"
             self.attentionCallTriggered = False
             self.personalityOrCreativeTriggered = False
-            self.isFirstTimeTouch = False
             
             self.currBehavior.finishBehavior() # finish any pending behavior
 
@@ -113,6 +112,8 @@ class Mind:
 
             if self.isFirstTimeTouch:
                 self.currBehavior = HelloBehavior(self.body)
+                self.isFirstTimeTouch = False
+                return
 
 
             if not self.attentionCallTriggered and (tCurr - self.tLastTouchF) > 60:
@@ -120,7 +121,7 @@ class Mind:
                 self.currBehavior = self.generateAttentionCallBehavior(self.personalityType)
             else:
                 if not self.personalityOrCreativeTriggered and tLastTouchDelta > 2:
-                    print (tLastTouchDelta)
+                    # print (tLastTouchDelta)
                     self.personalityOrCreativeTriggered = True
                     if (numpy.random.random_integers(0,1) == 1):
                         # personality

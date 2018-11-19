@@ -28,9 +28,9 @@ class BlinkBehavior(SimpleBehavior):
         self.activeBlinkBrightness = ColorBrightnessValues[brightness.name]
         
         self.animationEndPause = animationPause
-        self.behaviorDuration = duration
         self.defaultColor = defaultColor
 
+        self.duration = duration
 
     def behaviorActions(self):
         # when the animation is over we pause before changing color
@@ -55,9 +55,9 @@ class BlinkBehavior(SimpleBehavior):
         if self.keepBehaviorSetting:
             self.bodyRef.setColor(self.activeBlinkColor)
             self.bodyRef.setBrightness(self.activeBlinkBrightness)
-            print("setting the animation end color")
+            # print("setting the animation end color")
         else:
-            print "color: " + str(self.bodyColorAtStart)
+            # print "color: " + str(self.bodyColorAtStart)
             self.bodyRef.setColor(self.defaultColor)
             # self.bodyRef.setBrightness(self.bodyBrightnessAtStart)
         return
@@ -65,8 +65,8 @@ class BlinkBehavior(SimpleBehavior):
     
 
     def animateLerp(self, percentage):
-        if(self.isOver):
-            return
+        # if(self.isOver):
+        #     return
         self.bodyRef.setColor(self.lerpColor(percentage, self.bodyColorAtStart, self.activeBlinkColor))
         self.bodyRef.setBrightness(self.activeBlinkBrightness * percentage + self.bodyBrightnessAtStart * (1 - percentage))
         # print("Applying blink: passed " + str((time.time() - self._startTime)) + " of " + str(self._animationIntervalTime) + ". Percentage: " + str(percentage))
@@ -90,4 +90,4 @@ class BlinkBehavior(SimpleBehavior):
 
 
     def checkForBehaviorEnd(self): 
-        return time.time() - self.startTime > self.behaviorDuration + self.animationEndPause
+        return time.time() - self.startTime > self.duration + self.animationEndPause
