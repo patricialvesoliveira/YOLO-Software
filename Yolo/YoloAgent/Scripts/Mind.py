@@ -3,6 +3,7 @@ import calendar
 import logging
 import time
 import numpy
+from enum import IntEnum
 
 import traceback
 
@@ -11,7 +12,7 @@ from Libs.MachineLearning.lib.constants import SHAPE_ARRAY
 from Libs.MachineLearning.lib.util import extract_features, predict
 
 from Scripts.Behavior.SimpleBehavior.BlinkBehavior.BlinkBehaviorEaseInOut import BlinkBehaviorEaseInOut
-from Scripts.Behavior.SimpleBehavior.MoveBehavior.MoveBehaviorStraight import MoveBehaviorStraight
+from Scripts.Behavior.SimpleBehavior.MoveBehavior.MoveBehaviorLoops import MoveBehaviorLoops
 from colour import Color
 
 
@@ -24,6 +25,8 @@ from Scripts.Behavior.ComposedBehavior.CreativeTechnique.RectFastBehavior import
 from Scripts.Behavior.ComposedBehavior.CreativeTechnique.RectSlowBehavior import RectSlowBehavior
 from Scripts.Behavior.ComposedBehavior.CreativeTechnique.SpikesFastBehavior import SpikesFastBehavior
 from Scripts.Behavior.ComposedBehavior.CreativeTechnique.SpikesSlowBehavior import SpikesSlowBehavior
+from Scripts.Behavior.ComposedBehavior.CreativeTechnique.StraightFastBehavior import StraightFastBehavior
+from Scripts.Behavior.ComposedBehavior.CreativeTechnique.StraightSlowBehavior import StraightSlowBehavior
 from Behavior.ComposedBehavior.GenericBehavior.PuppeteerBehavior import PuppeteerBehavior
 
 from Scripts.Behavior.ComposedBehavior.PersonalityBehavior.AffectivePersonality.AffectiveAttentionCallBehavior import AffectiveAttentionCallBehavior
@@ -55,9 +58,8 @@ class Mind:
         self.personalityType = personalityType
         self.body = body
 
-        self.isFirstTimeTouch = True
         self.currBehavior = ComposedBehavior(body)
-        # self.currBehavior = BlinkBehaviorEaseInOut(body, [Color(rgb=(0.5, 0.0, 0.5))], ColorBrightness.HIGH, 1, 2.0, body.getColor(), False)
+        # self.currBehavior = MoveBehaviorLoops(self.body, 75, MovementDirection.ALTERNATING, 5, 1.5, True)
 
         tCurr = time.time()
 
@@ -71,9 +73,16 @@ class Mind:
         self.personalityOrCreativeTriggered = False
 
         self.currStoryArcMoment = StoryArc.NONE
+        self.currRecognizedShape = ShapeType.NONE
+
+        
+        self.isFirstTimeTouch = True
+
+
         return
 
     def update(self):
+
         self.body.update()
         self.currBehavior.applyBehavior()
 
@@ -88,7 +97,6 @@ class Mind:
             self.currStoryArcMoment = StoryArc.FALLING_ACTION
 
 
-        #hello behavior stuff
         tLastTouchDelta = self.tLastTouchF - self.tLastTouchI
         
 
@@ -99,43 +107,48 @@ class Mind:
             self.personalityOrCreativeTriggered = False
             
             self.currBehavior.finishBehavior() # finish any pending behavior
-
             self.currBehavior = PuppeteerBehavior(self.body)
 
         elif self.hasTouchedEnded():
+
             print "hasTouchEnded"
             self.currBehavior.finishBehavior()
+
+            #hello is performed on the first touch
+            if  self.isFirstTimeTouch:
+                self.currBehavior = HelloBehavior(self.body)
+                self.isFirstTimeTouch = False
+
+        #do nothing until first touch
+        if self.isFirstTimeTouch:
+            return
 
 
         # autonomous stuff
         if not self.beingTouched():
-
-            if self.isFirstTimeTouch:
-                self.currBehavior = HelloBehavior(self.body)
-                self.isFirstTimeTouch = False
-                return
-
-
             if not self.attentionCallTriggered and (tCurr - self.tLastTouchF) > 60:
                 self.attentionCallTriggered = True
                 self.currBehavior = self.generateAttentionCallBehavior(self.personalityType)
             else:
-                if not self.personalityOrCreativeTriggered and tLastTouchDelta > 2:
-                    # print (tLastTouchDelta)
+                if not self.personalityOrCreativeTriggered and tLastTouchDelta > 1:
                     self.personalityOrCreativeTriggered = True
-                    if (numpy.random.random_integers(0,1) == 1):
+                    if (numpy.random.random_integers(0,1) > 1):
                         # personality
                         self.currBehavior = self.generatePersonalityBehavior(self.personalityType, numpy.random.random_integers(1,3))
                     else:
                         # creativity
-                        self.currBehavior = self.generateCreativityBehavior(self.currStoryArcMoment)
-
-                
+                        self.currBehavior = self.generateCreativityBehavior(self.currStoryArcMoment, self.currRecognizedShape)
 
         # idle acts as fallback
         if self.currBehavior.isOver:
             self.currBehavior = self.generateIdleBehavior(self.personalityType)
             
+
+        # check for recognized shapes
+        if self.shapeWasRecognized():
+            self.currRecognizedShape = self.predictShape(self.body.getOpticalSensor().getCurrentRecognizedShape())
+            print self.currRecognizedShape
+
         return
 
 
@@ -182,19 +195,77 @@ class Mind:
         return switcher.get(personalityType ,"Invalid Personality Type.").get(behaviorNumber, "Invalid behavior number.")
 
 
-
-    def generateCreativityBehavior(self, currStoryArcMoment):
+    def getCreativityBehaviorFromShapeAndSpeed(self,shapeTypeName,shapeSpeed):
         switcher = {
-            StoryArc.RISING_ACTION : CurvedSlowBehavior(self.body),
-            StoryArc.CLIMAX : CurvedFastBehavior(self.body),
-            StoryArc.FALLING_ACTION : CurvedSlowBehavior(self.body),
+            ShapeType.NONE.name: 
+            {
+                # at first when there is no shape yet...
+                ShapeSpeed.SLOW : StraightSlowBehavior(self.body),
+                ShapeSpeed.FAST : StraightSlowBehavior(self.body)
+            }
+            ,
+            ShapeType.SPIKES.name: 
+            {
+                ShapeSpeed.SLOW : SpikesSlowBehavior(self.body),
+                ShapeSpeed.FAST : SpikesFastBehavior(self.body)
+            }
+            ,
+            ShapeType.CURVED.name: 
+            {
+                ShapeSpeed.SLOW : CurvedSlowBehavior(self.body),
+                ShapeSpeed.FAST : CurvedFastBehavior(self.body)
+            }
+            ,
+            ShapeType.LOOPS.name: 
+            {
+                ShapeSpeed.SLOW : LoopsSlowBehavior(self.body),
+                ShapeSpeed.FAST : LoopsFastBehavior(self.body)
+            }
+            ,
+            ShapeType.STRAIGHT.name: 
+            {
+                ShapeSpeed.SLOW : StraightSlowBehavior(self.body),
+                ShapeSpeed.FAST : StraightFastBehavior(self.body)
+            }
+            ,
+            ShapeType.RECT.name: 
+            {
+                ShapeSpeed.SLOW : RectSlowBehavior(self.body),
+                ShapeSpeed.FAST : RectFastBehavior(self.body)
+            }
+        }
+        # print switcher.get(shapeTypeName ,"Invalid Shape Type.").get(shapeSpeed,"Invalid Shape Speed")
+        # print shapeSpeed
+
+        return switcher.get(shapeTypeName ,"Invalid Shape Type.").get(shapeSpeed,"Invalid Shape Speed")
+
+
+    def getContrastCreativityBehavior(self, shapeName, speed):
+        # inaccessibility leads to less fine code...
+        consideredShapesNames = ['NONE','SPIKES','CURVED','LOOPS','STRAIGHT','RECT']
+        consideredShapesNames.remove(shapeName)
+        selectedShapeName = consideredShapesNames[numpy.random.random_integers(0, len(consideredShapesNames)-1)]
+        return self.getCreativityBehaviorFromShapeAndSpeed(selectedShapeName, speed) #contrast
+            
+    def getMirrorCreativityBehavior(self, shapeName, speed):
+        return self.getCreativityBehaviorFromShapeAndSpeed(shapeName, speed) #mirror
+
+
+    def generateCreativityBehavior(self, currStoryArcMoment, recognizedShape):
+        switcher = {
+            StoryArc.RISING_ACTION : self.getMirrorCreativityBehavior(recognizedShape, ShapeSpeed.SLOW), #mirror
+            StoryArc.CLIMAX : self.getContrastCreativityBehavior(recognizedShape, ShapeSpeed.FAST),
+            StoryArc.FALLING_ACTION : self.getMirrorCreativityBehavior(recognizedShape, ShapeSpeed.SLOW) #mirror
         }
         return switcher.get(currStoryArcMoment, "Invalid current story arc moment")
 
 
-
     def beingTouched(self):
-        return (self.body.getTouchSensorState() == TouchState.TOUCHING)
+        return (self.body.getTouchSensor().getState() == TouchState.TOUCHING)
+
+    def shapeWasRecognized(self):
+        return (self.body.getOpticalSensor().getState() == OpticalState.FINISHED)
+
 
     def hasTouchedStarted(self):
         result = not self.wasTouched and self.beingTouched()
@@ -204,12 +275,21 @@ class Mind:
         return result
     
     def hasTouchedEnded(self):
-        if(self.isFirstTimeTouch):
-            self.isFirstTimeTouch = False
-
         result = self.wasTouched and not self.beingTouched()
-        
         if(result):
             self.wasTouched = False
             self.tLastTouchF = time.time()
         return result
+
+    def predictShape(self, pointDataArray):
+        #print "shape recognized (length " + str(len(pointDataArray)) + "): " + str(pointDataArray)
+
+        #print "Time feature extract start: " + time.strftime("%H:%M:%S", time.gmtime())
+        features = extract_features(pointDataArray)
+        prediction = predict(features)[0]
+        #print "Time predict end: " + time.strftime("%H:%M:%S", time.gmtime())
+
+        print StoryArc(self.currStoryArcMoment).name + ' arc --- Recognized a shape: ' + SHAPE_ARRAY[int(prediction)]
+        logging.info(StoryArc(self.currStoryArcMoment).name + ' arc --- Recognized a shape: ' + SHAPE_ARRAY[int(prediction)])
+
+        return SHAPE_ARRAY[int(prediction)]

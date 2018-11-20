@@ -1,9 +1,4 @@
 import enum
-
-class ApplicationMode(enum.Enum):
-    AUTONOMOUS = 1
-    DEMO = 2
-
 # BODY
 
 class SensorType(enum.Enum):
@@ -43,6 +38,10 @@ class ShapeType(enum.Enum):
     CIRCLE = 6
     FORWARD_AND_BACK = 7
 
+class ShapeSpeed(enum.Enum):
+    NONE = 0
+    SLOW = 1
+    FAST = 2
 
 class MovementDirection(enum.Enum):
     NONE = 0
@@ -59,11 +58,11 @@ class StoryArc(enum.Enum):
     FALLING_ACTION = 3
 
 
-
 class BehaviorType(enum.Enum):
     NONE = 0
     BLINK = 1
     MOVE = 2
+
 
 
 class ComposedBehaviorType(enum.Enum):
@@ -106,26 +105,6 @@ class BlinkingSpeed(enum.Enum):
     NORMAL = 4
     FAST = 5
     VERY_FAST = 6
-
-
-class ColorType(enum.Enum):
-    NONE = 0
-    WHITE = 1
-    GRAY = 2
-    BLACK = 3
-    YELLOW = 4
-    DARKYELLOW = 5
-    ORANGE = 6
-    RED = 7
-    DARKRED = 8
-    PURPLE = 9
-    DARKPURPLE = 10
-    BLUE = 11
-    DARKBLUE = 12
-    CYAN = 13
-    GREEN = 14
-    DARKGREEN = 15
-    BROWN = 16
 
 
 class ColorBrightness(enum.Enum):

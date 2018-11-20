@@ -15,8 +15,6 @@ class MoveBehavior(SimpleBehavior):
         self.waypoints = numpy.array([])
 
         self.movementSpeed = 0
-        self.initialMovementDirection = MovementDirection.NONE
-        self.currentMovementDirection = MovementDirection.NONE
         self.alreadyStartedSegment = False
 
         self.currentWaypointIndex = 0
@@ -24,6 +22,13 @@ class MoveBehavior(SimpleBehavior):
 
         self.movementType = ShapeType.NONE
         self.initialMovementDirection = movementDirection
+
+        if self.initialMovementDirection == MovementDirection.ALTERNATING:
+            self.currentMovementDirection = MovementDirection.FORWARD
+        else:
+            self.currentMovementDirection = self.initialMovementDirection
+            
+
         self.movementSpeed = numpy.clip(movementSpeed, 0, 90)
 
         self.startTime = time.time()
@@ -40,10 +45,10 @@ class MoveBehavior(SimpleBehavior):
         return
 
     def reversePath(self, path):
-        # print "----------------------"
-        # print path
+        print "----------------------"
+        print path
         inversedPath = [-x for x in path]
-        # print inversedPath
+        print inversedPath
         reversedPath = list(reversed(inversedPath))
         return reversedPath
 
@@ -60,9 +65,7 @@ class MoveBehavior(SimpleBehavior):
 
         # account for last waypoint
         if self.checkForBehaviorEnd(pathLength): 
-            
-            if self.maxBehaviorRepetitions > 0:
-
+            if self.maxBehaviorRepetitions!=0:
                 if self.currentBehaviorRepetition == self.maxBehaviorRepetitions:
                     self.finishBehavior()
                     return
@@ -71,16 +74,17 @@ class MoveBehavior(SimpleBehavior):
                 if self.currentBehaviorRepetition > self.maxBehaviorRepetitions:
                     return
 
-                # if this movement is alternating then change it after each repetition
-                if self.initialMovementDirection == MovementDirection.ALTERNATING:
-                    if self.currentMovementDirection == MovementDirection.FORWARD:
-                        self.currentMovementDirection = MovementDirection.REVERSE
-                    else:
-                        self.currentMovementDirection = MovementDirection.FORWARD
-            
                 self.currentBehaviorRepetition += 1
-                self.startTime = time.time()
-                print "Repetition " + str(self.currentBehaviorRepetition + 1) + " out of " + str(self.maxBehaviorRepetitions)
+
+            # if this movement is alternating then change it after each repetition
+            if self.initialMovementDirection == MovementDirection.ALTERNATING:
+                if self.currentMovementDirection == MovementDirection.FORWARD:
+                    self.currentMovementDirection = MovementDirection.REVERSE
+                else:
+                    self.currentMovementDirection = MovementDirection.FORWARD
+        
+            self.startTime = time.time()
+            print "Repetition " + str(self.currentBehaviorRepetition + 1) + " out of " + str(self.maxBehaviorRepetitions)
             
             self.currentWaypointIndex = 0
             self.alreadyStartedSegment = False

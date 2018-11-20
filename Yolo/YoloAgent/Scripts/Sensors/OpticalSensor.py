@@ -14,11 +14,12 @@ class OpticalSensor:
 
         self.sensorType = SensorType.OPTICAL
 
-        self.opticalState = OpticalState.NOT_RECEIVING
+        self.state = OpticalState.NOT_RECEIVING
         self.opticalShape = collections.deque(maxlen=200)
         self.newOpticalInfo = None
         self.opticalSensorPosition = [0, 0]
 
+        
 
         for fn in evdev.list_devices():
             dev = evdev.InputDevice(fn)
@@ -68,18 +69,18 @@ class OpticalSensor:
 
         if not self.isOpticalSensorConnected():
 
-            if self.opticalState is OpticalState.RECEIVING:
+            if self.state is OpticalState.RECEIVING:
                 self.insertNewPathPosition(self.opticalShape, self.newOpticalInfo)
 
-            elif self.opticalState is OpticalState.NOT_RECEIVING:
-                if self.opticalState is OpticalState.RECEIVING:
+            elif self.state is OpticalState.NOT_RECEIVING:
+                if self.state is OpticalState.RECEIVING:
                     opticalState = OpticalState.FINISHED
                 # do nothing
                 a = 0;
 
-            elif self.opticalState is OpticalState.FINISHED:
-                shapeToReturn = list(self.opticalShape)
-                self.opticalState = OpticalState.NOT_RECEIVING
+            elif self.state is OpticalState.FINISHED:
+                # self.currentRecorgnizedShape = list(self.opticalShape)
+                self.state = OpticalState.NOT_RECEIVING
 
             else:
                 print ("Error: This option shouldn't be selected!")
@@ -97,29 +98,36 @@ class OpticalSensor:
                     self.opticalSensorPosition[1] = self.opticalSensorPosition[1] + int(event[1])
  
 
-            if self.opticalState is OpticalState.RECEIVING:
+            if self.state is OpticalState.RECEIVING:
                 newPosition = (self.opticalSensorPosition[0], self.opticalSensorPosition[1])
                 self.insertNewPathPosition(self.opticalShape, newPosition)
 
                  #Note: to avoids really small touches on the robot to be read as shapes
                 if len(self.opticalShape) > 30:
-                    self.opticalState = OpticalState.FINISHED
+                    self.state = OpticalState.FINISHED
                     # print self.opticalShape
 
 
-            elif self.opticalState is OpticalState.NOT_RECEIVING:
+            elif self.state is OpticalState.NOT_RECEIVING:
 
                 self.opticalSensorPosition = [0, 0]
 
 
-            elif self.opticalState is OpticalState.FINISHED:
+            elif self.state is OpticalState.FINISHED:
 
                 self.opticalShape.clear()
                 self.opticalSensorPosition = [0, 0]
-                self.opticalState = OpticalState.NOT_RECEIVING
+                self.state = OpticalState.NOT_RECEIVING
 
+
+
+    def setState(self,state):
+        self.state = state
     def getState(self):
-        return self.opticalState
+        return self.state
+
+    def getCurrentRecognizedShape(self):
+        return self.opticalShape
 
     def insertNewPathPosition(self,path,newPosition):
         if newPosition == None:
@@ -130,8 +138,6 @@ class OpticalSensor:
         elif path[-1] != newPosition:
             path.append(newPosition)
 
-    def changeState(self,state):
-        self.opticalState = state
 
     def printButtonEvent(self, event):
         states = ['released', 'pressed']

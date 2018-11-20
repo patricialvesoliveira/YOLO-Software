@@ -16,7 +16,6 @@ class Body:
     """docstring for Body"""
 
     def __init__(self):
-        self.applicationMode = ApplicationMode.AUTONOMOUS
 
         # setting the GPIO mode that the board should
         GPIO.setmode(GPIO.BCM)
@@ -51,11 +50,11 @@ class Body:
         self.updateOpticalSensorData()
 
     def updateOpticalSensorData(self):
-        if self.touchSensor.touchState is TouchState.TOUCHING and self.opticalSensor.opticalState is OpticalState.NOT_RECEIVING:
-            self.opticalSensor.changeState(OpticalState.RECEIVING);
+        if self.touchSensor.getState() == TouchState.TOUCHING and self.opticalSensor.getState() == OpticalState.NOT_RECEIVING:
+            self.opticalSensor.setState(OpticalState.RECEIVING);
 
-        if self.touchSensor.touchState is TouchState.NOT_TOUCHING and self.opticalSensor.opticalState is OpticalState.RECEIVING:
-            self.opticalSensor.changeState(OpticalState.NOT_RECEIVING);
+        if self.touchSensor.getState() == TouchState.NOT_TOUCHING and self.opticalSensor.getState() == OpticalState.RECEIVING:
+            self.opticalSensor.setState(OpticalState.NOT_RECEIVING);
         
         self.opticalSensor.update()
 
@@ -63,11 +62,11 @@ class Body:
         self.touchSensor.update()
 
 
-    def getTouchSensorState(self):
-        return self.touchSensor.getState()
+    def getTouchSensor(self):
+        return self.touchSensor
 
-    def getOpticalSensorState(self):
-        return self.opticalSensor.getState()
+    def getOpticalSensor(self):
+        return self.opticalSensor
 
 
     def getColor(self):
@@ -79,7 +78,7 @@ class Body:
     # SETTERS
     def setColor(self, newColor):
         self.color = newColor
-        print "setColor:" + str(newColor)
+        # print "setColor:" + str(newColor)
         # traceback.print_stack()
         self.LEDActuator.setColor(newColor.red, newColor.green, newColor.blue)  #Note: the LEDs will clip any value to integer
 
