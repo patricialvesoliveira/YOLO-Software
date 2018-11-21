@@ -103,7 +103,7 @@ class OpticalSensor:
                 self.insertNewPathPosition(self.opticalShape, newPosition)
 
                  #Note: to avoids really small touches on the robot to be read as shapes
-                if len(self.opticalShape) > 30:
+                if len(self.opticalShape) > 150:
                     self.state = OpticalState.FINISHED
                     # print self.opticalShape
 

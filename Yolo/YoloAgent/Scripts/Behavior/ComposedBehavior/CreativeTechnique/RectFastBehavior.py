@@ -1,7 +1,8 @@
 from Scripts.Behavior.ComposedBehavior.ComposedBehavior import ComposedBehavior
 from Scripts.Behavior.SimpleBehavior.MoveBehavior.MoveBehaviorRect import MoveBehaviorRect
+from Scripts.Behavior.SimpleBehavior.BlinkBehavior.BlinkBehaviorEaseInOut import BlinkBehaviorEaseInOut
 from Libs.Constants import *
-import time
+from colour import Color
 
 
 class RectFastBehavior(ComposedBehavior):
@@ -12,3 +13,4 @@ class RectFastBehavior(ComposedBehavior):
         # generic variables
         self.behaviorType = ComposedBehaviorType.RECT_FAST
         self.behaviorList.append(MoveBehaviorRect(bodyRef, 95, MovementDirection.FORWARD, 2, 1.5, True))
+        self.behaviorList.append(BlinkBehaviorEaseInOut(bodyRef, [bodyRef.getStimulusColor()], ColorBrightness.HIGH, 1, 3.0, Color(rgb=(0.0, 0.0, 0.0)), False))

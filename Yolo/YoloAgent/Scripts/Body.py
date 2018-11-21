@@ -15,10 +15,12 @@ import traceback
 class Body:
     """docstring for Body"""
 
-    def __init__(self):
+    def __init__(self, stimulusColor):
 
         # setting the GPIO mode that the board should
         GPIO.setmode(GPIO.BCM)
+
+        self.stimulusColor = stimulusColor;
 
         # Sensor devices and corresponding demo or auxiliary values
         self.touchSensor = TouchSensor()
@@ -69,6 +71,8 @@ class Body:
         return self.opticalSensor
 
 
+    def getStimulusColor(self):
+        return self.stimulusColor
     def getColor(self):
         return self.color
 

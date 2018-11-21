@@ -59,7 +59,7 @@ class Mind:
         self.body = body
 
         self.currBehavior = ComposedBehavior(body)
-        # self.currBehavior = MoveBehaviorLoops(self.body, 75, MovementDirection.ALTERNATING, 5, 1.5, True)
+        # self.currBehavior = CurvedFastBehavior(self.body)
 
         tCurr = time.time()
 
@@ -68,17 +68,15 @@ class Mind:
         self.tLastTouchF = tCurr
         self.wasTouched = False
 
-
-        self.attentionCallTriggered = False
         self.personalityOrCreativeTriggered = False
 
         self.currStoryArcMoment = StoryArc.NONE
-        self.currRecognizedShape = ShapeType.NONE
-
+        self.currRecognizedShape = "NONE"
         
-        self.isFirstTimeTouch = True
+        self.isInteractionStarted = False
+        self.isInteractionFinished = False
 
-
+        self.tLastAttentionCall = tCurr
         return
 
     def update(self):
@@ -88,6 +86,7 @@ class Mind:
 
         tCurr = time.time()
         tSinceStart = tCurr - self.startTime
+        print tSinceStart
         # update curr story arc moment
         if (tSinceStart > 0 and tSinceStart <= 5*60):
             self.currStoryArcMoment = StoryArc.RISING_ACTION
@@ -95,44 +94,51 @@ class Mind:
             self.currStoryArcMoment = StoryArc.CLIMAX
         elif (tSinceStart > 8*60 and tSinceStart <= 13*60):
             self.currStoryArcMoment = StoryArc.FALLING_ACTION
-
+        elif tSinceStart > 13*60 and not self.isInteractionFinished:
+            self.currBehavior.finishBehavior() # finish any pending behavior
+            self.currBehavior = HelloBehavior(self.body)
+            self.isInteractionFinished = True
 
         tLastTouchDelta = self.tLastTouchF - self.tLastTouchI
         
-
         # pupeteer behavior stuff
         if self.hasTouchedStarted():
             print "hasTouchStarted"
+            
             self.attentionCallTriggered = False
             self.personalityOrCreativeTriggered = False
-            
+
             self.currBehavior.finishBehavior() # finish any pending behavior
             self.currBehavior = PuppeteerBehavior(self.body)
 
         elif self.hasTouchedEnded():
-
+            self.tLastAttentionCall = self.tLastTouchF;
             print "hasTouchEnded"
             self.currBehavior.finishBehavior()
 
             #hello is performed on the first touch
-            if  self.isFirstTimeTouch:
+            if  not self.isInteractionStarted:
                 self.currBehavior = HelloBehavior(self.body)
-                self.isFirstTimeTouch = False
+                self.isInteractionStarted = True
 
         #do nothing until first touch
-        if self.isFirstTimeTouch:
+        if not self.isInteractionStarted or self.isInteractionFinished:
+            # constantly reinit startTime until robot starts
+            self.startTime = tCurr
             return
 
 
         # autonomous stuff
         if not self.beingTouched():
-            if not self.attentionCallTriggered and (tCurr - self.tLastTouchF) > 60:
-                self.attentionCallTriggered = True
+            # print "attCall: "+str(tCurr - self.tLastAttentionCall)
+            if (tCurr - self.tLastAttentionCall) > 30:
+                self.tLastAttentionCall = time.time() #simulate touch to reset timer
                 self.currBehavior = self.generateAttentionCallBehavior(self.personalityType)
+
             else:
                 if not self.personalityOrCreativeTriggered and tLastTouchDelta > 1:
                     self.personalityOrCreativeTriggered = True
-                    if (numpy.random.random_integers(0,1) > 1):
+                    if (numpy.random.random_integers(0,1) == 1):
                         # personality
                         self.currBehavior = self.generatePersonalityBehavior(self.personalityType, numpy.random.random_integers(1,3))
                     else:
@@ -196,12 +202,14 @@ class Mind:
 
 
     def getCreativityBehaviorFromShapeAndSpeed(self,shapeTypeName,shapeSpeed):
+        print shapeTypeName
+        print shapeSpeed
         switcher = {
             ShapeType.NONE.name: 
             {
-                # at first when there is no shape yet...
-                ShapeSpeed.SLOW : StraightSlowBehavior(self.body),
-                ShapeSpeed.FAST : StraightSlowBehavior(self.body)
+                # at first when there is no shape yet, generate empty behavior...
+                ShapeSpeed.SLOW : ComposedBehavior(self.body),
+                ShapeSpeed.FAST : ComposedBehavior(self.body)
             }
             ,
             ShapeType.SPIKES.name: 
