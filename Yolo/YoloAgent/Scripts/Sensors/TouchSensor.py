@@ -13,9 +13,7 @@ class TouchSensor:
         # set up pins
         if GPIO.getmode() is not GPIO.BCM:
             raise Exception("Error: The GPIO mode is different that the one the touch sensor uses (BCM numbering)")
-
         GPIO.setup(PIN_TOUCH, GPIO.IN)
-
         print "OK! -- Touch sensor set up!"
         return
 

@@ -23,8 +23,6 @@ class BlinkBehaviorEaseInOut(BlinkBehavior):
     def behaviorActions(self):
         BlinkBehavior.behaviorActions(self)
 
-        # print "isOver1: "+ str(self.easeInBehavior.isOver)
-        # print "isOver2: "+ str(self.easeOutBehavior.isOver)
         if not self.easeInBehavior.isOver:
             self.easeInBehavior.behaviorActions()
 
@@ -34,8 +32,6 @@ class BlinkBehaviorEaseInOut(BlinkBehavior):
                 self.behaviorOutSet = True
             self.easeOutBehavior.behaviorActions()
             
-        # print self.currentBehaviorRepetition
-        # print self.maxBehaviorRepetitions
         if self.checkForBehaviorEnd():
             self.resetBehaviors()
                      

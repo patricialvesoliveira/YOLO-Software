@@ -57,7 +57,6 @@ class MoveBehavior(SimpleBehavior):
         if not self.alreadyStartedSegment:
             self.alreadyStartedSegment = True
             self.bodyRef.setWheelMovement(nextWaypoint, self.movementSpeed)
-            # print "Movement " + str(self.movementType) + " going to " + str(self.currentMovementWaypoint + 1) + " of " + str(pathLength) + " waypoints"
         
         if self.reachedNewWaypoint(pathLength):
             self.currentWaypointIndex += 1

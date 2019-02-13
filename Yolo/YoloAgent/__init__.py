@@ -47,20 +47,20 @@ def main(personality, version):
         print "Error: " + str(e)
         return
 
-    if version == "Dev":
-        applicationGUI = GUI(agent)
-        applicationGUI.startMainApplicationLoop()
+    # if version == "Dev":
+    #     applicationGUI = GUI(agent)
+    #     applicationGUI.startMainApplicationLoop()
 
-    elif version == "Release":
-        try:
-            while True:
-                agent.update()
-        except KeyboardInterrupt:
-            print "Application closed due to user input!"
-        except Exception as e:
-            print "Error: " + str(e)
-        finally:
-            agent = None
+    # elif version == "Release":
+    try:
+        while True:
+            agent.update()
+    except KeyboardInterrupt:
+        print "Application closed due to user input!"
+    except Exception as e:
+        print "Error: " + str(e)
+    finally:
+        agent = None
 
     # After getting out of the main loop cleanup agent
     agent = None
@@ -71,6 +71,6 @@ def main(personality, version):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Agent startup')
     parser.add_argument('--personality', metavar='string', default="Affective", help='The personality the agent will have (Punk, Affective, Aloof). Default is Affective (for testing).')
-    parser.add_argument('--version', metavar='string', default="Dev", help='The mode of execution (Dev or Release). Dev requires a display either directly connected or using  X11 through SSH. Default is Dev)')
+    # parser.add_argument('--version', metavar='string', default="Dev", help='The mode of execution (Dev or Release). Dev requires a display either directly connected or using  X11 through SSH. Default is Dev)')
     args = parser.parse_args()
     main(personality=args.personality, version=args.version)

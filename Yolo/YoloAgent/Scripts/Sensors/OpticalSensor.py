@@ -51,19 +51,10 @@ class OpticalSensor:
                     resultList.append(("xCoordinate", event.value))
                 elif event.code == 1:
                     resultList.append(("yCoordinate", event.value))
-                #Note: to be able to test the pattern recognition using only mouse events as triggers - just uncomment
-                #elif event.code == 272:
-                #    if event.value == 1:
-                #        resultList.append(("leftButton", 1))
-                #    else:
-                #        resultList.append(("leftButton", 0))
-
             yield resultList
         except IOError:
-            # print('Looks like the device was idle since the last read')
+            # looks like the device was idle since the last read
             yield
-
-
 
     def update(self):
 
@@ -79,7 +70,6 @@ class OpticalSensor:
                 a = 0;
 
             elif self.state is OpticalState.FINISHED:
-                # self.currentRecorgnizedShape = list(self.opticalShape)
                 self.state = OpticalState.NOT_RECEIVING
 
             else:
@@ -102,10 +92,9 @@ class OpticalSensor:
                 newPosition = (self.opticalSensorPosition[0], self.opticalSensorPosition[1])
                 self.insertNewPathPosition(self.opticalShape, newPosition)
 
-                 #Note: to avoids really small touches on the robot to be read as shapes
+                #Note: to avoids really small touches on the robot to be read as shapes
                 if len(self.opticalShape) > 150:
                     self.state = OpticalState.FINISHED
-                    # print self.opticalShape
 
 
             elif self.state is OpticalState.NOT_RECEIVING:

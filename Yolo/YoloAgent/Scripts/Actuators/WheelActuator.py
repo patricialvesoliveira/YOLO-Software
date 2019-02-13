@@ -89,7 +89,6 @@ class WheelActuator:
             self.motor3.ChangeDutyCycle(CNEW)
             self.C1 = C1new
         if (A2new != self.A2):
-            # change pin output to high or low; 1 is low, -1 is high
             if (A2new < 0):
                 GPIO.output(26, 1)
             else:

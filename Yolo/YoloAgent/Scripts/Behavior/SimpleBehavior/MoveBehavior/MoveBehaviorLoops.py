@@ -21,22 +21,18 @@ class MoveBehaviorLoops(MoveBehavior):
         
         # create array of circle values
         N = 24  # number of samples; 16 for quicker behavior
-        # period = N*0.1 seconds
         ix = numpy.arange(N)
         rad = 20  # radius, arbitrary
         xSignal = numpy.cos(2 * numpy.pi / N * ix) * rad  # x values for circle
         ySignal = numpy.sin(2 * numpy.pi / N * ix) * rad  # y values for circle
         x_dist = 4  # constant x value for forward motion
-        # alternatively: create signal array with 1024 elements and sample from it according to inputs period and speed
 
         past_signal_x = 20
         past_signal_y = 0
         totalTime = float(self.animationIntervalTime) / N
-        # print "total time " + str(totalTime) + " of a repetition time of " + str(self.animationIntervalTime) + " divided by " + str(len(signal))
 
         # Note: to do a path backwards we invert the points and their order
         if self.currentMovementDirection == MovementDirection.REVERSE:
-            # signal = self.reversePath(signal)
             x_dist = -x_dist
 
         self.followPath(N, [xSignal[self.currentWaypointIndex] - past_signal_x + x_dist, ySignal[self.currentWaypointIndex] - past_signal_y])

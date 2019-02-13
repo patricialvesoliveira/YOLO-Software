@@ -20,16 +20,13 @@ class MoveBehaviorCircle(MoveBehavior):
 
         # create array of circle values
         N = 24  # number of samples; 16 for quicker behavior
-        # period = N*0.1 seconds
         ix = numpy.arange(N)
         rad = 20  # radius, arbitrary
         xSignal = numpy.cos(2 * numpy.pi / N * ix) * rad  # x values for circle
         ySignal = numpy.sin(2 * numpy.pi / N * ix) * rad  # y values for circle
-        # alternatively: create signal array with 1024 elements and sample from it according to inputs period and speed
 
         past_signal_x = 0
         past_signal_y = 0
-        # totalTime = float(self.animationIntervalTime) / N
 
         # Note: to do a path backwards we invert the points and their order
         if self.currentMovementDirection == MovementDirection.REVERSE:

@@ -55,11 +55,8 @@ class BlinkBehavior(SimpleBehavior):
         if self.keepBehaviorSetting:
             self.bodyRef.setColor(self.activeBlinkColor)
             self.bodyRef.setBrightness(self.activeBlinkBrightness)
-            # print("setting the animation end color")
         else:
-            # print "color: " + str(self.bodyColorAtStart)
             self.bodyRef.setColor(self.defaultColor)
-            # self.bodyRef.setBrightness(self.bodyBrightnessAtStart)
         return
 
     
@@ -82,10 +79,8 @@ class BlinkBehavior(SimpleBehavior):
         gLerp = numpy.clip(gLerp, 0, 1)
         bLerp = numpy.clip(bLerp, 0, 1)
 
-        #print("Color - Lerp: " + str(lerp) + ", rgb: " + str(rLerp) + "," + str(gLerp) + "," + str(bLerp))
         lerpColor = Color(rgb=(rLerp, gLerp, bLerp))
 
-        #print("color: " + str(currentColor) + ", blink: " + str(newColor) + ", finalColor: " + str(lerpColor.rgb))
         return lerpColor
 
 

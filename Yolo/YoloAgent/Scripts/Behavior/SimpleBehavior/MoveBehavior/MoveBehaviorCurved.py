@@ -20,16 +20,13 @@ class MoveBehaviorCurved(MoveBehavior):
         
         # create array of sin wave values
         N = 48  # number of samples; 24 for quicker behavior
-        # period = (N/2)*0.1 seconds
         ix = numpy.arange(N)
         amp = 20  # amplitude, arbitrary
         signal = numpy.sin(2 * numpy.pi * ix / float(N / 2)) * amp  # y values for 2 sine waves
         x_dist = amp / (N / 8)  # constant x value
-        # alternatively: create signal array with 1024 elements and sample from it according to inputs period and speed
 
         past_signal = 0
         totalTime = float(self.animationIntervalTime) / N
-        #print "total time " + str(totalTime) + " of a repetition time of " + str(self.animationIntervalTime) + " divided by " + str(len(signal))
 
         # Note: to do a path backwards we invert the points and their order
         if self.currentMovementDirection == MovementDirection.REVERSE:

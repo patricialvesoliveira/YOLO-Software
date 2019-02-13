@@ -38,11 +38,11 @@ class SimpleBehavior:
         return
 
     def behaviorActions(self):
+        # to be overridden
         return
 
     # Body body
     def finishBehavior(self):
         print "Behavior ended well"
-
         self.isOver = True
         return

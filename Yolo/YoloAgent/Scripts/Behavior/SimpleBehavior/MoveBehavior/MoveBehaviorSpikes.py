@@ -15,7 +15,6 @@ class MoveBehaviorSpikes(MoveBehavior):
         MoveBehavior.__init__(self, bodyRef, movementSpeed, movementDirection, repetitions, duration, keepBehaviorSetting, startDelay)
         self.movementType = ShapeType.SPIKES
         self.waypoints = numpy.array([[1, 1], [1, -1]])
-        
         return
 
     def behaviorActions(self):

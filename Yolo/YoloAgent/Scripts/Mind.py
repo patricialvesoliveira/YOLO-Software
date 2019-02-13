@@ -242,14 +242,11 @@ class Mind:
                 ShapeSpeed.FAST : RectFastBehavior(self.body)
             }
         }
-        # print switcher.get(shapeTypeName ,"Invalid Shape Type.").get(shapeSpeed,"Invalid Shape Speed")
-        # print shapeSpeed
 
         return switcher.get(shapeTypeName ,"Invalid Shape Type.").get(shapeSpeed,"Invalid Shape Speed")
 
 
     def getContrastCreativityBehavior(self, shapeName, speed):
-        # inaccessibility leads to less fine code...
         consideredShapesNames = ['NONE','SPIKES','CURVED','LOOPS','STRAIGHT','RECT']
         consideredShapesNames.remove(shapeName)
         selectedShapeName = consideredShapesNames[numpy.random.random_integers(0, len(consideredShapesNames)-1)]
@@ -290,14 +287,8 @@ class Mind:
         return result
 
     def predictShape(self, pointDataArray):
-        #print "shape recognized (length " + str(len(pointDataArray)) + "): " + str(pointDataArray)
-
-        #print "Time feature extract start: " + time.strftime("%H:%M:%S", time.gmtime())
         features = extract_features(pointDataArray)
         prediction = predict(features)[0]
-        #print "Time predict end: " + time.strftime("%H:%M:%S", time.gmtime())
-
         print StoryArc(self.currStoryArcMoment).name + ' arc --- Recognized a shape: ' + SHAPE_ARRAY[int(prediction)]
         logging.info(StoryArc(self.currStoryArcMoment).name + ' arc --- Recognized a shape: ' + SHAPE_ARRAY[int(prediction)])
-
         return SHAPE_ARRAY[int(prediction)]

@@ -9,15 +9,16 @@ from Scripts.Utilities import Utilities
 from neopixel import *
 from Libs.Constants import *
 
-# # LED strip configuration:
-# LED_COUNT = 15  # Number of LED pixels.
-# LED_PIN = 18  # GPIO pin connected to the pixels (must support PWM!).
-# LED_FREQ_HZ = 800000  # LED signal frequency in hertz (usually 800khz)
-# LED_DMA = 10  # DMA channel to use for generating signal (Between 1 and 14)
-# LED_INVERT = False  # True to invert the signal (when using NPN transistor level shift)
+# # LED strip configuration original:
+# LED_COUNT      = 24      # Number of LED pixels.
+# LED_PIN        = 12      # GPIO pin connected to the pixels (18 uses PWM!).
+# #LED_PIN        = 10      # GPIO pin connected to the pixels (10 uses SPI /dev/spidev0.0).
+# LED_FREQ_HZ    = 800000  # LED signal frequency in hertz (usually 800khz)
+# LED_DMA        = 5       # DMA channel to use for generating signal (try 5)
 # LED_BRIGHTNESS = 255     # Set to 0 for darkest and 255 for brightest
-# LED_CHANNEL = 0  # PWM 0 or 1
-# LED_TYPE = ws.WS2811_STRIP_GRB  # This type is for WS2811 GRB, must be matched with strip but it works. Check the Neopixel library for codes
+# LED_INVERT     = False   # True to invert the signal (when using NPN transistor level shift)
+# LED_CHANNEL    = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
+# LED_TYPE      = ws.SK6812_STRIP_RGBW   # Strip type and colour ordering
 
 
 # LED strip configuration:
@@ -29,7 +30,8 @@ LED_DMA        = 10       # DMA channel to use for generating signal (try 5)
 LED_BRIGHTNESS = 255     # Set to 0 for darkest and 255 for brightest
 LED_INVERT     = False   # True to invert the signal (when using NPN transistor level shift)
 LED_CHANNEL    = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
-LED_TYPE      = ws.WS2811_STRIP_GRB   # Strip type and colour ordering
+LED_TYPE       = ws.SK6812_STRIP_RGBW   # Strip type and colour ordering
+# LED_TYPE      = ws.WS2811_STRIP_GRB   # Strip type and colour ordering
 
 
 # NOTE: Two LED devices must have different DMA and PWM channels to work!!!!
@@ -40,14 +42,7 @@ class LEDActuator:
         # Create NeoPixel object with appropriate configuration.
         # Note: the jewel has a configuration of GRB
         self.leds = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL, LED_TYPE)
-        # Initialize the library (must be called once before other functions).
         self.leds.begin()
-
-        # init leds with a white color
-        # for i in range(0, self.leds.numPixels(), 1):
-        #     self.setColor(1,1,1);
-
-        # self.leds.show()
 
         print "OK! -- Jewel LEDs set up!"
 
@@ -60,7 +55,7 @@ class LEDActuator:
         print "Turning off the Jewel's LEDs"
 
     # Note: Don't change the setColor functions just the RGB specs for each strip
-    def setColor(self, red, green, blue):
+    def setColor(self, green, red, blue):
 
         #Note: I separate the color into its channel to avoid confusing between the Color module I was using and the one defined by NeoPixel
         red = Utilities.changeScale(red, 0, 1, 0, 255)
@@ -73,8 +68,6 @@ class LEDActuator:
         blue = numpy.clip(blue, 0, 255)
 
         color = Color(int(red), int(green), int(blue));
-
-        # self.printColor(color)
 
         # Note: the jewel has a configuration of GRB
         for i in range(0, self.leds.numPixels(), 1):

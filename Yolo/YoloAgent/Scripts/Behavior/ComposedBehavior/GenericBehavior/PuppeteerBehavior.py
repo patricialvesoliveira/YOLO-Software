@@ -14,4 +14,3 @@ class PuppeteerBehavior(ComposedBehavior):
         # generic variables
         self.behaviorType = ComposedBehaviorType.PUPPETEER
         self.behaviorList.append(BlinkBehaviorInstant(bodyRef, [Color(rgb=(1.0, 1.0, 1.0))], ColorBrightness.HIGH, 0, 1.0, bodyRef.getColor(), False))
-        # self.behaviorList.append(MoveBehaviorSpikes(bodyRef, 70, MovementDirection.ALTERNATING, 3, 10, 2, True))
