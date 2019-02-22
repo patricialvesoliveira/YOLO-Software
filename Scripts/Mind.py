@@ -1,4 +1,3 @@
-import sys
 import time
 import numpy
 from colour import Color
@@ -40,7 +39,6 @@ from Scripts.Behavior.ComposedBehavior.PersonalityBehavior.PunkPersonality.PunkI
 
 from Scripts.Behavior.ComposedBehavior.PersonalityBehavior.HelloBehavior import HelloBehavior
 from Scripts.Behavior.ComposedBehavior.ComposedBehavior import ComposedBehavior
-
 
 class Mind:
     def __init__(self, personalityType, body):

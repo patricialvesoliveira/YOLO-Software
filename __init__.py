@@ -1,24 +1,15 @@
-import time
-from ttk import Progressbar
-
-from Libs.GUI import *
-from Libs.Constants import *
-from Scripts.Agent import Agent
-from Tkinter import *
-import tkMessageBox
 import logging
 import os
 import platform
-import traceback
 import argparse
+import time
 
-applicationGUI = None
+from Libs.Constants import *
+from Scripts.Agent import Agent
+
 agent = None
 
-
-
 def main(personality):
-
     if platform.system() == "Windows":
         directory = os.path.dirname(os.path.abspath(__file__)) + '\Logging\\'
     else:
@@ -59,8 +50,6 @@ def main(personality):
 
     # After getting out of the main loop cleanup agent
     agent = None
-    return
-
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Agent startup')
