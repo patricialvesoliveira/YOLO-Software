@@ -75,7 +75,7 @@ class MoveBehavior(SimpleBehavior):
 
     def reachedNewWaypoint(self, pathLength):
         timePerWaypoint = float(self.animationIntervalTime) / (pathLength)
-        return time.time() - self.startTime >= timePerWaypoint * (self.currentWaypointIndex + 1) and self.currentWaypointIndex < pathLength
+        return time.time() - self.startTime >= timePerWaypoint * (self.currentWaypointIndex + 1) and self.currentWaypointIndex < (pathLength - 1)
   
     def checkForBehaviorEnd(self, pathLength):
-        return self.currentWaypointIndex > pathLength-1
+        return self.currentWaypointIndex > (pathLength - 1)

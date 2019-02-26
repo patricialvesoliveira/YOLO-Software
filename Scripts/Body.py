@@ -11,7 +11,6 @@ class Body:
     def __init__(self, stimulusColor):
         # setting the GPIO mode that the board should
         GPIO.setmode(GPIO.BCM)
-
         self.stimulusColor = stimulusColor;
         self.touchSensor = TouchSensor()
         self.opticalSensor = OpticalSensor()
@@ -24,9 +23,9 @@ class Body:
 
     def __del__(self):
         self.touchSensor = None
-        self.wheelActuator = None
         self.opticalSensor = None
-        self.LED = None
+        self.LEDActuator = None
+        self.wheelActuator = None
         self.cleanupGPIOPins()
         print "Body cleanup successful!"
 
@@ -54,12 +53,16 @@ class Body:
 
     def getStimulusColor(self):
         return self.stimulusColor
+
     def getColor(self):
         return self.color
 
     def getBrightness(self):
         return self.colorBrightness
-   
+    
+    def setStimulusColor(self, stimulusColor):
+        self.stimulusColor = stimulusColor
+
     def setColor(self, newColor):
         self.color = newColor
         self.LEDActuator.setColor(newColor.red, newColor.green, newColor.blue)  #Note: the LEDs will clip any value to integer

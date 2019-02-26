@@ -57,6 +57,10 @@ class StoryArc(enum.Enum):
     CLIMAX = 2
     FALLING_ACTION = 3
 
+class StoryArcBehaviorType(enum.Enum):
+    NONE = 0
+    MIRROR = 1
+    CONTRAST = 2
 
 class BehaviorType(enum.Enum):
     NONE = 0

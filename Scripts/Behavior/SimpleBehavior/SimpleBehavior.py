@@ -22,6 +22,12 @@ class SimpleBehavior:
         self.currentBehaviorRepetition = 1
         self.bodyRef = bodyRef
         self.startTime = time.time()
+
+    def resetBehavior(self):
+        self.isOver = False
+        self.hasStarted = False
+        self.currentBehaviorRepetition = 1
+        self.startTime = time.time()
         
     def applyBehavior(self):
         if(not self.isOver):
