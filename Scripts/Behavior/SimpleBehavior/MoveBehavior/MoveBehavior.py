@@ -26,7 +26,15 @@ class MoveBehavior(SimpleBehavior):
             
         self.movementSpeed = numpy.clip(movementSpeed, 0, 90)
         self.startTime = time.time()
+        self.currentBehaviorRepetition = 0
 
+
+    def resetBehavior(self):
+        SimpleBehavior.resetBehavior(self)
+        self.startTime = time.time()
+        self.alreadyStartedSegment = False
+        self.currentWaypointIndex = 0
+        self.currentBehaviorRepetition = 0
 
     def behaviorActions(self):
         return
@@ -75,7 +83,7 @@ class MoveBehavior(SimpleBehavior):
 
     def reachedNewWaypoint(self, pathLength):
         timePerWaypoint = float(self.animationIntervalTime) / (pathLength)
-        return time.time() - self.startTime >= timePerWaypoint * (self.currentWaypointIndex + 1) and self.currentWaypointIndex < (pathLength - 1)
+        return time.time() - self.startTime >= timePerWaypoint * (self.currentWaypointIndex + 1) and self.currentWaypointIndex < (pathLength)
   
     def checkForBehaviorEnd(self, pathLength):
         return self.currentWaypointIndex > (pathLength - 1)

@@ -2,7 +2,6 @@ import time
 import numpy
 from colour import Color
 from Libs.Constants import *
-from Libs.MachineLearning.lib.constants import SHAPE_ARRAY
 from Libs.MachineLearning.lib.util import extract_features, predict
 
 from Scripts.BehaviorImports import *
@@ -30,6 +29,8 @@ class Mind:
         self.isInteractionFinished = False
 
         self.tLastAttentionCall = tCurr
+                        
+
 
     def update(self):
         self.body.update()
@@ -81,19 +82,25 @@ class Mind:
 
         # autonomous stuff
         if not self.beingTouched():
-            # print "attCall: "+str(tCurr - self.tLastAttentionCall)
             if (tCurr - self.tLastAttentionCall) > 30:
                 self.tLastAttentionCall = time.time() #simulate touch to reset timer
                 self.currBehavior = self.generateAttentionCallBehavior()
             else:
                 if not self.personalityOrCreativeTriggered and tLastTouchDelta > 1:
                     self.personalityOrCreativeTriggered = True
-                    if (numpy.random.random_integers(0,1) == 1):
-                        # personality
-                        self.currBehavior = self.generatePersonalityBehavior(numpy.random.random_integers(0, len(self.personalityProfile.personalityBehaviorList) - 1))
+                    
+                    possibleBehaviors = []
+                    personalityBehavior = self.generatePersonalityBehavior()
+                    if(personalityBehavior):
+                        possibleBehaviors.append(personalityBehavior)
+                    creativityBehavior = self.generateCreativityBehavior(self.currStoryArcMoment, self.currRecognizedShape)
+                    if(creativityBehavior):
+                        possibleBehaviors.append(creativityBehavior)
+
+                    if(len(possibleBehaviors)==0):
+                        self.currBehavior = ComposedBehavior(self.body)
                     else:
-                        # creativity
-                        self.currBehavior = self.generateCreativityBehavior(self.currStoryArcMoment, self.currRecognizedShape)
+                        self.currBehavior = numpy.random.choice(possibleBehaviors)
 
         # idle acts as fallback
         if self.currBehavior.isOver:
@@ -102,7 +109,6 @@ class Mind:
         # check for recognized shapes
         if self.shapeWasRecognized():
             self.currRecognizedShape = self.predictShape(self.body.getOpticalSensor().getCurrentRecognizedShape())
-            print self.currRecognizedShape
 
     def generateAttentionCallBehavior(self):
         self.personalityProfile.attentionCallBehavior.resetBehavior()
@@ -112,68 +118,41 @@ class Mind:
         self.personalityProfile.idleBehavior.resetBehavior()
         return  self.personalityProfile.idleBehavior
 
-    def generatePersonalityBehavior(self, behaviorNumber):
-        self.personalityProfile.personalityBehaviorList[behaviorNumber].resetBehavior()
-        return self.personalityProfile.personalityBehaviorList[behaviorNumber]
+    def generatePersonalityBehavior(self):
+        personalityBehaviorList = self.personalityProfile.personalityBehaviorList
+        if(not personalityBehaviorList):
+            return False
+        selectedBehavior = numpy.random.choice(personalityBehaviorList)
+        selectedBehavior.resetBehavior()
+        return selectedBehavior
 
-    def getCreativityBehaviorFromShapeAndSpeed(self, shapeTypeName, shapeSpeed):
-        switcher = {
-            ShapeType.NONE.name: 
-            {
-                # at first when there is no shape yet, generate empty behavior...
-                ShapeSpeed.SLOW : ComposedBehavior(self.body),
-                ShapeSpeed.FAST : ComposedBehavior(self.body)
-            }
-            ,
-            ShapeType.SPIKES.name: 
-            {
-                ShapeSpeed.SLOW : SpikesSlowBehavior(self.body),
-                ShapeSpeed.FAST : SpikesFastBehavior(self.body)
-            }
-            ,
-            ShapeType.CURVED.name: 
-            {
-                ShapeSpeed.SLOW : CurvedSlowBehavior(self.body),
-                ShapeSpeed.FAST : CurvedFastBehavior(self.body)
-            }
-            ,
-            ShapeType.LOOPS.name: 
-            {
-                ShapeSpeed.SLOW : LoopsSlowBehavior(self.body),
-                ShapeSpeed.FAST : LoopsFastBehavior(self.body)
-            }
-            ,
-            ShapeType.STRAIGHT.name: 
-            {
-                ShapeSpeed.SLOW : StraightSlowBehavior(self.body),
-                ShapeSpeed.FAST : StraightFastBehavior(self.body)
-            }
-            ,
-            ShapeType.RECT.name: 
-            {
-                ShapeSpeed.SLOW : RectSlowBehavior(self.body),
-                ShapeSpeed.FAST : RectFastBehavior(self.body)
-            }
-        }
-        return switcher.get(shapeTypeName ,"Invalid Shape Type.").get(shapeSpeed,"Invalid Shape Speed")
+    def generateCreativityBehavior(self, currStoryArcMoment, recognizedShape):        
+        creativityBehaviorDict = {}
+        creativityBehaviorType = None
+        if(currStoryArcMoment == StoryArc.NONE):
+            return False
+        elif(currStoryArcMoment == StoryArc.RISING_ACTION):
+            creativityBehaviorDict = self.creativityProfile.risingActionBehaviorDict   
+            creativityBehaviorType = self.creativityProfile.risingActionBehaviorType
+        elif(currStoryArcMoment == StoryArc.CLIMAX):
+            creativityBehaviorDict = self.creativityProfile.climaxBehaviorDict   
+            creativityBehaviorType = self.creativityProfile.climaxBehaviorType
+        elif(currStoryArcMoment == StoryArc.FALLING_ACTION):
+            creativityBehaviorDict = self.creativityProfile.fallingActionBehaviorDict   
+            creativityBehaviorType = self.creativityProfile.fallingActionBehaviorType
 
-    def getContrastCreativityBehavior(self, shapeName, speed):
-        consideredShapesNames = ['NONE','SPIKES','CURVED','LOOPS','STRAIGHT','RECT']
-        consideredShapesNames.remove(shapeName)
-        selectedShapeName = consideredShapesNames[numpy.random.random_integers(0, len(consideredShapesNames)-1)]
-        return self.getCreativityBehaviorFromShapeAndSpeed(selectedShapeName, speed) #contrast
-            
-    def getMirrorCreativityBehavior(self, shapeName, speed):
-        return self.getCreativityBehaviorFromShapeAndSpeed(shapeName, speed) #mirror
+        currShapedBehavior = creativityBehaviorDict.get(recognizedShape, None)
+        print "Shape Dict: "+ str(creativityBehaviorDict)
+        print "Shape Rec: "+ str(recognizedShape)
+        if(currShapedBehavior == None):
+            return False
 
-
-    def generateCreativityBehavior(self, currStoryArcMoment, recognizedShape):
-        switcher = {
-            StoryArc.RISING_ACTION : self.getMirrorCreativityBehavior(recognizedShape, ShapeSpeed.SLOW), #mirror
-            StoryArc.CLIMAX : self.getContrastCreativityBehavior(recognizedShape, ShapeSpeed.FAST),
-            StoryArc.FALLING_ACTION : self.getMirrorCreativityBehavior(recognizedShape, ShapeSpeed.SLOW) #mirror
-        }
-        return switcher.get(currStoryArcMoment, "Invalid current story arc moment")
+        if(creativityBehaviorType==StoryArcBehaviorType.MIRROR):
+            return currShapedBehavior
+        elif(creativityBehaviorType==StoryArcBehaviorType.CONTRAST):
+            behaviorList = creativityBehaviorDict.values().copy()
+            behaviorList.remove(currShapedBehavior)
+            return numpy.random.choice(behaviorList)
 
     def setBehaviorProfiles(self, personalityProfile, creativityProfile):
         self.personalityProfile = personalityProfile
@@ -202,7 +181,5 @@ class Mind:
     def predictShape(self, pointDataArray):
         features = extract_features(pointDataArray)
         prediction = predict(features)[0]
-        logText = "Recognized the shape: " + SHAPE_ARRAY[int(prediction)] + "at the story arc: " + StoryArc(self.currStoryArcMoment).name
-        print logText
-        logging.info(logText)
-        return SHAPE_ARRAY[int(prediction)]
+        logText = "Recognized the shape: " + str(prediction) + "at the story arc: " + StoryArc(self.currStoryArcMoment).name
+        return ShapeType(int(prediction)+1)

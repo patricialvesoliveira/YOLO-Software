@@ -8,10 +8,9 @@ from Scripts.Actuators.LEDActuator import LEDActuator
 from Scripts.Actuators.WheelActuator import WheelActuator
 
 class Body:
-    def __init__(self, stimulusColor):
+    def __init__(self):
         # setting the GPIO mode that the board should
         GPIO.setmode(GPIO.BCM)
-        self.stimulusColor = stimulusColor;
         self.touchSensor = TouchSensor()
         self.opticalSensor = OpticalSensor()
         self.LEDActuator = LEDActuator()
@@ -51,17 +50,11 @@ class Body:
     def getOpticalSensor(self):
         return self.opticalSensor
 
-    def getStimulusColor(self):
-        return self.stimulusColor
-
     def getColor(self):
         return self.color
 
     def getBrightness(self):
         return self.colorBrightness
-    
-    def setStimulusColor(self, stimulusColor):
-        self.stimulusColor = stimulusColor
 
     def setColor(self, newColor):
         self.color = newColor

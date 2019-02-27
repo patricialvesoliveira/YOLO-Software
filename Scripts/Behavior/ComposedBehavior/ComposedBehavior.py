@@ -7,7 +7,6 @@ class ComposedBehavior:
         self.behaviorDuration = 0.0
         self.startTime = 0.0
         self.isOver = False
-        self.behaviorHalted = False
         self.behaviorType = ComposedBehaviorType.NONE
 
     def applyBehavior(self):
@@ -19,12 +18,11 @@ class ComposedBehavior:
                 behavior.applyBehavior()
         if areAllOver:
             self.finishBehavior()
-        if self.isOver : print("Composed behavior is over")
+        # if self.isOver : print("Composed behavior is over")
 
     def resetBehavior(self):
         self.startTime = 0.0
         self.isOver = False
-        self.behaviorHalted = False
         for behavior in self.behaviorList:
             behavior.resetBehavior()
 

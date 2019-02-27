@@ -20,13 +20,13 @@ class BlinkBehavior(SimpleBehavior):
         self.defaultColor = defaultColor
         self.duration = duration
 
+
     def behaviorActions(self):
         # when the animation is over we pause before changing color
         if self.checkForBehaviorEnd():
             if self.maxBehaviorRepetitions!=0:
                 if self.currentBehaviorRepetition == self.maxBehaviorRepetitions:
                     self.finishBehavior()
-                    print("Behavior ended")
                     return
 
                 if self.currentBehaviorRepetition > self.maxBehaviorRepetitions:
