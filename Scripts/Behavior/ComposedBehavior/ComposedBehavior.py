@@ -7,7 +7,6 @@ class ComposedBehavior:
         self.behaviorDuration = 0.0
         self.startTime = 0.0
         self.isOver = False
-        self.behaviorType = ComposedBehaviorType.NONE
 
     def applyBehavior(self):
         behaviorsToApply = self.behaviorList

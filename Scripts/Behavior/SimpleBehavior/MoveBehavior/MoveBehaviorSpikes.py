@@ -10,9 +10,8 @@ from Scripts.Behavior.SimpleBehavior.MoveBehavior.MoveBehavior import MoveBehavi
 
 
 class MoveBehaviorSpikes(MoveBehavior):
-    def __init__(self, bodyRef, movementSpeed, movementDirection, repetitions, duration, keepBehaviorSetting=False, startDelay = 0.0):
-        MoveBehavior.__init__(self, bodyRef, movementSpeed, movementDirection, repetitions, duration, keepBehaviorSetting, startDelay)
-        self.movementType = ShapeType.SPIKES
+    def __init__(self, bodyRef, movementSpeed, movementDirection, repetitions, duration):
+        MoveBehavior.__init__(self, bodyRef, movementSpeed, movementDirection, repetitions, duration)
         self.waypoints = numpy.array([[1, 1], [1, -1]])
 
     def behaviorActions(self):

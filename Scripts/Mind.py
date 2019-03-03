@@ -52,7 +52,7 @@ class Mind:
             self.currStoryArcMoment = StoryArc.FALLING_ACTION
         elif tSinceStart > (risingActionTime + climaxTime + fallingActionTime)*60 and not self.isInteractionFinished:
             self.currBehavior.finishBehavior() # finish any pending behavior
-            self.currBehavior = HelloBehavior(self.body)
+            self.currBehavior = self.personalityProfile.helloBehavior
             self.isInteractionFinished = True
 
         tLastTouchDelta = self.tLastTouchF - self.tLastTouchI
@@ -63,7 +63,7 @@ class Mind:
             self.personalityOrCreativeTriggered = False
 
             self.currBehavior.finishBehavior() # finish any pending behavior
-            self.currBehavior = PuppeteerBehavior(self.body)
+            self.currBehavior = self.personalityProfile.pupeteerBehavior
 
         elif self.hasTouchEnded():
             self.tLastAttentionCall = self.tLastTouchF;
@@ -71,7 +71,7 @@ class Mind:
 
             #hello is performed on the first touch
             if  not self.isInteractionStarted:
-                self.currBehavior = HelloBehavior(self.body)
+                self.currBehavior = self.personalityProfile.helloBehavior
                 self.isInteractionStarted = True
 
         #do nothing until first touch
@@ -82,11 +82,11 @@ class Mind:
 
         # autonomous stuff
         if not self.beingTouched():
-            if (tCurr - self.tLastAttentionCall) > 30:
+            if (tCurr - self.tLastAttentionCall) > self.personalityProfile.attentionCallBehaviorDelayInSeconds:
                 self.tLastAttentionCall = time.time() #simulate touch to reset timer
-                self.currBehavior = self.generateAttentionCallBehavior()
+                self.currBehavior = self.personalityProfile.attentionCallBehavior
             else:
-                if not self.personalityOrCreativeTriggered and tLastTouchDelta > 1:
+                if not self.personalityOrCreativeTriggered and tLastTouchDelta > self.personalityProfile.minimumTouchTimeInSeconds:
                     self.personalityOrCreativeTriggered = True
                     
                     possibleBehaviors = []
@@ -102,28 +102,22 @@ class Mind:
                     else:
                         self.currBehavior = numpy.random.choice(possibleBehaviors)
 
+
         # idle acts as fallback
         if self.currBehavior.isOver:
-            self.currBehavior = self.generateIdleBehavior()
+            self.currBehavior.resetBehavior()  #reset behavior before future application
+            self.currBehavior = self.personalityProfile.idleBehavior
 
         # check for recognized shapes
         if self.shapeWasRecognized():
             self.currRecognizedShape = self.predictShape(self.body.getOpticalSensor().getCurrentRecognizedShape())
 
-    def generateAttentionCallBehavior(self):
-        self.personalityProfile.attentionCallBehavior.resetBehavior()
-        return self.personalityProfile.attentionCallBehavior
-
-    def generateIdleBehavior(self):
-        self.personalityProfile.idleBehavior.resetBehavior()
-        return  self.personalityProfile.idleBehavior
-
+    
     def generatePersonalityBehavior(self):
         personalityBehaviorList = self.personalityProfile.personalityBehaviorList
         if(not personalityBehaviorList):
             return False
         selectedBehavior = numpy.random.choice(personalityBehaviorList)
-        selectedBehavior.resetBehavior()
         return selectedBehavior
 
     def generateCreativityBehavior(self, currStoryArcMoment, recognizedShape):        
@@ -147,16 +141,18 @@ class Mind:
         if(currShapedBehavior == None):
             return False
 
+        selectedBehavior = None;
         if(creativityBehaviorType==StoryArcBehaviorType.MIRROR):
-            return currShapedBehavior
+            selectedBehavior = currShapedBehavior
         elif(creativityBehaviorType==StoryArcBehaviorType.CONTRAST):
-            behaviorList = creativityBehaviorDict.values().copy()
+            behaviorList = list(creativityBehaviorDict.values())
             behaviorList.remove(currShapedBehavior)
-            return numpy.random.choice(behaviorList)
+            selectedBehavior = numpy.random.choice(behaviorList)
+        return selectedBehavior
 
-    def setBehaviorProfiles(self, personalityProfile, creativityProfile):
-        self.personalityProfile = personalityProfile
-        self.creativityProfile = creativityProfile
+    # def setBehaviorProfiles(self, personalityProfile, creativityProfile):
+    #     self.personalityProfile = personalityProfile
+    #     self.creativityProfile = creativityProfile
 
     def beingTouched(self):
         return (self.body.getTouchSensor().getState() == TouchState.TOUCHING)
@@ -181,5 +177,5 @@ class Mind:
     def predictShape(self, pointDataArray):
         features = extract_features(pointDataArray)
         prediction = predict(features)[0]
-        logText = "Recognized the shape: " + str(prediction) + "at the story arc: " + StoryArc(self.currStoryArcMoment).name
+        print "Recognized the shape: " + str(prediction) + "at the story arc: " + StoryArc(self.currStoryArcMoment).name
         return ShapeType(int(prediction)+1)

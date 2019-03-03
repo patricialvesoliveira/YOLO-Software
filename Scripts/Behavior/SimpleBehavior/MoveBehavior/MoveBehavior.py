@@ -8,13 +8,10 @@ from Scripts.Behavior.SimpleBehavior.SimpleBehavior import SimpleBehavior
 
 
 class MoveBehavior(SimpleBehavior):
-    def __init__(self, bodyRef, movementSpeed, movementDirection, repetitions, duration, keepBehaviorSetting=False, startDelay = 0.0):
-        SimpleBehavior.__init__(self, bodyRef, repetitions, duration, keepBehaviorSetting, startDelay)
-        self.behaviorType = BehaviorType.MOVE
+    def __init__(self, bodyRef, movementSpeed, movementDirection, repetitions, duration):
+        SimpleBehavior.__init__(self, bodyRef, repetitions, duration)
         self.waypoints = numpy.array([])
         self.movementSpeed = 0
-        self.alreadyStartedSegment = False
-        self.currentWaypointIndex = 0
         self.animationIntervalTime = duration
         self.movementType = ShapeType.NONE
         self.initialMovementDirection = movementDirection
@@ -25,16 +22,14 @@ class MoveBehavior(SimpleBehavior):
             self.currentMovementDirection = self.initialMovementDirection
             
         self.movementSpeed = numpy.clip(movementSpeed, 0, 90)
-        self.startTime = time.time()
-        self.currentBehaviorRepetition = 0
+        self.initBehavior()
 
 
-    def resetBehavior(self):
-        SimpleBehavior.resetBehavior(self)
-        self.startTime = time.time()
+    def initBehavior(self):
+        SimpleBehavior.initBehavior(self)
         self.alreadyStartedSegment = False
         self.currentWaypointIndex = 0
-        self.currentBehaviorRepetition = 0
+        
 
     def behaviorActions(self):
         return
@@ -42,7 +37,6 @@ class MoveBehavior(SimpleBehavior):
     def finishBehavior(self):
         SimpleBehavior.finishBehavior(self)
         self.bodyRef.resetWheelSetup()
-        self.currentBehaviorRepetition = 0
 
     def reversePath(self, path):
         inversedPath = [-x for x in path]

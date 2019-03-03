@@ -10,9 +10,8 @@ from Scripts.Behavior.SimpleBehavior.MoveBehavior.MoveBehavior import MoveBehavi
 
 
 class MoveBehaviorCircle(MoveBehavior):
-    def __init__(self, bodyRef, movementSpeed, movementDirection, repetitions, duration, keepBehaviorSetting=False, startDelay = 0.0):
-        MoveBehavior.__init__(self, bodyRef, movementSpeed, movementDirection, repetitions, duration, keepBehaviorSetting, startDelay)
-        self.movementType = ShapeType.CIRCLE
+    def __init__(self, bodyRef, movementSpeed, movementDirection, repetitions, duration):
+        MoveBehavior.__init__(self, bodyRef, movementSpeed, movementDirection, repetitions, duration)
     
     def behaviorActions(self):
         MoveBehavior.behaviorActions(self)

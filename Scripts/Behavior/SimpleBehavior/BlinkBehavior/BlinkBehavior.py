@@ -6,51 +6,44 @@ from Scripts.Behavior.SimpleBehavior.SimpleBehavior import SimpleBehavior
 
 
 class BlinkBehavior(SimpleBehavior):
-    def __init__(self, bodyRef, blinkColorList, brightness, repetitions, duration, defaultColor, keepBehaviorSetting, startDelay = 0.0, animationPause = 0.0):
-        SimpleBehavior.__init__(self, bodyRef, repetitions, duration, keepBehaviorSetting, startDelay)
+    def __init__(self, bodyRef, blinkColor, brightness, repetitions, duration, defaultColor):
+        SimpleBehavior.__init__(self, bodyRef, repetitions, duration)
         self.bodyRef = bodyRef
-        self.behaviorType = BehaviorType.BLINK
         self.bodyColorAtStart = bodyRef.getColor()
         self.bodyBrightnessAtStart = bodyRef.getBrightness()
-        self.blinkColorList = blinkColorList
-        self.activeBlinkColor = blinkColorList[0]
+        self.blinkColor = blinkColor
         self.brightness = brightness
         self.activeBlinkBrightness = ColorBrightnessValues[brightness.name]
-        self.animationEndPause = animationPause
         self.defaultColor = defaultColor
-        self.duration = duration
 
+        self.initBehavior()
 
+    def initBlink(self):
+        self.startTime = time.time()
+
+    def initBehavior(self):
+        SimpleBehavior.initBehavior(self)
+        self.initBlink()
+        
     def behaviorActions(self):
         # when the animation is over we pause before changing color
         if self.checkForBehaviorEnd():
             if self.maxBehaviorRepetitions!=0:
-                if self.currentBehaviorRepetition == self.maxBehaviorRepetitions:
+                self.currentBehaviorRepetition += 1
+                print self.currentBehaviorRepetition
+                if self.currentBehaviorRepetition >= self.maxBehaviorRepetitions:
                     self.finishBehavior()
                     return
-
-                if self.currentBehaviorRepetition > self.maxBehaviorRepetitions:
-                    return
-
-                self.currentBehaviorRepetition += 1
-            self.startTime = time.time()
-            self.activeBlinkColor = self.blinkColorList[(self.currentBehaviorRepetition-1) % len(self.blinkColorList)]
-        return
+                self.initBlink()
 
     def finishBehavior(self):
         SimpleBehavior.finishBehavior(self)
-        print "keepBehaviorSetting: "+str(self.keepBehaviorSetting)
-        if self.keepBehaviorSetting:
-            self.bodyRef.setColor(self.activeBlinkColor)
-            self.bodyRef.setBrightness(self.activeBlinkBrightness)
-        else:
-            self.bodyRef.setColor(self.defaultColor)
-        return
+        self.bodyRef.setColor(self.defaultColor)
 
     
 
     def animateLerp(self, percentage):
-        self.bodyRef.setColor(self.lerpColor(percentage, self.bodyColorAtStart, self.activeBlinkColor))
+        self.bodyRef.setColor(self.lerpColor(percentage, self.bodyColorAtStart, self.blinkColor))
         self.bodyRef.setBrightness(self.activeBlinkBrightness * percentage + self.bodyBrightnessAtStart * (1 - percentage))
 
     def lerpColor(self, percentage, currentColor, newColor):

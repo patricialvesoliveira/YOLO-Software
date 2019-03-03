@@ -5,27 +5,31 @@ from Libs.Constants import *
 
 
 class SimpleBehavior:
-    def __init__(self, bodyRef, repetitions, duration, keepBehaviorSetting, startDelay = 0.0):
-        self.behaviorType = BehaviorType.NONE
+    def __init__(self, bodyRef, maxBehaviorRepetitions, duration):
         self.isOver = False
-        self.startDelay = startDelay
-        self.keepBehaviorSetting = keepBehaviorSetting
         self.duration = duration;
-        self.maxBehaviorRepetitions = repetitions
-
+        self.maxBehaviorRepetitions = maxBehaviorRepetitions
+        self.currentBehaviorRepetition = 0
         if self.maxBehaviorRepetitions > 0:
             self.animationIntervalTime = self.duration / self.maxBehaviorRepetitions
         else:
             self.animationIntervalTime = self.duration
-
-        self.currentBehaviorRepetition = 1
         self.bodyRef = bodyRef
-        self.startTime = time.time()
+
+    def initBehavior(self):
+        # to be overridden
+        self.currentBehaviorRepetition = 0
+        return
+
+    def behaviorActions(self):
+        # to be overridden
+        return
 
     def resetBehavior(self):
         self.isOver = False
-        self.currentBehaviorRepetition = 1
+        self.currentBehaviorRepetition = 0
         self.startTime = time.time()
+        self.initBehavior()
         
     def applyBehavior(self):
         if(not self.isOver):
@@ -33,9 +37,7 @@ class SimpleBehavior:
         else:
             print "behavior not applied as it was finished!"
 
-    def behaviorActions(self):
-        # to be overridden
-        return
+    
 
     def finishBehavior(self):
         print "Behavior ended well"
