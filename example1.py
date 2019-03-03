@@ -91,6 +91,6 @@ creativityProfile = CreativityProfile("Creative",
 	0.1, creativityFastBehaviorDict, StoryArcBehaviorType.CONTRAST, 
 	0.1, creativitySlowBehaviorDict, StoryArcBehaviorType.MIRROR)
 
-# agent.interact(personalityProfile = "PUNK", creativityProfile = creativityProfile)
+agent.interact(personalityProfile = "PUNK", creativityProfile = creativityProfile)
 
 agent.interact(personalityProfile = "AFFECTIVE", creativityProfile="AFFECTIVE")

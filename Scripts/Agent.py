@@ -50,11 +50,10 @@ class Agent:
     
     def interact(self, personalityProfile = None, creativityProfile = None):
         
-        blink = BlinkBehaviorEaseInOut(self.body, Color(rgb=(1.0, 1.0, 0.0)), ColorBrightness.HIGH, 3, 3.0, Color(rgb=(0.0, 0.0, 0.0)))
-        
-        while True:
-            blink.applyBehavior()
-        return
+        # blink = BlinkBehaviorEaseInOut(self.body, Color(rgb=(1.0, 1.0, 0.0)), ColorBrightness.HIGH, 3, 3.0, Color(rgb=(0.0, 0.0, 0.0)))
+        # while True:
+        #     blink.applyBehavior()
+        # return
 
         if(isinstance(personalityProfile,basestring)):
             profilePresetSwitcher = {

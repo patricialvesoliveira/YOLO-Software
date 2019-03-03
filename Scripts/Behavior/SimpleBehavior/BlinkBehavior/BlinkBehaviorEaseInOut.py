@@ -15,18 +15,23 @@ class BlinkBehaviorEaseInOut(BlinkBehavior):
         
         self.resetBehaviors()
 
-
     def behaviorActions(self):
         BlinkBehavior.behaviorActions(self)
-        if not self.easeOutBehavior.isOver:
+        if not self.easeInBehavior.isOver:
+            if(not self.behaviorInSet):
+                self.easeInBehavior.resetBehavior()
+                self.behaviorInSet = True
             self.easeInBehavior.behaviorActions()
-        elif self.easeInBehavior.isOver:
+        elif not self.easeOutBehavior.isOver:
+            if(not self.behaviorOutSet):
+                self.easeOutBehavior.resetBehavior()
+                self.behaviorOutSet = True
             self.easeOutBehavior.behaviorActions()
-        if self.checkForBehaviorEnd():
+        else:
             self.resetBehaviors()
 
     def resetBehaviors(self):
-        self.easeInBehavior.initBehavior()
-        self.easeOutBehavior.initBehavior()
+        self.easeInBehavior.resetBehavior()
+        self.easeOutBehavior.resetBehavior()
         self.behaviorInSet = False
         self.behaviorOutSet = False

@@ -18,12 +18,11 @@ class SimpleBehavior:
 
     def initBehavior(self):
         # to be overridden
-        self.currentBehaviorRepetition = 0
-        return
+        self.startTime = time.time()
 
     def behaviorActions(self):
         # to be overridden
-        return
+        pass
 
     def resetBehavior(self):
         self.isOver = False
@@ -36,8 +35,6 @@ class SimpleBehavior:
             self.behaviorActions()
         else:
             print "behavior not applied as it was finished!"
-
-    
 
     def finishBehavior(self):
         print "Behavior ended well"

@@ -8,5 +8,5 @@ class BlinkBehaviorInstant(BlinkBehavior):
 	    
 	def behaviorActions(self):
 	    BlinkBehavior.behaviorActions(self)
-	    self.bodyRef.setColor(self.activeBlinkColor)
-	    self.bodyRef.setBrightness(self.activeBlinkBrightness)
+	    self.bodyRef.setColor(self.blinkColor)
+	    self.bodyRef.setBrightness(self.blinkBrightness)

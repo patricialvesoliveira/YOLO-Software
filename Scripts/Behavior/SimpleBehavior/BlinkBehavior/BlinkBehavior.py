@@ -13,38 +13,30 @@ class BlinkBehavior(SimpleBehavior):
         self.bodyBrightnessAtStart = bodyRef.getBrightness()
         self.blinkColor = blinkColor
         self.brightness = brightness
-        self.activeBlinkBrightness = ColorBrightnessValues[brightness.name]
+        self.blinkBrightness = ColorBrightnessValues[brightness.name]
         self.defaultColor = defaultColor
 
         self.initBehavior()
-
-    def initBlink(self):
-        self.startTime = time.time()
-
-    def initBehavior(self):
-        SimpleBehavior.initBehavior(self)
-        self.initBlink()
         
     def behaviorActions(self):
         # when the animation is over we pause before changing color
         if self.checkForBehaviorEnd():
-            if self.maxBehaviorRepetitions!=0:
+            if self.maxBehaviorRepetitions > 0:
                 self.currentBehaviorRepetition += 1
                 print self.currentBehaviorRepetition
                 if self.currentBehaviorRepetition >= self.maxBehaviorRepetitions:
                     self.finishBehavior()
-                    return
-                self.initBlink()
+                else:
+                    #reinit time before repeating behavior
+                    self.startTime = time.time()
 
     def finishBehavior(self):
         SimpleBehavior.finishBehavior(self)
         self.bodyRef.setColor(self.defaultColor)
 
-    
-
     def animateLerp(self, percentage):
         self.bodyRef.setColor(self.lerpColor(percentage, self.bodyColorAtStart, self.blinkColor))
-        self.bodyRef.setBrightness(self.activeBlinkBrightness * percentage + self.bodyBrightnessAtStart * (1 - percentage))
+        self.bodyRef.setBrightness(self.blinkBrightness * percentage + self.bodyBrightnessAtStart * (1 - percentage))
 
     def lerpColor(self, percentage, currentColor, newColor):
         rLerp = newColor.red * percentage + currentColor.red * (1 - percentage)
@@ -58,7 +50,6 @@ class BlinkBehavior(SimpleBehavior):
 
         lerpColor = Color(rgb=(rLerp, gLerp, bLerp))
         return lerpColor
-
 
     def checkForBehaviorEnd(self): 
         return time.time() - self.startTime > self.duration

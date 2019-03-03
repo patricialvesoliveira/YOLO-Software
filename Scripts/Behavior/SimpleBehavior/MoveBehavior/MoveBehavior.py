@@ -32,7 +32,7 @@ class MoveBehavior(SimpleBehavior):
         
 
     def behaviorActions(self):
-        return
+        pass
 
     def finishBehavior(self):
         SimpleBehavior.finishBehavior(self)

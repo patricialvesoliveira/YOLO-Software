@@ -52,7 +52,7 @@ class Mind:
             self.currStoryArcMoment = StoryArc.FALLING_ACTION
         elif tSinceStart > (risingActionTime + climaxTime + fallingActionTime)*60 and not self.isInteractionFinished:
             self.currBehavior.finishBehavior() # finish any pending behavior
-            self.currBehavior = self.personalityProfile.helloBehavior
+            self.resetCurrAndSetNewBehavior(self.personalityProfile.helloBehavior)
             self.isInteractionFinished = True
 
         tLastTouchDelta = self.tLastTouchF - self.tLastTouchI
@@ -63,7 +63,7 @@ class Mind:
             self.personalityOrCreativeTriggered = False
 
             self.currBehavior.finishBehavior() # finish any pending behavior
-            self.currBehavior = self.personalityProfile.pupeteerBehavior
+            self.resetCurrAndSetNewBehavior(self.personalityProfile.pupeteerBehavior)
 
         elif self.hasTouchEnded():
             self.tLastAttentionCall = self.tLastTouchF;
@@ -71,7 +71,7 @@ class Mind:
 
             #hello is performed on the first touch
             if  not self.isInteractionStarted:
-                self.currBehavior = self.personalityProfile.helloBehavior
+                self.resetCurrAndSetNewBehavior(self.personalityProfile.helloBehavior)
                 self.isInteractionStarted = True
 
         #do nothing until first touch
@@ -84,7 +84,7 @@ class Mind:
         if not self.beingTouched():
             if (tCurr - self.tLastAttentionCall) > self.personalityProfile.attentionCallBehaviorDelayInSeconds:
                 self.tLastAttentionCall = time.time() #simulate touch to reset timer
-                self.currBehavior = self.personalityProfile.attentionCallBehavior
+                self.resetCurrAndSetNewBehavior(self.personalityProfile.attentionCallBehavior)
             else:
                 if not self.personalityOrCreativeTriggered and tLastTouchDelta > self.personalityProfile.minimumTouchTimeInSeconds:
                     self.personalityOrCreativeTriggered = True
@@ -98,21 +98,23 @@ class Mind:
                         possibleBehaviors.append(creativityBehavior)
 
                     if(len(possibleBehaviors)==0):
-                        self.currBehavior = ComposedBehavior(self.body)
+                        self.resetCurrAndSetNewBehavior(ComposedBehavior(self.body))
                     else:
-                        self.currBehavior = numpy.random.choice(possibleBehaviors)
+                        self.resetCurrAndSetNewBehavior(numpy.random.choice(possibleBehaviors))
 
 
         # idle acts as fallback
         if self.currBehavior.isOver:
-            self.currBehavior.resetBehavior()  #reset behavior before future application
-            self.currBehavior = self.personalityProfile.idleBehavior
+            self.resetCurrAndSetNewBehavior(self.personalityProfile.idleBehavior)
 
         # check for recognized shapes
         if self.shapeWasRecognized():
             self.currRecognizedShape = self.predictShape(self.body.getOpticalSensor().getCurrentRecognizedShape())
 
-    
+    def resetCurrAndSetNewBehavior(self, newBehavior):
+        self.currBehavior.resetBehavior()  #reset behavior before future application
+        self.currBehavior = newBehavior
+
     def generatePersonalityBehavior(self):
         personalityBehaviorList = self.personalityProfile.personalityBehaviorList
         if(not personalityBehaviorList):
