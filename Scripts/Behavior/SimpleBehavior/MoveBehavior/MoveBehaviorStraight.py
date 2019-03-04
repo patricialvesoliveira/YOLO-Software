@@ -9,13 +9,13 @@ from Libs.Constants import *
 from Scripts.Behavior.SimpleBehavior.MoveBehavior.MoveBehavior import MoveBehavior
 
 
-class MoveBehaviorStraight(MoveBehavior):
+class MoveBehaviorStraight(MoveBehavior, object):
     def __init__(self, bodyRef, movementSpeed, movementDirection, repetitions, duration):
-        MoveBehavior.__init__(self, bodyRef, movementSpeed, movementDirection, repetitions, duration)
+        super(MoveBehaviorStraight, self).__init__(bodyRef, movementSpeed, movementDirection, repetitions, duration)
     	self.waypoints = numpy.array([[1, 0]])
     
     def behaviorActions(self):
-        MoveBehavior.behaviorActions(self)
+        super(MoveBehaviorStraight, self).behaviorActions()
 
         #To do a path backwards we invert the points and their order
         if self.currentMovementDirection == MovementDirection.REVERSE:

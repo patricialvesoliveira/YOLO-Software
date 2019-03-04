@@ -1,15 +1,13 @@
 from Libs.Constants import *
 
 class ComposedBehavior:
-    def __init__(self, bodyRef):
+    def __init__(self, bodyRef, behaviorList):
         self.bodyRef = bodyRef
-        self.behaviorList = []
-        self.behaviorDuration = 0.0
-        self.startTime = 0.0
+        self.behaviorList = behaviorList
         self.isOver = False
 
     def applyBehavior(self):
-        behaviorsToApply = self.behaviorList
+        behaviorsToApply = list(self.behaviorList)
         areAllOver = True
         for behavior in behaviorsToApply:
             if not behavior.isOver:
@@ -17,10 +15,8 @@ class ComposedBehavior:
                 behavior.applyBehavior()
         if areAllOver:
             self.finishBehavior()
-        # if self.isOver : print("Composed behavior is over")
 
     def resetBehavior(self):
-        self.startTime = 0.0
         self.isOver = False
         for behavior in self.behaviorList:
             behavior.resetBehavior()

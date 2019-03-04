@@ -5,9 +5,9 @@ from Libs.Constants import *
 from Scripts.Behavior.SimpleBehavior.SimpleBehavior import SimpleBehavior
 
 
-class BlinkBehavior(SimpleBehavior):
-    def __init__(self, bodyRef, blinkColor, brightness, repetitions, duration, defaultColor):
-        SimpleBehavior.__init__(self, bodyRef, repetitions, duration)
+class BlinkBehavior(SimpleBehavior, object):
+    def __init__(self, bodyRef, blinkColor, brightness, maxBehaviorRepetitions, duration, defaultColor):
+        super(BlinkBehavior, self).__init__(bodyRef, maxBehaviorRepetitions, duration)
         self.bodyRef = bodyRef
         self.bodyColorAtStart = bodyRef.getColor()
         self.bodyBrightnessAtStart = bodyRef.getBrightness()
@@ -15,7 +15,6 @@ class BlinkBehavior(SimpleBehavior):
         self.brightness = brightness
         self.blinkBrightness = ColorBrightnessValues[brightness.name]
         self.defaultColor = defaultColor
-
         self.initBehavior()
         
     def behaviorActions(self):
@@ -31,7 +30,7 @@ class BlinkBehavior(SimpleBehavior):
                     self.startTime = time.time()
 
     def finishBehavior(self):
-        SimpleBehavior.finishBehavior(self)
+        super(BlinkBehavior, self).finishBehavior()
         self.bodyRef.setColor(self.defaultColor)
 
     def animateLerp(self, percentage):

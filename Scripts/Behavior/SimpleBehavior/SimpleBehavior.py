@@ -15,10 +15,11 @@ class SimpleBehavior:
         else:
             self.animationIntervalTime = self.duration
         self.bodyRef = bodyRef
+        self.startTime = time.time()
 
     def initBehavior(self):
         # to be overridden
-        self.startTime = time.time()
+        pass
 
     def behaviorActions(self):
         # to be overridden

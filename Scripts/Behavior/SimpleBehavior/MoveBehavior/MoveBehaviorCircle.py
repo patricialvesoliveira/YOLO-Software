@@ -9,12 +9,12 @@ from Libs.Constants import *
 from Scripts.Behavior.SimpleBehavior.MoveBehavior.MoveBehavior import MoveBehavior
 
 
-class MoveBehaviorCircle(MoveBehavior):
+class MoveBehaviorCircle(MoveBehavior, object):
     def __init__(self, bodyRef, movementSpeed, movementDirection, repetitions, duration):
-        MoveBehavior.__init__(self, bodyRef, movementSpeed, movementDirection, repetitions, duration)
+        super(MoveBehaviorCircle, self).__init__(bodyRef, movementSpeed, movementDirection, repetitions, duration)
     
     def behaviorActions(self):
-        MoveBehavior.behaviorActions(self)
+        super(MoveBehaviorCircle, self).behaviorActions()
 
         # create array of circle values
         numSamples = 24

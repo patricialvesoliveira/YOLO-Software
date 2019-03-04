@@ -5,9 +5,9 @@ from Scripts.Behavior.SimpleBehavior.BlinkBehavior.BlinkBehavior import BlinkBeh
 from Scripts.Behavior.SimpleBehavior.BlinkBehavior.BlinkBehaviorEaseIn import BlinkBehaviorEaseIn
 from Scripts.Behavior.SimpleBehavior.BlinkBehavior.BlinkBehaviorEaseOut import BlinkBehaviorEaseOut
 
-class BlinkBehaviorEaseInOut(BlinkBehavior):
+class BlinkBehaviorEaseInOut(BlinkBehavior, object):
     def __init__(self, bodyRef, blinkColor, brightness, repetitions, duration, defaultColor):
-        BlinkBehavior.__init__(self, bodyRef, blinkColor, brightness, repetitions, duration, defaultColor)
+        super(BlinkBehaviorEaseInOut, self).__init__(bodyRef, blinkColor, brightness, repetitions, duration, defaultColor)
         self.subBehaviorDuration = duration/ 2.0
 
         self.easeInBehavior = BlinkBehaviorEaseIn(self.bodyRef, self.blinkColor, self.brightness, 1, self.subBehaviorDuration, self.defaultColor)
@@ -16,7 +16,7 @@ class BlinkBehaviorEaseInOut(BlinkBehavior):
         self.resetBehaviors()
 
     def behaviorActions(self):
-        BlinkBehavior.behaviorActions(self)
+        super(BlinkBehaviorEaseInOut, self).behaviorActions()
         if not self.easeInBehavior.isOver:
             if(not self.behaviorInSet):
                 self.easeInBehavior.resetBehavior()

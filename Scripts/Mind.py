@@ -6,13 +6,14 @@ from Libs.MachineLearning.lib.util import extract_features, predict
 
 from Scripts.BehaviorImports import *
 
-class Mind:
-    def __init__(self, body, personalityProfile, creativityProfile):
+class Mind (object):
+    def __init__(self, body, generalProfile, personalityProfile, creativityProfile):
 
+        self.generalProfile = generalProfile
         self.personalityProfile = personalityProfile
         self.creativityProfile = creativityProfile
         self.body = body
-        self.currBehavior = ComposedBehavior(body)
+        self.currBehavior = ComposedBehavior(body, [])
         tCurr = time.time()
 
         self.startTime = tCurr
@@ -27,14 +28,28 @@ class Mind:
         
         self.isInteractionStarted = False
         self.isInteractionFinished = False
+        self.isMindFinished = False
 
         self.tLastAttentionCall = tCurr
-                        
+        
+        # self.resetCurrAndSetNewBehavior(self.generalProfile.helloBehavior)       
 
 
     def update(self):
+        # pupeteer behavior stuff
+        # self.wasTouched = False
+        # if self.hasTouchStarted():
+        #     self.attentionCallTriggered = False
+        #     self.personalityOrCreativeTriggered = False
+        #     print "nfskndsjkfndsjknfjkdsnfjdsnfdnksjf"
+        #     self.currBehavior.finishBehavior() # finish any pending behavior
+        #     self.resetCurrAndSetNewBehavior(self.generalProfile.helloBehavior)
+
+
         self.body.update()
         self.currBehavior.applyBehavior()
+        # return
+
 
         tCurr = time.time()
         tSinceStart = tCurr - self.startTime
@@ -52,8 +67,9 @@ class Mind:
             self.currStoryArcMoment = StoryArc.FALLING_ACTION
         elif tSinceStart > (risingActionTime + climaxTime + fallingActionTime)*60 and not self.isInteractionFinished:
             self.currBehavior.finishBehavior() # finish any pending behavior
-            self.resetCurrAndSetNewBehavior(self.personalityProfile.helloBehavior)
+            self.resetCurrAndSetNewBehavior(self.generalProfile.goodbyeBehavior)
             self.isInteractionFinished = True
+            return
 
         tLastTouchDelta = self.tLastTouchF - self.tLastTouchI
         
@@ -63,19 +79,20 @@ class Mind:
             self.personalityOrCreativeTriggered = False
 
             self.currBehavior.finishBehavior() # finish any pending behavior
-            self.resetCurrAndSetNewBehavior(self.personalityProfile.pupeteerBehavior)
+            self.resetCurrAndSetNewBehavior(self.generalProfile.pupeteerBehavior)
 
         elif self.hasTouchEnded():
             self.tLastAttentionCall = self.tLastTouchF;
             self.currBehavior.finishBehavior()
 
             #hello is performed on the first touch
-            if  not self.isInteractionStarted:
-                self.resetCurrAndSetNewBehavior(self.personalityProfile.helloBehavior)
+            if not self.isInteractionStarted:
+                self.resetCurrAndSetNewBehavior(self.generalProfile.helloBehavior)
+                # print self.currBehavior.maxBehaviorRepetitions
                 self.isInteractionStarted = True
 
         #do nothing until first touch
-        if not self.isInteractionStarted or self.isInteractionFinished:
+        if not self.isInteractionStarted:
             # constantly reinit startTime until robot starts
             self.startTime = tCurr
             return
@@ -98,14 +115,15 @@ class Mind:
                         possibleBehaviors.append(creativityBehavior)
 
                     if(len(possibleBehaviors)==0):
-                        self.resetCurrAndSetNewBehavior(ComposedBehavior(self.body))
+                        self.resetCurrAndSetNewBehavior(ComposedBehavior(self.body, []))
                     else:
                         self.resetCurrAndSetNewBehavior(numpy.random.choice(possibleBehaviors))
 
-
         # idle acts as fallback
         if self.currBehavior.isOver:
-            self.resetCurrAndSetNewBehavior(self.personalityProfile.idleBehavior)
+            if(self.isInteractionFinished):
+                self.isMindFinished = True
+            self.resetCurrAndSetNewBehavior(self.generalProfile.idleBehavior)
 
         # check for recognized shapes
         if self.shapeWasRecognized():
@@ -151,10 +169,6 @@ class Mind:
             behaviorList.remove(currShapedBehavior)
             selectedBehavior = numpy.random.choice(behaviorList)
         return selectedBehavior
-
-    # def setBehaviorProfiles(self, personalityProfile, creativityProfile):
-    #     self.personalityProfile = personalityProfile
-    #     self.creativityProfile = creativityProfile
 
     def beingTouched(self):
         return (self.body.getTouchSensor().getState() == TouchState.TOUCHING)

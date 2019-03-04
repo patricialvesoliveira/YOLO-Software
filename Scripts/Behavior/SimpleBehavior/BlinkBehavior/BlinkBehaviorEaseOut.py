@@ -8,4 +8,3 @@ class BlinkBehaviorEaseOut(BlinkBehaviorEaseIn, object):
     	#an ease out is an ease to black 
     	super(BlinkBehaviorEaseOut, self).__init__(bodyRef, Color(rgb=(0.0, 0.0, 0.0)), brightness, repetitions, duration, defaultColor)
     	self.bodyColorAtStart = blinkColor
-    	self.isBodyColorSet = False

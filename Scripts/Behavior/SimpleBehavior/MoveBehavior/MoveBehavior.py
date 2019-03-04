@@ -7,9 +7,9 @@ from Libs.Constants import *
 from Scripts.Behavior.SimpleBehavior.SimpleBehavior import SimpleBehavior
 
 
-class MoveBehavior(SimpleBehavior):
-    def __init__(self, bodyRef, movementSpeed, movementDirection, repetitions, duration):
-        SimpleBehavior.__init__(self, bodyRef, repetitions, duration)
+class MoveBehavior(SimpleBehavior, object):
+    def __init__(self, bodyRef, movementSpeed, movementDirection, maxBehaviorRepetitions, duration):
+        super(MoveBehavior, self).__init__(bodyRef, maxBehaviorRepetitions, duration)
         self.waypoints = numpy.array([])
         self.movementSpeed = 0
         self.animationIntervalTime = duration
@@ -26,7 +26,7 @@ class MoveBehavior(SimpleBehavior):
 
 
     def initBehavior(self):
-        SimpleBehavior.initBehavior(self)
+        super(MoveBehavior, self).initBehavior()
         self.alreadyStartedSegment = False
         self.currentWaypointIndex = 0
         
@@ -35,7 +35,7 @@ class MoveBehavior(SimpleBehavior):
         pass
 
     def finishBehavior(self):
-        SimpleBehavior.finishBehavior(self)
+        super(MoveBehavior, self).finishBehavior()
         self.bodyRef.resetWheelSetup()
 
     def reversePath(self, path):

@@ -4,93 +4,121 @@ bodyColor = Color(rgb=(0.2,1.0,0.5))
 agent = Agent("YOLO")
 bodyRef = agent.getBodyRef()
 
-attentionCallBehavior = ComposedBehavior(bodyRef)
-attentionCallBehavior.behaviorList.append(BlinkBehaviorEaseInOut(bodyRef, Color(rgb=(1.0, 1.0, 0.0)), ColorBrightness.HIGH, 1, 3.0, Color(rgb=(0.0, 0.0, 0.0))))
-attentionCallBehavior.behaviorList.append(MoveBehaviorSpikes(bodyRef, 90, MovementDirection.ALTERNATING, 2, 1.5))
 
-idleBehavior = ComposedBehavior(bodyRef)
-idleBehavior.behaviorList.append(BlinkBehaviorEaseInOut(bodyRef, bodyColor, ColorBrightness.HIGH, 1, 2.0, Color(rgb=(0.0, 0.0, 0.0))))
+behaviorList = []
+behaviorList.append(BlinkBehaviorEaseInOut(bodyRef, Color(rgb=(0.0,0.1,0.5)), ColorBrightness.HIGH, 2, 2.0, Color(rgb=(0.0, 0.0, 0.0))))
+helloBehavior = ComposedBehavior(bodyRef, behaviorList)
 
-helloBehavior = ComposedBehavior(bodyRef)
-helloBehavior.behaviorList.append(BlinkBehaviorEaseInOut(bodyRef, bodyColor, ColorBrightness.HIGH, 1, 2.0, Color(rgb=(0.0, 0.0, 0.0))))
+behaviorList = []
+behaviorList.append(BlinkBehaviorEaseInOut(bodyRef, Color(rgb=(0.2,0.5,0.0)), ColorBrightness.HIGH, 1, 2.0, Color(rgb=(0.0, 0.0, 0.0))))
+goodbyeBehavior = ComposedBehavior(bodyRef, behaviorList)
 
-puppeteerBehavior = ComposedBehavior(bodyRef)
-puppeteerBehavior.behaviorList.append(BlinkBehaviorEaseInOut(bodyRef, bodyColor, ColorBrightness.HIGH, 1, 2.0, Color(rgb=(0.0, 0.0, 0.0))))
+behaviorList = []
+behaviorList.append(BlinkBehaviorInstant(bodyRef, Color(rgb=(1.0,0.0,1.0)), ColorBrightness.HIGH, 0, 2.0, Color(rgb=(0.0, 0.0, 0.0))))
+puppeteerBehavior = ComposedBehavior(bodyRef, behaviorList)
 
-personalityBehavior1 = ComposedBehavior(bodyRef)
-personalityBehavior1.behaviorList.append(BlinkBehaviorEaseInOut(bodyRef, Color(rgb=(0.9, 0.0, 1.0)), ColorBrightness.HIGH, 1, 4.5, Color(rgb=(0.0, 0.0, 0.0))))
-personalityBehavior1.behaviorList.append(MoveBehaviorSpikes(bodyRef, 40, MovementDirection.FORWARD, 3, 1.5))
 
-personalityBehavior2 = ComposedBehavior(bodyRef)
-personalityBehavior2.behaviorList.append(BlinkBehaviorEaseInOut(bodyRef, Color(rgb=(1.0, 0.0, 0.0)), ColorBrightness.HIGH, 1, 4.5, Color(rgb=(0.0, 0.0, 0.0))))
-personalityBehavior2.behaviorList.append(MoveBehaviorLoops(bodyRef, 50, MovementDirection.FORWARD, 3, 1.5))
+behaviorList = []
+behaviorList.append(BlinkBehaviorEaseIn(bodyRef, bodyColor, ColorBrightness.HIGH, 1, 2.0, Color(rgb=(0.0, 0.0, 0.0))))
+idleBehavior = ComposedBehavior(bodyRef, behaviorList)
+
+generalProfile = GeneralProfile("Jerk", helloBehavior, goodbyeBehavior, puppeteerBehavior, idleBehavior)
+
+
+behaviorList = []
+behaviorList.append(BlinkBehaviorEaseInOut(bodyRef, Color(rgb=(1.0, 1.0, 0.0)), ColorBrightness.HIGH, 1, 3.0, Color(rgb=(0.0, 0.0, 0.0))))
+behaviorList.append(MoveBehaviorSpikes(bodyRef, 90, MovementDirection.ALTERNATING, 2, 1.5))
+attentionCallBehavior = ComposedBehavior(bodyRef, behaviorList)
+
+
+behaviorList = []
+behaviorList.append(BlinkBehaviorEaseInOut(bodyRef, Color(rgb=(0.9, 0.0, 1.0)), ColorBrightness.HIGH, 1, 4.5, Color(rgb=(0.0, 0.0, 0.0))))
+behaviorList.append(MoveBehaviorSpikes(bodyRef, 40, MovementDirection.FORWARD, 3, 1.5))
+personalityBehavior1 = ComposedBehavior(bodyRef, behaviorList)
+
+behaviorList = []
+behaviorList.append(BlinkBehaviorEaseInOut(bodyRef, Color(rgb=(1.0, 0.0, 0.0)), ColorBrightness.HIGH, 1, 4.5, Color(rgb=(0.0, 0.0, 0.0))))
+behaviorList.append(MoveBehaviorLoops(bodyRef, 50, MovementDirection.FORWARD, 3, 1.5))
+personalityBehavior2 = ComposedBehavior(bodyRef, behaviorList)
 
 personalityBehaviorList = []
 personalityBehaviorList.append(personalityBehavior1)
 personalityBehaviorList.append(personalityBehavior2)
 
-personalityProfile = PersonalityProfile("Jerk", 1.0, attentionCallBehavior, 30.0, helloBehavior, puppeteerBehavior, idleBehavior, personalityBehaviorList)
+personalityProfile = PersonalityProfile("Jerk", 1.0, attentionCallBehavior, 30.0, personalityBehaviorList)
 
 
 creativitySlowBehaviorDict = {}
 creativityFastBehaviorDict = {}
 
-curvedFastBehavior = ComposedBehavior(bodyRef)
-curvedFastBehavior.behaviorList.append(MoveBehaviorLoops(bodyRef, 95, MovementDirection.FORWARD, 2, 1.5))
-curvedFastBehavior.behaviorList.append(BlinkBehaviorEaseInOut(bodyRef, bodyColor, ColorBrightness.HIGH, 1, 3.0, Color(rgb=(0.0, 0.0, 0.0))))
+behaviorList = []
+behaviorList.append(MoveBehaviorLoops(bodyRef, 95, MovementDirection.FORWARD, 2, 1.5))
+behaviorList.append(BlinkBehaviorEaseInOut(bodyRef, bodyColor, ColorBrightness.HIGH, 1, 3.0, Color(rgb=(0.0, 0.0, 0.0))))
+curvedFastBehavior = ComposedBehavior(bodyRef, behaviorList)
 creativityFastBehaviorDict[ShapeType.CURVED] = curvedFastBehavior
 
-curvedSlowBehavior = ComposedBehavior(bodyRef)
-curvedSlowBehavior.behaviorList.append(MoveBehaviorLoops(bodyRef, 30, MovementDirection.FORWARD, 2, 3.5))
-curvedSlowBehavior.behaviorList.append(BlinkBehaviorEaseInOut(bodyRef, bodyColor, ColorBrightness.HIGH, 1, 7.0, Color(rgb=(0.0, 0.0, 0.0))))
+behaviorList = []
+behaviorList.append(MoveBehaviorLoops(bodyRef, 30, MovementDirection.FORWARD, 2, 3.5))
+behaviorList.append(BlinkBehaviorEaseInOut(bodyRef, bodyColor, ColorBrightness.HIGH, 1, 7.0, Color(rgb=(0.0, 0.0, 0.0))))
+curvedSlowBehavior = ComposedBehavior(bodyRef, behaviorList)
 creativitySlowBehaviorDict[ShapeType.CURVED] = curvedSlowBehavior
 
-loopsFastBehavior = ComposedBehavior(bodyRef)
-loopsFastBehavior.behaviorList.append(MoveBehaviorLoops(bodyRef, 95, MovementDirection.FORWARD, 2, 1.5))
-loopsFastBehavior.behaviorList.append(BlinkBehaviorEaseInOut(bodyRef, bodyColor, ColorBrightness.HIGH, 1, 3.0, Color(rgb=(0.0, 0.0, 0.0))))
+behaviorList = []
+behaviorList.append(MoveBehaviorLoops(bodyRef, 95, MovementDirection.FORWARD, 2, 1.5))
+behaviorList.append(BlinkBehaviorEaseInOut(bodyRef, bodyColor, ColorBrightness.HIGH, 1, 3.0, Color(rgb=(0.0, 0.0, 0.0))))
+loopsFastBehavior = ComposedBehavior(bodyRef, behaviorList)
 creativityFastBehaviorDict[ShapeType.LOOPS] = loopsFastBehavior
 
-loopsSlowBehavior = ComposedBehavior(bodyRef)
-loopsSlowBehavior.behaviorList.append(MoveBehaviorLoops(bodyRef, 30, MovementDirection.FORWARD, 2, 3.5))
-loopsSlowBehavior.behaviorList.append(BlinkBehaviorEaseInOut(bodyRef, bodyColor, ColorBrightness.HIGH, 1, 7.0, Color(rgb=(0.0, 0.0, 0.0))))
+behaviorList = []
+behaviorList.append(MoveBehaviorLoops(bodyRef, 30, MovementDirection.FORWARD, 2, 3.5))
+behaviorList.append(BlinkBehaviorEaseInOut(bodyRef, bodyColor, ColorBrightness.HIGH, 1, 7.0, Color(rgb=(0.0, 0.0, 0.0))))
+loopsSlowBehavior = ComposedBehavior(bodyRef, behaviorList)
 creativitySlowBehaviorDict[ShapeType.LOOPS] = loopsSlowBehavior
 
-rectFastBehavior = ComposedBehavior(bodyRef)
-rectFastBehavior.behaviorList.append(MoveBehaviorLoops(bodyRef, 95, MovementDirection.FORWARD, 2, 1.5))
-rectFastBehavior.behaviorList.append(BlinkBehaviorEaseInOut(bodyRef, bodyColor, ColorBrightness.HIGH, 1, 3.0, Color(rgb=(0.0, 0.0, 0.0))))
+behaviorList = []
+behaviorList.append(MoveBehaviorLoops(bodyRef, 95, MovementDirection.FORWARD, 2, 1.5))
+behaviorList.append(BlinkBehaviorEaseInOut(bodyRef, bodyColor, ColorBrightness.HIGH, 1, 3.0, Color(rgb=(0.0, 0.0, 0.0))))
+rectFastBehavior = ComposedBehavior(bodyRef, behaviorList)
 creativityFastBehaviorDict[ShapeType.RECT] = rectFastBehavior
 
-rectSlowBehavior = ComposedBehavior(bodyRef)
-rectSlowBehavior.behaviorList.append(MoveBehaviorLoops(bodyRef, 30, MovementDirection.FORWARD, 2, 3.5))
-rectSlowBehavior.behaviorList.append(BlinkBehaviorEaseInOut(bodyRef, bodyColor, ColorBrightness.HIGH, 1, 7.0, Color(rgb=(0.0, 0.0, 0.0))))
+behaviorList = []
+behaviorList.append(MoveBehaviorLoops(bodyRef, 30, MovementDirection.FORWARD, 2, 3.5))
+behaviorList.append(BlinkBehaviorEaseInOut(bodyRef, bodyColor, ColorBrightness.HIGH, 1, 7.0, Color(rgb=(0.0, 0.0, 0.0))))
+rectSlowBehavior = ComposedBehavior(bodyRef, behaviorList)
 creativitySlowBehaviorDict[ShapeType.RECT] = rectSlowBehavior
 
-spikesFastBehavior = ComposedBehavior(bodyRef)
-spikesFastBehavior.behaviorList.append(MoveBehaviorLoops(bodyRef, 95, MovementDirection.FORWARD, 2, 1.5))
-spikesFastBehavior.behaviorList.append(BlinkBehaviorEaseInOut(bodyRef, bodyColor, ColorBrightness.HIGH, 1, 3.0, Color(rgb=(0.0, 0.0, 0.0))))
+behaviorList = []
+behaviorList.append(MoveBehaviorLoops(bodyRef, 95, MovementDirection.FORWARD, 2, 1.5))
+behaviorList.append(BlinkBehaviorEaseInOut(bodyRef, bodyColor, ColorBrightness.HIGH, 1, 3.0, Color(rgb=(0.0, 0.0, 0.0))))
+spikesFastBehavior = ComposedBehavior(bodyRef, behaviorList)
 creativityFastBehaviorDict[ShapeType.SPIKES] = spikesFastBehavior
 
-spikesSlowBehavior = ComposedBehavior(bodyRef)
-spikesSlowBehavior.behaviorList.append(MoveBehaviorLoops(bodyRef, 30, MovementDirection.FORWARD, 2, 3.5))
-spikesSlowBehavior.behaviorList.append(BlinkBehaviorEaseInOut(bodyRef, bodyColor, ColorBrightness.HIGH, 1, 7.0, Color(rgb=(0.0, 0.0, 0.0))))
+behaviorList = []
+behaviorList.append(MoveBehaviorLoops(bodyRef, 30, MovementDirection.FORWARD, 2, 3.5))
+behaviorList.append(BlinkBehaviorEaseInOut(bodyRef, bodyColor, ColorBrightness.HIGH, 1, 7.0, Color(rgb=(0.0, 0.0, 0.0))))
+spikesSlowBehavior = ComposedBehavior(bodyRef, behaviorList)
 creativitySlowBehaviorDict[ShapeType.SPIKES] = spikesSlowBehavior
 
-straightFastBehavior = ComposedBehavior(bodyRef)
-straightFastBehavior.behaviorList.append(MoveBehaviorLoops(bodyRef, 95, MovementDirection.FORWARD, 2, 1.5))
-straightFastBehavior.behaviorList.append(BlinkBehaviorEaseInOut(bodyRef, bodyColor, ColorBrightness.HIGH, 1, 3.0, Color(rgb=(0.0, 0.0, 0.0))))
+behaviorList = []
+behaviorList.append(MoveBehaviorLoops(bodyRef, 95, MovementDirection.FORWARD, 2, 1.5))
+behaviorList.append(BlinkBehaviorEaseInOut(bodyRef, bodyColor, ColorBrightness.HIGH, 1, 3.0, Color(rgb=(0.0, 0.0, 0.0))))
+straightFastBehavior = ComposedBehavior(bodyRef, behaviorList)
 creativityFastBehaviorDict[ShapeType.STRAIGHT] = straightFastBehavior
 
-straightSlowBehavior = ComposedBehavior(bodyRef)
-straightSlowBehavior.behaviorList.append(MoveBehaviorLoops(bodyRef, 30, MovementDirection.FORWARD, 2, 1.5))
-straightSlowBehavior.behaviorList.append(BlinkBehaviorEaseInOut(bodyRef, bodyColor, ColorBrightness.HIGH, 1, 3.0, Color(rgb=(0.0, 0.0, 0.0))))
+behaviorList = []
+behaviorList.append(MoveBehaviorLoops(bodyRef, 30, MovementDirection.FORWARD, 2, 1.5))
+behaviorList.append(BlinkBehaviorEaseInOut(bodyRef, bodyColor, ColorBrightness.HIGH, 1, 3.0, Color(rgb=(0.0, 0.0, 0.0))))
+straightSlowBehavior = ComposedBehavior(bodyRef, behaviorList)
 creativitySlowBehaviorDict[ShapeType.STRAIGHT] = straightSlowBehavior
 
 
 creativityProfile = CreativityProfile("Creative", 
-	0.1, creativitySlowBehaviorDict, StoryArcBehaviorType.CONTRAST, 
-	0.1, creativityFastBehaviorDict, StoryArcBehaviorType.CONTRAST, 
-	0.1, creativitySlowBehaviorDict, StoryArcBehaviorType.MIRROR)
+	3.1, creativitySlowBehaviorDict, StoryArcBehaviorType.CONTRAST, 
+	5.1, creativityFastBehaviorDict, StoryArcBehaviorType.CONTRAST, 
+	3.1, creativitySlowBehaviorDict, StoryArcBehaviorType.MIRROR)
 
-agent.interact(personalityProfile = "PUNK", creativityProfile = creativityProfile)
+agent.interact(creativityProfile = "AFFECTIVE", generalProfile = "PUNK")
 
-agent.interact(personalityProfile = "AFFECTIVE", creativityProfile="AFFECTIVE")
+agent.interact(personalityProfile = "AFFECTIVE", creativityProfile = "AFFECTIVE")
+
+agent.interact(personalityProfile = "ALOOF", creativityProfile = "ALOOF")

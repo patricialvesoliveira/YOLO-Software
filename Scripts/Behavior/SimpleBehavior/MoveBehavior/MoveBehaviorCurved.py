@@ -9,12 +9,12 @@ from Libs.Constants import *
 from Scripts.Behavior.SimpleBehavior.MoveBehavior.MoveBehavior import MoveBehavior
 
 
-class MoveBehaviorCurved(MoveBehavior):
+class MoveBehaviorCurved(MoveBehavior, object):
     def __init__(self, bodyRef, movementSpeed, movementDirection, repetitions, duration):
-        MoveBehavior.__init__(self, bodyRef, movementSpeed, movementDirection, repetitions, duration)
+        super(MoveBehaviorCurved, self).__init__(bodyRef, movementSpeed, movementDirection, repetitions, duration)
     
     def behaviorActions(self):
-        MoveBehavior.behaviorActions(self)
+        super(MoveBehaviorCurved, self).behaviorActions()
         
         # create array of sin wave values
         numSamples = 48

@@ -9,12 +9,12 @@ from Libs.Constants import *
 from Scripts.Behavior.SimpleBehavior.MoveBehavior.MoveBehavior import MoveBehavior
 
 
-class MoveBehaviorLoops(MoveBehavior):
+class MoveBehaviorLoops(MoveBehavior, object):
     def __init__(self, bodyRef, movementSpeed, movementDirection, repetitions, duration):
-        MoveBehavior.__init__(self, bodyRef, movementSpeed, movementDirection, repetitions, duration)
+        super(MoveBehaviorLoops, self).__init__(bodyRef, movementSpeed, movementDirection, repetitions, duration)
     
     def behaviorActions(self):
-        MoveBehavior.behaviorActions(self)
+        super(MoveBehaviorLoops, self).behaviorActions()
         
         # create array of semi-circles points
         numSamples = 24 
