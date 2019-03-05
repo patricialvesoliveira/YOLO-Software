@@ -7,6 +7,6 @@ class BlinkBehaviorInstant(BlinkBehavior, object):
 	    super(BlinkBehaviorInstant, self).__init__(bodyRef, blinkColor, brightness, repetitions, duration, defaultColor)
 	    
 	def behaviorActions(self):
-	    super(BlinkBehaviorInstant, self).behaviorActions()
-	    self.bodyRef.setColor(self.blinkColor)
-	    self.bodyRef.setBrightness(self.blinkBrightness)
+		super(BlinkBehaviorInstant, self).behaviorActions()
+		self.bodyRef.setColor(self.blinkColor)
+		self.bodyRef.setBrightness(self.blinkBrightness)

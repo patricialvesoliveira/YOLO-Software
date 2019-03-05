@@ -15,28 +15,17 @@ class BlinkBehavior(SimpleBehavior, object):
         self.brightness = brightness
         self.blinkBrightness = ColorBrightnessValues[brightness.name]
         self.defaultColor = defaultColor
-        self.initBehavior()
         
+
     def behaviorActions(self):
-        # when the animation is over we pause before changing color
-        if self.checkForBehaviorEnd():
-            if self.maxBehaviorRepetitions > 0:
-                self.currentBehaviorRepetition += 1
-                print self.currentBehaviorRepetition
-                if self.currentBehaviorRepetition >= self.maxBehaviorRepetitions:
-                    self.finishBehavior()
-                else:
-                    #reinit time before repeating behavior
-                    self.startTime = time.time()
+        #to be overriden
+        super(BlinkBehavior, self).behaviorActions()
+        
 
     def finishBehavior(self):
         super(BlinkBehavior, self).finishBehavior()
         self.bodyRef.setColor(self.defaultColor)
-
-    def animateLerp(self, percentage):
-        self.bodyRef.setColor(self.lerpColor(percentage, self.bodyColorAtStart, self.blinkColor))
-        self.bodyRef.setBrightness(self.blinkBrightness * percentage + self.bodyBrightnessAtStart * (1 - percentage))
-
+        
     def lerpColor(self, percentage, currentColor, newColor):
         rLerp = newColor.red * percentage + currentColor.red * (1 - percentage)
         gLerp = newColor.green * percentage + currentColor.green * (1 - percentage)

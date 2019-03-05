@@ -15,7 +15,6 @@ class MoveBehaviorLoops(MoveBehavior, object):
     
     def behaviorActions(self):
         super(MoveBehaviorLoops, self).behaviorActions()
-        
         # create array of semi-circles points
         numSamples = 24 
         ix = numpy.arange(numSamples)

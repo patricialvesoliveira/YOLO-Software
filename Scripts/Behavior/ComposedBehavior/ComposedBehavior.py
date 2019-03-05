@@ -1,6 +1,6 @@
 from Libs.Constants import *
 
-class ComposedBehavior:
+class ComposedBehavior(object):
     def __init__(self, bodyRef, behaviorList):
         self.bodyRef = bodyRef
         self.behaviorList = behaviorList

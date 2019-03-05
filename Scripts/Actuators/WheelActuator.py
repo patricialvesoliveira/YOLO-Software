@@ -99,7 +99,6 @@ class WheelActuator:
             self.C2 = C2new
 
     def moveTo(self, waypoint, speed):
-        print waypoint
         self.Eastmove2point(waypoint[0], waypoint[1], speed)
 
     def resetPinInput(self):

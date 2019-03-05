@@ -16,7 +16,6 @@ class MoveBehaviorSpikes(MoveBehavior, object):
 
     def behaviorActions(self):
         super(MoveBehaviorSpikes, self).behaviorActions()
-
         #To do a path backwards we invert the points and their order
         if self.currentMovementDirection == MovementDirection.REVERSE:
             self.waypoints = self.reversePath(self.waypoints)

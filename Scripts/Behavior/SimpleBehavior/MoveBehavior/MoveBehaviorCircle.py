@@ -15,7 +15,6 @@ class MoveBehaviorCircle(MoveBehavior, object):
     
     def behaviorActions(self):
         super(MoveBehaviorCircle, self).behaviorActions()
-
         # create array of circle values
         numSamples = 24
         ix = numpy.arange(numSamples)

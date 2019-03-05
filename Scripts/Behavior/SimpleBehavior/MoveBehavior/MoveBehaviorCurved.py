@@ -15,7 +15,6 @@ class MoveBehaviorCurved(MoveBehavior, object):
     
     def behaviorActions(self):
         super(MoveBehaviorCurved, self).behaviorActions()
-        
         # create array of sin wave values
         numSamples = 48
         ix = numpy.arange(numSamples)

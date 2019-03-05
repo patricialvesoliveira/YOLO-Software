@@ -4,34 +4,37 @@ import time
 from Libs.Constants import *
 
 
-class SimpleBehavior:
+class SimpleBehavior(object):
     def __init__(self, bodyRef, maxBehaviorRepetitions, duration):
         self.isOver = False
         self.duration = duration;
         self.maxBehaviorRepetitions = maxBehaviorRepetitions
         self.currentBehaviorRepetition = 0
-        if self.maxBehaviorRepetitions > 0:
-            self.animationIntervalTime = self.duration / self.maxBehaviorRepetitions
-        else:
-            self.animationIntervalTime = self.duration
         self.bodyRef = bodyRef
         self.startTime = time.time()
 
-    def initBehavior(self):
-        # to be overridden
-        pass
-
     def behaviorActions(self):
-        # to be overridden
-        pass
-
+        if(self.isOver):
+            return     
+        if(self.checkForBehaviorEnd()):
+            print "werwerwer"
+            if(self.maxBehaviorRepetitions == 0):
+                # infinite repetitions OO
+                self.resetBehavior()
+                return
+            self.currentBehaviorRepetition += 1
+            if(self.currentBehaviorRepetition >= self.maxBehaviorRepetitions):
+                self.finishBehavior()
+            else:
+                self.startTime = time.time()
+        
     def resetBehavior(self):
+        self.startTime = time.time()
         self.isOver = False
         self.currentBehaviorRepetition = 0
-        self.startTime = time.time()
-        self.initBehavior()
         
     def applyBehavior(self):
+        # print "cr: " + str(self.currentBehaviorRepetition)
         if(not self.isOver):
             self.behaviorActions()
         else:
