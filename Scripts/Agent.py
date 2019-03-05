@@ -106,6 +106,7 @@ class Agent (object):
         except Exception as e:
             print "Error: " + str(e)
 
+        self.body.setColor(Color(rgb=(0.0,0.0,0.0)))
         self.mind = None
         
     def generateGeneralProfile(self, name, idleColor):

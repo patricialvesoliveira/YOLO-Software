@@ -113,12 +113,12 @@ creativitySlowBehaviorDict[ShapeType.STRAIGHT] = straightSlowBehavior
 
 
 creativityProfile = CreativityProfile("Creative", 
-	3.1, creativitySlowBehaviorDict, StoryArcBehaviorType.CONTRAST, 
-	5.1, creativityFastBehaviorDict, StoryArcBehaviorType.CONTRAST, 
-	3.1, creativitySlowBehaviorDict, StoryArcBehaviorType.MIRROR)
+	0.1, creativitySlowBehaviorDict, StoryArcBehaviorType.CONTRAST, 
+	0.1, creativityFastBehaviorDict, StoryArcBehaviorType.CONTRAST, 
+	0.1, creativitySlowBehaviorDict, StoryArcBehaviorType.MIRROR)
 
 agent.interact(creativityProfile = creativityProfile)
 
-agent.interact(personalityProfile = "AFFECTIVE", creativityProfile = "AFFECTIVE")
+agent.interact(personalityProfile = "AFFECTIVE", generalProfile="AFFECTIVE", creativityProfile = "AFFECTIVE")
 
 agent.interact(personalityProfile = "ALOOF", creativityProfile = "ALOOF")

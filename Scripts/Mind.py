@@ -36,21 +36,11 @@ class Mind (object):
 
 
     def update(self):
-        # pupeteer behavior stuff
-        # self.wasTouched = False
-        # if self.hasTouchStarted():
-        #     self.attentionCallTriggered = False
-        #     self.personalityOrCreativeTriggered = False
-        #     print "nfskndsjkfndsjknfjkdsnfjdsnfdnksjf"
-        #     self.currBehavior.finishBehavior() # finish any pending behavior
-        #     self.resetCurrAndSetNewBehavior(BlinkBehaviorEaseInOut(self.body, Color(rgb=(1.0, 0.0, 0.0)), ColorBrightness.HIGH, 10, 2.0, Color(rgb=(0.0, 0.0, 0.0))))
-        #     # self.resetCurrAndSetNewBehavior(MoveBehaviorLoops(self.body, 40, MovementDirection.FORWARD, 5, 1.5))
-
 
         self.body.update()
         self.currBehavior.applyBehavior()
-        # return
-
+ 
+        
 
         tCurr = time.time()
         tSinceStart = tCurr - self.startTime
@@ -67,7 +57,6 @@ class Mind (object):
         elif (tSinceStart > (risingActionTime+ climaxTime)*60 and tSinceStart <= (risingActionTime + climaxTime + fallingActionTime)*60):
             self.currStoryArcMoment = StoryArc.FALLING_ACTION
         elif tSinceStart > (risingActionTime + climaxTime + fallingActionTime)*60 and not self.isInteractionFinished:
-            self.currBehavior.finishBehavior() # finish any pending behavior
             self.resetCurrAndSetNewBehavior(self.generalProfile.goodbyeBehavior)
             self.isInteractionFinished = True
             return
@@ -78,18 +67,15 @@ class Mind (object):
         if self.hasTouchStarted():
             self.attentionCallTriggered = False
             self.personalityOrCreativeTriggered = False
-
-            self.currBehavior.finishBehavior() # finish any pending behavior
             self.resetCurrAndSetNewBehavior(self.generalProfile.pupeteerBehavior)
 
         elif self.hasTouchEnded():
             self.tLastAttentionCall = self.tLastTouchF;
-            self.currBehavior.finishBehavior()
+            self.currBehavior.finishBehavior() # finish any pending behavior
 
             #hello is performed on the first touch
             if not self.isInteractionStarted:
                 self.resetCurrAndSetNewBehavior(self.generalProfile.helloBehavior)
-                # print self.currBehavior.maxBehaviorRepetitions
                 self.isInteractionStarted = True
 
         #do nothing until first touch
@@ -124,15 +110,18 @@ class Mind (object):
         if self.currBehavior.isOver:
             if(self.isInteractionFinished):
                 self.isMindFinished = True
+                return
             self.resetCurrAndSetNewBehavior(self.generalProfile.idleBehavior)
 
         # check for recognized shapes
-        if self.shapeWasRecognized():
-            self.currRecognizedShape = self.predictShape(self.body.getOpticalSensor().getCurrentRecognizedShape())
+        # if self.shapeWasRecognized():
+            # self.currRecognizedShape = self.predictShape(self.body.getOpticalSensor().getCurrentRecognizedShape())
+        self.currRecognizedShape = ShapeType(int(1)+1)
 
     def resetCurrAndSetNewBehavior(self, newBehavior):
-        self.currBehavior.resetBehavior()  #reset behavior before future application
+        self.currBehavior.finishBehavior() # finish any pending behavior
         self.currBehavior = newBehavior
+        self.currBehavior.resetBehavior()  #reset behavior before application
 
     def generatePersonalityBehavior(self):
         personalityBehaviorList = self.personalityProfile.personalityBehaviorList
