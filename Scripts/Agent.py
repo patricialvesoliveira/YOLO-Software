@@ -56,10 +56,6 @@ class Agent (object):
     
     def interact(self, generalProfile = None, personalityProfile = None, creativityProfile = None):
         
-        # composedBeh = BlinkBehaviorEaseIn(self.body, Color(rgb=(1.0, 0.0, 0.0)), ColorBrightness.HIGH, 1, 3.0, Color(rgb=(0.0, 0.0, 0.0)))
-        # while True:
-        #     composedBeh.applyBehavior()
-
         if(isinstance(generalProfile,basestring)):
             generalPresetSwitcher = {
                 "PUNK": self.generateGeneralProfile("PUNK", Color(rgb=(0.5,0.0,0.5))),

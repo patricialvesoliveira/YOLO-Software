@@ -37,19 +37,19 @@ class Mind (object):
 
     def update(self):
         # pupeteer behavior stuff
-        self.wasTouched = False
-        if self.hasTouchStarted():
-            self.attentionCallTriggered = False
-            self.personalityOrCreativeTriggered = False
-            print "nfskndsjkfndsjknfjkdsnfjdsnfdnksjf"
-            self.currBehavior.finishBehavior() # finish any pending behavior
-            self.resetCurrAndSetNewBehavior(BlinkBehaviorEaseInOut(self.body, Color(rgb=(1.0, 0.0, 0.0)), ColorBrightness.HIGH, 10, 2.0, Color(rgb=(0.0, 0.0, 0.0))))
-            # self.resetCurrAndSetNewBehavior(MoveBehaviorLoops(self.body, 40, MovementDirection.FORWARD, 5, 1.5))
+        # self.wasTouched = False
+        # if self.hasTouchStarted():
+        #     self.attentionCallTriggered = False
+        #     self.personalityOrCreativeTriggered = False
+        #     print "nfskndsjkfndsjknfjkdsnfjdsnfdnksjf"
+        #     self.currBehavior.finishBehavior() # finish any pending behavior
+        #     self.resetCurrAndSetNewBehavior(BlinkBehaviorEaseInOut(self.body, Color(rgb=(1.0, 0.0, 0.0)), ColorBrightness.HIGH, 10, 2.0, Color(rgb=(0.0, 0.0, 0.0))))
+        #     # self.resetCurrAndSetNewBehavior(MoveBehaviorLoops(self.body, 40, MovementDirection.FORWARD, 5, 1.5))
 
 
         self.body.update()
         self.currBehavior.applyBehavior()
-        return
+        # return
 
 
         tCurr = time.time()

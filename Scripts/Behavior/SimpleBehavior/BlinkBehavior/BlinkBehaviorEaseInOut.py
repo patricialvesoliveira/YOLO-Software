@@ -18,12 +18,12 @@ class BlinkBehaviorEaseInOut(BlinkBehavior, object):
         super(BlinkBehaviorEaseInOut, self).behaviorActions()
         currDuration = time.time() - self.startTime
         if currDuration <= self.subBehaviorDuration:
+            self.easeOutBehavior.resetBehavior() #constantly reset until needed
             self.easeInBehavior.behaviorActions()
-            self.easeOutBehavior.resetBehavior()
         elif currDuration < self.duration:
             self.easeOutBehavior.behaviorActions()
+            self.easeInBehavior.resetBehavior()
         
-
 
     def finishBehavior(self):
         super(BlinkBehaviorEaseInOut, self).finishBehavior()
@@ -36,5 +36,3 @@ class BlinkBehaviorEaseInOut(BlinkBehavior, object):
     def resetBehaviors(self):
         self.easeInBehavior.resetBehavior()
         self.easeOutBehavior.resetBehavior()
-        self.behaviorInSet = False
-        self.behaviorOutSet = False

@@ -14,3 +14,7 @@ class BlinkBehaviorEaseOut(BlinkBehavior, object):
     def behaviorActions(self):
         super(BlinkBehaviorEaseOut, self).behaviorActions()
     	self.easeInBehavior.behaviorActions()
+
+    def resetBehavior(self):
+        super(BlinkBehaviorEaseOut, self).behaviorActions()
+    	self.easeInBehavior.resetBehavior()
