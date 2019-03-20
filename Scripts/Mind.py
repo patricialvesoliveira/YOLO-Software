@@ -24,7 +24,7 @@ class Mind (object):
         self.personalityOrCreativeTriggered = False
 
         self.currStoryArcMoment = StoryArc.NONE
-        self.currRecognizedShape = "NONE"
+        self.currRecognizedShape = ShapeType.NONE
         
         self.isInteractionStarted = False
         self.isInteractionFinished = False
@@ -32,15 +32,9 @@ class Mind (object):
 
         self.tLastAttentionCall = tCurr
         
-        # self.resetCurrAndSetNewBehavior(self.generalProfile.helloBehavior)       
-
-
     def update(self):
-
         self.body.update()
         self.currBehavior.applyBehavior()
- 
-        
 
         tCurr = time.time()
         tSinceStart = tCurr - self.startTime
@@ -114,8 +108,8 @@ class Mind (object):
             self.resetCurrAndSetNewBehavior(self.generalProfile.idleBehavior)
 
         # check for recognized shapes
-        # if self.shapeWasRecognized():
-            # self.currRecognizedShape = self.predictShape(self.body.getOpticalSensor().getCurrentRecognizedShape())
+        if self.shapeWasRecognized():
+            self.currRecognizedShape = self.predictShape(self.body.getOpticalSensor().getCurrentRecognizedShape())
         self.currRecognizedShape = ShapeType(int(1)+1)
 
     def resetCurrAndSetNewBehavior(self, newBehavior):

@@ -9,6 +9,8 @@ from Scripts.Actuators.WheelActuator import WheelActuator
 
 class Body:
     def __init__(self):
+        # remove GPIO warnings
+        GPIO.setwarnings(False)
         # setting the GPIO mode that the board should
         GPIO.setmode(GPIO.BCM)
         self.touchSensor = TouchSensor()
@@ -18,7 +20,6 @@ class Body:
         self.color = Color(rgb=(0.0, 0.0, 0.0))
         self.colorBrightness = ColorBrightnessValues[ColorBrightness.MEDIUM.name]
         print "Body set up finished!"
-        return
 
     def __del__(self):
         self.touchSensor = None

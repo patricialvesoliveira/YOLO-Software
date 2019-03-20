@@ -22,13 +22,12 @@ class LEDActuator:
         # Note: the jewel has a configuration of GRB
         self.leds = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL, LED_TYPE)
         self.leds.begin()
+        self.setColor( 0, 0, 0)
+        self.leds.setBrightness(0)
         print "OK! -- Jewel LEDs set up!"
 
     def __del__(self):
-        for i in range(0, self.leds.numPixels(), 1):
-            self.leds.setPixelColor(i, Color(0, 0, 0))
-        self.leds.show()
-        print "Turning off the Jewel's LEDs"
+        print "LED Actuator cleanup successful!"
 
     # Don't change the setColor functions just the RGB specs for each strip
     def setColor(self, green, red, blue):

@@ -34,7 +34,6 @@ class MoveBehavior(SimpleBehavior, object):
         super(MoveBehavior, self).behaviorActions()
 
         if self.checkForBehaviorEnd(): 
-            print "safsa"
             # if this movement is alternating then change it after each repetition
             if self.initialMovementDirection == MovementDirection.ALTERNATING:
                 if self.currentMovementDirection == MovementDirection.FORWARD:

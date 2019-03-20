@@ -38,8 +38,10 @@ class CreativityProfile (object):
 
 class Agent (object):
     def __init__(self, name):
+        
         # init body as it is independent of the state of mind while interacting and needed to build behaviors
         self.body = Body() 
+        self.mind = None
 
         self.defaultPersonalityProfile = PersonalityProfile("Default", 1, ComposedBehavior(self.body, []), 30.0, [])
         self.defaultCreativityProfile = CreativityProfile("Default", 5, {}, StoryArcBehaviorType.MIRROR, 5, {}, StoryArcBehaviorType.MIRROR, 5, {}, StoryArcBehaviorType.MIRROR)
@@ -48,8 +50,9 @@ class Agent (object):
         self.name = name
 
     def __del__(self):
-        self.body.__del__()
-        self.mind = None
+        pass
+        # self.body.__del__()
+        # self.mind = None
 
     def getBodyRef(self):
         return self.body
@@ -101,8 +104,7 @@ class Agent (object):
                 else:
                     break
         except KeyboardInterrupt:
-            print "Application closed due to user input!"
-            self.__del__()
+            print "Current Interaction finnished due to user input!"
         except Exception as e:
             print "Error: " + str(e)
 

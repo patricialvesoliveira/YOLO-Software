@@ -1,19 +1,19 @@
-import enum
+from enum import IntEnum
 # BODY
 
-class SensorType(enum.Enum):
+class SensorType(IntEnum):
     OPTICAL = 1
     TOUCH = 2
 
 
-class OpticalState(enum.Enum):
+class OpticalState(IntEnum):
     RECEIVING = 1
     NOT_RECEIVING = 2
     FINISHED = 3
 
 
 
-class TouchState(enum.Enum):
+class TouchState(IntEnum):
     TOUCHING = 1
     NOT_TOUCHING = 2
 
@@ -21,14 +21,14 @@ class TouchState(enum.Enum):
 
 # MIND
 
-class PersonalityType(enum.Enum):
+class PersonalityType(IntEnum):
     NONE = 0
     PUNK = 1
     AFFECTIVE = 2
     ALOOF = 3
 
 
-class ShapeType(enum.Enum):
+class ShapeType(IntEnum):
     NONE = 0
     SPIKES = 1
     CURVED = 2
@@ -38,12 +38,12 @@ class ShapeType(enum.Enum):
     CIRCLE = 6
     FORWARD_AND_BACK = 7
 
-class ShapeSpeed(enum.Enum):
+class ShapeSpeed(IntEnum):
     NONE = 0
     SLOW = 1
     FAST = 2
 
-class MovementDirection(enum.Enum):
+class MovementDirection(IntEnum):
     NONE = 0
     FORWARD = 1
     REVERSE = 2
@@ -51,25 +51,25 @@ class MovementDirection(enum.Enum):
 
 
 # order is relevant here, the story progresses through its arcs sequentially
-class StoryArc(enum.Enum):
+class StoryArc(IntEnum):
     NONE = 0
     RISING_ACTION = 1
     CLIMAX = 2
     FALLING_ACTION = 3
 
-class StoryArcBehaviorType(enum.Enum):
+class StoryArcBehaviorType(IntEnum):
     NONE = 0
     MIRROR = 1
     CONTRAST = 2
 
-class BehaviorType(enum.Enum):
+class BehaviorType(IntEnum):
     NONE = 0
     BLINK = 1
     MOVE = 2
 
 
 
-class ComposedBehaviorType(enum.Enum):
+class ComposedBehaviorType(IntEnum):
     NONE = 0
     LOOPS_FAST = 1
     LOOPS_SLOW = 2
@@ -101,7 +101,7 @@ class ComposedBehaviorType(enum.Enum):
     BASE = 28
 
 
-class BlinkingSpeed(enum.Enum):
+class BlinkingSpeed(IntEnum):
     NONE = 0
     STOPPED = 1
     VERY_SLOW = 2
@@ -111,7 +111,7 @@ class BlinkingSpeed(enum.Enum):
     VERY_FAST = 6
 
 
-class ColorBrightness(enum.Enum):
+class ColorBrightness(IntEnum):
     NONE = 0
     LOW = 1
     MEDIUM = 2

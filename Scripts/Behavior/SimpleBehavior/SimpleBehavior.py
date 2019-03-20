@@ -17,7 +17,6 @@ class SimpleBehavior(object):
         if(self.isOver):
             return     
         if(self.checkForBehaviorEnd()):
-            print "werwerwer"
             if(self.maxBehaviorRepetitions == 0):
                 # infinite repetitions OO
                 self.resetBehavior()
