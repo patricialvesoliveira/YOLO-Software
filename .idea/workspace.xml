@@ -15,7 +15,7 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="Mind.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Core/Mind.py">
+        <entry file="file://$PROJECT_DIR$/YOLOSoftware/Mind.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="3648">
               <caret line="235" column="128" lean-forward="false" selection-start-line="235" selection-start-column="128" selection-end-line="235" selection-end-column="128" />
@@ -27,7 +27,7 @@
         </entry>
       </file>
       <file leaf-file-name="AloofBehavior3.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Core/Behaviors/ComposedBehaviors/PersonalityBehaviors/AloofPersonality/AloofBehavior3.py">
+        <entry file="file://$PROJECT_DIR$/YOLOSoftware/Behaviors/ComposedBehaviors/PersonalityBehaviors/AloofPersonality/AloofBehavior3.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="589">
               <caret line="36" column="0" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
@@ -37,7 +37,7 @@
         </entry>
       </file>
       <file leaf-file-name="PunkHelloBehavior.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Core/Behaviors/ComposedBehaviors/PersonalityBehaviors/PunkPersonality/PunkHelloBehavior.py">
+        <entry file="file://$PROJECT_DIR$/YOLOSoftware/Behaviors/ComposedBehaviors/PersonalityBehaviors/PunkPersonality/PunkHelloBehavior.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="551">
               <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
@@ -47,7 +47,7 @@
         </entry>
       </file>
       <file leaf-file-name="PunkAttentionCallBehavior.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Core/Behaviors/ComposedBehaviors/PersonalityBehaviors/PunkPersonality/PunkAttentionCallBehavior.py">
+        <entry file="file://$PROJECT_DIR$/YOLOSoftware/Behaviors/ComposedBehaviors/PersonalityBehaviors/PunkPersonality/PunkAttentionCallBehavior.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="456">
               <caret line="29" column="120" lean-forward="false" selection-start-line="29" selection-start-column="119" selection-end-line="29" selection-end-column="120" />
@@ -57,7 +57,7 @@
         </entry>
       </file>
       <file leaf-file-name="MoveBehavior.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Core/Behaviors/SimpleBehaviors/MoveBehavior.py">
+        <entry file="file://$PROJECT_DIR$/YOLOSoftware/Behaviors/SimpleBehaviors/MoveBehavior.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="183">
               <caret line="191" column="81" lean-forward="false" selection-start-line="191" selection-start-column="81" selection-end-line="191" selection-end-column="81" />
@@ -67,7 +67,7 @@
         </entry>
       </file>
       <file leaf-file-name="AffectiveAttentionCallBehavior.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Core/Behaviors/ComposedBehaviors/PersonalityBehaviors/AffectivePersonality/AffectiveAttentionCallBehavior.py">
+        <entry file="file://$PROJECT_DIR$/YOLOSoftware/Behaviors/ComposedBehaviors/PersonalityBehaviors/AffectivePersonality/AffectiveAttentionCallBehavior.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="437">
               <caret line="28" column="130" lean-forward="false" selection-start-line="28" selection-start-column="20" selection-end-line="28" selection-end-column="130" />
@@ -77,7 +77,7 @@
         </entry>
       </file>
       <file leaf-file-name="AloofIdleBehavior.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Core/Behaviors/ComposedBehaviors/PersonalityBehaviors/AloofPersonality/AloofIdleBehavior.py">
+        <entry file="file://$PROJECT_DIR$/YOLOSoftware/Behaviors/ComposedBehaviors/PersonalityBehaviors/AloofPersonality/AloofIdleBehavior.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="361">
               <caret line="24" column="89" lean-forward="false" selection-start-line="24" selection-start-column="89" selection-end-line="24" selection-end-column="89" />
@@ -87,7 +87,7 @@
         </entry>
       </file>
       <file leaf-file-name="ComposedBehavior.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Core/Behaviors/ComposedBehaviors/ComposedBehavior.py">
+        <entry file="file://$PROJECT_DIR$/YOLOSoftware/Behaviors/ComposedBehaviors/ComposedBehavior.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="532">
               <caret line="32" column="33" lean-forward="false" selection-start-line="32" selection-start-column="33" selection-end-line="32" selection-end-column="33" />
@@ -97,7 +97,7 @@
         </entry>
       </file>
       <file leaf-file-name="AloofHelloBehavior.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Core/Behaviors/ComposedBehaviors/PersonalityBehaviors/AloofPersonality/AloofHelloBehavior.py">
+        <entry file="file://$PROJECT_DIR$/YOLOSoftware/Behaviors/ComposedBehaviors/PersonalityBehaviors/AloofPersonality/AloofHelloBehavior.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="342">
               <caret line="23" column="146" lean-forward="false" selection-start-line="23" selection-start-column="146" selection-end-line="23" selection-end-column="146" />
@@ -107,7 +107,7 @@
         </entry>
       </file>
       <file leaf-file-name="AloofBehavior2.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Core/Behaviors/ComposedBehaviors/PersonalityBehaviors/AloofPersonality/AloofBehavior2.py">
+        <entry file="file://$PROJECT_DIR$/YOLOSoftware/Behaviors/ComposedBehaviors/PersonalityBehaviors/AloofPersonality/AloofBehavior2.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="342">
               <caret line="23" column="175" lean-forward="false" selection-start-line="23" selection-start-column="175" selection-end-line="23" selection-end-column="175" />
@@ -149,57 +149,57 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Core/Behaviors/ComposedBehaviors/PersonalityBehaviors/AffectiveIdleBehavior.py" />
-        <option value="$PROJECT_DIR$/Core/Behaviors/ComposedBehaviors/PersonalityBehaviors/AffectiveBehavior1.py" />
-        <option value="$PROJECT_DIR$/Core/Behaviors/ComposedBehaviors/PersonalityBehaviors/AffectiveBehavior2.py" />
-        <option value="$PROJECT_DIR$/Core/Behaviors/ComposedBehaviors/PersonalityBehaviors/AffectiveAttentionCallBehavior.py" />
-        <option value="$PROJECT_DIR$/Core/Behaviors/ComposedBehaviors/PersonalityBehaviors/AffectiveHelloBehavior.py" />
-        <option value="$PROJECT_DIR$/Core/Actuators/LEDActuator.py" />
-        <option value="$PROJECT_DIR$/Core/Actuators/HeadActuator.py" />
-        <option value="$PROJECT_DIR$/Core/Actuators/JewelLEDActuator.py" />
-        <option value="$PROJECT_DIR$/Core/Sensors/TouchSensor.py" />
-        <option value="$PROJECT_DIR$/Core/Sensors/OpticalSensor.py" />
-        <option value="$PROJECT_DIR$/Core/Behaviors/ComposedBehaviors/PersonalityBehaviors/PunkPersonality/PunkHelloBehavior.py" />
-        <option value="$PROJECT_DIR$/Core/Behaviors/ComposedBehaviors/PersonalityBehaviors/PunkPersonality/PunkBehavior3.py" />
-        <option value="$PROJECT_DIR$/Core/Behaviors/ComposedBehaviors/PersonalityBehaviors/PunkPersonality/PunkBehavior2.py" />
-        <option value="$PROJECT_DIR$/Core/Behaviors/ComposedBehaviors/PersonalityBehaviors/PunkPersonality/PunkBehavior1.py" />
-        <option value="$PROJECT_DIR$/Core/Behaviors/ComposedBehaviors/PersonalityBehaviors/AloofPersonality/AloofAttentionCallBehavior.py" />
-        <option value="$PROJECT_DIR$/Core/Behaviors/ComposedBehaviors/PersonalityBehaviors/AffectivePersonality/AffectiveBehavior3.py" />
-        <option value="$PROJECT_DIR$/Core/Behaviors/ComposedBehaviors/PersonalityBehaviors/AffectivePersonality/AffectiveBehavior2.py" />
-        <option value="$PROJECT_DIR$/Core/Behaviors/ComposedBehaviors/GenericBehaviors/PuppeteerBehavior.py" />
-        <option value="$PROJECT_DIR$/Core/Behaviors/ComposedBehaviors/CreativeTechniques/StraightSlowBehavior.py" />
-        <option value="$PROJECT_DIR$/Core/Behaviors/ComposedBehaviors/CreativeTechniques/StraightFastBehavior.py" />
-        <option value="$PROJECT_DIR$/Core/Behaviors/ComposedBehaviors/CreativeTechniques/SpikesSlowBehavior.py" />
-        <option value="$PROJECT_DIR$/Core/Behaviors/ComposedBehaviors/CreativeTechniques/RectSlowBehavior.py" />
-        <option value="$PROJECT_DIR$/Core/Behaviors/ComposedBehaviors/CreativeTechniques/RectFastBehavior.py" />
-        <option value="$PROJECT_DIR$/Core/Behaviors/ComposedBehaviors/CreativeTechniques/LoopsSlowBehavior.py" />
-        <option value="$PROJECT_DIR$/Core/Behaviors/ComposedBehaviors/CreativeTechniques/LoopsFastBehavior.py" />
-        <option value="$PROJECT_DIR$/Core/Behaviors/ComposedBehaviors/CreativeTechniques/CurvedSlowBehavior.py" />
-        <option value="$PROJECT_DIR$/Core/Behaviors/ComposedBehaviors/CreativeTechniques/CurvedFastBehavior.py" />
-        <option value="$PROJECT_DIR$/Core/Behaviors/ComposedBehaviors/CreativeTechniques/SpikesFastBehavior.py" />
-        <option value="$PROJECT_DIR$/Core/Behaviors/ComposedBehaviors/PersonalityBehaviors/AffectivePersonality/AffectiveBehavior1.py" />
-        <option value="$PROJECT_DIR$/Core/Behaviors/SimpleBehaviors/Behavior.py" />
-        <option value="$PROJECT_DIR$/Core/Behaviors/SimpleBehaviors/BlinkBehavior.py" />
-        <option value="$PROJECT_DIR$/Core/Behaviors/SimpleBehaviors/FeelerBehavior.py" />
-        <option value="$PROJECT_DIR$/Core/Behaviors/ComposedBehaviors/ComposedBehavior.py" />
+        <option value="$PROJECT_DIR$/YOLOSoftware/Behaviors/ComposedBehaviors/PersonalityBehaviors/AffectiveIdleBehavior.py" />
+        <option value="$PROJECT_DIR$/YOLOSoftware/Behaviors/ComposedBehaviors/PersonalityBehaviors/AffectiveBehavior1.py" />
+        <option value="$PROJECT_DIR$/YOLOSoftware/Behaviors/ComposedBehaviors/PersonalityBehaviors/AffectiveBehavior2.py" />
+        <option value="$PROJECT_DIR$/YOLOSoftware/Behaviors/ComposedBehaviors/PersonalityBehaviors/AffectiveAttentionCallBehavior.py" />
+        <option value="$PROJECT_DIR$/YOLOSoftware/Behaviors/ComposedBehaviors/PersonalityBehaviors/AffectiveHelloBehavior.py" />
+        <option value="$PROJECT_DIR$/YOLOSoftware/Actuators/LEDActuator.py" />
+        <option value="$PROJECT_DIR$/YOLOSoftware/Actuators/HeadActuator.py" />
+        <option value="$PROJECT_DIR$/YOLOSoftware/Actuators/JewelLEDActuator.py" />
+        <option value="$PROJECT_DIR$/YOLOSoftware/Sensors/TouchSensor.py" />
+        <option value="$PROJECT_DIR$/YOLOSoftware/Sensors/OpticalSensor.py" />
+        <option value="$PROJECT_DIR$/YOLOSoftware/Behaviors/ComposedBehaviors/PersonalityBehaviors/PunkPersonality/PunkHelloBehavior.py" />
+        <option value="$PROJECT_DIR$/YOLOSoftware/Behaviors/ComposedBehaviors/PersonalityBehaviors/PunkPersonality/PunkBehavior3.py" />
+        <option value="$PROJECT_DIR$/YOLOSoftware/Behaviors/ComposedBehaviors/PersonalityBehaviors/PunkPersonality/PunkBehavior2.py" />
+        <option value="$PROJECT_DIR$/YOLOSoftware/Behaviors/ComposedBehaviors/PersonalityBehaviors/PunkPersonality/PunkBehavior1.py" />
+        <option value="$PROJECT_DIR$/YOLOSoftware/Behaviors/ComposedBehaviors/PersonalityBehaviors/AloofPersonality/AloofAttentionCallBehavior.py" />
+        <option value="$PROJECT_DIR$/YOLOSoftware/Behaviors/ComposedBehaviors/PersonalityBehaviors/AffectivePersonality/AffectiveBehavior3.py" />
+        <option value="$PROJECT_DIR$/YOLOSoftware/Behaviors/ComposedBehaviors/PersonalityBehaviors/AffectivePersonality/AffectiveBehavior2.py" />
+        <option value="$PROJECT_DIR$/YOLOSoftware/Behaviors/ComposedBehaviors/GenericBehaviors/PuppeteerBehavior.py" />
+        <option value="$PROJECT_DIR$/YOLOSoftware/Behaviors/ComposedBehaviors/CreativeTechniques/StraightSlowBehavior.py" />
+        <option value="$PROJECT_DIR$/YOLOSoftware/Behaviors/ComposedBehaviors/CreativeTechniques/StraightFastBehavior.py" />
+        <option value="$PROJECT_DIR$/YOLOSoftware/Behaviors/ComposedBehaviors/CreativeTechniques/SpikesSlowBehavior.py" />
+        <option value="$PROJECT_DIR$/YOLOSoftware/Behaviors/ComposedBehaviors/CreativeTechniques/RectSlowBehavior.py" />
+        <option value="$PROJECT_DIR$/YOLOSoftware/Behaviors/ComposedBehaviors/CreativeTechniques/RectFastBehavior.py" />
+        <option value="$PROJECT_DIR$/YOLOSoftware/Behaviors/ComposedBehaviors/CreativeTechniques/LoopsSlowBehavior.py" />
+        <option value="$PROJECT_DIR$/YOLOSoftware/Behaviors/ComposedBehaviors/CreativeTechniques/LoopsFastBehavior.py" />
+        <option value="$PROJECT_DIR$/YOLOSoftware/Behaviors/ComposedBehaviors/CreativeTechniques/CurvedSlowBehavior.py" />
+        <option value="$PROJECT_DIR$/YOLOSoftware/Behaviors/ComposedBehaviors/CreativeTechniques/CurvedFastBehavior.py" />
+        <option value="$PROJECT_DIR$/YOLOSoftware/Behaviors/ComposedBehaviors/CreativeTechniques/SpikesFastBehavior.py" />
+        <option value="$PROJECT_DIR$/YOLOSoftware/Behaviors/ComposedBehaviors/PersonalityBehaviors/AffectivePersonality/AffectiveBehavior1.py" />
+        <option value="$PROJECT_DIR$/YOLOSoftware/Behaviors/SimpleBehaviors/Behavior.py" />
+        <option value="$PROJECT_DIR$/YOLOSoftware/Behaviors/SimpleBehaviors/BlinkBehavior.py" />
+        <option value="$PROJECT_DIR$/YOLOSoftware/Behaviors/SimpleBehaviors/FeelerBehavior.py" />
+        <option value="$PROJECT_DIR$/YOLOSoftware/Behaviors/ComposedBehaviors/ComposedBehavior.py" />
         <option value="$PROJECT_DIR$/__init__.py" />
-        <option value="$PROJECT_DIR$/Core/Actuators/WheelActuator.py" />
-        <option value="$PROJECT_DIR$/Core/Actuators/StripLEDActuator.py" />
-        <option value="$PROJECT_DIR$/Core/Body.py" />
+        <option value="$PROJECT_DIR$/YOLOSoftware/Actuators/WheelActuator.py" />
+        <option value="$PROJECT_DIR$/YOLOSoftware/Actuators/StripLEDActuator.py" />
+        <option value="$PROJECT_DIR$/YOLOSoftware/Body.py" />
         <option value="$PROJECT_DIR$/Libs/GUI.py" />
-        <option value="$PROJECT_DIR$/Core/Behaviors/ComposedBehaviors/PersonalityBehaviors/AffectivePersonality/AffectiveHelloBehavior.py" />
-        <option value="$PROJECT_DIR$/Core/Behaviors/ComposedBehaviors/PersonalityBehaviors/AffectivePersonality/AffectiveIdleBehavior.py" />
-        <option value="$PROJECT_DIR$/Core/Behaviors/ComposedBehaviors/PersonalityBehaviors/AffectivePersonality/AffectiveAttentionCallBehavior.py" />
-        <option value="$PROJECT_DIR$/Core/Mind.py" />
-        <option value="$PROJECT_DIR$/Core/Behaviors/ComposedBehaviors/PersonalityBehaviors/PunkPersonality/PunkIdleBehavior.py" />
-        <option value="$PROJECT_DIR$/Core/Behaviors/ComposedBehaviors/PersonalityBehaviors/AloofPersonality/AloofBehavior1.py" />
-        <option value="$PROJECT_DIR$/Core/Behaviors/ComposedBehaviors/PersonalityBehaviors/AloofPersonality/AloofBehavior2.py" />
-        <option value="$PROJECT_DIR$/Core/Behaviors/ComposedBehaviors/PersonalityBehaviors/AloofPersonality/AloofHelloBehavior.py" />
-        <option value="$PROJECT_DIR$/Core/Behaviors/ComposedBehaviors/PersonalityBehaviors/AloofPersonality/AloofIdleBehavior.py" />
+        <option value="$PROJECT_DIR$/YOLOSoftware/Behaviors/ComposedBehaviors/PersonalityBehaviors/AffectivePersonality/AffectiveHelloBehavior.py" />
+        <option value="$PROJECT_DIR$/YOLOSoftware/Behaviors/ComposedBehaviors/PersonalityBehaviors/AffectivePersonality/AffectiveIdleBehavior.py" />
+        <option value="$PROJECT_DIR$/YOLOSoftware/Behaviors/ComposedBehaviors/PersonalityBehaviors/AffectivePersonality/AffectiveAttentionCallBehavior.py" />
+        <option value="$PROJECT_DIR$/YOLOSoftware/Mind.py" />
+        <option value="$PROJECT_DIR$/YOLOSoftware/Behaviors/ComposedBehaviors/PersonalityBehaviors/PunkPersonality/PunkIdleBehavior.py" />
+        <option value="$PROJECT_DIR$/YOLOSoftware/Behaviors/ComposedBehaviors/PersonalityBehaviors/AloofPersonality/AloofBehavior1.py" />
+        <option value="$PROJECT_DIR$/YOLOSoftware/Behaviors/ComposedBehaviors/PersonalityBehaviors/AloofPersonality/AloofBehavior2.py" />
+        <option value="$PROJECT_DIR$/YOLOSoftware/Behaviors/ComposedBehaviors/PersonalityBehaviors/AloofPersonality/AloofHelloBehavior.py" />
+        <option value="$PROJECT_DIR$/YOLOSoftware/Behaviors/ComposedBehaviors/PersonalityBehaviors/AloofPersonality/AloofIdleBehavior.py" />
         <option value="$PROJECT_DIR$/Libs/Constants.py" />
-        <option value="$PROJECT_DIR$/Core/Behaviors/ComposedBehaviors/PersonalityBehaviors/AloofPersonality/AloofBehavior3.py" />
-        <option value="$PROJECT_DIR$/Core/Behaviors/ComposedBehaviors/PersonalityBehaviors/PunkPersonality/PunkAttentionCallBehavior.py" />
-        <option value="$PROJECT_DIR$/Core/Behaviors/SimpleBehaviors/MoveBehavior.py" />
+        <option value="$PROJECT_DIR$/YOLOSoftware/Behaviors/ComposedBehaviors/PersonalityBehaviors/AloofPersonality/AloofBehavior3.py" />
+        <option value="$PROJECT_DIR$/YOLOSoftware/Behaviors/ComposedBehaviors/PersonalityBehaviors/PunkPersonality/PunkAttentionCallBehavior.py" />
+        <option value="$PROJECT_DIR$/YOLOSoftware/Behaviors/SimpleBehaviors/MoveBehavior.py" />
       </list>
     </option>
   </component>
@@ -244,31 +244,31 @@
             <path>
               <item name="YoloAgent" type="b2602c69:ProjectViewProjectNode" />
               <item name="YoloAgent" type="462c0819:PsiDirectoryNode" />
-              <item name="Core" type="462c0819:PsiDirectoryNode" />
+              <item name="YOLOSoftware" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="YoloAgent" type="b2602c69:ProjectViewProjectNode" />
               <item name="YoloAgent" type="462c0819:PsiDirectoryNode" />
-              <item name="Core" type="462c0819:PsiDirectoryNode" />
+              <item name="YOLOSoftware" type="462c0819:PsiDirectoryNode" />
               <item name="Actuators" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="YoloAgent" type="b2602c69:ProjectViewProjectNode" />
               <item name="YoloAgent" type="462c0819:PsiDirectoryNode" />
-              <item name="Core" type="462c0819:PsiDirectoryNode" />
+              <item name="YOLOSoftware" type="462c0819:PsiDirectoryNode" />
               <item name="Behaviors" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="YoloAgent" type="b2602c69:ProjectViewProjectNode" />
               <item name="YoloAgent" type="462c0819:PsiDirectoryNode" />
-              <item name="Core" type="462c0819:PsiDirectoryNode" />
+              <item name="YOLOSoftware" type="462c0819:PsiDirectoryNode" />
               <item name="Behaviors" type="462c0819:PsiDirectoryNode" />
               <item name="ComposedBehaviors" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="YoloAgent" type="b2602c69:ProjectViewProjectNode" />
               <item name="YoloAgent" type="462c0819:PsiDirectoryNode" />
-              <item name="Core" type="462c0819:PsiDirectoryNode" />
+              <item name="YOLOSoftware" type="462c0819:PsiDirectoryNode" />
               <item name="Behaviors" type="462c0819:PsiDirectoryNode" />
               <item name="ComposedBehaviors" type="462c0819:PsiDirectoryNode" />
               <item name="PersonalityBehaviors" type="462c0819:PsiDirectoryNode" />
@@ -276,7 +276,7 @@
             <path>
               <item name="YoloAgent" type="b2602c69:ProjectViewProjectNode" />
               <item name="YoloAgent" type="462c0819:PsiDirectoryNode" />
-              <item name="Core" type="462c0819:PsiDirectoryNode" />
+              <item name="YOLOSoftware" type="462c0819:PsiDirectoryNode" />
               <item name="Behaviors" type="462c0819:PsiDirectoryNode" />
               <item name="ComposedBehaviors" type="462c0819:PsiDirectoryNode" />
               <item name="PersonalityBehaviors" type="462c0819:PsiDirectoryNode" />
@@ -285,7 +285,7 @@
             <path>
               <item name="YoloAgent" type="b2602c69:ProjectViewProjectNode" />
               <item name="YoloAgent" type="462c0819:PsiDirectoryNode" />
-              <item name="Core" type="462c0819:PsiDirectoryNode" />
+              <item name="YOLOSoftware" type="462c0819:PsiDirectoryNode" />
               <item name="Behaviors" type="462c0819:PsiDirectoryNode" />
               <item name="ComposedBehaviors" type="462c0819:PsiDirectoryNode" />
               <item name="PersonalityBehaviors" type="462c0819:PsiDirectoryNode" />
@@ -294,7 +294,7 @@
             <path>
               <item name="YoloAgent" type="b2602c69:ProjectViewProjectNode" />
               <item name="YoloAgent" type="462c0819:PsiDirectoryNode" />
-              <item name="Core" type="462c0819:PsiDirectoryNode" />
+              <item name="YOLOSoftware" type="462c0819:PsiDirectoryNode" />
               <item name="Behaviors" type="462c0819:PsiDirectoryNode" />
               <item name="ComposedBehaviors" type="462c0819:PsiDirectoryNode" />
               <item name="PersonalityBehaviors" type="462c0819:PsiDirectoryNode" />
@@ -303,14 +303,14 @@
             <path>
               <item name="YoloAgent" type="b2602c69:ProjectViewProjectNode" />
               <item name="YoloAgent" type="462c0819:PsiDirectoryNode" />
-              <item name="Core" type="462c0819:PsiDirectoryNode" />
+              <item name="YOLOSoftware" type="462c0819:PsiDirectoryNode" />
               <item name="Behaviors" type="462c0819:PsiDirectoryNode" />
               <item name="SimpleBehaviors" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="YoloAgent" type="b2602c69:ProjectViewProjectNode" />
               <item name="YoloAgent" type="462c0819:PsiDirectoryNode" />
-              <item name="Core" type="462c0819:PsiDirectoryNode" />
+              <item name="YOLOSoftware" type="462c0819:PsiDirectoryNode" />
               <item name="Sensors" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -329,16 +329,16 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Pires\Documents\IST\Work\CriatividadeTrabalho\YoloAgent\Core\Behaviors\ComposedBehaviors\PersonalityBehaviors\AffectivePersonality" />
-      <recent name="C:\Users\Pires\Documents\IST\Work\CriatividadeTrabalho\YoloAgent\Core\Behaviors\ComposedBehaviors\PersonalityBehaviors" />
-      <recent name="C:\Users\Pires\Documents\IST\Work\CriatividadeTrabalho\YoloAgent\Core\Behaviors\ComposedBehaviors\CreativeTechniques" />
+      <recent name="C:\Users\Pires\Documents\IST\Work\CriatividadeTrabalho\YoloAgent\YOLOSoftware\Behaviors\ComposedBehaviors\PersonalityBehaviors\AffectivePersonality" />
+      <recent name="C:\Users\Pires\Documents\IST\Work\CriatividadeTrabalho\YoloAgent\YOLOSoftware\Behaviors\ComposedBehaviors\PersonalityBehaviors" />
+      <recent name="C:\Users\Pires\Documents\IST\Work\CriatividadeTrabalho\YoloAgent\YOLOSoftware\Behaviors\ComposedBehaviors\CreativeTechniques" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Pires\Documents\IST\Work\CriatividadeTrabalho\YoloAgent\Core\Behaviors\ComposedBehaviors\PersonalityBehaviors\PunkPersonality" />
-      <recent name="C:\Users\Pires\Documents\IST\Work\CriatividadeTrabalho\YoloAgent\Core\Behaviors\ComposedBehaviors\PersonalityBehaviors\AloofPersonality" />
-      <recent name="C:\Users\Pires\Documents\IST\Work\CriatividadeTrabalho\YoloAgent\Core\Behaviors\ComposedBehaviors\GenericBehaviors" />
-      <recent name="C:\Users\Pires\Documents\IST\Work\CriatividadeTrabalho\YoloAgent\Core\Sensors" />
-      <recent name="C:\Users\Pires\Documents\IST\Work\CriatividadeTrabalho\YoloAgent\Core\Behaviors\ComposedBehaviors" />
+      <recent name="C:\Users\Pires\Documents\IST\Work\CriatividadeTrabalho\YoloAgent\YOLOSoftware\Behaviors\ComposedBehaviors\PersonalityBehaviors\PunkPersonality" />
+      <recent name="C:\Users\Pires\Documents\IST\Work\CriatividadeTrabalho\YoloAgent\YOLOSoftware\Behaviors\ComposedBehaviors\PersonalityBehaviors\AloofPersonality" />
+      <recent name="C:\Users\Pires\Documents\IST\Work\CriatividadeTrabalho\YoloAgent\YOLOSoftware\Behaviors\ComposedBehaviors\GenericBehaviors" />
+      <recent name="C:\Users\Pires\Documents\IST\Work\CriatividadeTrabalho\YoloAgent\YOLOSoftware\Sensors" />
+      <recent name="C:\Users\Pires\Documents\IST\Work\CriatividadeTrabalho\YoloAgent\YOLOSoftware\Behaviors\ComposedBehaviors" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -450,7 +450,7 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Core/Behaviors/ComposedBehaviors/PersonalityBehaviors/AffectivePersonality/AffectiveBehavior1.py</url>
+          <url>file://$PROJECT_DIR$/YOLOSoftware/Behaviors/ComposedBehaviors/PersonalityBehaviors/AffectivePersonality/AffectiveBehavior1.py</url>
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Libs/GUI.py</url>
@@ -463,105 +463,105 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Core/Behaviors/ComposedBehaviors/CreativeTechniques/SpikesFastBehavior.py">
+    <entry file="file://$PROJECT_DIR$/YOLOSoftware/Behaviors/ComposedBehaviors/CreativeTechniques/SpikesFastBehavior.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="380">
           <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Core/Behaviors/ComposedBehaviors/CreativeTechniques/RectSlowBehavior.py">
+    <entry file="file://$PROJECT_DIR$/YOLOSoftware/Behaviors/ComposedBehaviors/CreativeTechniques/RectSlowBehavior.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="228">
           <caret line="17" column="0" lean-forward="true" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Core/Behaviors/ComposedBehaviors/CreativeTechniques/RectFastBehavior.py">
+    <entry file="file://$PROJECT_DIR$/YOLOSoftware/Behaviors/ComposedBehaviors/CreativeTechniques/RectFastBehavior.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="266">
           <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Core/Behaviors/ComposedBehaviors/CreativeTechniques/LoopsSlowBehavior.py">
+    <entry file="file://$PROJECT_DIR$/YOLOSoftware/Behaviors/ComposedBehaviors/CreativeTechniques/LoopsSlowBehavior.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="266">
           <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Core/Behaviors/ComposedBehaviors/CreativeTechniques/LoopsFastBehavior.py">
+    <entry file="file://$PROJECT_DIR$/YOLOSoftware/Behaviors/ComposedBehaviors/CreativeTechniques/LoopsFastBehavior.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="247">
           <caret line="18" column="36" lean-forward="true" selection-start-line="18" selection-start-column="36" selection-end-line="18" selection-end-column="36" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Core/Behaviors/ComposedBehaviors/CreativeTechniques/CurvedSlowBehavior.py">
+    <entry file="file://$PROJECT_DIR$/YOLOSoftware/Behaviors/ComposedBehaviors/CreativeTechniques/CurvedSlowBehavior.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="171">
           <caret line="14" column="40" lean-forward="false" selection-start-line="14" selection-start-column="40" selection-end-line="14" selection-end-column="40" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Core/Behaviors/ComposedBehaviors/CreativeTechniques/CurvedFastBehavior.py">
+    <entry file="file://$PROJECT_DIR$/YOLOSoftware/Behaviors/ComposedBehaviors/CreativeTechniques/CurvedFastBehavior.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="133">
           <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Core/Behaviors/ComposedBehaviors/GenericBehaviors/PuppeteerBehavior.py">
+    <entry file="file://$PROJECT_DIR$/YOLOSoftware/Behaviors/ComposedBehaviors/GenericBehaviors/PuppeteerBehavior.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="266">
           <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Core/Behaviors/ComposedBehaviors/CreativeTechniques/SpikesSlowBehavior.py">
+    <entry file="file://$PROJECT_DIR$/YOLOSoftware/Behaviors/ComposedBehaviors/CreativeTechniques/SpikesSlowBehavior.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="133">
           <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Core/Behaviors/ComposedBehaviors/CreativeTechniques/StraightFastBehavior.py">
+    <entry file="file://$PROJECT_DIR$/YOLOSoftware/Behaviors/ComposedBehaviors/CreativeTechniques/StraightFastBehavior.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="228">
           <caret line="17" column="0" lean-forward="true" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Core/Behaviors/ComposedBehaviors/CreativeTechniques/StraightSlowBehavior.py">
+    <entry file="file://$PROJECT_DIR$/YOLOSoftware/Behaviors/ComposedBehaviors/CreativeTechniques/StraightSlowBehavior.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="247">
           <caret line="18" column="36" lean-forward="true" selection-start-line="18" selection-start-column="36" selection-end-line="18" selection-end-column="36" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Core/Behaviors/ComposedBehaviors/PersonalityBehaviors/AffectivePersonality/AffectiveBehavior2.py">
+    <entry file="file://$PROJECT_DIR$/YOLOSoftware/Behaviors/ComposedBehaviors/PersonalityBehaviors/AffectivePersonality/AffectiveBehavior2.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="266">
           <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Core/Behaviors/ComposedBehaviors/PersonalityBehaviors/AffectivePersonality/AffectiveBehavior3.py">
+    <entry file="file://$PROJECT_DIR$/YOLOSoftware/Behaviors/ComposedBehaviors/PersonalityBehaviors/AffectivePersonality/AffectiveBehavior3.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="171">
           <caret line="14" column="59" lean-forward="true" selection-start-line="14" selection-start-column="59" selection-end-line="14" selection-end-column="59" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Core/Behaviors/SimpleBehaviors/Behavior.py">
+    <entry file="file://$PROJECT_DIR$/YOLOSoftware/Behaviors/SimpleBehaviors/Behavior.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="76">
           <caret line="7" column="21" lean-forward="false" selection-start-line="7" selection-start-column="21" selection-end-line="7" selection-end-column="21" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Core/Behaviors/SimpleBehaviors/FeelerBehavior.py">
+    <entry file="file://$PROJECT_DIR$/YOLOSoftware/Behaviors/SimpleBehaviors/FeelerBehavior.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="76">
           <caret line="12" column="21" lean-forward="false" selection-start-line="12" selection-start-column="21" selection-end-line="12" selection-end-column="21" />
@@ -569,28 +569,28 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Core/Sensors/OpticalSensor.py">
+    <entry file="file://$PROJECT_DIR$/YOLOSoftware/Sensors/OpticalSensor.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="912">
           <caret line="49" column="118" lean-forward="false" selection-start-line="49" selection-start-column="16" selection-end-line="49" selection-end-column="118" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Core/Actuators/HeadActuator.py">
+    <entry file="file://$PROJECT_DIR$/YOLOSoftware/Actuators/HeadActuator.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1102">
           <caret line="62" column="12" lean-forward="false" selection-start-line="62" selection-start-column="12" selection-end-line="62" selection-end-column="12" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Core/Actuators/JewelLEDActuator.py">
+    <entry file="file://$PROJECT_DIR$/YOLOSoftware/Actuators/JewelLEDActuator.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1444">
           <caret line="80" column="13" lean-forward="false" selection-start-line="80" selection-start-column="8" selection-end-line="80" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Core/Actuators/StripLEDActuator.py">
+    <entry file="file://$PROJECT_DIR$/YOLOSoftware/Actuators/StripLEDActuator.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1444">
           <caret line="80" column="26" lean-forward="false" selection-start-line="80" selection-start-column="26" selection-end-line="80" selection-end-column="26" />
@@ -621,68 +621,68 @@
           <ID>Python</ID>
           <OriginalElement>#C:/Users/Pires/Documents/IST/Work/CriatividadeTrabalho/Yolo/YoloAgent</OriginalElement>
           <nodes>
-            <node x="" y="">Core.Body.Body</node>
-            <node x="" y="">Core.Behaviors.SimpleBehaviors.BlinkBehavior.BlinkBehavior</node>
-            <node x="" y="">Core.Behaviors.ComposedBehaviors.PersonalityBehaviors.AffectivePersonality.AffectiveBehavior3.AffectiveBehavior3</node>
+            <node x="" y="">YOLOSoftware.Body.Body</node>
+            <node x="" y="">YOLOSoftware.Behaviors.SimpleBehaviors.BlinkBehavior.BlinkBehavior</node>
+            <node x="" y="">YOLOSoftware.Behaviors.ComposedBehaviors.PersonalityBehaviors.AffectivePersonality.AffectiveBehavior3.AffectiveBehavior3</node>
             <node x="" y="">Libs.Constants.ComposedBehaviors</node>
             <node x="" y="">Libs.GUI.GUI</node>
-            <node x="" y="">Core.Behaviors.ComposedBehaviors.CreativeTechniques.SpikesFastBehavior.SpikesFastBehavior</node>
+            <node x="" y="">YOLOSoftware.Behaviors.ComposedBehaviors.CreativeTechniques.SpikesFastBehavior.SpikesFastBehavior</node>
             <node x="" y="">Libs.Constants.Touch</node>
-            <node x="" y="">Core.Behaviors.SimpleBehaviors.MoveBehavior.MoveBehavior</node>
-            <node x="" y="">Core.Actuators.JewelLEDActuator.JewelLEDActuator</node>
-            <node x="" y="">Core.Behaviors.ComposedBehaviors.PersonalityBehaviors.PunkPersonality.PunkBehavior3.PunkBehavior3</node>
-            <node x="" y="">Core.Behaviors.ComposedBehaviors.PersonalityBehaviors.PunkPersonality.PunkBehavior2.PunkBehavior2</node>
-            <node x="" y="">Core.Behaviors.ComposedBehaviors.PersonalityBehaviors.AloofPersonality.AloofBehavior1.AloofBehavior1</node>
-            <node x="" y="">Core.Behaviors.SimpleBehaviors.FeelerBehavior.FeelerBehavior</node>
-            <node x="" y="">Core.Behaviors.ComposedBehaviors.GenericBehaviors.PuppeteerBehavior.PuppeteerBehavior</node>
-            <node x="" y="">Core.Behaviors.ComposedBehaviors.PersonalityBehaviors.AffectivePersonality.AffectiveBehavior2.AffectiveBehavior2</node>
-            <node x="" y="">Core.Behaviors.ComposedBehaviors.CreativeTechniques.StraightFastBehavior.StraightFastBehavior</node>
+            <node x="" y="">YOLOSoftware.Behaviors.SimpleBehaviors.MoveBehavior.MoveBehavior</node>
+            <node x="" y="">YOLOSoftware.Actuators.JewelLEDActuator.JewelLEDActuator</node>
+            <node x="" y="">YOLOSoftware.Behaviors.ComposedBehaviors.PersonalityBehaviors.PunkPersonality.PunkBehavior3.PunkBehavior3</node>
+            <node x="" y="">YOLOSoftware.Behaviors.ComposedBehaviors.PersonalityBehaviors.PunkPersonality.PunkBehavior2.PunkBehavior2</node>
+            <node x="" y="">YOLOSoftware.Behaviors.ComposedBehaviors.PersonalityBehaviors.AloofPersonality.AloofBehavior1.AloofBehavior1</node>
+            <node x="" y="">YOLOSoftware.Behaviors.SimpleBehaviors.FeelerBehavior.FeelerBehavior</node>
+            <node x="" y="">YOLOSoftware.Behaviors.ComposedBehaviors.GenericBehaviors.PuppeteerBehavior.PuppeteerBehavior</node>
+            <node x="" y="">YOLOSoftware.Behaviors.ComposedBehaviors.PersonalityBehaviors.AffectivePersonality.AffectiveBehavior2.AffectiveBehavior2</node>
+            <node x="" y="">YOLOSoftware.Behaviors.ComposedBehaviors.CreativeTechniques.StraightFastBehavior.StraightFastBehavior</node>
             <node x="" y="">Libs.Constants.Personality</node>
             <node x="" y="">Libs.Constants.Tilt</node>
-            <node x="" y="">Core.Behaviors.SimpleBehaviors.Behavior.Behavior</node>
+            <node x="" y="">YOLOSoftware.Behaviors.SimpleBehaviors.Behavior.Behavior</node>
             <node x="" y="">Libs.Constants.BlinkingSpeed</node>
             <node x="" y="">Libs.Constants.MovementDirection</node>
-            <node x="" y="">Core.Behaviors.ComposedBehaviors.PersonalityBehaviors.PunkPersonality.PunkHelloBehavior.PunkHelloBehavior</node>
-            <node x="" y="">Core.Behaviors.ComposedBehaviors.CreativeTechniques.LoopsFastBehavior.LoopsFastBehavior</node>
-            <node x="" y="">Core.Sensors.TouchSensor.TouchSensor</node>
+            <node x="" y="">YOLOSoftware.Behaviors.ComposedBehaviors.PersonalityBehaviors.PunkPersonality.PunkHelloBehavior.PunkHelloBehavior</node>
+            <node x="" y="">YOLOSoftware.Behaviors.ComposedBehaviors.CreativeTechniques.LoopsFastBehavior.LoopsFastBehavior</node>
+            <node x="" y="">YOLOSoftware.Sensors.TouchSensor.TouchSensor</node>
             <node x="" y="">Enum</node>
-            <node x="" y="">Core.Behaviors.ComposedBehaviors.CreativeTechniques.CurvedSlowBehavior.CurvedSlowBehavior</node>
+            <node x="" y="">YOLOSoftware.Behaviors.ComposedBehaviors.CreativeTechniques.CurvedSlowBehavior.CurvedSlowBehavior</node>
             <node x="" y="">Libs.Constants.Battery</node>
-            <node x="" y="">Core.Behaviors.ComposedBehaviors.PersonalityBehaviors.AloofPersonality.AloofAttentionCallBehavior.AloofAttentionCallBehavior</node>
-            <node x="" y="">Core.Behaviors.ComposedBehaviors.PersonalityBehaviors.AffectivePersonality.AffectiveBehavior1.AffectiveBehavior1</node>
+            <node x="" y="">YOLOSoftware.Behaviors.ComposedBehaviors.PersonalityBehaviors.AloofPersonality.AloofAttentionCallBehavior.AloofAttentionCallBehavior</node>
+            <node x="" y="">YOLOSoftware.Behaviors.ComposedBehaviors.PersonalityBehaviors.AffectivePersonality.AffectiveBehavior1.AffectiveBehavior1</node>
             <node x="" y="">Libs.Constants.Behaviors</node>
-            <node x="" y="">Core.Behaviors.ComposedBehaviors.CreativeTechniques.RectSlowBehavior.RectSlowBehavior</node>
-            <node x="" y="">Core.Behaviors.ComposedBehaviors.CreativeTechniques.StraightSlowBehavior.StraightSlowBehavior</node>
-            <node x="" y="">Core.Behaviors.ComposedBehaviors.PersonalityBehaviors.AffectivePersonality.AffectiveIdleBehavior.AffectiveIdleBehavior</node>
-            <node x="" y="">Core.Behaviors.ComposedBehaviors.CreativeTechniques.RectFastBehavior.RectFastBehavior</node>
+            <node x="" y="">YOLOSoftware.Behaviors.ComposedBehaviors.CreativeTechniques.RectSlowBehavior.RectSlowBehavior</node>
+            <node x="" y="">YOLOSoftware.Behaviors.ComposedBehaviors.CreativeTechniques.StraightSlowBehavior.StraightSlowBehavior</node>
+            <node x="" y="">YOLOSoftware.Behaviors.ComposedBehaviors.PersonalityBehaviors.AffectivePersonality.AffectiveIdleBehavior.AffectiveIdleBehavior</node>
+            <node x="" y="">YOLOSoftware.Behaviors.ComposedBehaviors.CreativeTechniques.RectFastBehavior.RectFastBehavior</node>
             <node x="" y="">Libs.Constants.Optical</node>
-            <node x="" y="">Core.Behaviors.ComposedBehaviors.PersonalityBehaviors.AffectivePersonality.AffectiveAttentionCallBehavior.AffectiveAttentionCallBehavior</node>
-            <node x="" y="">Core.Behaviors.ComposedBehaviors.CreativeTechniques.LoopsSlowBehavior.LoopsSlowBehavior</node>
-            <node x="" y="">Core.Behaviors.ComposedBehaviors.PersonalityBehaviors.AffectivePersonality.AffectiveHelloBehavior.AffectiveHelloBehavior</node>
+            <node x="" y="">YOLOSoftware.Behaviors.ComposedBehaviors.PersonalityBehaviors.AffectivePersonality.AffectiveAttentionCallBehavior.AffectiveAttentionCallBehavior</node>
+            <node x="" y="">YOLOSoftware.Behaviors.ComposedBehaviors.CreativeTechniques.LoopsSlowBehavior.LoopsSlowBehavior</node>
+            <node x="" y="">YOLOSoftware.Behaviors.ComposedBehaviors.PersonalityBehaviors.AffectivePersonality.AffectiveHelloBehavior.AffectiveHelloBehavior</node>
             <node x="" y="">Libs.Constants.Transitions</node>
             <node x="" y="">Libs.Constants.Colors</node>
             <node x="" y="">Libs.Constants.Shapes</node>
-            <node x="" y="">Core.Behaviors.ComposedBehaviors.PersonalityBehaviors.PunkPersonality.PunkAttentionCallBehavior.PunkAttentionCallBehavior</node>
-            <node x="" y="">Core.Behaviors.ComposedBehaviors.CreativeTechniques.SpikesSlowBehavior.SpikesSlowBehavior</node>
-            <node x="" y="">Core.Behaviors.ComposedBehaviors.PersonalityBehaviors.AloofPersonality.AloofIdleBehavior.AloofIdleBehavior</node>
-            <node x="" y="">Core.Agent.Agent</node>
+            <node x="" y="">YOLOSoftware.Behaviors.ComposedBehaviors.PersonalityBehaviors.PunkPersonality.PunkAttentionCallBehavior.PunkAttentionCallBehavior</node>
+            <node x="" y="">YOLOSoftware.Behaviors.ComposedBehaviors.CreativeTechniques.SpikesSlowBehavior.SpikesSlowBehavior</node>
+            <node x="" y="">YOLOSoftware.Behaviors.ComposedBehaviors.PersonalityBehaviors.AloofPersonality.AloofIdleBehavior.AloofIdleBehavior</node>
+            <node x="" y="">YOLOSoftware.Agent.Agent</node>
             <node x="" y="">Libs.Constants.ApplicationMode</node>
-            <node x="" y="">Core.Behaviors.ComposedBehaviors.PersonalityBehaviors.AloofPersonality.AloofBehavior2.AloofBehavior2</node>
-            <node x="" y="">Core.Behaviors.ComposedBehaviors.PersonalityBehaviors.AloofPersonality.AloofBehavior3.AloofBehavior3</node>
-            <node x="" y="">Core.Actuators.WheelActuator.WheelActuator</node>
-            <node x="" y="">Core.Behaviors.ComposedBehaviors.PersonalityBehaviors.AloofPersonality.AloofHelloBehavior.AloofHelloBehavior</node>
-            <node x="" y="">Core.Actuators.HeadActuator.HeadActuator</node>
-            <node x="" y="">Core.Sensors.OpticalSensor.OpticalSensor</node>
+            <node x="" y="">YOLOSoftware.Behaviors.ComposedBehaviors.PersonalityBehaviors.AloofPersonality.AloofBehavior2.AloofBehavior2</node>
+            <node x="" y="">YOLOSoftware.Behaviors.ComposedBehaviors.PersonalityBehaviors.AloofPersonality.AloofBehavior3.AloofBehavior3</node>
+            <node x="" y="">YOLOSoftware.Actuators.WheelActuator.WheelActuator</node>
+            <node x="" y="">YOLOSoftware.Behaviors.ComposedBehaviors.PersonalityBehaviors.AloofPersonality.AloofHelloBehavior.AloofHelloBehavior</node>
+            <node x="" y="">YOLOSoftware.Actuators.HeadActuator.HeadActuator</node>
+            <node x="" y="">YOLOSoftware.Sensors.OpticalSensor.OpticalSensor</node>
             <node x="" y="">Libs.Constants.Acceleration</node>
-            <node x="" y="">Core.Actuators.StripLEDActuator.StripLEDActuator</node>
-            <node x="" y="">Core.Behaviors.ComposedBehaviors.PersonalityBehaviors.PunkPersonality.PunkIdleBehavior.PunkIdleBehavior</node>
+            <node x="" y="">YOLOSoftware.Actuators.StripLEDActuator.StripLEDActuator</node>
+            <node x="" y="">YOLOSoftware.Behaviors.ComposedBehaviors.PersonalityBehaviors.PunkPersonality.PunkIdleBehavior.PunkIdleBehavior</node>
             <node x="" y="">Libs.Constants.StoryArc</node>
             <node x="" y="">Libs.Constants.Sensor</node>
-            <node x="" y="">Core.Behaviors.ComposedBehaviors.CreativeTechniques.CurvedFastBehavior.CurvedFastBehavior</node>
-            <node x="" y="">Core.Mind.Mind</node>
-            <node x="" y="">Core.Behaviors.ComposedBehaviors.PersonalityBehaviors.PunkPersonality.PunkBehavior1.PunkBehavior1</node>
+            <node x="" y="">YOLOSoftware.Behaviors.ComposedBehaviors.CreativeTechniques.CurvedFastBehavior.CurvedFastBehavior</node>
+            <node x="" y="">YOLOSoftware.Mind.Mind</node>
+            <node x="" y="">YOLOSoftware.Behaviors.ComposedBehaviors.PersonalityBehaviors.PunkPersonality.PunkBehavior1.PunkBehavior1</node>
             <node x="" y="">Libs.Constants.ColorBrightness</node>
-            <node x="" y="">Core.Behaviors.ComposedBehaviors.ComposedBehavior.ComposedBehavior</node>
+            <node x="" y="">YOLOSoftware.Behaviors.ComposedBehaviors.ComposedBehavior.ComposedBehavior</node>
           </nodes>
           <notes />
           <edges />
@@ -701,13 +701,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="uml://Python/#C:/Users/Pires/Documents/IST/Work/CriatividadeTrabalho/Yolo/YoloAgent/Core/Agent.py">
+    <entry file="uml://Python/#C:/Users/Pires/Documents/IST/Work/CriatividadeTrabalho/Yolo/YoloAgent/YOLOSoftware/Agent.py">
       <provider selected="true" editor-type-id="UmlEditorProvider">
         <state>
           <ID>Python</ID>
-          <OriginalElement>#C:/Users/Pires/Documents/IST/Work/CriatividadeTrabalho/Yolo/YoloAgent/Core/Agent.py</OriginalElement>
+          <OriginalElement>#C:/Users/Pires/Documents/IST/Work/CriatividadeTrabalho/Yolo/YoloAgent/YOLOSoftware/Agent.py</OriginalElement>
           <nodes>
-            <node x="" y="">Core.Agent.Agent</node>
+            <node x="" y="">YOLOSoftware.Agent.Agent</node>
           </nodes>
           <notes />
           <edges />
@@ -718,55 +718,55 @@
         </state>
       </provider>
     </entry>
-    <entry file="uml://Python/#C:/Users/Pires/Documents/IST/Work/CriatividadeTrabalho/Yolo/YoloAgent/Core">
+    <entry file="uml://Python/#C:/Users/Pires/Documents/IST/Work/CriatividadeTrabalho/Yolo/YoloAgent/YOLOSoftware">
       <provider selected="true" editor-type-id="UmlEditorProvider">
         <state>
           <ID>Python</ID>
-          <OriginalElement>#C:/Users/Pires/Documents/IST/Work/CriatividadeTrabalho/Yolo/YoloAgent/Core</OriginalElement>
+          <OriginalElement>#C:/Users/Pires/Documents/IST/Work/CriatividadeTrabalho/Yolo/YoloAgent/YOLOSoftware</OriginalElement>
           <nodes>
-            <node x="" y="">Core.Behaviors.ComposedBehaviors.PersonalityBehaviors.AloofPersonality.AloofIdleBehavior.AloofIdleBehavior</node>
-            <node x="" y="">Core.Actuators.JewelLEDActuator.JewelLEDActuator</node>
-            <node x="" y="">Core.Behaviors.ComposedBehaviors.GenericBehaviors.PuppeteerBehavior.PuppeteerBehavior</node>
-            <node x="" y="">Core.Actuators.WheelActuator.WheelActuator</node>
-            <node x="" y="">Core.Behaviors.ComposedBehaviors.CreativeTechniques.RectSlowBehavior.RectSlowBehavior</node>
-            <node x="" y="">Core.Actuators.HeadActuator.HeadActuator</node>
-            <node x="" y="">Core.Behaviors.ComposedBehaviors.PersonalityBehaviors.PunkPersonality.PunkHelloBehavior.PunkHelloBehavior</node>
-            <node x="" y="">Core.Behaviors.ComposedBehaviors.PersonalityBehaviors.PunkPersonality.PunkBehavior1.PunkBehavior1</node>
-            <node x="" y="">Core.Behaviors.ComposedBehaviors.CreativeTechniques.LoopsSlowBehavior.LoopsSlowBehavior</node>
-            <node x="" y="">Core.Behaviors.ComposedBehaviors.PersonalityBehaviors.AffectivePersonality.AffectiveBehavior2.AffectiveBehavior2</node>
-            <node x="" y="">Core.Behaviors.ComposedBehaviors.CreativeTechniques.SpikesSlowBehavior.SpikesSlowBehavior</node>
-            <node x="" y="">Core.Behaviors.ComposedBehaviors.PersonalityBehaviors.AffectivePersonality.AffectiveAttentionCallBehavior.AffectiveAttentionCallBehavior</node>
-            <node x="" y="">Core.Sensors.TouchSensor.TouchSensor</node>
-            <node x="" y="">Core.Behaviors.ComposedBehaviors.CreativeTechniques.RectFastBehavior.RectFastBehavior</node>
-            <node x="" y="">Core.Behaviors.ComposedBehaviors.PersonalityBehaviors.PunkPersonality.PunkBehavior3.PunkBehavior3</node>
-            <node x="" y="">Core.Behaviors.ComposedBehaviors.CreativeTechniques.StraightFastBehavior.StraightFastBehavior</node>
-            <node x="" y="">Core.Behaviors.SimpleBehaviors.MoveBehavior.MoveBehavior</node>
-            <node x="" y="">Core.Behaviors.ComposedBehaviors.CreativeTechniques.CurvedSlowBehavior.CurvedSlowBehavior</node>
-            <node x="" y="">Core.Mind.Mind</node>
-            <node x="" y="">Core.Behaviors.ComposedBehaviors.CreativeTechniques.SpikesFastBehavior.SpikesFastBehavior</node>
-            <node x="" y="">Core.Body.Body</node>
-            <node x="" y="">Core.Behaviors.ComposedBehaviors.ComposedBehavior.ComposedBehavior</node>
-            <node x="" y="">Core.Behaviors.ComposedBehaviors.CreativeTechniques.StraightSlowBehavior.StraightSlowBehavior</node>
-            <node x="" y="">Core.Behaviors.ComposedBehaviors.PersonalityBehaviors.PunkPersonality.PunkIdleBehavior.PunkIdleBehavior</node>
-            <node x="" y="">Core.Behaviors.ComposedBehaviors.CreativeTechniques.CurvedFastBehavior.CurvedFastBehavior</node>
-            <node x="" y="">Core.Behaviors.ComposedBehaviors.PersonalityBehaviors.AffectivePersonality.AffectiveBehavior3.AffectiveBehavior3</node>
-            <node x="" y="">Core.Behaviors.ComposedBehaviors.PersonalityBehaviors.AloofPersonality.AloofHelloBehavior.AloofHelloBehavior</node>
-            <node x="" y="">Core.Behaviors.ComposedBehaviors.PersonalityBehaviors.AloofPersonality.AloofBehavior3.AloofBehavior3</node>
-            <node x="" y="">Core.Behaviors.SimpleBehaviors.Behavior.Behavior</node>
-            <node x="" y="">Core.Behaviors.ComposedBehaviors.PersonalityBehaviors.AloofPersonality.AloofAttentionCallBehavior.AloofAttentionCallBehavior</node>
-            <node x="" y="">Core.Behaviors.ComposedBehaviors.CreativeTechniques.LoopsFastBehavior.LoopsFastBehavior</node>
-            <node x="" y="">Core.Behaviors.ComposedBehaviors.PersonalityBehaviors.AffectivePersonality.AffectiveBehavior1.AffectiveBehavior1</node>
-            <node x="" y="">Core.Behaviors.ComposedBehaviors.PersonalityBehaviors.AloofPersonality.AloofBehavior1.AloofBehavior1</node>
-            <node x="" y="">Core.Actuators.StripLEDActuator.StripLEDActuator</node>
-            <node x="" y="">Core.Behaviors.ComposedBehaviors.PersonalityBehaviors.PunkPersonality.PunkBehavior2.PunkBehavior2</node>
-            <node x="" y="">Core.Behaviors.ComposedBehaviors.PersonalityBehaviors.AffectivePersonality.AffectiveHelloBehavior.AffectiveHelloBehavior</node>
-            <node x="" y="">Core.Behaviors.ComposedBehaviors.PersonalityBehaviors.AloofPersonality.AloofBehavior2.AloofBehavior2</node>
-            <node x="" y="">Core.Behaviors.SimpleBehaviors.BlinkBehavior.BlinkBehavior</node>
-            <node x="" y="">Core.Behaviors.ComposedBehaviors.PersonalityBehaviors.PunkPersonality.PunkAttentionCallBehavior.PunkAttentionCallBehavior</node>
-            <node x="" y="">Core.Agent.Agent</node>
-            <node x="" y="">Core.Sensors.OpticalSensor.OpticalSensor</node>
-            <node x="" y="">Core.Behaviors.ComposedBehaviors.PersonalityBehaviors.AffectivePersonality.AffectiveIdleBehavior.AffectiveIdleBehavior</node>
-            <node x="" y="">Core.Behaviors.SimpleBehaviors.FeelerBehavior.FeelerBehavior</node>
+            <node x="" y="">YOLOSoftware.Behaviors.ComposedBehaviors.PersonalityBehaviors.AloofPersonality.AloofIdleBehavior.AloofIdleBehavior</node>
+            <node x="" y="">YOLOSoftware.Actuators.JewelLEDActuator.JewelLEDActuator</node>
+            <node x="" y="">YOLOSoftware.Behaviors.ComposedBehaviors.GenericBehaviors.PuppeteerBehavior.PuppeteerBehavior</node>
+            <node x="" y="">YOLOSoftware.Actuators.WheelActuator.WheelActuator</node>
+            <node x="" y="">YOLOSoftware.Behaviors.ComposedBehaviors.CreativeTechniques.RectSlowBehavior.RectSlowBehavior</node>
+            <node x="" y="">YOLOSoftware.Actuators.HeadActuator.HeadActuator</node>
+            <node x="" y="">YOLOSoftware.Behaviors.ComposedBehaviors.PersonalityBehaviors.PunkPersonality.PunkHelloBehavior.PunkHelloBehavior</node>
+            <node x="" y="">YOLOSoftware.Behaviors.ComposedBehaviors.PersonalityBehaviors.PunkPersonality.PunkBehavior1.PunkBehavior1</node>
+            <node x="" y="">YOLOSoftware.Behaviors.ComposedBehaviors.CreativeTechniques.LoopsSlowBehavior.LoopsSlowBehavior</node>
+            <node x="" y="">YOLOSoftware.Behaviors.ComposedBehaviors.PersonalityBehaviors.AffectivePersonality.AffectiveBehavior2.AffectiveBehavior2</node>
+            <node x="" y="">YOLOSoftware.Behaviors.ComposedBehaviors.CreativeTechniques.SpikesSlowBehavior.SpikesSlowBehavior</node>
+            <node x="" y="">YOLOSoftware.Behaviors.ComposedBehaviors.PersonalityBehaviors.AffectivePersonality.AffectiveAttentionCallBehavior.AffectiveAttentionCallBehavior</node>
+            <node x="" y="">YOLOSoftware.Sensors.TouchSensor.TouchSensor</node>
+            <node x="" y="">YOLOSoftware.Behaviors.ComposedBehaviors.CreativeTechniques.RectFastBehavior.RectFastBehavior</node>
+            <node x="" y="">YOLOSoftware.Behaviors.ComposedBehaviors.PersonalityBehaviors.PunkPersonality.PunkBehavior3.PunkBehavior3</node>
+            <node x="" y="">YOLOSoftware.Behaviors.ComposedBehaviors.CreativeTechniques.StraightFastBehavior.StraightFastBehavior</node>
+            <node x="" y="">YOLOSoftware.Behaviors.SimpleBehaviors.MoveBehavior.MoveBehavior</node>
+            <node x="" y="">YOLOSoftware.Behaviors.ComposedBehaviors.CreativeTechniques.CurvedSlowBehavior.CurvedSlowBehavior</node>
+            <node x="" y="">YOLOSoftware.Mind.Mind</node>
+            <node x="" y="">YOLOSoftware.Behaviors.ComposedBehaviors.CreativeTechniques.SpikesFastBehavior.SpikesFastBehavior</node>
+            <node x="" y="">YOLOSoftware.Body.Body</node>
+            <node x="" y="">YOLOSoftware.Behaviors.ComposedBehaviors.ComposedBehavior.ComposedBehavior</node>
+            <node x="" y="">YOLOSoftware.Behaviors.ComposedBehaviors.CreativeTechniques.StraightSlowBehavior.StraightSlowBehavior</node>
+            <node x="" y="">YOLOSoftware.Behaviors.ComposedBehaviors.PersonalityBehaviors.PunkPersonality.PunkIdleBehavior.PunkIdleBehavior</node>
+            <node x="" y="">YOLOSoftware.Behaviors.ComposedBehaviors.CreativeTechniques.CurvedFastBehavior.CurvedFastBehavior</node>
+            <node x="" y="">YOLOSoftware.Behaviors.ComposedBehaviors.PersonalityBehaviors.AffectivePersonality.AffectiveBehavior3.AffectiveBehavior3</node>
+            <node x="" y="">YOLOSoftware.Behaviors.ComposedBehaviors.PersonalityBehaviors.AloofPersonality.AloofHelloBehavior.AloofHelloBehavior</node>
+            <node x="" y="">YOLOSoftware.Behaviors.ComposedBehaviors.PersonalityBehaviors.AloofPersonality.AloofBehavior3.AloofBehavior3</node>
+            <node x="" y="">YOLOSoftware.Behaviors.SimpleBehaviors.Behavior.Behavior</node>
+            <node x="" y="">YOLOSoftware.Behaviors.ComposedBehaviors.PersonalityBehaviors.AloofPersonality.AloofAttentionCallBehavior.AloofAttentionCallBehavior</node>
+            <node x="" y="">YOLOSoftware.Behaviors.ComposedBehaviors.CreativeTechniques.LoopsFastBehavior.LoopsFastBehavior</node>
+            <node x="" y="">YOLOSoftware.Behaviors.ComposedBehaviors.PersonalityBehaviors.AffectivePersonality.AffectiveBehavior1.AffectiveBehavior1</node>
+            <node x="" y="">YOLOSoftware.Behaviors.ComposedBehaviors.PersonalityBehaviors.AloofPersonality.AloofBehavior1.AloofBehavior1</node>
+            <node x="" y="">YOLOSoftware.Actuators.StripLEDActuator.StripLEDActuator</node>
+            <node x="" y="">YOLOSoftware.Behaviors.ComposedBehaviors.PersonalityBehaviors.PunkPersonality.PunkBehavior2.PunkBehavior2</node>
+            <node x="" y="">YOLOSoftware.Behaviors.ComposedBehaviors.PersonalityBehaviors.AffectivePersonality.AffectiveHelloBehavior.AffectiveHelloBehavior</node>
+            <node x="" y="">YOLOSoftware.Behaviors.ComposedBehaviors.PersonalityBehaviors.AloofPersonality.AloofBehavior2.AloofBehavior2</node>
+            <node x="" y="">YOLOSoftware.Behaviors.SimpleBehaviors.BlinkBehavior.BlinkBehavior</node>
+            <node x="" y="">YOLOSoftware.Behaviors.ComposedBehaviors.PersonalityBehaviors.PunkPersonality.PunkAttentionCallBehavior.PunkAttentionCallBehavior</node>
+            <node x="" y="">YOLOSoftware.Agent.Agent</node>
+            <node x="" y="">YOLOSoftware.Sensors.OpticalSensor.OpticalSensor</node>
+            <node x="" y="">YOLOSoftware.Behaviors.ComposedBehaviors.PersonalityBehaviors.AffectivePersonality.AffectiveIdleBehavior.AffectiveIdleBehavior</node>
+            <node x="" y="">YOLOSoftware.Behaviors.SimpleBehaviors.FeelerBehavior.FeelerBehavior</node>
           </nodes>
           <notes />
           <edges />
@@ -777,11 +777,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="uml://JavaScript-modules-diagram/C:/Users/Pires/Documents/IST/Work/CriatividadeTrabalho/Yolo/YoloAgent/Core">
+    <entry file="uml://JavaScript-modules-diagram/C:/Users/Pires/Documents/IST/Work/CriatividadeTrabalho/Yolo/YoloAgent/YOLOSoftware">
       <provider selected="true" editor-type-id="UmlEditorProvider">
         <state>
           <ID>JavaScript-modules-diagram</ID>
-          <OriginalElement>$PROJECT_DIR$/Core</OriginalElement>
+          <OriginalElement>$PROJECT_DIR$/YOLOSoftware</OriginalElement>
           <nodes />
           <notes />
           <edges />
@@ -817,42 +817,42 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Core/Sensors/TouchSensor.py">
+    <entry file="file://$PROJECT_DIR$/YOLOSoftware/Sensors/TouchSensor.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="437">
           <caret line="24" column="0" lean-forward="true" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Core/Behaviors/ComposedBehaviors/PersonalityBehaviors/AffectivePersonality/AffectiveHelloBehavior.py">
+    <entry file="file://$PROJECT_DIR$/YOLOSoftware/Behaviors/ComposedBehaviors/PersonalityBehaviors/AffectivePersonality/AffectiveHelloBehavior.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
           <caret line="22" column="60" lean-forward="true" selection-start-line="22" selection-start-column="60" selection-end-line="22" selection-end-column="60" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Core/Body.py">
+    <entry file="file://$PROJECT_DIR$/YOLOSoftware/Body.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="851">
           <caret line="279" column="9" lean-forward="false" selection-start-line="279" selection-start-column="9" selection-end-line="279" selection-end-column="9" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Core/Actuators/WheelActuator.py">
+    <entry file="file://$PROJECT_DIR$/YOLOSoftware/Actuators/WheelActuator.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="791">
           <caret line="217" column="12" lean-forward="false" selection-start-line="217" selection-start-column="12" selection-end-line="217" selection-end-column="12" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Core/Behaviors/ComposedBehaviors/PersonalityBehaviors/AffectivePersonality/AffectiveIdleBehavior.py">
+    <entry file="file://$PROJECT_DIR$/YOLOSoftware/Behaviors/ComposedBehaviors/PersonalityBehaviors/AffectivePersonality/AffectiveIdleBehavior.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="361">
           <caret line="24" column="72" lean-forward="false" selection-start-line="24" selection-start-column="72" selection-end-line="24" selection-end-column="72" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Core/Behaviors/ComposedBehaviors/PersonalityBehaviors/AffectivePersonality/AffectiveBehavior1.py">
+    <entry file="file://$PROJECT_DIR$/YOLOSoftware/Behaviors/ComposedBehaviors/PersonalityBehaviors/AffectivePersonality/AffectiveBehavior1.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="570">
           <caret line="35" column="0" lean-forward="true" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
@@ -860,35 +860,35 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Core/Behaviors/ComposedBehaviors/PersonalityBehaviors/PunkPersonality/PunkBehavior1.py">
+    <entry file="file://$PROJECT_DIR$/YOLOSoftware/Behaviors/ComposedBehaviors/PersonalityBehaviors/PunkPersonality/PunkBehavior1.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="247">
           <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Core/Behaviors/ComposedBehaviors/PersonalityBehaviors/PunkPersonality/PunkIdleBehavior.py">
+    <entry file="file://$PROJECT_DIR$/YOLOSoftware/Behaviors/ComposedBehaviors/PersonalityBehaviors/PunkPersonality/PunkIdleBehavior.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="228">
           <caret line="17" column="34" lean-forward="false" selection-start-line="17" selection-start-column="34" selection-end-line="17" selection-end-column="34" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Core/Behaviors/ComposedBehaviors/PersonalityBehaviors/PunkPersonality/PunkBehavior3.py">
+    <entry file="file://$PROJECT_DIR$/YOLOSoftware/Behaviors/ComposedBehaviors/PersonalityBehaviors/PunkPersonality/PunkBehavior3.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="247">
           <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Core/Behaviors/ComposedBehaviors/PersonalityBehaviors/PunkPersonality/PunkBehavior2.py">
+    <entry file="file://$PROJECT_DIR$/YOLOSoftware/Behaviors/ComposedBehaviors/PersonalityBehaviors/PunkPersonality/PunkBehavior2.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="247">
           <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Core/Behaviors/SimpleBehaviors/BlinkBehavior.py">
+    <entry file="file://$PROJECT_DIR$/YOLOSoftware/Behaviors/SimpleBehaviors/BlinkBehavior.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-833">
           <caret line="12" column="21" lean-forward="false" selection-start-line="12" selection-start-column="21" selection-end-line="12" selection-end-column="21" />
@@ -896,14 +896,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Core/Behaviors/ComposedBehaviors/PersonalityBehaviors/AloofPersonality/AloofAttentionCallBehavior.py">
+    <entry file="file://$PROJECT_DIR$/YOLOSoftware/Behaviors/ComposedBehaviors/PersonalityBehaviors/AloofPersonality/AloofAttentionCallBehavior.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="532">
           <caret line="33" column="0" lean-forward="true" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Core/Behaviors/ComposedBehaviors/PersonalityBehaviors/AloofPersonality/AloofBehavior1.py">
+    <entry file="file://$PROJECT_DIR$/YOLOSoftware/Behaviors/ComposedBehaviors/PersonalityBehaviors/AloofPersonality/AloofBehavior1.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="342">
           <caret line="23" column="149" lean-forward="false" selection-start-line="23" selection-start-column="149" selection-end-line="23" selection-end-column="149" />
@@ -911,7 +911,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Core/Behaviors/ComposedBehaviors/PersonalityBehaviors/AloofPersonality/AloofHelloBehavior.py">
+    <entry file="file://$PROJECT_DIR$/YOLOSoftware/Behaviors/ComposedBehaviors/PersonalityBehaviors/AloofPersonality/AloofHelloBehavior.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="342">
           <caret line="23" column="146" lean-forward="false" selection-start-line="23" selection-start-column="146" selection-end-line="23" selection-end-column="146" />
@@ -919,7 +919,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Core/Behaviors/ComposedBehaviors/PersonalityBehaviors/AloofPersonality/AloofIdleBehavior.py">
+    <entry file="file://$PROJECT_DIR$/YOLOSoftware/Behaviors/ComposedBehaviors/PersonalityBehaviors/AloofPersonality/AloofIdleBehavior.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="361">
           <caret line="24" column="89" lean-forward="false" selection-start-line="24" selection-start-column="89" selection-end-line="24" selection-end-column="89" />
@@ -927,7 +927,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Core/Behaviors/ComposedBehaviors/ComposedBehavior.py">
+    <entry file="file://$PROJECT_DIR$/YOLOSoftware/Behaviors/ComposedBehaviors/ComposedBehavior.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="532">
           <caret line="32" column="33" lean-forward="false" selection-start-line="32" selection-start-column="33" selection-end-line="32" selection-end-column="33" />
@@ -935,7 +935,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Core/Mind.py">
+    <entry file="file://$PROJECT_DIR$/YOLOSoftware/Mind.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3648">
           <caret line="235" column="128" lean-forward="false" selection-start-line="235" selection-start-column="128" selection-end-line="235" selection-end-column="128" />
@@ -945,7 +945,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Core/Behaviors/ComposedBehaviors/PersonalityBehaviors/AloofPersonality/AloofBehavior2.py">
+    <entry file="file://$PROJECT_DIR$/YOLOSoftware/Behaviors/ComposedBehaviors/PersonalityBehaviors/AloofPersonality/AloofBehavior2.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="342">
           <caret line="23" column="175" lean-forward="false" selection-start-line="23" selection-start-column="175" selection-end-line="23" selection-end-column="175" />
@@ -961,7 +961,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Core/Behaviors/ComposedBehaviors/PersonalityBehaviors/AloofPersonality/AloofBehavior3.py">
+    <entry file="file://$PROJECT_DIR$/YOLOSoftware/Behaviors/ComposedBehaviors/PersonalityBehaviors/AloofPersonality/AloofBehavior3.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="589">
           <caret line="36" column="0" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
@@ -969,7 +969,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Core/Behaviors/ComposedBehaviors/PersonalityBehaviors/PunkPersonality/PunkHelloBehavior.py">
+    <entry file="file://$PROJECT_DIR$/YOLOSoftware/Behaviors/ComposedBehaviors/PersonalityBehaviors/PunkPersonality/PunkHelloBehavior.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="551">
           <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
@@ -977,7 +977,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Core/Behaviors/ComposedBehaviors/PersonalityBehaviors/AffectivePersonality/AffectiveAttentionCallBehavior.py">
+    <entry file="file://$PROJECT_DIR$/YOLOSoftware/Behaviors/ComposedBehaviors/PersonalityBehaviors/AffectivePersonality/AffectiveAttentionCallBehavior.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="437">
           <caret line="28" column="130" lean-forward="false" selection-start-line="28" selection-start-column="20" selection-end-line="28" selection-end-column="130" />
@@ -985,7 +985,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Core/Behaviors/ComposedBehaviors/PersonalityBehaviors/PunkPersonality/PunkAttentionCallBehavior.py">
+    <entry file="file://$PROJECT_DIR$/YOLOSoftware/Behaviors/ComposedBehaviors/PersonalityBehaviors/PunkPersonality/PunkAttentionCallBehavior.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="456">
           <caret line="29" column="120" lean-forward="false" selection-start-line="29" selection-start-column="119" selection-end-line="29" selection-end-column="120" />
@@ -993,7 +993,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Core/Behaviors/SimpleBehaviors/MoveBehavior.py">
+    <entry file="file://$PROJECT_DIR$/YOLOSoftware/Behaviors/SimpleBehaviors/MoveBehavior.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="183">
           <caret line="191" column="81" lean-forward="false" selection-start-line="191" selection-start-column="81" selection-end-line="191" selection-end-column="81" />

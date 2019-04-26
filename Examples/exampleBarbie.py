@@ -1,4 +1,8 @@
-from YOLOSoftware import *
+import sys
+sys.path.append('..')
+
+from YOLOSoftware.Agent import *
+
 
 bodyColor = Color(rgb=(1.0,0.4,0.6))
 agent = Agent("YOLO")
@@ -25,7 +29,6 @@ behaviorList = []
 behaviorList.append(BlinkBehaviorEaseInOut(bodyRef, bodyColor, ColorBrightness.HIGH, 1, 4.5, Color(rgb=(0.0, 0.0, 0.0))))
 behaviorList.append(MoveBehaviorCircle(bodyRef, 90, MovementDirection.FORWARD, 3, 1.5))
 personalityBehavior1 = ComposedBehavior(bodyRef, behaviorList)
-
 
 personalityBehaviorList = []
 personalityBehaviorList.append(personalityBehavior1)

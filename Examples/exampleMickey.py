@@ -1,4 +1,8 @@
-from YOLOSoftware import *
+import sys
+sys.path.append('..')
+
+from YOLOSoftware.Agent import *
+
 
 bodyColor = Color(rgb=(1.0,0.0,0.0))
 agent = Agent("YOLO")
