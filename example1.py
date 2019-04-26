@@ -1,4 +1,4 @@
-from Scripts.YOLOSoftware import *
+from Core.YOLOSoftware import *
 
 bodyColor = Color(rgb=(0.2,1.0,0.5))
 agent = Agent("YOLO")

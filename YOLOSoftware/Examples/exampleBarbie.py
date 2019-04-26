@@ -26,7 +26,6 @@ behaviorList.append(BlinkBehaviorEaseInOut(bodyRef, bodyColor, ColorBrightness.H
 behaviorList.append(MoveBehaviorCircle(bodyRef, 90, MovementDirection.FORWARD, 3, 1.5))
 personalityBehavior1 = ComposedBehavior(bodyRef, behaviorList)
 
-
 personalityBehaviorList = []
 personalityBehaviorList.append(personalityBehavior1)
 
