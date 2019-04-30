@@ -1,7 +1,7 @@
 import sys
 sys.path.append('..')
 
-from YOLOSoftware.Agent import *
+from Core.Agent import *
 
 
 bodyColor = Color(rgb=(1.0,0.4,0.6))
