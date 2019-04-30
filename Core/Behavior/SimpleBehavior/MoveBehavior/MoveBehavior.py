@@ -48,6 +48,9 @@ class MoveBehavior(SimpleBehavior, object):
         super(MoveBehavior, self).finishBehavior()
         self.bodyRef.resetWheelSetup()
 
+    def checkForBehaviorEnd(self):
+        return self.currentWaypointIndex > (self.pathLength - 1)
+        
     def reversePath(self, path):
         inversedPath = [-x for x in path]
         reversedPath = list(reversed(inversedPath))
@@ -72,5 +75,3 @@ class MoveBehavior(SimpleBehavior, object):
         timePerWaypoint = float(self.animationIntervalTime) / (pathLength)
         return time.time() - self.startTime >= timePerWaypoint * (self.currentWaypointIndex + 1) and self.currentWaypointIndex < (pathLength)
   
-    def checkForBehaviorEnd(self):
-        return self.currentWaypointIndex > (self.pathLength - 1)

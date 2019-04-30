@@ -24,7 +24,10 @@ class BlinkBehavior(SimpleBehavior, object):
     def finishBehavior(self):
         super(BlinkBehavior, self).finishBehavior()
         self.bodyRef.setColor(self.defaultColor)
-        
+
+    def checkForBehaviorEnd(self): 
+        return time.time() - self.startTime > self.duration  
+              
     def lerpColor(self, percentage, currentColor, newColor):
         rLerp = newColor.red * percentage + currentColor.red * (1 - percentage)
         gLerp = newColor.green * percentage + currentColor.green * (1 - percentage)
@@ -37,6 +40,3 @@ class BlinkBehavior(SimpleBehavior, object):
 
         lerpColor = Color(rgb=(rLerp, gLerp, bLerp))
         return lerpColor
-
-    def checkForBehaviorEnd(self): 
-        return time.time() - self.startTime > self.duration

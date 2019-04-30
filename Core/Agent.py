@@ -38,7 +38,8 @@ class CreativityProfile (object):
 
 class Agent (object):
     def __init__(self, name):
-        
+        self.name = name
+
         # init body as it is independent of the state of mind while interacting and needed to build behaviors
         self.body = Body() 
         self.mind = None
@@ -47,12 +48,6 @@ class Agent (object):
         self.defaultCreativityProfile = CreativityProfile("Default", 5, {}, StoryArcBehaviorType.MIRROR, 5, {}, StoryArcBehaviorType.MIRROR, 5, {}, StoryArcBehaviorType.MIRROR)
         self.defaultGeneralProfile = self.generateGeneralProfile("Default", Color(rgb=(0.1 ,0.1 ,0.1)))
         
-        self.name = name
-
-    def __del__(self):
-        pass
-        # self.body.__del__()
-        # self.mind = None
 
     def getBodyRef(self):
         return self.body

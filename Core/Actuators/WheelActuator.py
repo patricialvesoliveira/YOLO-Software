@@ -58,7 +58,7 @@ class WheelActuator:
         forces = numpy.matmul(transform, initial)
         return forces
 
-    def Eastmove2point(self, x, y, max_speed):
+    def eastMoveToPoint(self, x, y, max_speed):
         controls = self.transform(x, y, 0)
         MAX = max(abs(controls))[0]
         A1new = abs(controls[0])
@@ -99,7 +99,7 @@ class WheelActuator:
             self.C2 = C2new
 
     def moveTo(self, waypoint, speed):
-        self.Eastmove2point(waypoint[0], waypoint[1], speed)
+        self.eastMoveToPoint(waypoint[0], waypoint[1], speed)
 
     def resetPinInput(self):
         self.A1 = 0

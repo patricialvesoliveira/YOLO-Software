@@ -62,9 +62,3 @@ class LEDActuator:
 
         # Convert the 0-1 range into a value in the right range.
         return rightMin + (valueScaled * rightSpan)
-
-    def printColor(self, ledColorData):
-        blue = 255 & ledColorData
-        green = ((255 << 8) & ledColorData) >> 8
-        red = ((255 << 16) & ledColorData) >> 16
-        print "Jewel LEDs color: " + str(red) + ", " + str(green) + ", " + str(blue)
