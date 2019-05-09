@@ -3,8 +3,8 @@ Software developed for YOLO, a minimalistic robot that boosts children’s creat
 
 
 # Collaborators
-[Samuel Gomes:](https://samgomes.github.io/) @SamGomes
-Ankita Chandak
-André Pires
-Peter Moegenburg
+- [Samuel Gomes:](https://samgomes.github.io/) @SamGomes
+- Ankita Chandak
+- André Pires
+- Peter Moegenburg
 
