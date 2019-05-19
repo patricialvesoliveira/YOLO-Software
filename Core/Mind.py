@@ -2,7 +2,7 @@ import time
 import numpy
 from colour import Color
 from Core.Enumerations import *
-from MachineLearning.lib.util import extract_features, predict
+from MachineLearning.util import extract_features, predict
 
 from Core.BehaviorImports import *
 
