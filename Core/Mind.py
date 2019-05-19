@@ -84,7 +84,7 @@ class Mind (object):
                 self.tLastAttentionCall = time.time() #simulate touch to reset timer
                 self.resetCurrAndSetNewBehavior(self.personalityProfile.attentionCallBehavior)
             else:
-                if not self.personalityOrCreativeTriggered and tLastTouchDelta > self.personalityProfile.minimumTouchTimeInSeconds:
+                if not self.personalityOrCreativeTriggered and tLastTouchDelta > self.generalProfile.minimumTouchTimeInSeconds:
                     self.personalityOrCreativeTriggered = True
                     
                     possibleBehaviors = []

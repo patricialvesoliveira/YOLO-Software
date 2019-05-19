@@ -17,7 +17,7 @@ behaviorList = []
 behaviorList.append(BlinkBehaviorEaseInOut(bodyRef, bodyColor, ColorBrightness.HIGH, 1, 2.0, Color(rgb=(0.0, 0.0, 0.0))))
 idleBehavior = ComposedBehavior(bodyRef, behaviorList)
 
-mickeyGeneralProfile = GeneralProfile("MickeyGeneral", helloBehavior, goodbyeBehavior, puppeteerBehavior, idleBehavior)
+mickeyGeneralProfile = GeneralProfile("MickeyGeneral", helloBehavior, goodbyeBehavior, puppeteerBehavior, idleBehavior, 1.0)
 
 
 behaviorList = []
@@ -37,7 +37,7 @@ personalityBehaviorList = []
 personalityBehaviorList.append(personalityBehavior1)
 personalityBehaviorList.append(personalityBehavior2)
 
-mickeyPersonalityProfile = PersonalityProfile("MickeyPersonality", 1.0, attentionCallBehavior, 30.0, personalityBehaviorList)
+mickeyPersonalityProfile = PersonalityProfile("MickeyPersonality", attentionCallBehavior, 30.0, personalityBehaviorList)
 
 behaviorList = []
 behaviorList.append(MoveBehaviorLoops(bodyRef, 30, MovementDirection.FORWARD, 2, 1.5))

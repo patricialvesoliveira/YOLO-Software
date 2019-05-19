@@ -15,7 +15,7 @@ puppeteerBehavior = ComposedBehavior(bodyRef,[BlinkBehaviorEaseInOut(bodyRef, Co
 
 idleBehavior = ComposedBehavior(bodyRef, [BlinkBehaviorEaseInOut(bodyRef,  Color(rgb=(0.05,0.05,0.05)), ColorBrightness.LOW, 1, 2.0, Color(rgb=(1.0, 0.4, 0.0)))])
 
-bugsBunnyGeneralProfile = GeneralProfile("BugsBunnyGeneral", helloBehavior, goodbyeBehavior, puppeteerBehavior, idleBehavior)
+bugsBunnyGeneralProfile = GeneralProfile("BugsBunnyGeneral", helloBehavior, goodbyeBehavior, puppeteerBehavior, idleBehavior, 1.0)
 
 
 attentionCallBehavior = ComposedBehavior(bodyRef, [BlinkBehaviorInstant(bodyRef, Color(rgb=(0.05,0.05,0.05)), ColorBrightness.HIGH, 4, 2.0, Color(rgb=(0.0, 0.0, 0.0)))])
@@ -36,7 +36,7 @@ personalityBehaviorList = []
 personalityBehaviorList.append(personalityBehavior1)
 personalityBehaviorList.append(personalityBehavior2)
 
-bugsBunnyPersonalityProfile = PersonalityProfile("BugsBunnyPersonality", 1.0, attentionCallBehavior, 10.0, personalityBehaviorList)
+bugsBunnyPersonalityProfile = PersonalityProfile("BugsBunnyPersonality", attentionCallBehavior, 10.0, personalityBehaviorList)
 
 behaviorList = []
 behaviorList.append(BlinkBehaviorInstant(bodyRef, Color(rgb=(1.0,0.4,0.0)), ColorBrightness.HIGH, 2, 2.0, Color(rgb=(0.0, 0.0, 0.0))))

@@ -17,7 +17,7 @@ behaviorList = []
 behaviorList.append(BlinkBehaviorEaseInOut(bodyRef, bodyColor, ColorBrightness.HIGH, 1, 2.0, Color(rgb=(0.0, 0.0, 0.0))))
 idleBehavior = ComposedBehavior(bodyRef, behaviorList)
 
-barbieGeneralProfile = GeneralProfile("BarbieGeneral", helloBehavior, goodbyeBehavior, puppeteerBehavior, idleBehavior)
+barbieGeneralProfile = GeneralProfile("BarbieGeneral", helloBehavior, goodbyeBehavior, puppeteerBehavior, idleBehavior, 1.0)
 
 
 behaviorList = []
@@ -33,7 +33,7 @@ personalityBehavior1 = ComposedBehavior(bodyRef, behaviorList)
 personalityBehaviorList = []
 personalityBehaviorList.append(personalityBehavior1)
 
-barbiePersonalityProfile = PersonalityProfile("BarbiePersonality", 1.0, attentionCallBehavior, 30.0, personalityBehaviorList)
+barbiePersonalityProfile = PersonalityProfile("BarbiePersonality", attentionCallBehavior, 30.0, personalityBehaviorList)
 
 behaviorList = []
 behaviorList.append(MoveBehaviorLoops(bodyRef, 30, MovementDirection.FORWARD, 2, 1.5))

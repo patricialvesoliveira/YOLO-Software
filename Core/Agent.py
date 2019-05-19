@@ -5,17 +5,17 @@ from Body import *
 
 # auxiliary Agent API structs
 class GeneralProfile (object):
-    def __init__(self, name, helloBehavior, goodbyeBehavior, pupeteerBehavior, idleBehavior):
+    def __init__(self, name, helloBehavior, goodbyeBehavior, pupeteerBehavior, idleBehavior, minimumTouchTimeInSeconds):
         self.name = name
         self.helloBehavior = helloBehavior
         self.goodbyeBehavior = goodbyeBehavior
         self.pupeteerBehavior = pupeteerBehavior
         self.idleBehavior = idleBehavior
+        self.minimumTouchTimeInSeconds = minimumTouchTimeInSeconds
 
 class PersonalityProfile (object):
-    def __init__(self, name, minimumTouchTimeInSeconds, attentionCallBehavior, attentionCallBehaviorDelayInSeconds, personalityBehaviorList):
+    def __init__(self, name, attentionCallBehavior, attentionCallBehaviorDelayInSeconds, personalityBehaviorList):
         self.name = name
-        self.minimumTouchTimeInSeconds = minimumTouchTimeInSeconds
         self.attentionCallBehavior = attentionCallBehavior
         self.attentionCallBehaviorDelayInSeconds = attentionCallBehaviorDelayInSeconds
         self.personalityBehaviorList = personalityBehaviorList
@@ -44,9 +44,9 @@ class Agent (object):
         self.body = Body() 
         self.mind = None
 
-        self.defaultPersonalityProfile = PersonalityProfile("Default", 1, ComposedBehavior(self.body, []), 30.0, [])
-        self.defaultCreativityProfile = CreativityProfile("Default", 5, {}, StoryArcBehaviorType.MIRROR, 5, {}, StoryArcBehaviorType.MIRROR, 5, {}, StoryArcBehaviorType.MIRROR)
-        self.defaultGeneralProfile = self.generateGeneralProfile("Default", Color(rgb=(0.1 ,0.1 ,0.1)))
+        self.defaultPersonalityProfile = PersonalityProfile("Default", ComposedBehavior(self.body, []), 30.0, [])
+        self.defaultCreativityProfile = CreativityProfile("Default", 5, {}, StoryArcBehaviorType.MIRROR, 5.0, {}, StoryArcBehaviorType.MIRROR, 5.0, {}, StoryArcBehaviorType.MIRROR)
+        self.defaultGeneralProfile = self.generateGeneralProfile("Default", Color(rgb=(0.1 ,0.1 ,0.1)), 1.0)
         
 
     def getBodyRef(self):
@@ -56,9 +56,9 @@ class Agent (object):
         
         if(isinstance(generalProfile,basestring)):
             generalPresetSwitcher = {
-                "PUNK": self.generateGeneralProfile("PUNK", Color(rgb=(0.5,0.0,0.5))),
-                "AFFECTIVE": self.generateGeneralProfile("AFFECTIVE", Color(rgb=(1.0,0.55,0.0))),
-                "ALOOF": self.generateGeneralProfile("ALOOF", Color(rgb=(0.0,0.0,0.5)))
+                "PUNK": self.generateGeneralProfile("PUNK", Color(rgb=(0.5,0.0,0.5)), 1.0),
+                "AFFECTIVE": self.generateGeneralProfile("AFFECTIVE", Color(rgb=(1.0,0.55,0.0)), 1.0),
+                "ALOOF": self.generateGeneralProfile("ALOOF", Color(rgb=(0.0,0.0,0.5)), 1.0)
             }
             generalProfile = generalPresetSwitcher.get(generalProfile, None)
             
@@ -106,14 +106,14 @@ class Agent (object):
         self.body.setColor(Color(rgb=(0.0,0.0,0.0)))
         self.mind = None
         
-    def generateGeneralProfile(self, name, idleColor):
+    def generateGeneralProfile(self, name, idleColor, minimumTouchTimeInSeconds):
         helloBehavior = self.generateHelloBehaviorPreset()
         goodbyeBehavior = self.generateGoodbyeBehaviorPreset()
         puppeteerBehavior = self.generatePupetteerBehaviorPreset()
 
         idleBehavior = ComposedBehavior(self.body, [BlinkBehaviorEaseInOut(self.body, idleColor, ColorBrightness.HIGH, 1, 2.0, Color(rgb=(0.0, 0.0, 0.0)))])
 
-        return GeneralProfile(name, helloBehavior, goodbyeBehavior, puppeteerBehavior, idleBehavior)
+        return GeneralProfile(name, helloBehavior, goodbyeBehavior, puppeteerBehavior, idleBehavior, minimumTouchTimeInSeconds)
 
 
     def generateHelloBehaviorPreset(self):
@@ -154,7 +154,7 @@ class Agent (object):
         personalityBehaviorList.append(personalityBehavior3)
 
         
-        return PersonalityProfile("PUNK", 1.0, attentionCallBehavior, 30.0, personalityBehaviorList)
+        return PersonalityProfile("PUNK", attentionCallBehavior, 30.0, personalityBehaviorList)
 
     def generateAffectiveProfilePreset(self):
         behaviorList = []
@@ -183,7 +183,7 @@ class Agent (object):
         goodbyeBehavior = self.generateGoodbyeBehaviorPreset()
         puppeteerBehavior = self.generatePupetteerBehaviorPreset()
 
-        return PersonalityProfile("AFFECTIVE", 1.0, attentionCallBehavior, 30.0, personalityBehaviorList)
+        return PersonalityProfile("AFFECTIVE", attentionCallBehavior, 30.0, personalityBehaviorList)
 
     def generateAloofProfilePreset(self):
         attentionCallBehavior = ComposedBehavior(self.body, [])
@@ -209,7 +209,7 @@ class Agent (object):
         goodbyeBehavior = self.generateGoodbyeBehaviorPreset()
         puppeteerBehavior = self.generatePupetteerBehaviorPreset()
 
-        return PersonalityProfile("ALOOF", 1.0, attentionCallBehavior, 30.0, personalityBehaviorList)
+        return PersonalityProfile("ALOOF", attentionCallBehavior, 30.0, personalityBehaviorList)
 
 
     def generateDefaultCreativityProfile(self, name, bodyColor):
