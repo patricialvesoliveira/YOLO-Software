@@ -30,18 +30,12 @@ behaviorList.append(MoveBehaviorCircle(bodyRef, 90, MovementDirection.FORWARD, 3
 personalityBehavior1 = ComposedBehavior(bodyRef, behaviorList)
 
 behaviorList = []
-behaviorList.append(BlinkBehaviorEaseInOut(bodyRef, bodyColor, ColorBrightness.HIGH, 1, 4.5, Color(rgb=(0.0, 0.0, 0.0))))
-behaviorList.append(MoveBehaviorCircle(bodyRef, 90, MovementDirection.FORWARD, 3, 1.5))
-personalityBehavior2 = ComposedBehavior(bodyRef, behaviorList)
-
-behaviorList = []
 behaviorList.append(BlinkBehaviorEaseInOut(bodyRef, bodyColor, ColorBrightness.HIGH, 1, 3.0, Color(rgb=(0.0, 0.0, 0.0))))
-personalityBehavior3 = ComposedBehavior(bodyRef, behaviorList)
+personalityBehavior2 = ComposedBehavior(bodyRef, behaviorList)
 
 personalityBehaviorList = []
 personalityBehaviorList.append(personalityBehavior1)
 personalityBehaviorList.append(personalityBehavior2)
-personalityBehaviorList.append(personalityBehavior3)
 
 mickeyPersonalityProfile = PersonalityProfile("MickeyPersonality", 1.0, attentionCallBehavior, 30.0, personalityBehaviorList)
 
