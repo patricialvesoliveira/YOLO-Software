@@ -7,7 +7,7 @@ Software developed for YOLO, a minimalistic robot that boosts children’s creat
 YOLO-Software is licensed under the [CC Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/)
 
 ## Collaborators
-- [Samuel Gomes:](https://samgomes.github.io/) @SamGomes
+- [Samuel Gomes:](https://samgomes.github.io/) [@SamGomes](https://github.com/SamGomes/)
 - Ankita Chandak
 - André Pires
 - Peter Moegenburg
