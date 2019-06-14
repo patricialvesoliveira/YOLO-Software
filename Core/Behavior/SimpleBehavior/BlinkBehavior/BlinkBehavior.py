@@ -14,6 +14,7 @@ class BlinkBehavior(SimpleBehavior, object):
         self.blinkColor = blinkColor
         self.brightness = brightness
         self.defaultColor = defaultColor
+        # self.duration = duration
         
 
     def behaviorActions(self):

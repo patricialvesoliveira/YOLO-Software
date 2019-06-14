@@ -8,7 +8,7 @@ agent = Agent("YOLO")
 bodyRef = agent.getBodyRef()
 
 
-helloBehavior = ComposedBehavior(bodyRef, [BlinkBehaviorEaseOut(bodyRef, Color(rgb=(1.0, 1.0, 1.0)), ColorBrightness.LOW, 10, 1.0, Color(rgb=(0.0, 0.0, 1.0)))])
+helloBehavior = ComposedBehavior(bodyRef, [BlinkBehaviorInstant(bodyRef, Color(rgb=(1.0, 1.0, 1.0)), ColorBrightness.LOW, 10, 2.2, Color(rgb=(0.0, 0.0, 1.0)))])
 goodbyeBehavior = ComposedBehavior(bodyRef, [])
 puppeteerBehavior = ComposedBehavior(bodyRef,[])
 idleBehavior = ComposedBehavior(bodyRef, [])
