@@ -58,7 +58,8 @@ class Agent (object):
             generalPresetSwitcher = {
                 "PUNK": self.generateGeneralProfile("PUNK", Color(rgb=(0.5,0.0,0.5)), 1.0),
                 "AFFECTIVE": self.generateGeneralProfile("AFFECTIVE", Color(rgb=(1.0,0.55,0.0)), 1.0),
-                "ALOOF": self.generateGeneralProfile("ALOOF", Color(rgb=(0.0,0.0,0.5)), 1.0)
+                "ALOOF": self.generateGeneralProfile("ALOOF", Color(rgb=(0.0,0.0,0.5)), 1.0),
+                "NEUTRAL": self.generateGeneralProfile("NEUTRAL", Color(rgb=(1.0,1.0,1.0)), 1.0)
             }
             generalProfile = generalPresetSwitcher.get(generalProfile, None)
             
@@ -74,7 +75,8 @@ class Agent (object):
             creativityPresetSwitcher = {
                 "PUNK": self.generateDefaultCreativityProfile("PUNK", Color(rgb=(0.5,0.0,0.5))),
                 "AFFECTIVE": self.generateDefaultCreativityProfile("AFFECTIVE", Color(rgb=(1.0,0.55,0.0))),
-                "ALOOF": self.generateDefaultCreativityProfile("ALOOF", Color(rgb=(0.0,0.0,0.5)))
+                "ALOOF": self.generateDefaultCreativityProfile("ALOOF", Color(rgb=(0.0,0.0,0.5))),
+                "NEUTRAL": self.generateDefaultCreativityProfile("NEUTRAL", Color(rgb=(1.0,1.0,1.0)))
             }
             creativityProfile = creativityPresetSwitcher.get(creativityProfile, None)
 
@@ -279,6 +281,6 @@ class Agent (object):
         creativitySlowBehaviorDict[ShapeType.STRAIGHT] = straightSlowBehavior
 
         return CreativityProfile(name, 
-            5.0, creativitySlowBehaviorDict, StoryArcBehaviorType.MIRROR, 
-            3.0, creativityFastBehaviorDict, StoryArcBehaviorType.CONTRAST, 
-            5.0, creativitySlowBehaviorDict, StoryArcBehaviorType.MIRROR)
+            2.0, creativitySlowBehaviorDict, StoryArcBehaviorType.MIRROR, 
+            5.0, creativityFastBehaviorDict, StoryArcBehaviorType.CONTRAST, 
+            2.0, creativitySlowBehaviorDict, StoryArcBehaviorType.MIRROR)

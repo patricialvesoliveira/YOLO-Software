@@ -1,6 +1,8 @@
 # Constants used in Core and libraries
+import os
+dir_path = os.path.dirname(os.path.realpath(__file__))
 
-TRAINING_LOCATION = 'MachineLearning/files/training_data.txt' #When running only ML code directly 'files/training_data.txt'
-CACHED_LOCATION = 'MachineLearning/files/cached_features.txt' #When running only ML code directly 'files/training_data.txt'
+TRAINING_LOCATION = dir_path+'/Files/training_data.txt'
+CACHED_LOCATION = dir_path+'/Files/cached_features.txt' 
 SHAPE = {'SPIKES':0, 'CURVED': 1, 'LOOPS': 2, 'STRAIGHT':3, 'RECT':4}
 SHAPE_ARRAY = ['SPIKES', 'CURVED', 'LOOPS', 'STRAIGHT', 'RECT']

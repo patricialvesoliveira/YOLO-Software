@@ -110,7 +110,7 @@ class Mind (object):
         # check for recognized shapes
         if self.shapeWasRecognized():
             self.currRecognizedShape = self.predictShape(self.body.getOpticalSensor().getCurrentRecognizedShape())
-        self.currRecognizedShape = ShapeType(int(1)+1)
+        
 
     def resetCurrAndSetNewBehavior(self, newBehavior):
         self.currBehavior.finishBehavior() # finish any pending behavior
@@ -140,8 +140,8 @@ class Mind (object):
             creativityBehaviorType = self.creativityProfile.fallingActionBehaviorType
 
         currShapedBehavior = creativityBehaviorDict.get(recognizedShape, None)
-        print "Shape Dict: "+ str(creativityBehaviorDict)
-        print "Shape Rec: "+ str(recognizedShape)
+        # print "Shape Dict: "+ str(creativityBehaviorDict)
+        # print "Shape Rec: "+ str(recognizedShape)
         if(currShapedBehavior == None):
             return False
 
