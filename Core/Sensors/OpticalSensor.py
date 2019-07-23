@@ -38,7 +38,7 @@ class OpticalSensor:
 
             elif self.state is OpticalState.NOT_RECEIVING:
                 if self.state is OpticalState.RECEIVING:
-                    opticalState = OpticalState.FINISHED
+                    self.state = OpticalState.FINISHED
                 a = 0;
 
             elif self.state is OpticalState.FINISHED:

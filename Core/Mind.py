@@ -90,11 +90,11 @@ class Mind (object):
                     possibleBehaviors = []
                     personalityBehavior = self.generatePersonalityBehavior()
                     if(personalityBehavior):
-                        print "[INFO] Performing personality behavior..."
+                        print "[INFO] Adding personality behavior..."
                         possibleBehaviors.append(personalityBehavior)
                     creativityBehavior = self.generateCreativityBehavior(self.currStoryArcMoment, self.currRecognizedShape)
                     if(creativityBehavior):
-                        print "[INFO] Performing creativity behavior..."
+                        print "[INFO] Adding creativity behavior..."
                         possibleBehaviors.append(creativityBehavior)
 
                     if(len(possibleBehaviors)==0):
