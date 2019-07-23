@@ -90,9 +90,11 @@ class Mind (object):
                     possibleBehaviors = []
                     personalityBehavior = self.generatePersonalityBehavior()
                     if(personalityBehavior):
+                        print "[INFO] Performing personality behavior..."
                         possibleBehaviors.append(personalityBehavior)
                     creativityBehavior = self.generateCreativityBehavior(self.currStoryArcMoment, self.currRecognizedShape)
                     if(creativityBehavior):
+                        print "[INFO] Performing creativity behavior..."
                         possibleBehaviors.append(creativityBehavior)
 
                     if(len(possibleBehaviors)==0):
@@ -127,6 +129,7 @@ class Mind (object):
     def generateCreativityBehavior(self, currStoryArcMoment, recognizedShape):        
         creativityBehaviorDict = {}
         creativityBehaviorType = None
+
         if(currStoryArcMoment == StoryArc.NONE):
             return False
         elif(currStoryArcMoment == StoryArc.RISING_ACTION):
@@ -140,8 +143,6 @@ class Mind (object):
             creativityBehaviorType = self.creativityProfile.fallingActionBehaviorType
 
         currShapedBehavior = creativityBehaviorDict.get(recognizedShape, None)
-        # print "Shape Dict: "+ str(creativityBehaviorDict)
-        # print "Shape Rec: "+ str(recognizedShape)
         if(currShapedBehavior == None):
             return False
 
@@ -177,5 +178,5 @@ class Mind (object):
     def predictShape(self, pointDataArray):
         features = extract_features(pointDataArray)
         prediction = predict(features)[0]
-        print "Recognized the shape: " + str(prediction) + "at the story arc: " + StoryArc(self.currStoryArcMoment).name
+        print "::::::::::::::::::::::Recognized the shape: " + str(prediction) + ":::::::::::::::::::::::::::"
         return ShapeType(int(prediction)+1)
