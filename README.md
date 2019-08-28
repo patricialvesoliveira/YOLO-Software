@@ -8,7 +8,6 @@ YOLO-Software is licensed under the [CC Attribution 4.0 International](https://c
 
 ## Collaborators
 - [Samuel Gomes:](https://samgomes.github.io/) [@SamGomes](https://github.com/SamGomes/)
-- Ankita Chandak
-- André Pires
-- Peter Moegenburg
-
+- [Ankita Chandak:](https://www.linkedin.com/in/ankitachandak1/) [@ankitachandak](https://github.com/ankitachandak)
+- [André Pires:](https://www.linkedin.com/in/andr%C3%A9-pires-40a5516b/?originalSubdomain=pt) [@Andre-Pires](https://github.com/Andre-Pires)
+- [Peter Moegenburg:](https://petermoegenburg.myportfolio.com/)
