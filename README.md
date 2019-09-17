@@ -8,6 +8,14 @@ Software developed for YOLO, a minimalistic robot that boosts children’s creat
 ## Licence
 YOLO-Software is licensed under the [CC Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/)
 
+## Supervision
+- [Guy Hoffman:](http://guyhoffman.com/) [@guyhoffman](https://github.com/guyhoffman/)
+- [Patrícia Arriaga](https://ciencia.iscte-iul.pt/authors/patricia-paula-lourenco-arriaga-ferreira/cv) [@patriciaarriaga](https://github.com/patriciaarriaga/)
+- [Ana Paiva:](https://https://https://ana-paiva.com/) [@ana-paiva](https://github.com/ana-paiva/)
+
+## Design and orientation
+- [Patrícia Alves-Oliveira:](https://patricialvesoliveira.com/) [@patricialvesoliveira](https://github.com/patricialvesoliveira/)
+
 ## Collaborators
 - [Samuel Gomes:](https://samgomes.github.io/) [@SamGomes](https://github.com/SamGomes/)
 - [Ankita Chandak:](https://www.linkedin.com/in/ankitachandak1/) [@ankitachandak](https://github.com/ankitachandak)
