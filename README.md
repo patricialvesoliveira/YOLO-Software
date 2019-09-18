@@ -13,7 +13,7 @@ YOLO-Software is licensed under the [CC Attribution 4.0 International](https://c
 - [Patrícia Arriaga](https://ciencia.iscte-iul.pt/authors/patricia-paula-lourenco-arriaga-ferreira/cv), [@patriciaarriaga](https://github.com/patriciaarriaga/)
 - [Ana Paiva](https://ana-paiva.com/), [@ana-paiva](https://github.com/ana-paiva/)
 
-## Design
+## Algorithm design
 - [Patrícia Alves-Oliveira](https://patricialvesoliveira.com/), [@patricialvesoliveira](https://github.com/patricialvesoliveira/)
 
 ## Collaborators
