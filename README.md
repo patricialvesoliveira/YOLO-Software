@@ -1,4 +1,4 @@
-# YOLO-Software
+# Software architecture for YOLO, a creativity-stimulating robot
 
 ![YOLOLogo](https://github.com/patricialvesoliveira/YOLO-Software/blob/master/logo.jpg)
 
