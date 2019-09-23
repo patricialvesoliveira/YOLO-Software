@@ -4,36 +4,36 @@ sys.path.append('..')
 from Core.Agent import *
 
 
-controlColor = Color(rgb=(1.0,0.4,0.6))
+mainColor = Color(rgb=(1.0,0.4,0.6))
 agent = Agent("YOLO")
 controlRef = agent.getControlRef()
 
 
-helloBehavior = ComposedBehavior(controlRef, [BlinkBehaviorEaseIn(controlRef, controlColor, ColorBrightness.HIGH, 3, 2.0, Color(rgb=(0.0, 0.0, 0.0)))])
-goodbyeBehavior = ComposedBehavior(controlRef, [BlinkBehaviorEaseOut(controlRef, controlColor, ColorBrightness.HIGH, 3, 2.0, Color(rgb=(0.0, 0.0, 0.0)))])
-puppeteerBehavior = ComposedBehavior(controlRef,[BlinkBehaviorInstant(controlRef, controlColor, ColorBrightness.HIGH, 0, 1.0, Color(rgb=(0.0, 0.0, 0.0)))])
+helloBehavior = ComposedBehavior(controlRef, [BlinkBehaviorEaseIn(controlRef, mainColor, ColorBrightness.HIGH, 3, 2.0, Color(rgb=(0.0, 0.0, 0.0)))])
+goodbyeBehavior = ComposedBehavior(controlRef, [BlinkBehaviorEaseOut(controlRef, mainColor, ColorBrightness.HIGH, 3, 2.0, Color(rgb=(0.0, 0.0, 0.0)))])
+puppeteerBehavior = ComposedBehavior(controlRef,[BlinkBehaviorInstant(controlRef, mainColor, ColorBrightness.HIGH, 0, 1.0, Color(rgb=(0.0, 0.0, 0.0)))])
 
 behaviorList = []
-behaviorList.append(BlinkBehaviorEaseInOut(controlRef, controlColor, ColorBrightness.HIGH, 1, 2.0, Color(rgb=(0.0, 0.0, 0.0))))
+behaviorList.append(BlinkBehaviorEaseInOut(controlRef, mainColor, ColorBrightness.HIGH, 1, 2.0, Color(rgb=(0.0, 0.0, 0.0))))
 idleBehavior = ComposedBehavior(controlRef, behaviorList)
 
 barbieGeneralProfile = GeneralProfile("BarbieGeneral", helloBehavior, goodbyeBehavior, puppeteerBehavior, idleBehavior, 1.0)
 
 
 behaviorList = []
-behaviorList.append(BlinkBehaviorEaseOut(controlRef, controlColor, ColorBrightness.HIGH, 3, 1.0, Color(rgb=(0.0, 0.0, 0.0))))
+behaviorList.append(BlinkBehaviorEaseOut(controlRef, mainColor, ColorBrightness.HIGH, 3, 1.0, Color(rgb=(0.0, 0.0, 0.0))))
 attentionCallBehavior = ComposedBehavior(controlRef, behaviorList)
 
 
 behaviorList = []
-behaviorList.append(BlinkBehaviorEaseInOut(controlRef, controlColor, ColorBrightness.HIGH, 1, 4.5, Color(rgb=(0.0, 0.0, 0.0))))
+behaviorList.append(BlinkBehaviorEaseInOut(controlRef, mainColor, ColorBrightness.HIGH, 1, 4.5, Color(rgb=(0.0, 0.0, 0.0))))
 behaviorList.append(MoveBehaviorCircle(controlRef, 90, MovementDirection.FORWARD, 3, 1.5))
 socialBehavior1 = ComposedBehavior(controlRef, behaviorList)
 
 socialBehaviorList = []
 socialBehaviorList.append(socialBehavior1)
 
-barbiesocialProfile = SocialProfile("Barbiesocial", attentionCallBehavior, 30.0, socialBehaviorList)
+barbieSocialProfile = SocialProfile("BarbieSocial", attentionCallBehavior, 30.0, socialBehaviorList)
 
 behaviorList = []
 behaviorList.append(MoveBehaviorLoops(controlRef, 30, MovementDirection.FORWARD, 2, 1.5))
@@ -50,4 +50,4 @@ barbieCreativityProfile = CreativityProfile("BarbieCreative",
 	3.1, creativityRABDict, StoryArcBehaviorType.MIRROR)
 
 
-agent.interact(socialProfile = barbiesocialProfile, generalProfile=barbieGeneralProfile, creativityProfile = barbieCreativityProfile)
+agent.interact(socialProfile = barbieSocialProfile, generalProfile = barbieGeneralProfile, creativityProfile = barbieCreativityProfile)

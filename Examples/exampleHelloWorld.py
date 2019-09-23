@@ -3,7 +3,6 @@ sys.path.append('..')
 
 from Core.Agent import *
 
-
 agent = Agent("YOLO")
 controlRef = agent.getControlRef()
 
@@ -13,6 +12,6 @@ goodbyeBehavior = ComposedBehavior(controlRef, [])
 puppeteerBehavior = ComposedBehavior(controlRef,[])
 idleBehavior = ComposedBehavior(controlRef, [])
 
-helloWorldGeneralProfile = GeneralProfile("helloWorldGeneral", helloBehavior, goodbyeBehavior, puppeteerBehavior, idleBehavior, 1.0)
+helloWorldGeneralProfile = GeneralProfile("HelloWorldGeneral", helloBehavior, goodbyeBehavior, puppeteerBehavior, idleBehavior, 1.0)
 
 agent.interact(generalProfile = helloWorldGeneralProfile)

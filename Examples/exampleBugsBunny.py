@@ -4,7 +4,6 @@ sys.path.append('..')
 from Core.Agent import *
 
 
-controlColor = Color(rgb=(1.0,0.0,0.0))
 agent = Agent("YOLO")
 controlRef = agent.getControlRef()
 
@@ -36,7 +35,7 @@ socialBehaviorList = []
 socialBehaviorList.append(socialBehavior1)
 socialBehaviorList.append(socialBehavior2)
 
-bugsBunnysocialProfile = SocialProfile("BugsBunnysocial", attentionCallBehavior, 10.0, socialBehaviorList)
+bugsBunnySocialProfile = SocialProfile("BugsBunnySocial", attentionCallBehavior, 10.0, socialBehaviorList)
 
 behaviorList = []
 behaviorList.append(BlinkBehaviorInstant(controlRef, Color(rgb=(1.0,0.4,0.0)), ColorBrightness.HIGH, 2, 2.0, Color(rgb=(0.0, 0.0, 0.0))))
@@ -65,4 +64,4 @@ bugsBunnyCreativityProfile = CreativityProfile("BugsBunnyCreative",
 	3.1, creativityFallingDict, StoryArcBehaviorType.MIRROR)
 
 
-agent.interact(generalProfile = bugsBunnyGeneralProfile, socialProfile=bugsBunnysocialProfile, creativityProfile = bugsBunnyCreativityProfile)
+agent.interact(generalProfile = bugsBunnyGeneralProfile, socialProfile = bugsBunnySocialProfile, creativityProfile = bugsBunnyCreativityProfile)
