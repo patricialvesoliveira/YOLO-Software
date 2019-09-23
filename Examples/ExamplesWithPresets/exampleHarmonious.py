@@ -7,4 +7,4 @@ from Core.Agent import *
 agent = Agent("YOLO")
 controlRef = agent.getControlRef()
 
-agent.interact(generalProfile = "ALOOF", socialProfile="ALOOF", creativityProfile="ALOOF")
+agent.interact(generalProfile = "HARMONIOUS", socialProfile="HARMONIOUS", creativityProfile="HARMONIOUS")

@@ -5,6 +5,6 @@ from Core.Behavior.SimpleBehavior.BlinkBehavior.BlinkBehaviorInstant import Blin
 from Core.Behavior.SimpleBehavior.MoveBehavior.MoveBehaviorSpikes import MoveBehaviorSpikes
 
 class PuppeteerBehavior(ComposedBehavior):
-    def __init__(self, bodyRef):
-        ComposedBehavior.__init__(self, bodyRef)
-        self.behaviorList.append(BlinkBehaviorInstant(bodyRef, [Color(rgb=(1.0, 1.0, 1.0))], ColorBrightness.HIGH, 0, 1.0, bodyRef.getColor()))
+    def __init__(self, controlRef):
+        ComposedBehavior.__init__(self, controlRef)
+        self.behaviorList.append(BlinkBehaviorInstant(controlRef, [Color(rgb=(1.0, 1.0, 1.0))], ColorBrightness.HIGH, 0, 1.0, controlRef.getColor()))

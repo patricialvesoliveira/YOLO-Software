@@ -1,10 +1,10 @@
 import sys
-sys.path.append('..')
+sys.path.append('../..')
 
 from Core.Agent import *
 
 
 agent = Agent("YOLO")
-bodyRef = agent.getBodyRef()
+controlRef = agent.getControlRef()
 
 agent.interact(creativityProfile="NEUTRAL")

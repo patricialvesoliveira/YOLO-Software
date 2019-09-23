@@ -5,12 +5,12 @@ from Core.Enumerations import *
 
 
 class SimpleBehavior(object):
-    def __init__(self, bodyRef, maxBehaviorRepetitions, duration):
+    def __init__(self, controlRef, maxBehaviorRepetitions, duration):
         self.isOver = False
         self.duration = duration;
         self.maxBehaviorRepetitions = maxBehaviorRepetitions
         self.currentBehaviorRepetition = 0
-        self.bodyRef = bodyRef
+        self.controlRef = controlRef
         self.startTime = time.time()
 
     def behaviorActions(self):

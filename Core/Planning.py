@@ -6,14 +6,14 @@ from MachineLearning.util import extract_features, predict
 
 from Core.BehaviorImports import *
 
-class Mind (object):
-    def __init__(self, body, generalProfile, personalityProfile, creativityProfile):
+class Planning(object):
+    def __init__(self, control, generalProfile, socialProfile, creativityProfile):
 
         self.generalProfile = generalProfile
-        self.personalityProfile = personalityProfile
+        self.socialProfile = socialProfile
         self.creativityProfile = creativityProfile
-        self.body = body
-        self.currBehavior = ComposedBehavior(body, [])
+        self.control = control
+        self.currBehavior = ComposedBehavior(control, [])
         tCurr = time.time()
 
         self.startTime = tCurr
@@ -21,19 +21,19 @@ class Mind (object):
         self.tLastTouchF = tCurr
         self.wasTouched = False
 
-        self.personalityOrCreativeTriggered = False
+        self.socialOrCreativeTriggered = False
 
         self.currStoryArcMoment = StoryArc.NONE
         self.currRecognizedShape = ShapeType.NONE
         
         self.isInteractionStarted = False
         self.isInteractionFinished = False
-        self.isMindFinished = False
+        self.isPlanningFinished = False
 
         self.tLastAttentionCall = tCurr
         
     def update(self):
-        self.body.update()
+        self.control.update()
         self.currBehavior.applyBehavior()
 
         tCurr = time.time()
@@ -60,7 +60,7 @@ class Mind (object):
         # pupeteer behavior stuff
         if self.hasTouchStarted():
             self.attentionCallTriggered = False
-            self.personalityOrCreativeTriggered = False
+            self.socialOrCreativeTriggered = False
             self.resetCurrAndSetNewBehavior(self.generalProfile.pupeteerBehavior)
 
         elif self.hasTouchEnded():
@@ -80,38 +80,38 @@ class Mind (object):
 
         # autonomous stuff
         if not self.beingTouched():
-            if (tCurr - self.tLastAttentionCall) > self.personalityProfile.attentionCallBehaviorDelayInSeconds:
+            if (tCurr - self.tLastAttentionCall) > self.socialProfile.attentionCallBehaviorDelayInSeconds:
                 self.tLastAttentionCall = time.time() #simulate touch to reset timer
-                self.resetCurrAndSetNewBehavior(self.personalityProfile.attentionCallBehavior)
+                self.resetCurrAndSetNewBehavior(self.socialProfile.attentionCallBehavior)
             else:
-                if not self.personalityOrCreativeTriggered and tLastTouchDelta > self.generalProfile.minimumTouchTimeInSeconds:
-                    self.personalityOrCreativeTriggered = True
+                if not self.socialOrCreativeTriggered and tLastTouchDelta > self.generalProfile.minimumTouchTimeInSeconds:
+                    self.socialOrCreativeTriggered = True
                     
                     possibleBehaviors = []
-                    personalityBehavior = self.generatePersonalityBehavior()
-                    if(personalityBehavior):
-                        print "[INFO] Adding personality behavior..."
-                        possibleBehaviors.append(personalityBehavior)
+                    socialBehavior = self.generatesocialBehavior()
+                    if(socialBehavior):
+                        print "[INFO] Adding social behavior..."
+                        possibleBehaviors.append(socialBehavior)
                     creativityBehavior = self.generateCreativityBehavior(self.currStoryArcMoment, self.currRecognizedShape)
                     if(creativityBehavior):
                         print "[INFO] Adding creativity behavior..."
                         possibleBehaviors.append(creativityBehavior)
 
                     if(len(possibleBehaviors)==0):
-                        self.resetCurrAndSetNewBehavior(ComposedBehavior(self.body, []))
+                        self.resetCurrAndSetNewBehavior(ComposedBehavior(self.control, []))
                     else:
                         self.resetCurrAndSetNewBehavior(numpy.random.choice(possibleBehaviors))
 
         # idle acts as fallback
         if self.currBehavior.isOver:
             if(self.isInteractionFinished):
-                self.isMindFinished = True
+                self.isPlanningFinished = True
                 return
             self.resetCurrAndSetNewBehavior(self.generalProfile.idleBehavior)
 
         # check for recognized shapes
         if self.shapeWasRecognized():
-            self.currRecognizedShape = self.predictShape(self.body.getOpticalSensor().getCurrentRecognizedShape())
+            self.currRecognizedShape = self.predictShape(self.control.getOpticalSensor().getCurrentRecognizedShape())
         
 
     def resetCurrAndSetNewBehavior(self, newBehavior):
@@ -119,11 +119,11 @@ class Mind (object):
         self.currBehavior = newBehavior
         self.currBehavior.resetBehavior()  #reset behavior before application
 
-    def generatePersonalityBehavior(self):
-        personalityBehaviorList = self.personalityProfile.personalityBehaviorList
-        if(not personalityBehaviorList):
+    def generatesocialBehavior(self):
+        socialBehaviorList = self.socialProfile.socialBehaviorList
+        if(not socialBehaviorList):
             return False
-        selectedBehavior = numpy.random.choice(personalityBehaviorList)
+        selectedBehavior = numpy.random.choice(socialBehaviorList)
         return selectedBehavior
 
     def generateCreativityBehavior(self, currStoryArcMoment, recognizedShape):        
@@ -156,10 +156,10 @@ class Mind (object):
         return selectedBehavior
 
     def beingTouched(self):
-        return (self.body.getTouchSensor().getState() == TouchState.TOUCHING)
+        return (self.control.getTouchSensor().getState() == TouchState.TOUCHING)
 
     def shapeWasRecognized(self):
-        return (self.body.getOpticalSensor().getState() == OpticalState.FINISHED)
+        return (self.control.getOpticalSensor().getState() == OpticalState.FINISHED)
 
     def hasTouchStarted(self):
         result = not self.wasTouched and self.beingTouched()

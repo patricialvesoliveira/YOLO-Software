@@ -1,8 +1,8 @@
 from Core.Enumerations import *
 
 class ComposedBehavior(object):
-    def __init__(self, bodyRef, behaviorList):
-        self.bodyRef = bodyRef
+    def __init__(self, controlRef, behaviorList):
+        self.controlRef = controlRef
         self.behaviorList = behaviorList
         self.isOver = False
 

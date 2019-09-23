@@ -1,7 +1,7 @@
 from colour import Color
 from Core.Enumerations import *
-from Mind import *
-from Body import *
+from Planning import *
+from Control import *
 
 # auxiliary Agent API structs
 class GeneralProfile (object):
@@ -13,12 +13,12 @@ class GeneralProfile (object):
         self.idleBehavior = idleBehavior
         self.minimumTouchTimeInSeconds = minimumTouchTimeInSeconds
 
-class PersonalityProfile (object):
-    def __init__(self, name, attentionCallBehavior, attentionCallBehaviorDelayInSeconds, personalityBehaviorList):
+class SocialProfile (object):
+    def __init__(self, name, attentionCallBehavior, attentionCallBehaviorDelayInSeconds, socialBehaviorList):
         self.name = name
         self.attentionCallBehavior = attentionCallBehavior
         self.attentionCallBehaviorDelayInSeconds = attentionCallBehaviorDelayInSeconds
-        self.personalityBehaviorList = personalityBehaviorList
+        self.socialBehaviorList = socialBehaviorList
 
 class CreativityProfile (object):
     def __init__(self, name, 
@@ -40,41 +40,41 @@ class Agent (object):
     def __init__(self, name):
         self.name = name
 
-        # init body as it is independent of the state of mind while interacting and needed to build behaviors
-        self.body = Body() 
-        self.mind = None
+        # init control as it is independent of the state of planning while interacting and needed to build behaviors
+        self.control = Control() 
+        self.planning = None
 
-        self.defaultPersonalityProfile = PersonalityProfile("Default", ComposedBehavior(self.body, []), 30.0, [])
+        self.defaultSocialProfile = SocialProfile("Default", ComposedBehavior(self.control, []), 30.0, [])
         self.defaultCreativityProfile = CreativityProfile("Default", 5, {}, StoryArcBehaviorType.MIRROR, 5.0, {}, StoryArcBehaviorType.MIRROR, 5.0, {}, StoryArcBehaviorType.MIRROR)
         self.defaultGeneralProfile = self.generateGeneralProfile("Default", Color(rgb=(0.1 ,0.1 ,0.1)), 1.0)
         
 
-    def getBodyRef(self):
-        return self.body
+    def getControlRef(self):
+        return self.control
     
-    def interact(self, generalProfile = None, personalityProfile = None, creativityProfile = None):
+    def interact(self, generalProfile = None, socialProfile = None, creativityProfile = None):
         
         if(isinstance(generalProfile,basestring)):
             generalPresetSwitcher = {
-                "PUNK": self.generateGeneralProfile("PUNK", Color(rgb=(0.5,0.0,0.5)), 1.0),
-                "AFFECTIVE": self.generateGeneralProfile("AFFECTIVE", Color(rgb=(1.0,0.55,0.0)), 1.0),
+                "EXUBERANT": self.generateGeneralProfile("EXUBERANT", Color(rgb=(0.5,0.0,0.5)), 1.0),
+                "HARMONIOUS": self.generateGeneralProfile("HARMONIOUS", Color(rgb=(1.0,0.55,0.0)), 1.0),
                 "ALOOF": self.generateGeneralProfile("ALOOF", Color(rgb=(0.0,0.0,0.5)), 1.0),
                 "NEUTRAL": self.generateGeneralProfile("NEUTRAL", Color(rgb=(1.0,1.0,1.0)), 1.0)
             }
             generalProfile = generalPresetSwitcher.get(generalProfile, None)
             
-        if(isinstance(personalityProfile,basestring)):
+        if(isinstance(socialProfile,basestring)):
             profilePresetSwitcher = {
-                "PUNK": self.generatePunkProfilePreset(),
-                "AFFECTIVE": self.generateAffectiveProfilePreset(),
+                "EXUBERANT": self.generateEXUBERANTProfilePreset(),
+                "HARMONIOUS": self.generateHARMONIOUSProfilePreset(),
                 "ALOOF": self.generateAloofProfilePreset()
             }
-            personalityProfile = profilePresetSwitcher.get(personalityProfile, None)
+            socialProfile = profilePresetSwitcher.get(socialProfile, None)
         
         if(isinstance(creativityProfile,basestring)):
             creativityPresetSwitcher = {
-                "PUNK": self.generateDefaultCreativityProfile("PUNK", Color(rgb=(0.5,0.0,0.5))),
-                "AFFECTIVE": self.generateDefaultCreativityProfile("AFFECTIVE", Color(rgb=(1.0,0.55,0.0))),
+                "EXUBERANT": self.generateDefaultCreativityProfile("EXUBERANT", Color(rgb=(0.5,0.0,0.5))),
+                "HARMONIOUS": self.generateDefaultCreativityProfile("HARMONIOUS", Color(rgb=(1.0,0.55,0.0))),
                 "ALOOF": self.generateDefaultCreativityProfile("ALOOF", Color(rgb=(0.0,0.0,0.5))),
                 "NEUTRAL": self.generateDefaultCreativityProfile("NEUTRAL", Color(rgb=(1.0,1.0,1.0)))
             }
@@ -84,20 +84,20 @@ class Agent (object):
         if(generalProfile == None):
             generalProfile = self.defaultGeneralProfile
 
-        if(personalityProfile == None):
-            personalityProfile = self.defaultPersonalityProfile
+        if(socialProfile == None):
+            socialProfile = self.defaultSocialProfile
 
         if(creativityProfile == None):
             creativityProfile = self.defaultCreativityProfile
   
 
-        # init new state of mind before interaction update
-        self.mind = Mind(self.body, generalProfile, personalityProfile, creativityProfile)      
+        # init new state of planning before interaction update
+        self.planning = Planning(self.control, generalProfile, socialProfile, creativityProfile)      
         
         try:
             while True:
-                if(self.mind.isMindFinished == False):
-                    self.mind.update()
+                if(self.planning.isPlanningFinished == False):
+                    self.planning.update()
                 else:
                     break
         except KeyboardInterrupt:
@@ -105,179 +105,179 @@ class Agent (object):
         except Exception as e:
             print "Error: " + str(e)
 
-        self.body.setColor(Color(rgb=(0.0,0.0,0.0)))
-        self.mind = None
+        self.control.setColor(Color(rgb=(0.0,0.0,0.0)))
+        self.planning = None
         
     def generateGeneralProfile(self, name, idleColor, minimumTouchTimeInSeconds):
         helloBehavior = self.generateHelloBehaviorPreset()
         goodbyeBehavior = self.generateGoodbyeBehaviorPreset()
         puppeteerBehavior = self.generatePupetteerBehaviorPreset()
 
-        idleBehavior = ComposedBehavior(self.body, [BlinkBehaviorEaseInOut(self.body, idleColor, ColorBrightness.HIGH, 1, 2.0, Color(rgb=(0.0, 0.0, 0.0)))])
+        idleBehavior = ComposedBehavior(self.control, [BlinkBehaviorEaseInOut(self.control, idleColor, ColorBrightness.HIGH, 1, 2.0, Color(rgb=(0.0, 0.0, 0.0)))])
 
         return GeneralProfile(name, helloBehavior, goodbyeBehavior, puppeteerBehavior, idleBehavior, minimumTouchTimeInSeconds)
 
 
     def generateHelloBehaviorPreset(self):
-        helloBehavior = ComposedBehavior(self.body, [BlinkBehaviorEaseIn(self.body, Color(rgb=(1.0, 1.0, 1.0)), ColorBrightness.MEDIUM, 3, 2.0, Color(rgb=(0.0, 0.0, 0.0)))])
+        helloBehavior = ComposedBehavior(self.control, [BlinkBehaviorEaseIn(self.control, Color(rgb=(1.0, 1.0, 1.0)), ColorBrightness.MEDIUM, 3, 2.0, Color(rgb=(0.0, 0.0, 0.0)))])
         return helloBehavior
 
     def generateGoodbyeBehaviorPreset(self):
-        goodbyeBehavior = ComposedBehavior(self.body, [BlinkBehaviorEaseOut(self.body, Color(rgb=(1.0, 1.0, 1.0)), ColorBrightness.MEDIUM, 3, 2.0, Color(rgb=(0.0, 0.0, 0.0)))])
+        goodbyeBehavior = ComposedBehavior(self.control, [BlinkBehaviorEaseOut(self.control, Color(rgb=(1.0, 1.0, 1.0)), ColorBrightness.MEDIUM, 3, 2.0, Color(rgb=(0.0, 0.0, 0.0)))])
         return goodbyeBehavior
 
     def generatePupetteerBehaviorPreset(self):
-        pupeteerBehavior = ComposedBehavior(self.body,[BlinkBehaviorInstant(self.body, Color(rgb=(1.0, 1.0, 1.0)), ColorBrightness.HIGH, 0, 1.0, Color(rgb=(0.0, 0.0, 0.0)))])
+        pupeteerBehavior = ComposedBehavior(self.control,[BlinkBehaviorInstant(self.control, Color(rgb=(1.0, 1.0, 1.0)), ColorBrightness.HIGH, 0, 1.0, Color(rgb=(0.0, 0.0, 0.0)))])
         return pupeteerBehavior
 
-    def generatePunkProfilePreset(self):
+    def generateEXUBERANTProfilePreset(self):
         behaviorList = []
-        behaviorList.append(BlinkBehaviorEaseInOut(self.body, Color(rgb=(1.0, 0.0, 0.0)), ColorBrightness.HIGH, 1, 3.0, Color(rgb=(0.0, 0.0, 0.0))))
-        behaviorList.append(MoveBehaviorSpikes(self.body, 90, MovementDirection.ALTERNATING, 2, 1.5))
-        attentionCallBehavior = ComposedBehavior(self.body, behaviorList)
+        behaviorList.append(BlinkBehaviorEaseInOut(self.control, Color(rgb=(1.0, 0.0, 0.0)), ColorBrightness.HIGH, 1, 3.0, Color(rgb=(0.0, 0.0, 0.0))))
+        behaviorList.append(MoveBehaviorSpikes(self.control, 90, MovementDirection.ALTERNATING, 2, 1.5))
+        attentionCallBehavior = ComposedBehavior(self.control, behaviorList)
 
         behaviorList = []
-        behaviorList.append(BlinkBehaviorEaseInOut(self.body, Color(rgb=(1.0, 0.0, 0.0)), ColorBrightness.HIGH, 1, 4.5, Color(rgb=(0.0, 0.0, 0.0))))
-        behaviorList.append(MoveBehaviorSpikes(self.body, 80, MovementDirection.FORWARD, 3, 1.5))
-        personalityBehavior1 = ComposedBehavior(self.body, behaviorList)
+        behaviorList.append(BlinkBehaviorEaseInOut(self.control, Color(rgb=(1.0, 0.0, 0.0)), ColorBrightness.HIGH, 1, 4.5, Color(rgb=(0.0, 0.0, 0.0))))
+        behaviorList.append(MoveBehaviorSpikes(self.control, 80, MovementDirection.FORWARD, 3, 1.5))
+        socialBehavior1 = ComposedBehavior(self.control, behaviorList)
 
         behaviorList = []
-        behaviorList.append(BlinkBehaviorEaseInOut(self.body, Color(rgb=(1.0, 0.0, 0.0)), ColorBrightness.HIGH, 1, 4.5, Color(rgb=(0.0, 0.0, 0.0))))
-        behaviorList.append(MoveBehaviorLoops(self.body, 80, MovementDirection.FORWARD, 3, 1.5))
-        personalityBehavior2 = ComposedBehavior(self.body, behaviorList)
+        behaviorList.append(BlinkBehaviorEaseInOut(self.control, Color(rgb=(1.0, 0.0, 0.0)), ColorBrightness.HIGH, 1, 4.5, Color(rgb=(0.0, 0.0, 0.0))))
+        behaviorList.append(MoveBehaviorLoops(self.control, 80, MovementDirection.FORWARD, 3, 1.5))
+        socialBehavior2 = ComposedBehavior(self.control, behaviorList)
 
         behaviorList = []
-        behaviorList.append(BlinkBehaviorInstant(self.body, Color(rgb=(1.0, 0.0, 0.0)), ColorBrightness.HIGH, 1, 2.5, Color(rgb=(0.0, 0.0, 0.0))))
-        personalityBehavior3 = ComposedBehavior(self.body, behaviorList)
+        behaviorList.append(BlinkBehaviorInstant(self.control, Color(rgb=(1.0, 0.0, 0.0)), ColorBrightness.HIGH, 1, 2.5, Color(rgb=(0.0, 0.0, 0.0))))
+        socialBehavior3 = ComposedBehavior(self.control, behaviorList)
 
-        personalityBehaviorList = []
-        personalityBehaviorList.append(personalityBehavior1)
-        personalityBehaviorList.append(personalityBehavior2)
-        personalityBehaviorList.append(personalityBehavior3)
+        socialBehaviorList = []
+        socialBehaviorList.append(socialBehavior1)
+        socialBehaviorList.append(socialBehavior2)
+        socialBehaviorList.append(socialBehavior3)
 
         
-        return PersonalityProfile("PUNK", attentionCallBehavior, 30.0, personalityBehaviorList)
+        return SocialProfile("EXUBERANT", attentionCallBehavior, 30.0, socialBehaviorList)
 
-    def generateAffectiveProfilePreset(self):
+    def generateHARMONIOUSProfilePreset(self):
         behaviorList = []
-        behaviorList.append(BlinkBehaviorEaseIn(self.body, Color(rgb=(1.0, 0.25, 0.0)), ColorBrightness.MEDIUM, 1.0, 1.0, Color(rgb=(0.0, 0.0, 0.0))))
-        behaviorList.append(MoveBehaviorCircle(self.body, 40.0, MovementDirection.FORWARD, 3.0, 5.0))
-        attentionCallBehavior = ComposedBehavior(self.body, behaviorList)
-
-        behaviorList = []
-        behaviorList.append(BlinkBehaviorEaseIn(self.body, Color(rgb=(1.0, 0.25, 0.0)), ColorBrightness.MEDIUM, 1, 1.0, Color(rgb=(0.0, 0.0, 0.0))))
-        behaviorList.append(MoveBehaviorCurved(self.body, 40.0, MovementDirection.FORWARD, 2, 6.0))
-        personalityBehavior1 = ComposedBehavior(self.body, behaviorList)
+        behaviorList.append(BlinkBehaviorEaseIn(self.control, Color(rgb=(1.0, 0.25, 0.0)), ColorBrightness.MEDIUM, 1.0, 1.0, Color(rgb=(0.0, 0.0, 0.0))))
+        behaviorList.append(MoveBehaviorCircle(self.control, 40.0, MovementDirection.FORWARD, 3.0, 5.0))
+        attentionCallBehavior = ComposedBehavior(self.control, behaviorList)
 
         behaviorList = []
-        behaviorList.append(BlinkBehaviorEaseIn(self.body, Color(rgb=(1.0, 0.25, 0.0)), ColorBrightness.MEDIUM, 1, 1.0, Color(rgb=(0.0, 0.0, 0.0))))
-        behaviorList.append(MoveBehaviorRect(self.body, 50.0, MovementDirection.FORWARD, 2, 6.0))
-        personalityBehavior2 = ComposedBehavior(self.body, behaviorList)
+        behaviorList.append(BlinkBehaviorEaseIn(self.control, Color(rgb=(1.0, 0.25, 0.0)), ColorBrightness.MEDIUM, 1, 1.0, Color(rgb=(0.0, 0.0, 0.0))))
+        behaviorList.append(MoveBehaviorCurved(self.control, 40.0, MovementDirection.FORWARD, 2, 6.0))
+        socialBehavior1 = ComposedBehavior(self.control, behaviorList)
 
-        personalityBehavior3 = ComposedBehavior(self.body, [BlinkBehaviorEaseIn(self.body, Color(rgb=(1.0, 0.25, 0.0)), ColorBrightness.MEDIUM, 1, 3.0, Color(rgb=(0.0, 0.0, 0.0)))])
+        behaviorList = []
+        behaviorList.append(BlinkBehaviorEaseIn(self.control, Color(rgb=(1.0, 0.25, 0.0)), ColorBrightness.MEDIUM, 1, 1.0, Color(rgb=(0.0, 0.0, 0.0))))
+        behaviorList.append(MoveBehaviorRect(self.control, 50.0, MovementDirection.FORWARD, 2, 6.0))
+        socialBehavior2 = ComposedBehavior(self.control, behaviorList)
 
-        personalityBehaviorList = []
-        personalityBehaviorList.append(personalityBehavior1)
-        personalityBehaviorList.append(personalityBehavior2)
-        personalityBehaviorList.append(personalityBehavior3)
+        socialBehavior3 = ComposedBehavior(self.control, [BlinkBehaviorEaseIn(self.control, Color(rgb=(1.0, 0.25, 0.0)), ColorBrightness.MEDIUM, 1, 3.0, Color(rgb=(0.0, 0.0, 0.0)))])
+
+        socialBehaviorList = []
+        socialBehaviorList.append(socialBehavior1)
+        socialBehaviorList.append(socialBehavior2)
+        socialBehaviorList.append(socialBehavior3)
 
         helloBehavior = self.generateHelloBehaviorPreset()
         goodbyeBehavior = self.generateGoodbyeBehaviorPreset()
         puppeteerBehavior = self.generatePupetteerBehaviorPreset()
 
-        return PersonalityProfile("AFFECTIVE", attentionCallBehavior, 30.0, personalityBehaviorList)
+        return SocialProfile("HARMONIOUS", attentionCallBehavior, 30.0, socialBehaviorList)
 
     def generateAloofProfilePreset(self):
-        attentionCallBehavior = ComposedBehavior(self.body, [])
+        attentionCallBehavior = ComposedBehavior(self.control, [])
 
         behaviorList = []
-        behaviorList.append(BlinkBehaviorEaseInOut(self.body, Color(rgb=(0.0, 1.0, 0.0)), ColorBrightness.LOW, 1, 5.0, Color(rgb=(0.0, 0.0, 0.0))))
-        behaviorList.append(MoveBehaviorStraight(self.body, 20.0, MovementDirection.FORWARD, 1, 5.0))
-        personalityBehavior1 = ComposedBehavior(self.body, behaviorList)
+        behaviorList.append(BlinkBehaviorEaseInOut(self.control, Color(rgb=(0.0, 1.0, 0.0)), ColorBrightness.LOW, 1, 5.0, Color(rgb=(0.0, 0.0, 0.0))))
+        behaviorList.append(MoveBehaviorStraight(self.control, 20.0, MovementDirection.FORWARD, 1, 5.0))
+        socialBehavior1 = ComposedBehavior(self.control, behaviorList)
 
         behaviorList = []
-        behaviorList.append(BlinkBehaviorEaseInOut(self.body, Color(rgb=(0.0, 0.0, 0.1)), ColorBrightness.LOW, 1, 5.0, Color(rgb=(0.0, 0.0, 0.0))))
-        behaviorList.append(MoveBehaviorStraight(self.body, 20.0, MovementDirection.REVERSE, 1, 5.0))
-        personalityBehavior2 = ComposedBehavior(self.body, behaviorList)
+        behaviorList.append(BlinkBehaviorEaseInOut(self.control, Color(rgb=(0.0, 0.0, 0.1)), ColorBrightness.LOW, 1, 5.0, Color(rgb=(0.0, 0.0, 0.0))))
+        behaviorList.append(MoveBehaviorStraight(self.control, 20.0, MovementDirection.REVERSE, 1, 5.0))
+        socialBehavior2 = ComposedBehavior(self.control, behaviorList)
 
-        personalityBehavior3 = ComposedBehavior(self.body, [BlinkBehaviorEaseInOut(self.body, Color(rgb=(0.0, 0.0, 0.1)), ColorBrightness.LOW, 1, 8.0, Color(rgb=(0.0, 0.0, 0.0)))])
+        socialBehavior3 = ComposedBehavior(self.control, [BlinkBehaviorEaseInOut(self.control, Color(rgb=(0.0, 0.0, 0.1)), ColorBrightness.LOW, 1, 8.0, Color(rgb=(0.0, 0.0, 0.0)))])
 
-        personalityBehaviorList = []
-        personalityBehaviorList.append(personalityBehavior1)
-        personalityBehaviorList.append(personalityBehavior2)
-        personalityBehaviorList.append(personalityBehavior3)
+        socialBehaviorList = []
+        socialBehaviorList.append(socialBehavior1)
+        socialBehaviorList.append(socialBehavior2)
+        socialBehaviorList.append(socialBehavior3)
 
         helloBehavior = self.generateHelloBehaviorPreset()
         goodbyeBehavior = self.generateGoodbyeBehaviorPreset()
         puppeteerBehavior = self.generatePupetteerBehaviorPreset()
 
-        return PersonalityProfile("ALOOF", attentionCallBehavior, 30.0, personalityBehaviorList)
+        return SocialProfile("ALOOF", attentionCallBehavior, 30.0, socialBehaviorList)
 
 
-    def generateDefaultCreativityProfile(self, name, bodyColor):
+    def generateDefaultCreativityProfile(self, name, controlColor):
         creativitySlowBehaviorDict = {}
         creativityFastBehaviorDict = {}
 
         behaviorList = []
-        behaviorList.append(MoveBehaviorCurved(self.body, 95, MovementDirection.FORWARD, 2, 1.5))
-        behaviorList.append(BlinkBehaviorEaseInOut(self.body, bodyColor, ColorBrightness.HIGH, 1, 1.0, Color(rgb=(0.0, 0.0, 0.0))))
-        curvedFastBehavior = ComposedBehavior(self.body, behaviorList)
+        behaviorList.append(MoveBehaviorCurved(self.control, 95, MovementDirection.FORWARD, 2, 1.5))
+        behaviorList.append(BlinkBehaviorEaseInOut(self.control, controlColor, ColorBrightness.HIGH, 1, 1.0, Color(rgb=(0.0, 0.0, 0.0))))
+        curvedFastBehavior = ComposedBehavior(self.control, behaviorList)
         creativityFastBehaviorDict[ShapeType.CURVED] = curvedFastBehavior
 
         behaviorList = []
-        behaviorList.append(MoveBehaviorCurved(self.body, 30, MovementDirection.FORWARD, 2, 3.5))
-        behaviorList.append(BlinkBehaviorEaseInOut(self.body, bodyColor, ColorBrightness.HIGH, 1, 3.0, Color(rgb=(0.0, 0.0, 0.0))))
-        curvedSlowBehavior = ComposedBehavior(self.body, behaviorList)
+        behaviorList.append(MoveBehaviorCurved(self.control, 30, MovementDirection.FORWARD, 2, 3.5))
+        behaviorList.append(BlinkBehaviorEaseInOut(self.control, controlColor, ColorBrightness.HIGH, 1, 3.0, Color(rgb=(0.0, 0.0, 0.0))))
+        curvedSlowBehavior = ComposedBehavior(self.control, behaviorList)
         creativitySlowBehaviorDict[ShapeType.CURVED] = curvedSlowBehavior
 
 
         behaviorList = []
-        behaviorList.append(MoveBehaviorLoops(self.body, 95, MovementDirection.FORWARD, 2, 1.5))
-        behaviorList.append(BlinkBehaviorEaseInOut(self.body, bodyColor, ColorBrightness.HIGH, 1, 1.0, Color(rgb=(0.0, 0.0, 0.0))))
-        loopsFastBehavior = ComposedBehavior(self.body, behaviorList)
+        behaviorList.append(MoveBehaviorLoops(self.control, 95, MovementDirection.FORWARD, 2, 1.5))
+        behaviorList.append(BlinkBehaviorEaseInOut(self.control, controlColor, ColorBrightness.HIGH, 1, 1.0, Color(rgb=(0.0, 0.0, 0.0))))
+        loopsFastBehavior = ComposedBehavior(self.control, behaviorList)
         creativityFastBehaviorDict[ShapeType.LOOPS] = loopsFastBehavior
 
 
         behaviorList = []
-        behaviorList.append(MoveBehaviorLoops(self.body, 30, MovementDirection.FORWARD, 2, 3.5))
-        behaviorList.append(BlinkBehaviorEaseInOut(self.body, bodyColor, ColorBrightness.HIGH, 1, 3.0, Color(rgb=(0.0, 0.0, 0.0))))
-        loopsSlowBehavior = ComposedBehavior(self.body, behaviorList)
+        behaviorList.append(MoveBehaviorLoops(self.control, 30, MovementDirection.FORWARD, 2, 3.5))
+        behaviorList.append(BlinkBehaviorEaseInOut(self.control, controlColor, ColorBrightness.HIGH, 1, 3.0, Color(rgb=(0.0, 0.0, 0.0))))
+        loopsSlowBehavior = ComposedBehavior(self.control, behaviorList)
         creativitySlowBehaviorDict[ShapeType.LOOPS] = loopsSlowBehavior
 
         behaviorList = []
-        behaviorList.append(MoveBehaviorRect(self.body, 95, MovementDirection.FORWARD, 2, 1.5))
-        behaviorList.append(BlinkBehaviorEaseInOut(self.body, bodyColor, ColorBrightness.HIGH, 1, 1.0, Color(rgb=(0.0, 0.0, 0.0))))
-        rectFastBehavior = ComposedBehavior(self.body, behaviorList)
+        behaviorList.append(MoveBehaviorRect(self.control, 95, MovementDirection.FORWARD, 2, 1.5))
+        behaviorList.append(BlinkBehaviorEaseInOut(self.control, controlColor, ColorBrightness.HIGH, 1, 1.0, Color(rgb=(0.0, 0.0, 0.0))))
+        rectFastBehavior = ComposedBehavior(self.control, behaviorList)
         creativityFastBehaviorDict[ShapeType.RECT] = rectFastBehavior
 
         behaviorList = []
-        behaviorList.append(MoveBehaviorRect(self.body, 30, MovementDirection.FORWARD, 2, 3.5))
-        behaviorList.append(BlinkBehaviorEaseInOut(self.body, bodyColor, ColorBrightness.HIGH, 1, 3.0, Color(rgb=(0.0, 0.0, 0.0))))
-        rectSlowBehavior = ComposedBehavior(self.body, behaviorList)
+        behaviorList.append(MoveBehaviorRect(self.control, 30, MovementDirection.FORWARD, 2, 3.5))
+        behaviorList.append(BlinkBehaviorEaseInOut(self.control, controlColor, ColorBrightness.HIGH, 1, 3.0, Color(rgb=(0.0, 0.0, 0.0))))
+        rectSlowBehavior = ComposedBehavior(self.control, behaviorList)
         creativitySlowBehaviorDict[ShapeType.RECT] = rectSlowBehavior
 
         behaviorList = []
-        behaviorList.append(MoveBehaviorSpikes(self.body, 95, MovementDirection.FORWARD, 2, 1.5))
-        behaviorList.append(BlinkBehaviorEaseInOut(self.body, bodyColor, ColorBrightness.HIGH, 1, 1.0, Color(rgb=(0.0, 0.0, 0.0))))
-        spikesFastBehavior = ComposedBehavior(self.body, behaviorList)
+        behaviorList.append(MoveBehaviorSpikes(self.control, 95, MovementDirection.FORWARD, 2, 1.5))
+        behaviorList.append(BlinkBehaviorEaseInOut(self.control, controlColor, ColorBrightness.HIGH, 1, 1.0, Color(rgb=(0.0, 0.0, 0.0))))
+        spikesFastBehavior = ComposedBehavior(self.control, behaviorList)
         creativityFastBehaviorDict[ShapeType.SPIKES] = spikesFastBehavior
 
         behaviorList = []
-        behaviorList.append(MoveBehaviorSpikes(self.body, 30, MovementDirection.FORWARD, 2, 3.5))
-        behaviorList.append(BlinkBehaviorEaseInOut(self.body, bodyColor, ColorBrightness.HIGH, 1, 3.0, Color(rgb=(0.0, 0.0, 0.0))))
-        spikesSlowBehavior = ComposedBehavior(self.body, behaviorList)
+        behaviorList.append(MoveBehaviorSpikes(self.control, 30, MovementDirection.FORWARD, 2, 3.5))
+        behaviorList.append(BlinkBehaviorEaseInOut(self.control, controlColor, ColorBrightness.HIGH, 1, 3.0, Color(rgb=(0.0, 0.0, 0.0))))
+        spikesSlowBehavior = ComposedBehavior(self.control, behaviorList)
         creativitySlowBehaviorDict[ShapeType.SPIKES] = spikesSlowBehavior
 
         behaviorList = []
-        behaviorList.append(MoveBehaviorStraight(self.body, 95, MovementDirection.FORWARD, 2, 1.5))
-        behaviorList.append(BlinkBehaviorEaseInOut(self.body, bodyColor, ColorBrightness.HIGH, 1, 1.0, Color(rgb=(0.0, 0.0, 0.0))))
-        straightFastBehavior = ComposedBehavior(self.body, behaviorList)
+        behaviorList.append(MoveBehaviorStraight(self.control, 95, MovementDirection.FORWARD, 2, 1.5))
+        behaviorList.append(BlinkBehaviorEaseInOut(self.control, controlColor, ColorBrightness.HIGH, 1, 1.0, Color(rgb=(0.0, 0.0, 0.0))))
+        straightFastBehavior = ComposedBehavior(self.control, behaviorList)
         creativityFastBehaviorDict[ShapeType.STRAIGHT] = straightFastBehavior
 
         behaviorList = []
-        behaviorList.append(MoveBehaviorStraight(self.body, 30, MovementDirection.FORWARD, 2, 1.5))
-        behaviorList.append(BlinkBehaviorEaseInOut(self.body, bodyColor, ColorBrightness.HIGH, 1, 3.0, Color(rgb=(0.0, 0.0, 0.0))))
-        straightSlowBehavior = ComposedBehavior(self.body, behaviorList)
+        behaviorList.append(MoveBehaviorStraight(self.control, 30, MovementDirection.FORWARD, 2, 1.5))
+        behaviorList.append(BlinkBehaviorEaseInOut(self.control, controlColor, ColorBrightness.HIGH, 1, 3.0, Color(rgb=(0.0, 0.0, 0.0))))
+        straightSlowBehavior = ComposedBehavior(self.control, behaviorList)
         creativitySlowBehaviorDict[ShapeType.STRAIGHT] = straightSlowBehavior
 
         return CreativityProfile(name, 

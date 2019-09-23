@@ -10,8 +10,8 @@ from Core.Behavior.SimpleBehavior.MoveBehavior.MoveBehavior import MoveBehavior
 
 
 class MoveBehaviorStraight(MoveBehavior, object):
-    def __init__(self, bodyRef, movementSpeed, movementDirection, repetitions, duration):
-        super(MoveBehaviorStraight, self).__init__(bodyRef, movementSpeed, movementDirection, repetitions, duration)
+    def __init__(self, controlRef, movementSpeed, movementDirection, repetitions, duration):
+        super(MoveBehaviorStraight, self).__init__(controlRef, movementSpeed, movementDirection, repetitions, duration)
     	self.waypoints = numpy.array([[1, 0]])
     
     def behaviorActions(self):

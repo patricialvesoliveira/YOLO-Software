@@ -10,8 +10,8 @@ from Core.Behavior.SimpleBehavior.MoveBehavior.MoveBehavior import MoveBehavior
 
 
 class MoveBehaviorSpikes(MoveBehavior, object):
-    def __init__(self, bodyRef, movementSpeed, movementDirection, repetitions, duration):
-        super(MoveBehaviorSpikes, self).__init__(bodyRef, movementSpeed, movementDirection, repetitions, duration)
+    def __init__(self, controlRef, movementSpeed, movementDirection, repetitions, duration):
+        super(MoveBehaviorSpikes, self).__init__(controlRef, movementSpeed, movementDirection, repetitions, duration)
         self.waypoints = numpy.array([[1, 1], [1, -1]])
 
     def behaviorActions(self):

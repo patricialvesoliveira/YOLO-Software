@@ -6,12 +6,12 @@ from Core.Enumerations import *
 from Core.Behavior.SimpleBehavior.BlinkBehavior.BlinkBehavior import BlinkBehavior
 
 class BlinkBehaviorEaseIn(BlinkBehavior, object):
-    def __init__(self, bodyRef, blinkColor, brightness, repetitions, duration, defaultColor):
-        super(BlinkBehaviorEaseIn, self).__init__(bodyRef, blinkColor, brightness, repetitions, duration, defaultColor)
+    def __init__(self, controlRef, blinkColor, brightness, repetitions, duration, defaultColor):
+        super(BlinkBehaviorEaseIn, self).__init__(controlRef, blinkColor, brightness, repetitions, duration, defaultColor)
     
     def behaviorActions(self):
         super(BlinkBehaviorEaseIn, self).behaviorActions()
         timeElapsed = time.time() - self.startTime
         percentage = tween.easeInSine(numpy.clip(timeElapsed / self.duration, 0, 1))
-        self.bodyRef.setColor(self.lerpColor(percentage, self.bodyColorAtStart, self.blinkColor))
-        self.bodyRef.setBrightness(self.brightness * percentage + self.bodyBrightnessAtStart * (1 - percentage))
+        self.controlRef.setColor(self.lerpColor(percentage, self.controlColorAtStart, self.blinkColor))
+        self.controlRef.setBrightness(self.brightness * percentage + self.controlBrightnessAtStart * (1 - percentage))

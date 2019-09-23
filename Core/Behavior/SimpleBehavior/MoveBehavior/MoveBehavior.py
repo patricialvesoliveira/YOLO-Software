@@ -8,8 +8,8 @@ from Core.Behavior.SimpleBehavior.SimpleBehavior import SimpleBehavior
 
 
 class MoveBehavior(SimpleBehavior, object):
-    def __init__(self, bodyRef, movementSpeed, movementDirection, maxBehaviorRepetitions, duration):
-        super(MoveBehavior, self).__init__(bodyRef, maxBehaviorRepetitions, duration)
+    def __init__(self, controlRef, movementSpeed, movementDirection, maxBehaviorRepetitions, duration):
+        super(MoveBehavior, self).__init__(controlRef, maxBehaviorRepetitions, duration)
         self.waypoints = numpy.array([])
         self.movementSpeed = 0
         self.animationIntervalTime = duration
@@ -46,7 +46,7 @@ class MoveBehavior(SimpleBehavior, object):
 
     def finishBehavior(self):
         super(MoveBehavior, self).finishBehavior()
-        self.bodyRef.resetWheelSetup()
+        self.controlRef.resetWheelSetup()
 
     def checkForBehaviorEnd(self):
         return self.currentWaypointIndex > (self.pathLength - 1)
@@ -64,7 +64,7 @@ class MoveBehavior(SimpleBehavior, object):
 
         if not self.alreadyStartedSegment:
             self.alreadyStartedSegment = True
-            self.bodyRef.setWheelMovement(nextWaypoint, self.movementSpeed)
+            self.controlRef.setWheelMovement(nextWaypoint, self.movementSpeed)
 
         if self.reachedNewWaypoint(pathLength):
             self.currentWaypointIndex += 1

@@ -5,11 +5,11 @@ from Core.Behavior.SimpleBehavior.BlinkBehavior.BlinkBehavior import BlinkBehavi
 from Core.Behavior.SimpleBehavior.BlinkBehavior.BlinkBehaviorEaseIn import BlinkBehaviorEaseIn
 
 class BlinkBehaviorEaseOut(BlinkBehavior, object):
-    def __init__(self, bodyRef, blinkColor, brightness, repetitions, duration, defaultColor):
-    	super(BlinkBehaviorEaseOut, self).__init__(bodyRef, blinkColor, brightness, repetitions, duration, defaultColor)
+    def __init__(self, controlRef, blinkColor, brightness, repetitions, duration, defaultColor):
+    	super(BlinkBehaviorEaseOut, self).__init__(controlRef, blinkColor, brightness, repetitions, duration, defaultColor)
     	#an ease out is an ease to black 
-    	self.easeInBehavior = BlinkBehaviorEaseIn(bodyRef, Color(rgb=(0.0, 0.0, 0.0)), brightness, repetitions, duration, defaultColor)
-    	self.easeInBehavior.bodyColorAtStart = blinkColor
+    	self.easeInBehavior = BlinkBehaviorEaseIn(controlRef, Color(rgb=(0.0, 0.0, 0.0)), brightness, repetitions, duration, defaultColor)
+    	self.easeInBehavior.controlColorAtStart = blinkColor
 
     def behaviorActions(self):
         super(BlinkBehaviorEaseOut, self).behaviorActions()

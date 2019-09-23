@@ -7,7 +7,7 @@ from Core.Sensors.TouchSensor import TouchSensor
 from Core.Actuators.LEDActuator import LEDActuator
 from Core.Actuators.WheelActuator import WheelActuator
 
-class Body:
+class Control:
     def __init__(self):
         # remove GPIO warnings
         GPIO.setwarnings(False)
@@ -20,7 +20,7 @@ class Body:
         self.color = Color(rgb=(0.0, 0.0, 0.0))
 
         self.colorBrightness = ColorBrightness.MEDIUM
-        print "Body set up finished!"
+        print "Control set up finished!"
 
     def __del__(self):
         self.touchSensor = None
@@ -28,7 +28,7 @@ class Body:
         self.LEDActuator = None
         self.wheelActuator = None
         self.cleanupGPIOPins()
-        print "Body cleanup successful!"
+        print "Control cleanup successful!"
 
     def update(self):
         self.updateTouchSensorData()
@@ -76,4 +76,4 @@ class Body:
         try:
             GPIO.cleanup()
         except Exception:
-            print("ERROR: There was a problem cleaning up the Body's GPIO")
+            print("ERROR: There was a problem cleaning up the Control's GPIO")

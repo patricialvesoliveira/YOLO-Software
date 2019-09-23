@@ -6,11 +6,11 @@ from Core.Behavior.SimpleBehavior.SimpleBehavior import SimpleBehavior
 
 
 class BlinkBehavior(SimpleBehavior, object):
-    def __init__(self, bodyRef, blinkColor, brightness, maxBehaviorRepetitions, duration, defaultColor):
-        super(BlinkBehavior, self).__init__(bodyRef, maxBehaviorRepetitions, duration)
-        self.bodyRef = bodyRef
-        self.bodyColorAtStart = bodyRef.getColor()
-        self.bodyBrightnessAtStart = bodyRef.getBrightness()
+    def __init__(self, controlRef, blinkColor, brightness, maxBehaviorRepetitions, duration, defaultColor):
+        super(BlinkBehavior, self).__init__(controlRef, maxBehaviorRepetitions, duration)
+        self.controlRef = controlRef
+        self.controlColorAtStart = controlRef.getColor()
+        self.controlBrightnessAtStart = controlRef.getBrightness()
         self.blinkColor = blinkColor
         self.brightness = brightness
         self.defaultColor = defaultColor
@@ -23,7 +23,7 @@ class BlinkBehavior(SimpleBehavior, object):
 
     def finishBehavior(self):
         super(BlinkBehavior, self).finishBehavior()
-        self.bodyRef.setColor(self.defaultColor)
+        self.controlRef.setColor(self.defaultColor)
 
     def checkForBehaviorEnd(self): 
         return time.time() - self.startTime > self.duration  
