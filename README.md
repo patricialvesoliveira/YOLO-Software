@@ -6,7 +6,7 @@
 Software developed for YOLO, a minimalistic robot that boosts children’s creativity during play. This software gives YOLO the abiulity to be socially competent and to promote children's creative abilities throught interaction. This page provides the source code for running YOLO and a [Wiki page](https://github.com/patricialvesoliveira/YOLO-Software/wiki) with a guide for installation.
 
 
-This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/ellerbrock/" property="cc:attributionName" rel="cc:attributionURL">Maik Ellerbrock</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>
+This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>
 ## Project Designer and Manager
 - [Patrícia Alves-Oliveira](https://patricialvesoliveira.com/), [@patricialvesoliveira](https://github.com/patricialvesoliveira/)
 
