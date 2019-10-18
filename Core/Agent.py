@@ -75,7 +75,7 @@ class Agent (object):
             creativityPresetSwitcher = {
                 "EXUBERANT": self.generateDefaultCreativityProfile("EXUBERANT", Color(rgb=(0.5,0.0,0.5))),
                 "HARMONIOUS": self.generateDefaultCreativityProfile("HARMONIOUS", Color(rgb=(1.0,0.55,0.0))),
-                "ALOOF": self.generateDefaultCreativityProfile("ALOOF", Color(rgb=(0.0,0.0,0.5))),
+                "ALOOF": self.generateDefaultCreativityProfile("ALOOF", Color(rgb=(0.0,1.0,0.0))),
                 "NEUTRAL": self.generateDefaultCreativityProfile("NEUTRAL", Color(rgb=(1.0,1.0,1.0)))
             }
             creativityProfile = creativityPresetSwitcher.get(creativityProfile, None)
@@ -191,7 +191,7 @@ class Agent (object):
         attentionCallBehavior = ComposedBehavior(self.control, [])
 
         behaviorList = []
-        behaviorList.append(BlinkBehaviorEaseInOut(self.control, Color(rgb=(0.0, 1.0, 0.0)), ColorBrightness.LOW, 1, 5.0, Color(rgb=(0.0, 0.0, 0.0))))
+        behaviorList.append(BlinkBehaviorEaseInOut(self.control, Color(rgb=(0.0, 0.0, 0.1))), ColorBrightness.LOW, 1, 5.0, Color(rgb=(0.0, 0.0, 0.0))))
         behaviorList.append(MoveBehaviorStraight(self.control, 20.0, MovementDirection.FORWARD, 1, 5.0))
         socialBehavior1 = ComposedBehavior(self.control, behaviorList)
 
