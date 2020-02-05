@@ -3,7 +3,7 @@
 ![YOLOLogo](https://github.com/patricialvesoliveira/YOLO-Software/blob/master/logo.jpg)
 
 ## Description
-Software developed for YOLO, a minimalistic robot that boosts children’s creativity during play. This software gives YOLO the ability to be socially competent and to promote children's creative abilities throught interaction. This page provides the source code for running YOLO and a [Wiki page](https://github.com/patricialvesoliveira/YOLO-Software/wiki) with a guide for installation.
+Software developed for YOLO, a minimalistic robot that boosts children’s creativity during play. This software gives YOLO the ability to be socially competent and to promote children's creative abilities through interaction. This page provides the source code for running YOLO and a [Wiki page](https://github.com/patricialvesoliveira/YOLO-Software/wiki) with a guide for installation.
 
 
 This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>
